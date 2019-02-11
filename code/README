@@ -1,0 +1,3 @@
+le code du projet est réparti en quatre grande classes selon le modele de programmation MVC :
+- une partie rangée dans le modele, une autre dans la vue et enfin la derniere partie dans le controleur.
+Ces trois groupements de code interagissent entre eux pour faire fonctionner le programme final.
