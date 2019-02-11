@@ -1,1 +1,30 @@
 cahier des charges du projet :
+
+I/ Contexte et définition de l’application à réaliser:
+
+Notre projet consiste en la réalisation d’une application permettant de jouer à un portage numérique d’un jeu de plateau”CATANE”. Notre application devra permettre au joueurs de suivre de la manière la plus proche possible les différentes règles stratégies et aspects du jeu originelle. L’application devra intégrer un interface graphique permettant aux joueurs d'interagir tout au long de la partie sans aucuns prérequis pour sa compréhension .
+Sur l’écran de jeu les joueurs devront pouvoir avoir accès aux mêmes informations que lors d’une partie sur le jeu physique. Il ne devra pas être possible pour un joueur d’effectuer une action interdit par les règles du jeu et des aides devront être disponible pour faciliter la compréhension de ces règles.
+Le développement de cette application a été motivé par plusieurs idées, nous souhaitons que notre application permette de faire découvrir à des joueurs ce jeu sans nécessiter d'acheter la version physique qu’elle permettent d’aider un joueur débutant à comprendre les règles, et dans sa finalité permettre à des joueur distant géographiquement de se retrouver pour jouer au CATANE. Le choix de ce projet a aussi été motivé par des notions de complexités en effet après quelques recherche et d’après les connaissances acquises durant le semestre 6 en langage c avancée il nous semble qu’un telle projet soit accessible à notre niveau tout en présentant quelques difficultés que nous devrons relever.
+
+
+II/Objectifs des différentes versions:
+
+V0:
+Recherche et mise en place des différentes librairies utilisées par la suite.
+Créations des différentes structures et des fonctions permettant de les manipuler.
+Organisation du projet selon le modèle MVC.
+Test des premières fonctionnalités dans le main sans affichage graphique.
+
+V1:
+Implémentation d’une page d’initialisation de la partie.
+Ajout de l’interface graphique et des différents interfaces de joueurs.
+
+V2:
+Version complète du jeu jouable sur une seul machine.
+Respect des règles du jeu originale.
+Ajout de tous les visuels nécessaire aux joueurs au cours de la partie.
+
+V3:
+Permettre aux joueurs de jouer sur différentes machines d’un réseau local. 
+Ajouter une option d’échange de ressource entre les joueurs.
+
