@@ -28,3 +28,40 @@ V3:
 Permettre aux joueurs de jouer sur différentes machines d’un réseau local. 
 Ajouter une option d’échange de ressource entre les joueurs.
 
+III/Modèle Vue Contrôleur.
+
+V0:
+    Modèle:
+    -structure Joueur, Tuile,
+    
+
+    Contrôleur:
+    -fonctions gain de ressources, constructions, gain de points de victoire, jet de dés aléatoire
+
+    Vue:
+    -pas de vue pour le moment
+
+V1:
+
+    Modèle:
+    - Structure partie qui recense les joueurs
+
+    Contrôleur:
+    - Fonctions d'inscriptions des joueurs et de lancement de la partie
+
+    Vue
+    -création de l'interface graphique d'inscription à la partie
+    -création de l'interface graphique de jeu avec le plateau et les premières mécaniques de jeu.
+
+V2:
+    
+    Modèle:
+    -
+
+    Contrôleur:
+    -
+
+    Vue:
+
+	-
+	
