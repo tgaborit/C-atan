@@ -10,25 +10,67 @@ Le développement de cette application a été motivé par plusieurs idées, nou
 II/Objectifs des différentes versions:
 
 V0:
-Recherche et mise en place des différentes librairies utilisées par la suite.
-Créations des différentes structures et des fonctions permettant de les manipuler.
-Organisation du projet selon le modèle MVC.
-Test des premières fonctionnalités dans le main sans affichage graphique.
+
+Cette première version est plus une étape commune au groupe pour poser les bases du projet et bien clarifier les objectifs afin de gagner du temps par la suite. Cela concerne les outils utilisés, la gestion du temps et surtout la reflexion collective sur le but du projet.
+Voici les points clés de cette première étape :
+
+- création du repository git afin de gérer simultanément le stockage des documents et du code
+
+- création du cahier des charges, afin de poser les bases des objectifs de chacun sur le projet global
+
+- création du diagramme de gantt prévisionnel du projet, pour gérer le temps imparti à la réalisation du travail
+
+- réalisation d'un schéma bloc fonctionnel, pour représenter le squelette du code à réaliser, qui permettra a chaque membre du groupe d'avoir les informations de base sur l'ensemble du code de l'ensemble du groupe (fonctions, structures, modèle MVC)
+
+- prise en main de la librairie retenue pour le projet : SDL2, particulièrement utile pour la vue et le controleur
+
+- (optionnel) première implémentation des structures (Joueur, Plateau, Tuile)
+
 
 V1:
-Implémentation d’une page d’initialisation de la partie.
-Ajout de l’interface graphique et des différents interfaces de joueurs.
+
+Cette version à pour principal but le codage de la majeure partie du projet catane.
+
+- implémentation finale de toutes les structures du jeu
+
+- codage de l'ensemble des fonctions de chaque partie :
+	fonctions du modèle manipulant les différentes structures du modèle
+	fonctions du controleur pour gérer les actions du client
+	fonctions de la vue afin d'afficher l'état actuel de la partie au joueur
+
+- vérifications et tests du code, en utilisant notamment CMocka et gcov
+
+- mise en commun du travail (merge) et résolutions des problèmes via les outils de git
+
 
 V2:
-Version complète du jeu jouable sur une seul machine.
-Respect des règles du jeu originale.
-Ajout de tous les visuels nécessaire aux joueurs au cours de la partie.
+
+Cette version doit présenter un jeu jouable sur une seule machine selon le respect d'un grand nombre de règles initiales du jeu (sans échanges entre joueurs). Le jeu doit se jouer en tour par tour.
+
+- implémentation du main afin de programmer le tour par tour et l'utilisation des fonctions précédement implémentées
+
+- création d'une "page d'accueil" pour enregistrer quelques informations sur les joueurs (principalement pseudo) et lancement de la partie
+
+- vérifications, tests et mise en commun du travail
+
+-résolutions des problèmes et proposition d'une première version jouable sur une machine
 
 V3:
-Permettre aux joueurs de jouer sur différentes machines d’un réseau local. 
-Ajouter une option d’échange de ressource entre les joueurs.
 
-III/Modèle Vue Contrôleur.
+Cette version est une version optionnelle, qui propose des améliorations au projet si le temps le permet.
+ 
+- Permettre aux joueurs de jouer sur plusieurs machines à la fois (une par joueur) avec un jeu hébergé sur une machine. Cette version de jeu "en réseau" s'appuiera sur l'échange de sockets entre les machines "joueurs" et la machine "hébergeur" et vice versa.
+
+- Ajouter une option d’échange de ressources entre les joueurs, (uniquement en cas de jeu en réseau) afin de coller un peu plus au jeu originel
+
+- ajout de différents "styles" de graphismes pour le plateau
+
+- vérifications, tests et mise en commun du travail
+
+-résolution des problèmes et proposition d'une seconde version jouable sur plusieurs machines
+
+
+III/Modèle Vue Contrôleur :
 
 V0:
     Modèle:
