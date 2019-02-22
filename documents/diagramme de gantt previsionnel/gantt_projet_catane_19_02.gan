@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet CATANE" company="" webLink="https://gitlab.insa-rennes.fr/edurel/catane" view-date="2019-01-20" view-index="0" gantt-divider-location="590" resource-divider-location="300" version="2.8.10" locale="fr">
+    <description/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="375" order="0"/>
+        <field id="tpd4" name="Date de début" width="103" order="1"/>
+        <field id="tpd5" name="Date de fin" width="105" order="2"/>
+        <option id="color.recent">
+            <![CDATA[#000099 #0033cc #ffff00 #0033ff #e1e1e1 #ff0033 #00cc00 #ff0000 #999999 #ff9999]]>
+        </option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="208" order="0"/>
+        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="0"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="59" name="V0" color="#8cb6ce" meeting="false" start="2019-01-31" duration="22" complete="0" thirdDate="2019-02-01" thirdDate-constraint="0" expand="true">
+            <depend id="60" type="2" difference="0" hardness="Strong"/>
+            <task id="0" name="Création du repository git et du projet GitLab [EDurel]" color="#8cb6ce" meeting="true" start="2019-02-11" duration="0" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="1" name="Rédaction du cahier des charges [All]" color="#8cb6ce" meeting="false" start="2019-01-31" duration="22" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+            <task id="63" name="Réalisation du diagramme de Gantt prévisionnel [RFargeon/TGaborit]" color="#8cb6ce" meeting="false" start="2019-01-31" duration="19" complete="0" thirdDate="2019-01-31" thirdDate-constraint="0" expand="true">
+                <depend id="262" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="262" name="Deadline diagramme de Gantt" color="#8cb6ce" meeting="true" start="2019-02-22" duration="0" complete="0" thirdDate="2019-02-13" thirdDate-constraint="0" expand="true"/>
+            <task id="64" name="Réalisation de schéma-bloc fonctionnel [All]" color="#8cb6ce" meeting="false" start="2019-02-18" duration="7" complete="0" thirdDate="2019-01-29" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="60" name="V1" color="#ffff66" meeting="false" start="2019-02-26" duration="10" complete="0" thirdDate="2019-02-26" thirdDate-constraint="0" expand="true">
+            <depend id="80" type="2" difference="0" hardness="Strong"/>
+            <task id="4" name="Mise en place des librairies [All]" color="#ffff99" meeting="false" start="2019-02-26" duration="5" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="74" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="66" name="Conception du squelette de l'application [All]" color="#ffff99" meeting="false" start="2019-02-26" duration="10" complete="0" thirdDate="2019-02-26" thirdDate-constraint="0" expand="true">
+                <depend id="74" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="74" name="Déploiement de le la V1" color="#ffff99" meeting="true" start="2019-03-09" duration="0" complete="0" thirdDate="2019-02-22" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="80" name="V2" color="#ffcc66" meeting="false" start="2019-03-11" duration="17" complete="0" thirdDate="2019-03-11" thirdDate-constraint="0" expand="true">
+            <depend id="102" type="2" difference="0" hardness="Strong"/>
+            <task id="3" name="Conception des structures modèle [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-11" duration="6" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="6" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="6" name="Implémentation des fonctions modèle [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-18" duration="11" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="10" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="7" name="Implémentation des fonctions contrôleur [TGaborit]" color="#000099" meeting="false" start="2019-03-11" duration="17" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="10" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="5" name="Conception des structures vue [PManauthon]" color="#ffff00" meeting="false" start="2019-03-11" duration="6" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="9" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="9" name="Implémentation des fonctions vue [PManauthon]" color="#ffff00" meeting="false" start="2019-03-18" duration="11" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="10" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="10" name="Déploiement de la V2" color="#ffcc66" meeting="true" start="2019-03-30" duration="0" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="102" name="V3" color="#ff9999" meeting="false" start="2019-04-01" duration="17" complete="0" thirdDate="2019-04-01" thirdDate-constraint="0" expand="true">
+            <depend id="283" type="2" difference="0" hardness="Strong"/>
+            <task id="17" name="Jeu en réseau local dans le modèle [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-04-01" duration="17" complete="0" thirdDate="2019-04-12" thirdDate-constraint="0" expand="true">
+                <depend id="260" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="11" name="Jeu en réseau local dans le contrôleur [TGaborit]" color="#000099" meeting="false" start="2019-04-01" duration="17" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="260" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="242" name="Jeu en réseau local dans la vue [PManauthon]" color="#ffff00" meeting="false" start="2019-04-01" duration="17" complete="0" thirdDate="2019-03-26" thirdDate-constraint="0" expand="true">
+                <depend id="260" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="260" name="Déploiement de la V3" color="#ff9999" meeting="true" start="2019-04-20" duration="0" complete="0" thirdDate="2019-04-04" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="283" name="V4" color="#ff0033" meeting="false" start="2019-04-22" duration="17" complete="0" thirdDate="2019-04-11" thirdDate-constraint="0" expand="true">
+            <task id="292" name="Jeu en réseau distant [EDurel/RFargeon/TGaborit]" color="#000099" meeting="false" start="2019-04-22" duration="17" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true">
+                <depend id="296" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="338" name="Implémentation de thèmes de jeu [PManauthon]" color="#ffff00" meeting="false" start="2019-04-22" duration="6" complete="0" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true">
+                <depend id="296" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="340" name="Implémentation de variantes [PManauthon]" color="#ffff00" meeting="false" start="2019-04-29" duration="11" complete="0" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true">
+                <depend id="296" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="339" name="Implémentation des extensions du jeu [All]" color="#ff0033" meeting="false" start="2019-04-22" duration="17" complete="0" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true">
+                <depend id="296" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="296" name="Déploiement de la V4" color="#ff0033" meeting="true" start="2019-05-11" duration="0" complete="0" thirdDate="2019-04-22" thirdDate-constraint="0" expand="true"/>
+        </task>
+        <task id="280" name="Deadline Git" color="#00ffcc" meeting="true" start="2019-05-29" duration="0" complete="0" thirdDate="2019-04-29" thirdDate-constraint="0" expand="true"/>
+        <task id="273" name="Mise en page du rapport [All]" color="#00ffcc" meeting="false" start="2019-05-06" duration="15" complete="0" thirdDate="2019-05-09" thirdDate-constraint="0" expand="true">
+            <depend id="22" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="22" name="Deadline rapport" color="#00ffcc" meeting="true" start="2019-05-23" duration="0" complete="0" thirdDate="2019-02-13" thirdDate-constraint="0" expand="true"/>
+        <task id="278" name="Préparation exposé [All]" color="#00ffcc" meeting="false" start="2019-05-13" duration="12" complete="0" thirdDate="2019-04-29" thirdDate-constraint="0" expand="true">
+            <depend id="268" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="268" name="Exposé" color="#00ffcc" meeting="true" start="2019-05-27" duration="0" complete="0" thirdDate="2019-07-26" thirdDate-constraint="0" expand="true"/>
+        <task id="276" name="Réalisation vidéo promotionnelle [All]" color="#00ffcc" meeting="false" start="2019-05-20" duration="10" complete="0" thirdDate="2019-04-29" thirdDate-constraint="0" expand="true">
+            <depend id="270" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="270" name="Deadline vidéo promotionnelle" color="#00ffcc" meeting="true" start="2019-05-31" duration="0" complete="0" thirdDate="2019-05-08" thirdDate-constraint="0" expand="true"/>
+        <task id="2" name="Vacances d'hiver" color="#999999" meeting="false" start="2019-02-16" duration="7" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+        <task id="8" name="Vacances de Pâques" color="#999999" meeting="false" start="2019-04-06" duration="14" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles>
+        <role id="1" name=""/>
+    </roles>
+</project>
