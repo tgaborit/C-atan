@@ -72,38 +72,56 @@ Cette version est une version optionnelle, qui propose des améliorations au pro
 
 III/Modèle Vue Contrôleur :
 
-V0:
-    Modèle:
-    -structure Joueur, Tuile,
-    
 
-    Contrôleur:
-    -fonctions gain de ressources, constructions, gain de points de victoire, jet de dés aléatoire
+	Modèle : Le modèle accueille les structures du jeu, afin de stocker toutes les informations nécéssaires de chaque joueur et du plateau.
 
-    Vue:
-    -pas de vue pour le moment
+	- type Infrastructure : ville, colonie, route, vide
 
-V1:
+	- type Ressource : blé, pierre, argile, mouton, bois
 
-    Modèle:
-    - Structure partie qui recense les joueurs
+	- type Developpement : cavalier, etc (cartes developpement)
 
-    Contrôleur:
-    - Fonctions d'inscriptions des joueurs et de lancement de la partie
+	- structure Sommet : associe un type d'Infrastructure à un joueur
 
-    Vue
-    -création de l'interface graphique d'inscription à la partie
-    -création de l'interface graphique de jeu avec le plateau et les premières mécaniques de jeu.
+	- structure Arrete : associe un type d'Infrastructure (route) et un joueur
 
-V2:
-    
-    Modèle:
-    -
 
-    Contrôleur:
-    -
-
-    Vue:
-
-	-
+	- structure Tuile :
+		Type de tuile (Ressource)
+		Tableau de ses sommets
+		Tableau de ses arretes
+		présence du brigand (entier à 0 ou 1)
+		Probabilité de tirage de la Tuile (entier)
+		
+	- structure Noeud :
+		une tuile
+		un tableau de tuiles adjacentes
 	
+	- liste Plateau :
+		liste des noeuds
+		
+	- structure Joueur :
+		liste/tableau de ressources
+		liste/tableau de developpements
+		pseudo (char)
+		couleur (?)
+		score (int)
+
+	- listes de cartes (Piles) à dépiler (pioches) pour les developpements et ressources
+
+	Le modele accueille également des fonctions travaillant sur ces structures et informations de la partie.
+
+	- fonctions de construction sur le plateau
+	- fonction de lancé de dé
+	- fonctions de gain de ressources pour les joueurs
+	- fonctions d'initialisation du plateau et des joueurs
+	- fonctions d'initialisation des piles de cartes
+	- fonctions de comptage de points
+	- (optionel) fonctions d'échange de cartes
+	
+		
+	Contrôleur :
+
+
+	Vue:
+
