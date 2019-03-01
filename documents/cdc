@@ -63,7 +63,7 @@ Cette version est une version optionnelle, qui propose des améliorations au pro
 
 - Ajouter une option d’échange de ressources entre les joueurs, (uniquement en cas de jeu en réseau) afin de coller un peu plus au jeu originel
 
-- ajout de différents "styles" de graphismes pour le plateau
+- ajout de différents "styles" de graphismes pour le plateau (futuriste, aquatique etc)
 
 - vérifications, tests et mise en commun du travail
 
@@ -124,4 +124,22 @@ III/Modèle Vue Contrôleur :
 
 
 	Vue:
+
+	- fonction Tuile pour afficher les tuiles du plateau de jeu 
+	- fonction Plateau pour afficher le plateau fixe (avec ports)
+	- fonction Proba pour afficher les chiffre affecté aux tuiles
+	- fonction Carte pour afficher les cartes ressources et leur nombre
+	- fonction Architecture pour afficher les constructions en menu déroulant et les 	   ressources nécessaires pour les faires 
+	- fonction CarteDeveloppement pour afficher les cartes développement en notre  		  possession en menu déroulant
+	- fonction Joueurs pour afficher les scores des différents joueurs
+	- fonction Reussite pour afficher les cartes “plus grande route” et/ou “plus grande    		  armée”
+	- fonction Regle pour afficher le point d’interrogation pour avoir les règles du jeu
+	- fonction Des pour afficher les dés
+	- fonction Skip pour afficher un bouton pour finir son tour
+	- fonction Menu pour afficher le menu démarrer du jeu avec "boutons" jouer 		  (déroulement sur nombre de joueurs), instructions et crédit.
+
+
+
+
+
 
