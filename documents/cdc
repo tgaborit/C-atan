@@ -121,6 +121,35 @@ III/Modèle Vue Contrôleur :
 	
 		
 	Contrôleur :
+	
+	- fonction controller_turn pour que le joueur décide quoi faire lors de son tour
+	- fonction quit fonction de callback qui quitte le jeu
+	- fonction end_turn_event fonction de callback qui met fin au tour
+	- fonction draw_dev_card fonction de callback qui fait piocher une carte développement
+	- fonction use_dev_card_event fonction de callback qui fait utiliser une carte developpement
+
+	- fonction controller_set_road pour que le joueur place une route
+	- fonction set_road_event fonction de callback qui place la route
+	- fonction back_event fonction de callback qui fait revenir en arrière (réutilisée pour set_settlement et set_city)
+
+	- fonction controller_set_settlement pour que le joueur place une colonie
+	- fonction set_settlement_event fonction de callback qui place la colonie
+
+	- fonction controller_set_city pour que le joueur place une ville (pratiquement la même fonction ou la même?)
+	- fonction set_city_event fonction de callback qui place la ville
+
+	- fonction controller_choose_resource pour que le joueur decide de la ressource de la carte developpement monopole ou de la carte developpement invention
+	- fonction monopoly_event fonction de callback qui modifie ensuite l'état du jeu pour la carte monopole
+	- fonction invention_event fonction de callback qui modifie l'état du jeu pour la carte invention
+
+	- fonction controller_choose_player pour que le joueur decide du joueur adverse lors de la carte chevalier
+	- fonction knight_event fonction de callback qui modifie l'état du jeu pour la carte chevalier
+
+	- fonction controller_set_thief pour que le joueur décide de la tuile où placer le voleur
+	- fonction set_thief_event fonction de callback qui place le voleur
+
+	- fonction controller_main_menu pour que le joueur agisse sur le menu démarrer
+	- fonction launch_game_event fonction de callback qui lance la partie
 
 
 	Vue:
