@@ -13,6 +13,15 @@
 #define JOUEUR_H
 
 #include "ressource.h"
+#include<stdio.h>
+#include <string.h>
+#include <malloc.h>
+#include <stdlib.h>
+
+
+
+
+#define TAILLE_MAX_PSEUDO  16 //taille max de caractère dans le pseudo d'un joueur
 
 /**
  * \enum Couleur
@@ -20,8 +29,10 @@
  *
  * contient les différentes couleurs possible pour un joueur
  */
-typedef enum Couleur{
-    ROUGE, VERT, ORANGE, BLEU} Couleur;
+
+typedef enum {
+    ROUGE, VERT, ORANGE, BLEU}
+    Couleur;
 
 /**
  * \enum Status
@@ -29,8 +40,8 @@ typedef enum Couleur{
  *
  * représente le status du joueur si il est en train de jouer ou il attend son tour
  */
-typedef enum Status{
-    JOUE, /*!<c'est le tour du joueur>*/ 
+typedef enum {
+    JOUE, /*!<c'est le tour du joueur>*/
     ATTEND /*<le joueur attend son tour>*/
 }Status;
 
@@ -46,15 +57,55 @@ typedef enum Status{
  */
 typedef struct {
 int score; /*!<entier représentant le nombre de points de victoire du joueur>*/
-char[] pseudo; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
-Status status /*<deffinie si c'est le tour du joueur ou si il est en attente>*/
-Ressource[4] ressource; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
-Developpement[4] carte_dev; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
+char pseudo[TAILLE_MAX_PSEUDO]; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
+Status status; /*<deffinie si c'est le tour du joueur ou si il est en attente>*/
+Ressource ressource[4] ; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
+CarteDev carte_dev [4] ; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
 Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
 }Joueur;
 
+/**
+ * \fn void set_pseudo(Joueur joueur);
+ * \brief Initialisaton pseudo joueur
+ *
+ *
+ * \param Char* pseudo choisie par le joueur Joueur*: joueur dont on initialise le pseudo
+ * \return: aucun
+ */
+void set_pseudo(Joueur* joueur, char* pseudo);
 
-void set_pseudo(Joueur joueur);
+/**
+ * \fn void set_status(Joueur joueur);
+ * \brief Initialisaton status du joueur
+ *
+ *
+ * \param Status status Joueur*: joueur dont on initialise le status
+ * \return: aucun
+ */
+void set_status(Joueur* joueur, Status satus);
+
+
+/**
+ * \fn void init_main_ressource(Joueur joueur);
+ * \brief Initialisation des cartes en main du joueur
+ *
+ *
+ * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \return: aucun
+ */
+void init_main_ressource(Joueur* joueur);
+
+/**
+ * \fn void init_main_cartdev(Joueur joueur);
+ * \brief Initialisation des cartes en main du joueur
+ *
+ *
+ * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \return: aucun
+ */
+void init_main_cartedev(Joueur* joueur);
+
+
 /**
  * \fn void init_joueur(Couleur couleur,char* pseudo)
  * \brief Fonction d'initialisationde la structure joueur
@@ -63,7 +114,7 @@ void set_pseudo(Joueur joueur);
  * \param Couleur: la couleur choisi par le joueur char* le pseudo choisi par le joueur.
  * \return: aucun
  */
-void init_joueur(Couleur couleur,char* pseudo);
+Joueur* init_joueur(Couleur couleur,char* pseudo);
 
 
 
@@ -75,7 +126,7 @@ void init_joueur(Couleur couleur,char* pseudo);
  * \param Joueur : joueur dont on veut connètrele score
  * \return int:la valeur score cotenue dans la structure joueur passé en paramètre
  */
-int get_score(Joueur joueur);
+int get_score(Joueur* joueur);
 
 
 
@@ -87,7 +138,7 @@ int get_score(Joueur joueur);
  * \param  Type_ressource: le type de la ressource gagné, Joueur: la structure joueur qui gagne cette ressource
  * \return aucun
  */
-void gain_ressource(Type_ressource type, Joueur* joueur);
+void gain_ressource(TypeRessource type, Joueur* joueur);
 
 /**
  * \fn void perte_ressource(Type_ressource type, Joueur* joueur)
@@ -97,7 +148,7 @@ void gain_ressource(Type_ressource type, Joueur* joueur);
  * \param  Type_ressource: le type de la ressource gagné, Joueur: la structure joueur qui perd cette ressource
  * \return aucun
  */
-void perte_ressource(Type_ressource type, Joueur* joueur);
+void perte_ressource(TypeRessource type, Joueur* joueur);
 
 /**
  * \fn int  get_nbressource(Type_ressource type, Joueur* joueur)
@@ -107,6 +158,38 @@ void perte_ressource(Type_ressource type, Joueur* joueur);
  * \param Type_ressource: le type de la ressource dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de ressource
  * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur
  */
-int  get_nbressource(Type_ressource type, Joueur* joueur);
+int  get_nbressource(TypeRessource type, Joueur* joueur);
+
+
+/**
+ * \fn void gain_cartedev(TypeCarteDev type, Joueur* joueur)
+ * \brief Fonction qui ajoute une carte developpement dans la main du joueur
+ *
+ * fait gagner au joueur une carte developpement spécifique
+ * \param  TypeCarteDev: le type de la carte developpement gagné, Joueur: la structure joueur qui gagne cette carte
+ * \return aucun
+ */
+void gain_cartedev(TypeCarteDev type, Joueur* joueur);
+
+/**
+ * \fn void perte_cartedev(TypeCarteDev type, Joueur* joueur)
+ * \brief Fonction qui enlève une carte developpement dans la main du joueur
+ *
+ * fait gagner au joueur une carte developpement spécifique
+ * \param  TypeCarteDev: le type de la carte developpement gagné, Joueur: la structure joueur qui gagne cette carte
+ * \return aucun
+ */
+void perte_ressource(TypeRessource type, Joueur* joueur);
+
+/**
+ * \fn int  get_nbcartedev(TypeCarteDev type, Joueur* joueur)
+ * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur
+ *
+ * fonction renvoillant le nombre de carte developpement d'un certain type possédé par un joueur
+ * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de carte developpment
+ * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur
+ */
+int  get_nbressource(TypeRessource type, Joueur* joueur);
 
 #endif // JOUEUR_H
+ 
