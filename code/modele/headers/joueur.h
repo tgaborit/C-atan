@@ -192,4 +192,3 @@ void perte_ressource(TypeRessource type, Joueur* joueur);
 int  get_nbressource(TypeRessource type, Joueur* joueur);
 
 #endif // JOUEUR_H
- 
