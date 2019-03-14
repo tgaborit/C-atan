@@ -17,6 +17,7 @@
  *
  */
 typedef enum {
+    BLE, /*<blé>*/
     BOIS, /*!<bois>*/
     PIERRE, /*!<pierre>*/
     ARGILE, /*!<argile>*/
