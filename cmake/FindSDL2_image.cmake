@@ -98,3 +98,5 @@ set(SDL2IMAGE_INCLUDE_DIR ${SDL2_IMAGE_INCLUDE_DIRS})
 set(SDL2IMAGE_FOUND ${SDL2_IMAGE_FOUND})
 
 mark_as_advanced(SDL2_IMAGE_LIBRARY SDL2_IMAGE_INCLUDE_DIR)
+
+# found on https://trenki2.github.io/blog/2017/07/04/using-sdl2-image-with-cmake/
