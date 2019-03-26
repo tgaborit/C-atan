@@ -322,3 +322,42 @@ Noeud* deplacementPlateau(Plateau* p, double x, double y){
     }                                                                       // On continue les déplacements tant que le noeud courant n'est pas le noeud recherché.
     return Cur;
 }
+
+
+/**
+ * \fn int bougerVoleur(double x, double y)
+ * \brief fonction permettant de déplacer le voleur d'une tuile à une autre.
+ *
+ *
+ * \param x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
+ * \return: retourne 1 si tout c est bien passé, 0 sinon.
+ */
+
+int bougerVoleur(Plateau* p, double x, double y){
+    if(p == NULL || deplacementPlateau(p,x,y) == NULL){
+        return -1;
+    }
+    int i=0;
+    int ord[6] = {1,3,0,5,2,4};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+    for(i=0;i<6;++i){                                               // On cherche le noeud ou se trouve actuellement le voleur afin de l'enlever.
+        if(p->t->brigand == 1){
+            p->t->brigand = 0;
+            break;
+        }
+        if(p->adjacence[i]->t->brigand == 1){
+            p->adjacence[i]->t->brigand = 0;
+            break;
+        }
+        if(p->adjacence[i]->adjacence[i]->t->brigand == 1){
+            p->adjacence[i]->adjacence[i]->t->brigand = 0;
+            break;
+        }
+        if(p->adjacence[i]->adjacence[ord[i]]->t->brigand == 1){
+            p->adjacence[i]->adjacence[ord[i]]->t->brigand = 0;
+            break;
+        }
+    }
+    Noeud* voleur = deplacementPlateau(p, x, y);                    // Le noeud choisi est paramétreé pour acueillir le voleur.
+    voleur->t->brigand = 1;
+    return 0;
+}
