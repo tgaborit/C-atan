@@ -282,3 +282,43 @@ int freePlateau(Plateau* p){
     freeNoeud(p);
     return 0;
 }
+
+
+/**
+ * \fn Noeud* deplacementPlateau(Plateau* p, double x, double y)
+ * \brief Fonction permettant de se déplacer à un endroit du plateau.
+ *
+ *
+ * \param p est un pointeur vers le plateau et x et y sont les coordonnées du noeud recherché.
+ * \return: retourne un pointeur vers le noeud cherché.
+ */
+
+Noeud* deplacementPlateau(Plateau* p, double x, double y){
+    Noeud* Cur = p;
+    int stop_infinite_while = 0;                                                    // Le noeud central est défini comme noeud de départ (noeud courant.
+    if(Cur == NULL){return NULL;}
+    while((Cur->x != x) || (Cur->y != y)){                                  // déplacement choisi en fonction des paramètres x et y par rapport au noeud courant.
+        ++stop_infinite_while;
+        if(stop_infinite_while > 10){
+            return NULL;
+        }
+        if(Cur->x < x){
+            if(Cur->y == y){Cur = Cur->adjacence[D];}
+            else if(Cur->y < y){Cur = Cur->adjacence[HD];}
+            else if(Cur->y > y){Cur = Cur->adjacence[BD];}
+        }
+        if(Cur == NULL){return NULL;}
+        if(Cur->x == x){
+            if(Cur->y < y){Cur = Cur->adjacence[HD]->adjacence[HG];}
+            else if(Cur->y > y){Cur = Cur->adjacence[BD]->adjacence[BG];}
+        }
+        if(Cur == NULL){return NULL;}
+        if(Cur->x > x){
+            if(Cur->y == y){Cur = Cur->adjacence[G];}
+            else if(Cur->y < y){Cur = Cur->adjacence[HG];}
+            else if(Cur->y > y){Cur = Cur->adjacence[BG];}
+        }
+        if(Cur == NULL){return NULL;}
+    }                                                                       // On continue les déplacements tant que le noeud courant n'est pas le noeud recherché.
+    return Cur;
+}
