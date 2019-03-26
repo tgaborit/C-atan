@@ -56,6 +56,22 @@ static void test_deplacementPlateau_PlateauNull(void** state){
     assert_ptr_equal(NULL,deplacementPlateau(NULL,2,0));
 }
 
+static void test_bougerVoleur_coordBonnes(void** state){
+    Plateau* p = (Plateau*) (*state);
+    bougerVoleur(p,1.5,1);
+    assert_int_equal(p->t->brigand,0);
+    assert_int_equal(deplacementPlateau(p,1.5,1)->t->brigand,1);
+}
+
+static void test_bougerVoleur_PlateauNULL(void** state){
+    assert_int_equal(bougerVoleur(NULL,2,0),-1);
+}
+
+static void test_bougerVoleur_coordFausses(void** state){
+    Plateau* p = (Plateau*) (*state);
+    assert_int_equal(bougerVoleur(p,10,10),-1);
+}
+
 int main_test(void){
     const struct CMUnitTest tests_plateau[] = {
         cmocka_unit_test(test_initPlateau_retourNonNul),
@@ -63,7 +79,10 @@ int main_test(void){
         cmocka_unit_test(test_freePlateau_PlateauNonNul),
 	cmocka_unit_test(test_deplacementPlateau_coordBonnes),
         cmocka_unit_test(test_deplacementPlateau_coordFausses),
-        cmocka_unit_test(test_deplacementPlateau_PlateauNull)
+        cmocka_unit_test(test_deplacementPlateau_PlateauNull),
+	cmocka_unit_test(test_bougerVoleur_coordBonnes),
+        cmocka_unit_test(test_bougerVoleur_coordFausses),
+        cmocka_unit_test(test_bougerVoleur_PlateauNULL)
     };
     return cmocka_run_group_tests(tests_plateau,group_setup,group_teardown);
 }
