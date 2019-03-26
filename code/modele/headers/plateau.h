@@ -24,10 +24,10 @@
 
 typedef enum
 {
-    ville,          /*!< ville du jeu */
-    colonie,        /*!< colonie du jeu */
-    route,          /*!< relie les villes et colonies entre elles */
-    vide            /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
+    VILLE,          /*!< ville du jeu */
+    COLONIE,        /*!< colonie du jeu */
+    ROUTE,          /*!< relie les villes et colonies entre elles */
+    VIDE            /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
 }Infrastructure;
 
 
@@ -43,11 +43,11 @@ typedef enum
 typedef enum
 {
     G,      /*!< déplacement à gauche */
-    D,      /*!< déplacement à droite */
-    HG,     /*!< déplacement en haut à gauche */
-    BG,     /*!< déplacement en bas à gauche */
-    HD,     /*!< déplacement en haut à droite */
-    BD      /*!< déplacement en bas à droite */
+    BG,     /*!< déplacement en haut à gauche */
+    HG,     /*!< déplacement en haut à droite */
+    BD,      /*!< déplacement à droite */
+    HD,      /*!< déplacement en bas à droite */
+    D,     /*!< déplacement en bas à gauche */
 }Mouvement;
 
 
@@ -108,25 +108,74 @@ typedef struct
  *
  */
 
-typedef struct Noeud
-{
-    Tuile* t;                /*!< Tuile associée au Noeud */
-    struct Noeud adjacence[6];      /*!< Noeuds des Tuiles adjacentes à la Tuile du Noeud */
-    int x;                          /*!< Position abscisse dans le repère de la Tuile du Noeud */
-    int y;                          /*!< Position ordonnée dans le repère de la Tuile du Noeud */
+typedef struct Noeud{
+    Tuile* t;                          /*!< Tuile associée au Noeud */
+    struct Noeud** adjacence;           /*!< pointeur vers un tableau de pointeurs de Noeuds des Tuiles adjacentes à la Tuile du Noeud (tableau) */
+    double x;                          /*!< Position abscisse dans le repère de la Tuile du Noeud */
+    double y;                          /*!< Position ordonnée dans le repère de la Tuile du Noeud */
 }Noeud;
 
 
-typedef Noeud* Plateau;
+typedef Noeud Plateau;
+
+
+/**
+ * \fn Plateau* initPlateau()
+ * \brief Initialisation du Plateau, c'est à dire de tous ses Noeuds et Tuiles.
+ *
+ *
+ * \param aucun paramètre
+ * \return: retourne un pointeur vers une instance de type Plateau.
+ */
 
 Plateau* initPlateau();
 
-int poserInfrastructure(Plateau* p,Infrastructure i,int x, int y, int pos);
 
-int deplacementPlateau(Mouvement m);
+/**
+ * \fn void freePlateau(Plateau* p)
+ * \brief Libération de la mémoire allouée à un plateau et son contenu.
+ *
+ *
+ * \param p un pointeur vers le Plateau à libérer.
+ * \return: -1 si p est un pointeur nul, 0 sinon.
+ */
 
-int bougerVoleur(int x, int y);
+ int freePlateau(Plateau* p);
 
 
+/**
+ * \fn int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int pos)
+ * \brief Fonction permettant de poser une infrastructure à un endroit du plateau si l'endroit en question est vide.
+ *
+ *
+ * \param p est un pointeur vers le plateau, i est le type d'infrastructure à poser, x et y sont les coordonnées de la tuile en question et pos est la position sur la tuile en question.
+ * \return: retourne 1 si l'action est validée, 0 sinon (cas ou il y a deja une infrastructure de présente).
+ */
+
+int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int pos);
+
+
+/**
+ * \fn Noeud* deplacementPlateau(Plateau* p, double x, double y)
+ * \brief Fonction permettant de se déplacer à un endroit du plateau.
+ *
+ *
+ * \param p est un pointeur vers le plateau et x et y sont les coordonnées du noeud recherché.
+ * \return: retourne un pointeur vers le noeud cherché.
+ */
+
+Noeud* deplacementPlateau(Plateau* p, double x, double y);
+
+
+/**
+ * \fn int bougerVoleur(double x, double y)
+ * \brief fonction permettant de déplacer le voleur d'une tuile à une autre.
+ *
+ *
+ * \param x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
+ * \return: retourne 1 si tout c est bien passé, 0 sinon.
+ */
+
+int bougerVoleur(Plateau* p, double x, double y);
 
 #endif
