@@ -24,10 +24,10 @@
 
 typedef enum
 {
+    VIDE,           /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
     VILLE,          /*!< ville du jeu */
     COLONIE,        /*!< colonie du jeu */
-    ROUTE,          /*!< relie les villes et colonies entre elles */
-    VIDE            /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
+    ROUTE           /*!< relie les villes et colonies entre elles */
 }Infrastructure;
 
 
