@@ -9,6 +9,7 @@
 SDL_Rect wood_card_area;        /* rectangles correspondant aux zones des cartes ressources*/
 SDL_Rect wheat_card_area;       /* initialisés une seule fois dans les fonctions init*Card*/
 SDL_Rect clay_card_area;
+SDL_Rect sheeps_card_area;
 
 void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
@@ -41,6 +42,10 @@ void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appe
 
                 case CLAY_BUTTON :
                     printf("Clic sur carte argile\n");
+                    break;
+
+                case SHEEPS_BUTTON :
+                    printf("Clic sur carte moutons\n");
                     break;
 
                 default :
@@ -104,11 +109,21 @@ void initClayCard()
     clay_card_area.y = WINDOWH - CARDH;
 }
 
+void initSheepsCard()
+{
+    sheeps_card_area.w = CARDW;
+    sheeps_card_area.h = CARDH;
+
+    sheeps_card_area.x = wood_card_area.x+wood_card_area.w+58;
+    sheeps_card_area.y = WINDOWH - CARDH;
+}
+
 void initCardsAreas()
 {
     initWoodCard();
     initWheatCard();
     initClayCard();
+    initSheepsCard();
 }
 
 ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
@@ -118,6 +133,8 @@ ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return WHEAT_BUTTON;
     if(isInArea(mouse_button, clay_card_area) == SDL_TRUE)
         return CLAY_BUTTON;
+    if(isInArea(mouse_button, sheeps_card_area) == SDL_TRUE)
+        return SHEEPS_BUTTON;
     return NO_BUTTON;
 }
 
