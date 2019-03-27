@@ -8,6 +8,7 @@
 
 SDL_Rect wood_card_area;        /* rectangles correspondant aux zones des cartes ressources*/
 SDL_Rect wheat_card_area;       /* initialisés une seule fois dans les fonctions init*Card*/
+SDL_Rect clay_card_area;
 
 void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
@@ -38,14 +39,13 @@ void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appe
                     printf("Clic sur carte ble\n");
                     break;
 
+                case CLAY_BUTTON :
+                    printf("Clic sur carte argile\n");
+                    break;
+
                 default :
                     continue;
                 }
-                /*if(isInArea(event.button, wood_card_area)==SDL_TRUE)
-                    printf("Clic sur carte bois\n");
-                if(isInArea(event.button, wheat_card_area)==SDL_TRUE)
-                    printf("Clic sur carte ble\n");
-                break;*/
 
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
@@ -91,14 +91,24 @@ void initWheatCard()
     wheat_card_area.w = CARDW;
     wheat_card_area.h = CARDH;
 
-    wheat_card_area.x = wood_card_area.x-58-wood_card_area.w;
+    wheat_card_area.x = wood_card_area.x-58-wheat_card_area.w;
     wheat_card_area.y = WINDOWH - CARDH;
+}
+
+void initClayCard()
+{
+    clay_card_area.w = CARDW;
+    clay_card_area.h = CARDH;
+
+    clay_card_area.x = wheat_card_area.x-58-clay_card_area.w;
+    clay_card_area.y = WINDOWH - CARDH;
 }
 
 void initCardsAreas()
 {
     initWoodCard();
     initWheatCard();
+    initClayCard();
 }
 
 ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
@@ -106,6 +116,8 @@ ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return WOOD_BUTTON;
     if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
         return WHEAT_BUTTON;
+    if(isInArea(mouse_button, clay_card_area) == SDL_TRUE)
+        return CLAY_BUTTON;
     return NO_BUTTON;
 }
 
