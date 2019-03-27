@@ -22,7 +22,7 @@
  *
  * \param tabNoeud, un pointeur vers le premier élément du tableau contenant les noeuds des tuiles du plateau
  * \param x et y les coordonnées du noeud recherché
- * \return: Retourne -1 si le noeud n'existe pas, et son indice dans le tableau sinon.
+ * \return -1 si le noeud n'existe pas, et son indice dans le tableau sinon.
  */
 
 static int rechercheNoeud(Noeud** tabNoeud, double x, double y){
@@ -42,7 +42,7 @@ static int rechercheNoeud(Noeud** tabNoeud, double x, double y){
  *
  *
  * \param tabNoeud, un pointeur vers un tableau de pointeurs de noeuds des tuiles du plateau
- * \return: Aucun retour
+ * \return Aucun retour
  */
 
 static void fillAdjacence(Noeud** tabNoeud){
@@ -73,7 +73,7 @@ static void fillAdjacence(Noeud** tabNoeud){
  *
  *
  * \param tabNoeud, un pointeur vers le premier élément du tableau contenant les noeuds des tuiles du plateau
- * \return: Aucun retour
+ * \return Aucun retour
  */
 
 static void generationProba(Noeud** tabNoeud){
@@ -111,7 +111,7 @@ static void generationProba(Noeud** tabNoeud){
  *
  *
  * \param tabNoeud, un pointeur vers le premier élément du tableau contenant les noeuds des tuiles du plateau
- * \return: Aucun retour
+ * \return Aucun retour
  */
 
 static void generationType(Noeud** tabNoeud){
@@ -146,7 +146,7 @@ static void generationType(Noeud** tabNoeud){
  *
  *
  * \param aucun paramètre
- * \return: retourne un pointeur vers l'instance de type Tuile créée.
+ * \return un pointeur vers l'instance de type Tuile créée.
  */
 
 static Tuile* initTuile(){
@@ -174,7 +174,7 @@ static Tuile* initTuile(){
  *
  *
  * \param t un pointeur vers la tuile à libérer.
- * \return: Aucun retour
+ * \return Aucun retour
  */
 
 static void freeTuile(Tuile* t){
@@ -188,7 +188,7 @@ static void freeTuile(Tuile* t){
  *
  *
  * \param positions x et y du nouveau noeud
- * \return: retourne un pointeur vers l'instance de type Noeud créée.
+ * \return un pointeur vers l'instance de type Noeud créée.
  */
 
 static Noeud* initNoeud(double x, double y){
@@ -212,7 +212,7 @@ static Noeud* initNoeud(double x, double y){
  *
  *
  * \param n un pointeur vers le noeud correspondant.
- * \return: Aucun retour
+ * \return Aucun retour
  */
 
 static void freeNoeud(Noeud* n){
@@ -228,7 +228,7 @@ static void freeNoeud(Noeud* n){
  *
  *
  * \param aucun paramètre
- * \return: retourne un pointeur vers une instance de type Plateau.
+ * \return un pointeur vers une instance de type Plateau.
  */
 
 Plateau* initPlateau(){
@@ -265,7 +265,7 @@ Plateau* initPlateau(){
  *
  *
  * \param p un pointeur vers le Plateau à libérer.
- * \return: 0 si tout c'est bien passé, -1 sinon.
+ * \return 0 si tout c'est bien passé, -1 sinon.
  */
 
 int freePlateau(Plateau* p){
@@ -290,7 +290,7 @@ int freePlateau(Plateau* p){
  *
  *
  * \param p est un pointeur vers le plateau et x et y sont les coordonnées du noeud recherché.
- * \return: retourne un pointeur vers le noeud cherché.
+ * \return un pointeur vers le noeud cherché.
  */
 
 Noeud* deplacementPlateau(Plateau* p, double x, double y){
@@ -330,7 +330,7 @@ Noeud* deplacementPlateau(Plateau* p, double x, double y){
  *
  *
  * \param x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
- * \return: retourne 1 si tout c est bien passé, 0 sinon.
+ * \return 1 si tout c est bien passé, 0 sinon.
  */
 
 int bougerVoleur(Plateau* p, double x, double y){
