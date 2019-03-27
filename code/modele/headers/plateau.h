@@ -24,10 +24,10 @@
 
 typedef enum
 {
+    VIDE,           /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
     VILLE,          /*!< ville du jeu */
     COLONIE,        /*!< colonie du jeu */
-    ROUTE,          /*!< relie les villes et colonies entre elles */
-    VIDE            /*!< est une infrastructure par defaut afin de remplir les endroits vides du plateau */
+    ROUTE           /*!< relie les villes et colonies entre elles */
 }Infrastructure;
 
 
@@ -125,7 +125,7 @@ typedef Noeud Plateau;
  *
  *
  * \param aucun paramètre
- * \return: retourne un pointeur vers une instance de type Plateau.
+ * \return un pointeur vers une instance de type Plateau.
  */
 
 Plateau* initPlateau();
@@ -137,7 +137,7 @@ Plateau* initPlateau();
  *
  *
  * \param p un pointeur vers le Plateau à libérer.
- * \return: -1 si p est un pointeur nul, 0 sinon.
+ * \return -1 si p est un pointeur nul, 0 sinon.
  */
 
  int freePlateau(Plateau* p);
@@ -149,7 +149,7 @@ Plateau* initPlateau();
  *
  *
  * \param p est un pointeur vers le plateau, i est le type d'infrastructure à poser, x et y sont les coordonnées de la tuile en question et pos est la position sur la tuile en question.
- * \return: retourne 1 si l'action est validée, 0 sinon (cas ou il y a deja une infrastructure de présente).
+ * \return 1 si l'action est validée, 0 sinon (cas ou il y a deja une infrastructure de présente).
  */
 
 int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int pos);
@@ -161,7 +161,7 @@ int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int po
  *
  *
  * \param p est un pointeur vers le plateau et x et y sont les coordonnées du noeud recherché.
- * \return: retourne un pointeur vers le noeud cherché.
+ * \return un pointeur vers le noeud cherché.
  */
 
 Noeud* deplacementPlateau(Plateau* p, double x, double y);
@@ -173,7 +173,7 @@ Noeud* deplacementPlateau(Plateau* p, double x, double y);
  *
  *
  * \param x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
- * \return: retourne 1 si tout c est bien passé, 0 sinon.
+ * \return 1 si tout c est bien passé, 0 sinon.
  */
 
 int bougerVoleur(Plateau* p, double x, double y);
