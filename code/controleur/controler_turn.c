@@ -28,11 +28,24 @@ void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appe
                 break;
 
             case SDL_MOUSEBUTTONDOWN :
-                if(isInArea(event.button, wood_card_area)==SDL_TRUE)
+                switch(whichButtonTurn(event.button))
+                {
+                case WOOD_BUTTON :
+                    printf("Clic sur carte bois\n");
+                    break;
+
+                case WHEAT_BUTTON :
+                    printf("Clic sur carte ble\n");
+                    break;
+
+                default :
+                    continue;
+                }
+                /*if(isInArea(event.button, wood_card_area)==SDL_TRUE)
                     printf("Clic sur carte bois\n");
                 if(isInArea(event.button, wheat_card_area)==SDL_TRUE)
                     printf("Clic sur carte ble\n");
-                break;
+                break;*/
 
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
@@ -69,7 +82,7 @@ void initWoodCard()
     wood_card_area.w = CARDW;
     wood_card_area.h = CARDH;
 
-    wood_card_area.x = WINDOWW/2 - CARDW/2;
+    wood_card_area.x = WINDOWW/2 - CARDW/2;/* regler positions par rapport à la vue */
     wood_card_area.y = WINDOWH - CARDH;
 }
 
@@ -82,10 +95,19 @@ void initWheatCard()
     wheat_card_area.y = WINDOWH - CARDH;
 }
 
-void initCardsAreas(){
+void initCardsAreas()
+{
     initWoodCard();
     initWheatCard();
-    }
+}
+
+ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
+        return WOOD_BUTTON;
+    if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
+        return WHEAT_BUTTON;
+    return NO_BUTTON;
+}
 
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
 {
