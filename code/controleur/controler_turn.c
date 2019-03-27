@@ -26,6 +26,11 @@ void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appe
                 printf("Appel de la fonction AffichePlateau(the_partie)\n");
                 break;
 
+            case SDL_MOUSEBUTTONDOWN :
+                if(isInArea(event.button, wood_card_area)==SDL_TRUE)
+                    printf("Clic sur carte bois\n");
+                break;
+
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
                 {
@@ -63,4 +68,15 @@ void initWoodCard()
 
     wood_card_area.x = BANNERW/2 - CARDW/2;
     wood_card_area.y = WINDOWH - CARDH;
+}
+
+
+SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
+{
+    if ((mouse_button.x>=area.x)&&(mouse_button.x<=area.x+area.w))
+    {
+        if ((mouse_button.y>=area.y)&&(mouse_button.y<=area.y+area.h))
+            return SDL_TRUE;
+    }
+    return SDL_FALSE;
 }
