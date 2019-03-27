@@ -5,11 +5,9 @@
 #include "Plateau.c"
 
 
-
 int main(int argc, char **argv)
 {
 	AfficheFenetre();
-
 
 	return EXIT_SUCCESS; 
 }
