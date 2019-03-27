@@ -5,6 +5,11 @@
 #ifndef CATANE_CONTROLER_TURN_H
 #define CATANE_CONTROLER_TURN_H
 
-void controler_turn(SDL_bool program_launched/*, partie * the_partie*/);
+#define CARDW 115
+#define CARDH 166
+
+void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/);
+void quit(SDL_bool * program_launched);
+void initWoodCard();
 
 #endif //CATANE_CONTROLER_TURN_H
