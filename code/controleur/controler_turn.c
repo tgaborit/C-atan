@@ -6,12 +6,13 @@
 #include "controler.h"
 #include "controler_turn.h"
 
-SDL_Rect wood_card_area;
+SDL_Rect wood_card_area;        /* rectangles correspondant aux zones des cartes ressources*/
+SDL_Rect wheat_card_area;       /* initialisés une seule fois dans les fonctions init*Card*/
 
 void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
     //printf("Doit afficher 115 : %d\n", CARDW);
-    initWoodCard();
+    initCardsAreas();
 
     while(program_launched)
     {
@@ -29,6 +30,8 @@ void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appe
             case SDL_MOUSEBUTTONDOWN :
                 if(isInArea(event.button, wood_card_area)==SDL_TRUE)
                     printf("Clic sur carte bois\n");
+                if(isInArea(event.button, wheat_card_area)==SDL_TRUE)
+                    printf("Clic sur carte ble\n");
                 break;
 
             case SDL_KEYDOWN :
@@ -66,10 +69,23 @@ void initWoodCard()
     wood_card_area.w = CARDW;
     wood_card_area.h = CARDH;
 
-    wood_card_area.x = BANNERW/2 - CARDW/2;
+    wood_card_area.x = WINDOWW/2 - CARDW/2;
     wood_card_area.y = WINDOWH - CARDH;
 }
 
+void initWheatCard()
+{
+    wheat_card_area.w = CARDW;
+    wheat_card_area.h = CARDH;
+
+    wheat_card_area.x = wood_card_area.x-58-wood_card_area.w;
+    wheat_card_area.y = WINDOWH - CARDH;
+}
+
+void initCardsAreas(){
+    initWoodCard();
+    initWheatCard();
+    }
 
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
 {
