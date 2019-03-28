@@ -13,4 +13,6 @@
 #define CARDW 115
 #define CARDH 166
 
+SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
+
 #endif //CATANE_CONTROLER_H

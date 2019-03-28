@@ -17,7 +17,6 @@ void initWheatCard();
 void initClayCard();
 void initSheepsCard();
 void initCardsAreas();
-SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
 
 #endif //CATANE_CONTROLER_TURN_H
