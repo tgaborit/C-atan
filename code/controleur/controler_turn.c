@@ -12,11 +12,11 @@
 #include "controler.h"
 #include "controler_turn.h"
 
-SDL_Rect wood_card_area;        /* rectangles correspondant aux zones des cartes ressources*/
-SDL_Rect wheat_card_area;       /* initialisés une seule fois dans les fonctions init*Card*/
-SDL_Rect clay_card_area;
-SDL_Rect sheeps_card_area;
-SDL_Rect rock_card_area;
+static SDL_Rect wood_card_area;        /*!< Rectangle correspondant à la zone de la carte Bois*/
+static SDL_Rect wheat_card_area;       /*!< Rectangle correspondant à la zone de la carte Blé*/
+static SDL_Rect clay_card_area;        /*!< Rectangle correspondant à la zone de la carte Argile*/
+static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone de la carte Moutons*/
+static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
 
 
 /**
