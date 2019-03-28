@@ -4,6 +4,7 @@
 
 #include "Plateau.h"
 #include "carte.c"
+#include "tuile.c"
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -43,7 +44,7 @@ void AfficheFenetre(){
 	
 	SDL_RenderPresent(renderer);
 		
-	//AfficheTuile(renderer);
+	AfficheTuile(renderer);
 
 	AfficheCarteArgile(renderer);
 	AfficheCarteBle(renderer);
@@ -95,41 +96,6 @@ void AfficheFenetre(){
 
 
 
-
-void AfficheTuile(SDL_Renderer* renderer)		//changer l'image et mettre ruche
-{
-	SDL_Surface *image = NULL;
-	SDL_Texture *texture = NULL;
-	
-	image = SDL_LoadBMP("planete.bmp");
-
-	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
-
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
-	
-	//switch avec fonction manu ?
-	if(texture == NULL)
-		SDL_ExitWithError("impossible de creer la texture");
-
-	SDL_Rect rectangle;
-
-	if(SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h) != 0)
-		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectangle.x = (800 - rectangle.w) / 2;		
-	rectangle.y = (600 - rectangle.h) / 2;
-
-
-	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0) 
-		SDL_ExitWithError("Impossible d'afficher la texture");
-	
-	SDL_RenderPresent(renderer);
-}
-
-
-
 void AfficheJoueur(SDL_Renderer* renderer)
 {
 	
@@ -141,7 +107,7 @@ void AfficheJoueur(SDL_Renderer* renderer)
 	barrejoueurs.x = 0;
 	barrejoueurs.y = 0;
 	barrejoueurs.w = WINDOWW;
-	barrejoueurs.h = 50;
+	barrejoueurs.h = 35;
 	
 	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)	
 		SDL_ExitWithError("Impossible de remplir un rectangle");
