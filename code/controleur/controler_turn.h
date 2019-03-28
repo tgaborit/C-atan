@@ -1,13 +1,31 @@
-//
-// Created by tgaborit on 27/03/19.
-//
+/**
+* \file controler_turn.h
+* \brief En-tête du contrôleur du tour du joueur
+* \author Titouan Gaborit
+* \date 27 mars 2019
+*
+* En-tête déclarant les fonctions du contrôleur du tour du joueur ainsi que la définition des macros relatives aux boutons du tour de jeu.
+*/
 
 #ifndef CATANE_CONTROLER_TURN_H
 #define CATANE_CONTROLER_TURN_H
 
+/**
+* \def CARDW
+* Définit la largeur d'une carte ressource
+*/
 #define CARDW 115
+
+/**
+* \def CARDW
+* Définit la hauteur d'une carte ressource
+*/
 #define CARDH 166
 
+/**
+* \enum ControlerButton
+* Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
+*/
 typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON} ControlerButton ;
 
 void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/);
