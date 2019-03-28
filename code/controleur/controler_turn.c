@@ -18,7 +18,6 @@ static SDL_Rect clay_card_area;        /*!< Rectangle correspondant à la zone d
 static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone de la carte Moutons*/
 static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
 
-
 /**
 * \fn void controlerTurn(SDL_bool program_launched, partie * the_partie)
 * \brief Fonction principale du contrôleur du tour du joueur
@@ -29,15 +28,18 @@ static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone d
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur
 */
-void controlerTurn(SDL_bool program_launched/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
+void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
     //printf("Doit afficher 115 : %d\n", CARDW);
     initCardsAreas();
-
+    drawButtons(renderer);
+    SDL_RenderPresent(renderer);
     while(program_launched)
     {
         SDL_Event event;
-
+        //drawButtons(renderer);
+        //SDL_RenderClear(renderer);
+        //SDL_RenderPresent(renderer);
         while(SDL_PollEvent(&event))
         {
             switch(event.type)
@@ -225,7 +227,7 @@ void initCardsAreas()
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
 * \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué.
 */
-ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
         return WOOD_BUTTON;
     if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
@@ -237,4 +239,18 @@ ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
         return ROCK_BUTTON;
     return NO_BUTTON;
+}
+
+void drawButtons(SDL_Renderer* renderer)
+{
+    SDL_Rect turn_buttons[5] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area};
+    if(SDL_RenderDrawRects(renderer, turn_buttons, 5) != 0)
+        SDL_ExitWithError("Impossible de dessiner les cartes ressource");
+}
+
+void SDL_ExitWithError(const char *message)
+{
+    SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
+    SDL_Quit();
+    exit(EXIT_FAILURE);
 }
