@@ -17,6 +17,7 @@ static SDL_Rect wheat_card_area;       /*!< Rectangle correspondant à la zone d
 static SDL_Rect clay_card_area;        /*!< Rectangle correspondant à la zone de la carte Argile*/
 static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone de la carte Moutons*/
 static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
+static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 /**
 * \fn void controlerTurn(SDL_bool program_launched, partie * the_partie)
@@ -30,16 +31,13 @@ static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone d
 */
 void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
-    //printf("Doit afficher 115 : %d\n", CARDW);
     initCardsAreas();
+    initEndTurnArea();
     drawButtons(renderer);
     SDL_RenderPresent(renderer);
     while(program_launched)
     {
         SDL_Event event;
-        //drawButtons(renderer);
-        //SDL_RenderClear(renderer);
-        //SDL_RenderPresent(renderer);
         while(SDL_PollEvent(&event))
         {
             switch(event.type)
@@ -54,6 +52,7 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                 {
                 case WOOD_BUTTON :
                     printf("Clic sur carte bois\n");
+                    //echange(BOIS); /* fonction
                     break;
 
                 case WHEAT_BUTTON :
@@ -72,6 +71,10 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                     printf("Clic sur carte roche\n");
                     break;
 
+                case ENDTURN_BUTTON :
+                    printf("Clic sur bouton Fin de tour\n");
+                    break;
+
                 default :
                     continue;
                 }
@@ -80,7 +83,6 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_q :
-                    //program_launched = SDL_FALSE;
                     quit(&program_launched);
                     break;
 
@@ -89,7 +91,6 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                 }
 
             case SDL_QUIT :
-                //program_launched = SDL_FALSE;
                 quit(&program_launched);
                 break;
 
@@ -218,6 +219,23 @@ void initCardsAreas()
 }
 
 /**
+* \fn void initEndTurnArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*
+*/
+void initEndTurnArea()
+{
+    end_turn_area.w = 150;
+    end_turn_area.h = 75;
+
+    end_turn_area.x = 300;
+    end_turn_area.y = 55;
+}
+
+/**
 * \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le jouer a cliqué
 *
@@ -238,13 +256,15 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return SHEEPS_BUTTON;
     if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
         return ROCK_BUTTON;
+    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
+        return ENDTURN_BUTTON;
     return NO_BUTTON;
 }
 
 void drawButtons(SDL_Renderer* renderer)
 {
-    SDL_Rect turn_buttons[5] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area};
-    if(SDL_RenderDrawRects(renderer, turn_buttons, 5) != 0)
+    SDL_Rect turn_buttons[6] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area};
+    if(SDL_RenderDrawRects(renderer, turn_buttons, 6) != 0)
         SDL_ExitWithError("Impossible de dessiner les cartes ressource");
 }
 

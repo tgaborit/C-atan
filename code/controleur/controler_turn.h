@@ -26,16 +26,20 @@
 * \enum TurnButton
 * Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
 */
-typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON} TurnButton ;
+typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON, ENDTURN_BUTTON} TurnButton ;
 
 void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/);
 void quit(SDL_bool * program_launched);
+
 void initWoodCard();
 void initWheatCard();
 void initClayCard();
 void initSheepsCard();
 void initRockCard();
 void initCardsAreas();
+
+void initEndTurnArea();
+
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
 void drawButtons(SDL_Renderer* renderer);
 
