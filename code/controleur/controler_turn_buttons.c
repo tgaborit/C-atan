@@ -14,18 +14,99 @@
 #include "controler_turn.h"
 #include "controler_turn_buttons.h"
 
-static SDL_Rect wood_card_area;        /*!< Rectangle correspondant à la zone de la carte Bois*/
-static SDL_Rect wheat_card_area;       /*!< Rectangle correspondant à la zone de la carte Blé*/
-static SDL_Rect clay_card_area;        /*!< Rectangle correspondant à la zone de la carte Argile*/
-static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone de la carte Moutons*/
-static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
+static SDL_Rect wood_card_area;         /*!< Rectangle correspondant à la zone de la carte Bois*/
+static SDL_Rect wheat_card_area;        /*!< Rectangle correspondant à la zone de la carte Blé*/
+static SDL_Rect clay_card_area;         /*!< Rectangle correspondant à la zone de la carte Argile*/
+static SDL_Rect sheeps_card_area;       /*!< Rectangle correspondant à la zone de la carte Moutons*/
+static SDL_Rect rock_card_area;         /*!< Rectangle correspondant à la zone de la carte Roche*/
+
+static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
+static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Route*/
+static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
+static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
 
 static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
-static SDL_Rect dev_craft_area;
-static SDL_Rect road_craft_area;
-static SDL_Rect settle_craft_area;
-static SDL_Rect city_craft_area;
+void drawButtons(SDL_Renderer* renderer)
+{
+    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area,
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area};
+    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
+        SDL_ExitWithError("Impossible de dessiner les boutons");
+}
+
+/**
+* \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton le jouer a cliqué
+*
+* Teste pour chaque bouton si le clic efféctué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué.
+*/
+TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
+        return WOOD_BUTTON;
+    if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
+        return WHEAT_BUTTON;
+    if(isInArea(mouse_button, clay_card_area) == SDL_TRUE)
+        return CLAY_BUTTON;
+    if(isInArea(mouse_button, sheeps_card_area) == SDL_TRUE)
+        return SHEEPS_BUTTON;
+    if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
+        return ROCK_BUTTON;
+    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
+        return ENDTURN_BUTTON;
+    if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
+        return DEVCRAFT_BUTTON;
+    if(isInArea(mouse_button, road_craft_area) == SDL_TRUE)
+        return ROADCRAFT_BUTTON;
+    if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
+        return SETTLECRAFT_BUTTON;
+    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
+        return CITYCRAFT_BUTTON;
+    return NO_BUTTON;
+}
+
+/**
+* \fn void initButtonsTurn()
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
+*
+* Initialise les champs des rectangles des zones correspondant aux cartes ressources et au bouton Fin de tour.
+* Fait appel aux fonctions d'initialisation correspondantes.
+*
+*/
+void initButtonsTurn()
+{
+    initCardsAreas();
+    initCraftAreas();
+    initEndTurnArea();
+}
+
+/**
+* \fn void initCardsAreas()
+* \brief Fonction d'initialisation des cartes ressources
+*
+* Initialise les champs des rectangles des zones correspondant aux cartes ressources.
+* Fait appel aux fonctions d'initialisation pour la carte Bois, la carte Blé, la carte Argile, la carte Moutons et la carte Roche.
+*
+*/
+void initCardsAreas()
+{
+    initWoodCard();
+    initWheatCard();
+    initClayCard();
+    initSheepsCard();
+    initRockCard();
+}
+
+void initCraftAreas(){
+    initDevCraftArea();
+    initRoadCraftArea();
+    initSettleCraftArea();
+    initCityCraftArea();
+}
 
 /**
 * \fn void initWoodCard()
@@ -112,40 +193,6 @@ void initRockCard()
     rock_card_area.y = WINDOWH - CARDH;
 }
 
-/**
-* \fn void initCardsAreas()
-* \brief Fonction d'initialisation des cartes ressources
-*
-* Initialise les champs des rectangles des zones correspondant aux cartes ressources.
-* Fait appel aux fonctions d'initialisation pour la carte Bois, la carte Blé, la carte Argile, la carte Moutons et la carte Roche.
-*
-*/
-void initCardsAreas()
-{
-    initWoodCard();
-    initWheatCard();
-    initClayCard();
-    initSheepsCard();
-    initRockCard();
-}
-
-/**
-* \fn void initEndTurnArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour
-*
-* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
-* Assigne les valeurs de position selon le placement souhaité.
-*
-*/
-void initEndTurnArea()
-{
-    end_turn_area.w = 150;
-    end_turn_area.h = 75;
-
-    end_turn_area.x = 300;
-    end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
-}
-
 void initDevCraftArea()
 {
     dev_craft_area.w = CRAFTW;
@@ -183,64 +230,18 @@ void initCityCraftArea()
 }
 
 /**
-* \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton le jouer a cliqué
+* \fn void initEndTurnArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour
 *
-* Teste pour chaque bouton si le clic efféctué correspond à la zone de ce bouton.
-* Si c'est le cas, communique lequel.
-*
-* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué.
-*/
-TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
-    if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
-        return WOOD_BUTTON;
-    if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
-        return WHEAT_BUTTON;
-    if(isInArea(mouse_button, clay_card_area) == SDL_TRUE)
-        return CLAY_BUTTON;
-    if(isInArea(mouse_button, sheeps_card_area) == SDL_TRUE)
-        return SHEEPS_BUTTON;
-    if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
-        return ROCK_BUTTON;
-    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
-        return ENDTURN_BUTTON;
-    if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
-        return DEVCRAFT_BUTTON;
-    if(isInArea(mouse_button, road_craft_area) == SDL_TRUE)
-        return ROADCRAFT_BUTTON;
-    if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
-        return SETTLECRAFT_BUTTON;
-    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
-        return CITYCRAFT_BUTTON;
-    return NO_BUTTON;
-}
-
-/**
-* \fn void initButtonsTurn()
-* \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
-*
-* Initialise les champs des rectangles des zones correspondant aux cartes ressources et au bouton Fin de tour.
-* Fait appel aux fonctions d'initialisation correspondantes.
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
 *
 */
-void initButtonsTurn()
+void initEndTurnArea()
 {
-    initCardsAreas();
-    initCraftAreas();
-    initEndTurnArea();
-}
+    end_turn_area.w = 150;
+    end_turn_area.h = 75;
 
-void initCraftAreas(){
-    initDevCraftArea();
-    initRoadCraftArea();
-    initSettleCraftArea();
-    initCityCraftArea();
-}
-
-void drawButtons(SDL_Renderer* renderer)
-{
-    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area, road_craft_area, settle_craft_area, city_craft_area};
-    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
-        SDL_ExitWithError("Impossible de dessiner les boutons");
+    end_turn_area.x = 300;
+    end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
 }

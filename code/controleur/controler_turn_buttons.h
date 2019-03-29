@@ -14,7 +14,22 @@
 * \enum TurnButton
 * Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
 */
-typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON, ENDTURN_BUTTON, DEVCRAFT_BUTTON, ROADCRAFT_BUTTON, SETTLECRAFT_BUTTON, CITYCRAFT_BUTTON} TurnButton ;
+typedef enum {
+        WOOD_BUTTON,
+        WHEAT_BUTTON,
+        CLAY_BUTTON,
+        SHEEPS_BUTTON,
+        ROCK_BUTTON,
+
+        DEVCRAFT_BUTTON,
+        ROADCRAFT_BUTTON,
+        SETTLECRAFT_BUTTON,
+        CITYCRAFT_BUTTON,
+
+        ENDTURN_BUTTON,
+
+        NO_BUTTON
+} TurnButton;
 
 /**
 * \def NTURNBUTTON
@@ -37,24 +52,22 @@ typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, 
 #define CRAFTW 200
 #define CRAFTH 75
 
-void initWoodCard();
-void initWheatCard();
-void initClayCard();
-void initSheepsCard();
-void initRockCard();
-void initCardsAreas();
-
-void initEndTurnArea();
-
-void initDevCraftArea();
-void initRoadCraftArea();
-void initSettleCraftArea();
-void initCityCraftArea();
-void initCraftAreas();
-
-void initButtonsTurn();
+void drawButtons(SDL_Renderer* renderer);
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
-void drawButtons(SDL_Renderer* renderer);
+
+void initButtonsTurn();
+    void initCardsAreas();
+        void initWoodCard();
+        void initWheatCard();
+        void initClayCard();
+        void initSheepsCard();
+        void initRockCard();
+    void initDevCraftArea();
+        void initRoadCraftArea();
+        void initSettleCraftArea();
+        void initCityCraftArea();
+        void initCraftAreas();
+    void initEndTurnArea();
 
 #endif //CATANE_CONTROLER_TURN_BUTTONS_H

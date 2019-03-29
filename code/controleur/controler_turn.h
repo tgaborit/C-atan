@@ -11,6 +11,7 @@
 #define CATANE_CONTROLER_TURN_H
 
 void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/);
+
 void quit(SDL_bool * program_launched);
 
 void SDL_ExitWithError(const char *message);
