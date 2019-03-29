@@ -19,10 +19,11 @@ static SDL_Rect wheat_card_area;       /*!< Rectangle correspondant à la zone d
 static SDL_Rect clay_card_area;        /*!< Rectangle correspondant à la zone de la carte Argile*/
 static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone de la carte Moutons*/
 static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
+
 static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 static SDL_Rect dev_craft_area;
-
+static SDL_Rect road_craft_area;
 /**
 * \fn void initWoodCard()
 * \brief Fonction d'initialisation des champs du rectangle de la zone de la carte bois
@@ -147,8 +148,17 @@ void initDevCraftArea()
     dev_craft_area.w = CRAFTW;
     dev_craft_area.h = CRAFTH;
 
-    dev_craft_area.x = WINDOWW - 300 - dev_craft_area.w;
+    dev_craft_area.x = WINDOWW - 400;
     dev_craft_area.y = 300;
+}
+
+void initRoadCraftArea()
+{
+    road_craft_area.w = CRAFTW;
+    road_craft_area.h = CRAFTH;
+
+    road_craft_area.x = dev_craft_area.x;
+    road_craft_area.y = dev_craft_area.y + dev_craft_area.h + 50;
 }
 
 /**
@@ -176,6 +186,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return ENDTURN_BUTTON;
     if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
         return DEVCRAFT_BUTTON;
+    if(isInArea(mouse_button, road_craft_area) == SDL_TRUE)
+        return ROADCRAFT_BUTTON;
     return NO_BUTTON;
 }
 
@@ -196,11 +208,12 @@ void initButtonsTurn()
 
 void initCraftAreas(){
     initDevCraftArea();
+    initRoadCraftArea();
 }
 
 void drawButtons(SDL_Renderer* renderer)
 {
-    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area};
+    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area, road_craft_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 }

@@ -70,6 +70,10 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                     printf("Clic sur bouton Craft developpement\n");
                     break;
 
+                case ROADCRAFT_BUTTON :
+                    printf("Clic sur bouton Craft route\n");
+                    break;
+
                 default :
                     continue;
                 }
