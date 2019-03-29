@@ -66,6 +66,10 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                     printf("Clic sur bouton Fin de tour\n");
                     break;
 
+                case DEVCRAFT_BUTTON :
+                    printf("Clic sur bouton Craft developpement\n");
+                    break;
+
                 default :
                     continue;
                 }

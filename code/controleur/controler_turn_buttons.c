@@ -21,6 +21,8 @@ static SDL_Rect sheeps_card_area;      /*!< Rectangle correspondant à la zone d
 static SDL_Rect rock_card_area;        /*!< Rectangle correspondant à la zone de la carte Roche*/
 static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
+static SDL_Rect dev_craft_area;
+
 /**
 * \fn void initWoodCard()
 * \brief Fonction d'initialisation des champs du rectangle de la zone de la carte bois
@@ -140,6 +142,15 @@ void initEndTurnArea()
     end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
 }
 
+void initDevCraftArea()
+{
+    dev_craft_area.w = CRAFTW;
+    dev_craft_area.h = CRAFTH;
+
+    dev_craft_area.x = WINDOWW - 300 - dev_craft_area.w;
+    dev_craft_area.y = 300;
+}
+
 /**
 * \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le jouer a cliqué
@@ -163,6 +174,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return ROCK_BUTTON;
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
+    if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
+        return DEVCRAFT_BUTTON;
     return NO_BUTTON;
 }
 
@@ -177,12 +190,17 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
 void initButtonsTurn()
 {
     initCardsAreas();
+    initCraftAreas();
     initEndTurnArea();
+}
+
+void initCraftAreas(){
+    initDevCraftArea();
 }
 
 void drawButtons(SDL_Renderer* renderer)
 {
-    SDL_Rect turn_buttons[6] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area};
-    if(SDL_RenderDrawRects(renderer, turn_buttons, 6) != 0)
-        SDL_ExitWithError("Impossible de dessiner les cartes ressource");
+    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area};
+    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
+        SDL_ExitWithError("Impossible de dessiner les boutons");
 }

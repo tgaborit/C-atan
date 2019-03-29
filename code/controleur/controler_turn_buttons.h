@@ -14,7 +14,13 @@
 * \enum TurnButton
 * Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
 */
-typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON, ENDTURN_BUTTON} TurnButton ;
+typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, ROCK_BUTTON, ENDTURN_BUTTON, DEVCRAFT_BUTTON} TurnButton ;
+
+/**
+* \def NTURNBUTTON
+* Définit le nombre de boutons de l'environnement "Tour du joueur"
+*/
+#define NTURNBUTTON 7
 
 /**
 * \def CARDW
@@ -28,6 +34,8 @@ typedef enum {NO_BUTTON, WOOD_BUTTON, WHEAT_BUTTON, CLAY_BUTTON, SHEEPS_BUTTON, 
 */
 #define CARDH 166
 
+#define CRAFTW 200
+#define CRAFTH 75
 
 void initWoodCard();
 void initWheatCard();
@@ -37,6 +45,9 @@ void initRockCard();
 void initCardsAreas();
 
 void initEndTurnArea();
+
+void initDevCraftArea();
+void initCraftAreas();
 
 void initButtonsTurn();
 
