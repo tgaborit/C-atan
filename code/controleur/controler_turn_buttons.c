@@ -41,13 +41,34 @@ void drawButtons(SDL_Renderer* renderer)
 * \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le jouer a cliqué
 *
-* Teste pour chaque bouton si le clic efféctué correspond à la zone de ce bouton.
+* Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué.
+* \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué, NO_BUTTON si aucun.
 */
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+    TurnButton button_clicked;
+    if((button_clicked = whichCardButton(mouse_button)) != NO_BUTTON)
+        return button_clicked;
+    if((button_clicked = whichCraftButton(mouse_button)) != NO_BUTTON)
+        return button_clicked;
+    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
+        return CITYCRAFT_BUTTON;
+    return NO_BUTTON;
+}
+
+/**
+* \fn ControlerButton whichCardButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de carte ressource le joueur a cliqué
+*
+* Teste pour chaque bouton de carte ressource si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de carte ressource qui a été cliqué, NO_BUTTON si aucun.
+*/
+TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
         return WOOD_BUTTON;
     if(isInArea(mouse_button, wheat_card_area) == SDL_TRUE)
@@ -58,6 +79,20 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return SHEEPS_BUTTON;
     if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
         return ROCK_BUTTON;
+    return NO_BUTTON;
+}
+
+/**
+* \fn ControlerButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de craft le joueur a cliqué
+*
+* Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de craft qui a été cliqué, NO_BUTTON si aucun.
+*/
+TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
     if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
@@ -66,8 +101,6 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return ROADCRAFT_BUTTON;
     if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
         return SETTLECRAFT_BUTTON;
-    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
-        return CITYCRAFT_BUTTON;
     return NO_BUTTON;
 }
 

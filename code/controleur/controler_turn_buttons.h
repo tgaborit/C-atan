@@ -64,6 +64,8 @@ typedef enum {
 void drawButtons(SDL_Renderer* renderer);
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
+    TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button);
+    TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsTurn();
     void initCardsAreas();
