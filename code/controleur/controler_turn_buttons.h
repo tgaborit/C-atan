@@ -38,6 +38,8 @@ void initCardsAreas();
 
 void initEndTurnArea();
 
+void initButtonsTurn();
+
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
 void drawButtons(SDL_Renderer* renderer);
 

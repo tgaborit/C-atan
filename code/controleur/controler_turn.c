@@ -24,8 +24,7 @@
 */
 void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
 {
-    initCardsAreas();
-    initEndTurnArea();
+    initButtonsTurn();
     drawButtons(renderer);
     SDL_RenderPresent(renderer);
     while(program_launched)

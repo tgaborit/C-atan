@@ -166,6 +166,20 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
     return NO_BUTTON;
 }
 
+/**
+* \fn void initButtonsTurn()
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
+*
+* Initialise les champs des rectangles des zones correspondant aux cartes ressources et au bouton Fin de tour.
+* Fait appel aux fonctions d'initialisation correspondantes.
+*
+*/
+void initButtonsTurn()
+{
+    initCardsAreas();
+    initEndTurnArea();
+}
+
 void drawButtons(SDL_Renderer* renderer)
 {
     SDL_Rect turn_buttons[6] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area};
