@@ -52,7 +52,6 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
                 {
                 case WOOD_BUTTON :
                     printf("Clic sur carte bois\n");
-                    //echange(BOIS); /* fonction
                     break;
 
                 case WHEAT_BUTTON :
@@ -146,7 +145,7 @@ void initWheatCard()
     wheat_card_area.w = CARDW;
     wheat_card_area.h = CARDH;
 
-    wheat_card_area.x = wood_card_area.x-58-wheat_card_area.w;
+    wheat_card_area.x = wood_card_area.x - 58 - wheat_card_area.w;
     wheat_card_area.y = WINDOWH - CARDH;
 }
 
@@ -163,7 +162,7 @@ void initClayCard()
     clay_card_area.w = CARDW;
     clay_card_area.h = CARDH;
 
-    clay_card_area.x = wheat_card_area.x-58-clay_card_area.w;
+    clay_card_area.x = wheat_card_area.x - 58 - clay_card_area.w;
     clay_card_area.y = WINDOWH - CARDH;
 }
 
@@ -180,7 +179,7 @@ void initSheepsCard()
     sheeps_card_area.w = CARDW;
     sheeps_card_area.h = CARDH;
 
-    sheeps_card_area.x = wood_card_area.x+wood_card_area.w+58;
+    sheeps_card_area.x = wood_card_area.x + wood_card_area.w + 58;
     sheeps_card_area.y = WINDOWH - CARDH;
 }
 
@@ -197,7 +196,7 @@ void initRockCard()
     rock_card_area.w = CARDW;
     rock_card_area.h = CARDH;
 
-    rock_card_area.x = sheeps_card_area.x+sheeps_card_area.w+58;
+    rock_card_area.x = sheeps_card_area.x + sheeps_card_area.w + 58;
     rock_card_area.y = WINDOWH - CARDH;
 }
 
@@ -232,7 +231,7 @@ void initEndTurnArea()
     end_turn_area.h = 75;
 
     end_turn_area.x = 300;
-    end_turn_area.y = 55;
+    end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
 }
 
 /**
