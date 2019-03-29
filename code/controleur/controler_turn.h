@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 27 mars 2019
 *
-* En-tête déclarant les fonctions du contrôleur du tour du joueur ainsi que la définition des macros relatives aux boutons du tour de jeu.
+* En-tête déclarant les fonctions du contrôleur du tour du joueur.
 */
 
 #ifndef CATANE_CONTROLER_TURN_H

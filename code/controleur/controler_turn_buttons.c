@@ -1,3 +1,13 @@
+/**
+* \file controler_turn_buttons.c
+* \brief Fonctions de gestion des boutons de l'environnement "Tour du joueur"
+* \author Titouan Gaborit
+* \date 29 mars 2019
+*
+* Fonctions gérant l'initialisation des boutons cliquables par le joueur lors de son tour de jeu et la détection d'un clic dessus.
+*
+*/
+
 #include <SDL.h>
 
 #include "controler.h"

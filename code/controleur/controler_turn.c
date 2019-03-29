@@ -9,7 +9,6 @@
 */
 
 #include <SDL.h>
-#include "controler.h"
 #include "controler_turn.h"
 #include "controler_turn_buttons.h"
 

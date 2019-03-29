@@ -1,3 +1,12 @@
+/**
+* \file controler_turn_buttons.h
+* \brief En-tête des boutons de l'environnement "Tour du joueur"
+* \author Titouan Gaborit
+* \date 29 mars 2019
+*
+* En-tête déclarant les fonctions de gestion des boutons du tour du joueur ainsi que la définition des macros relatives.
+*/
+
 #ifndef CATANE_CONTROLER_TURN_BUTTONS_H
 #define CATANE_CONTROLER_TURN_BUTTONS_H
 
@@ -28,8 +37,6 @@ void initRockCard();
 void initCardsAreas();
 
 void initEndTurnArea();
-
-
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
 void drawButtons(SDL_Renderer* renderer);
