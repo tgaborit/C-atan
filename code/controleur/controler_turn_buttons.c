@@ -25,6 +25,7 @@ static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone d
 static SDL_Rect dev_craft_area;
 static SDL_Rect road_craft_area;
 static SDL_Rect settle_craft_area;
+static SDL_Rect city_craft_area;
 
 /**
 * \fn void initWoodCard()
@@ -172,6 +173,15 @@ void initSettleCraftArea()
     settle_craft_area.y = road_craft_area.y + road_craft_area.h + 50;
 }
 
+void initCityCraftArea()
+{
+    city_craft_area.w = CRAFTW;
+    city_craft_area.h = CRAFTH;
+
+    city_craft_area.x = settle_craft_area.x;
+    city_craft_area.y = settle_craft_area.y + settle_craft_area.h + 50;
+}
+
 /**
 * \fn ControlerButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le jouer a cliqué
@@ -201,6 +211,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return ROADCRAFT_BUTTON;
     if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
         return SETTLECRAFT_BUTTON;
+    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
+        return CITYCRAFT_BUTTON;
     return NO_BUTTON;
 }
 
@@ -223,11 +235,12 @@ void initCraftAreas(){
     initDevCraftArea();
     initRoadCraftArea();
     initSettleCraftArea();
+    initCityCraftArea();
 }
 
 void drawButtons(SDL_Renderer* renderer)
 {
-    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area, road_craft_area, settle_craft_area};
+    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area, dev_craft_area, road_craft_area, settle_craft_area, city_craft_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 }
