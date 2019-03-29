@@ -44,12 +44,21 @@ typedef enum {
 #define CARDW 115
 
 /**
-* \def CARDW
+* \def CARDH
 * Définit la hauteur d'une carte ressource
 */
 #define CARDH 166
 
+/**
+* \def CRAFTW
+* Définit la largeur d'un bouton de craft
+*/
 #define CRAFTW 200
+
+/**
+* \def CRAFTH
+* Définit la hauteur d'un bouton de craft
+*/
 #define CRAFTH 75
 
 void drawButtons(SDL_Renderer* renderer);

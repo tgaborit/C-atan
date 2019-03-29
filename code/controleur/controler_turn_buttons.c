@@ -14,6 +14,7 @@
 #include "controler_turn.h"
 #include "controler_turn_buttons.h"
 
+
 static SDL_Rect wood_card_area;         /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect wheat_card_area;        /*!< Rectangle correspondant à la zone de la carte Blé*/
 static SDL_Rect clay_card_area;         /*!< Rectangle correspondant à la zone de la carte Argile*/
@@ -25,7 +26,8 @@ static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
 static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
 
-static SDL_Rect end_turn_area;         /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
+static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
+
 
 void drawButtons(SDL_Renderer* renderer)
 {
@@ -101,6 +103,15 @@ void initCardsAreas()
     initRockCard();
 }
 
+/**
+* \fn void initCraftAreas()
+* \brief Fonction d'initialisation des boutons de craft
+*
+* Initialise les champs des rectangles des zones correspondant aux boutons de craft.
+* Fait appel aux fonctions d'initialisation pour le bouton Craft d'une Carte développement, le bouton Craft d'une Route,
+* le bouton de Craft d'une Colonie et le bouton de Craft d'une Ville.
+*
+*/
 void initCraftAreas(){
     initDevCraftArea();
     initRoadCraftArea();
@@ -193,6 +204,14 @@ void initRockCard()
     rock_card_area.y = WINDOWH - CARDH;
 }
 
+/**
+* \fn void initDevCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Carte développement
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Carte développement sur l'écran du joueur.
+*
+*/
 void initDevCraftArea()
 {
     dev_craft_area.w = CRAFTW;
@@ -202,6 +221,14 @@ void initDevCraftArea()
     dev_craft_area.y = 300;
 }
 
+/**
+* \fn void initRoadCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Route
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Route sur l'écran du joueur.
+*
+*/
 void initRoadCraftArea()
 {
     road_craft_area.w = CRAFTW;
@@ -211,6 +238,14 @@ void initRoadCraftArea()
     road_craft_area.y = dev_craft_area.y + dev_craft_area.h + 50;
 }
 
+/**
+* \fn void initSettleCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Colonie
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Colonie sur l'écran du joueur.
+*
+*/
 void initSettleCraftArea()
 {
     settle_craft_area.w = CRAFTW;
@@ -220,6 +255,14 @@ void initSettleCraftArea()
     settle_craft_area.y = road_craft_area.y + road_craft_area.h + 50;
 }
 
+/**
+* \fn void initCityCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Ville
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Ville sur l'écran du joueur.
+*
+*/
 void initCityCraftArea()
 {
     city_craft_area.w = CRAFTW;
