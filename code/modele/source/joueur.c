@@ -126,13 +126,17 @@ int get_score(Joueur* joueur)
 }
 
 /**
- * \fn void set_status(Joueur joueur);
- * \brief Initialisaton status du joueur
+ * \fn char* get_pseudo(Joueur* joueur)
+ * \brief Fonction qui retourne le pseudo du joueur
  *
- *
- * \param Status status Joueur*: joueur dont on initialise le status
- * \return: aucun
+ * fonction renvoillant le pseudo du joueur passé en paramètre
+ * \param Joueur : joueur dont on veut connètre le pseudo
+ * \return char* :le pseudo du joueur
  */
+char* get_pseudo(Joueur* joueur)
+{
+    return joueur->pseudo;
+}
 
  /**
  * \fn void inc_score(Joueur* joueur, int points)
@@ -147,7 +151,14 @@ void inc_score(Joueur* joueur, int points)
     joueur->score+=points;
 }
 
-
+/**
+ * \fn void set_status(Joueur joueur);
+ * \brief Initialisaton status du joueur
+ *
+ *
+ * \param Status status Joueur*: joueur dont on initialise le status
+ * \return: aucun
+ */
 void set_status(Joueur* joueur, Status status)
 {
     joueur->status=status;
@@ -242,4 +253,83 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur)
 int  get_cartedev(TypeCarteDev type, Joueur* joueur)
 {
     return joueur->carte_dev[type].nb_carte;
+}
+
+
+/**
+ * \fn int achat_route(Joueur* joueur);
+ * \brief teste si le joueur à sufisament de ressource pour construire une route
+ *consome les ressource si c'est le cas.
+ * \param Joueur* joueur
+ * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ */
+int achat_route(Joueur* joueur)
+{
+    if (get_nbressource(ARGILE,joueur)>=1 && get_nbressource(BOIS,joueur)>=1)
+        {
+            perte_ressource(ARGILE,joueur);
+            perte_ressource(BOIS, joueur);
+            return 0;
+        }
+    return -1;
+}
+
+
+/**
+ * \fn int achat_colonie(Joueur* joueur);
+ * \brief teste si le joueur à sufisament de ressource pour construire une colonie
+ *consome les ressource si c'est le cas.
+ * \param Joueur* joueur
+ * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ */
+int achat_colonie(Joueur* joueur)
+{
+    if (get_nbressource(ARGILE,joueur)>=1 && get_nbressource(BOIS,joueur)>=1 && get_nbressource(MOUTON,joueur)>=1 && get_nbressource(BLE,joueur)>=1)
+        {
+            perte_ressource(ARGILE,joueur);
+            perte_ressource(BOIS, joueur);
+            perte_ressource(MOUTON, joueur);
+            perte_ressource(BLE, joueur);
+            return 0;
+        }
+    return -1;
+}
+
+/**
+ * \fn int achat_ville(Joueur* joueur);
+ * \brief teste si le joueur à sufisament de ressource pour construire une ville
+ *consome les ressource si c'est le cas.
+ * \param Joueur* joueur
+ * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ */
+int achat_ville(Joueur* joueur)
+{
+    if (get_nbressource(PIERRE,joueur)>=3 && get_nbressource(BLE,joueur)>=2)
+        {
+            perte_ressource(PIERRE,joueur);
+            perte_ressource(PIERRE,joueur);
+            perte_ressource(PIERRE,joueur);
+            perte_ressource(BLE, joueur);
+            perte_ressource(BLE, joueur);
+            return 0;
+        }
+    return -1;
+}
+/**
+ * \fn int achat_cartedev(Joueur* joueur);
+ * \brief teste si le joueur à sufisament de ressource pour acheter une cartedev
+ *consome les ressource si c'est le cas.
+ * \param Joueur* joueur
+ * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ */
+int achat_cartedev(Joueur* joueur)
+{
+    if (get_nbressource(PIERRE,joueur)>=1 && get_nbressource(BLE,joueur)>=1 && get_nbressource(BLE,joueur)>=1)
+        {
+            perte_ressource(PIERRE,joueur);
+            perte_ressource(BLE, joueur);
+            perte_ressource(MOUTON, joueur);
+            return 0;
+        }
+    return -1;
 }
