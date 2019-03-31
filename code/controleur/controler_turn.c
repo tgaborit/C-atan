@@ -92,8 +92,10 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
                     endTurnEvent(/*the_game*/);
                     break;
 
-                case DIES_BUTTON :
+                case DICE_BUTTON :
                     printf("Clic sur bouton Lancer les des\n");
+                    printf("Appel de la fonction rollDiceEvent(renderer, the_game)\n");
+                    rollDiceEvent(/*the_game*/);
                     break;
 
                 default :
@@ -140,6 +142,15 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
 void quit(SDL_bool * pprogram_launched)
 {
     *pprogram_launched = SDL_FALSE;
+}
+
+void rollDiceEvent(/*Game* the_game*/)
+{
+    SDL_Event ev;
+    printf("Appel de la fonction du modèle endDice(the_game)\n");
+    //rollDice(the_game);
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
 }
 
 /**

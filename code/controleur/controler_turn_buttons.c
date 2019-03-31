@@ -26,14 +26,14 @@ static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
 static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
 
-static SDL_Rect dies_area;
+static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 
 void drawButtons(SDL_Renderer* renderer)
 {
     SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
-    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dies_area, end_turn_area};
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 }
@@ -56,8 +56,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return button_clicked;
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
-    if(isInArea(mouse_button, dies_area) == SDL_TRUE)
-        return DIES_BUTTON;
+    if(isInArea(mouse_button, dice_area) == SDL_TRUE)
+        return DICE_BUTTON;
     return NO_BUTTON;
 }
 
@@ -111,7 +111,7 @@ TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
 * \fn void initButtonsTurn()
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
 *
-* Initialise les champs des rectangles des zones correspondant aux cartes ressources et au bouton Fin de tour.
+* Initialise les champs des rectangles des zones correspondant aux cartes ressources, au bouton Lancer les dés et au bouton Fin de tour.
 * Fait appel aux fonctions d'initialisation correspondantes.
 *
 */
@@ -119,7 +119,7 @@ void initButtonsTurn()
 {
     initCardsAreas();
     initCraftAreas();
-    initDiesArea();
+    initDiceArea();
     initEndTurnArea();
 }
 
@@ -309,13 +309,21 @@ void initCityCraftArea()
     city_craft_area.y = settle_craft_area.y + settle_craft_area.h + 50;
 }
 
-void initDiesArea()
+/**
+* \fn void initDiesArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*
+*/
+void initDiceArea()
 {
-    dies_area.w = 100;
-    dies_area.h = 100;
+    dice_area.w = 100;
+    dice_area.h = 100;
 
-    dies_area.x = dev_craft_area.x + dev_craft_area.w/2 - dies_area.w/2;
-    dies_area.y = 75;
+    dice_area.x = dev_craft_area.x + dev_craft_area.w/2 - dice_area.w/2;
+    dice_area.y = 75;
 }
 
 /**

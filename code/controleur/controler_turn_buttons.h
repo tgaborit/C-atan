@@ -26,7 +26,7 @@ typedef enum {
         SETTLECRAFT_BUTTON,
         CITYCRAFT_BUTTON,
 
-        DIES_BUTTON,
+        DICE_BUTTON,
         ENDTURN_BUTTON,
 
         NO_BUTTON
@@ -80,7 +80,7 @@ void initButtonsTurn();
         void initSettleCraftArea();
         void initCityCraftArea();
         void initCraftAreas();
-    void initDiesArea();
+    void initDiceArea();
     void initEndTurnArea();
 
 #endif //CATANE_CONTROLER_TURN_BUTTONS_H
