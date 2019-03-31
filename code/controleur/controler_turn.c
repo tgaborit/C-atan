@@ -71,7 +71,7 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
                     printf("Appel de la fonction craftDevEvent(renderer, the_game)\n");
-                    /*craftDevEvent(the_game);*/
+                    craftDevEvent(/*the_game*/);
                     break;
 
                 case ROADCRAFT_BUTTON :
@@ -136,6 +136,15 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
 void quit(SDL_bool * pprogram_launched)
 {
     *pprogram_launched = SDL_FALSE;
+}
+
+void craftDevEvent(/*Game* the_game*/)
+{
+    SDL_Event ev;
+    printf("Appel de la fonction craftDev(the_game)\n");
+    //craftDev(the_game);
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
 }
 
 void SDL_ExitWithError(const char *message)
