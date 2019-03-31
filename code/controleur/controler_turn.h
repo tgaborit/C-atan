@@ -10,7 +10,7 @@
 #ifndef CATANE_CONTROLER_TURN_H
 #define CATANE_CONTROLER_TURN_H
 
-void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Partie* the_partie*/);
+void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
 void quit(SDL_bool * program_launched);
 

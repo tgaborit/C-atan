@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 27 mars 2019
 *
-* Programme gérant les actions du joueur lors de son tour de jeu : les intéractions avec les cartes ressources ainsi que le bouton de fin de tour.
+* Programme gérant les actions du joueur lors de son tour de jeu : les interactions avec les cartes ressources ainsi que le bouton de fin de tour.
 *
 */
 
@@ -13,7 +13,7 @@
 #include "controler_turn_buttons.h"
 
 /**
-* \fn void controlerTurn(SDL_bool program_launched, partie * the_partie)
+* \fn void controlerTurn(SDL_bool program_launched, Game* the_game)
 * \brief Fonction principale du contrôleur du tour du joueur
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
@@ -35,7 +35,7 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
             switch(event.type)
             {
             case SDL_USEREVENT:
-                printf("Appel de la fonction displayBoardEvent(the_game)\n");
+                printf("Appel de la fonction de la vue displayBoardEvent(the_game)\n");
                 //displayBoardEvent(the_game);
                 break;
 
@@ -138,19 +138,37 @@ void quit(SDL_bool * pprogram_launched)
     *pprogram_launched = SDL_FALSE;
 }
 
+/**
+* \fn void endTurnEvent(Game* the_game)
+* \brief Evénement de fin de tour du joueur
+*
+* Fait appel à la fonction du modèle endTurn pour modifier l'état du jeu et crée un événement pour mettre à jour la vue
+*
+* \param[in,out] the_game Pointeur vers l'état de la partie
+*
+*/
 void endTurnEvent(/*Game* the_game*/)
 {
     SDL_Event ev;
-    printf("Appel de la fonction endTurn(the_game)\n");
+    printf("Appel de la fonction du modèle endTurn(the_game)\n");
     //endTurn(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
+/**
+* \fn void craftDevEvent(Game* the_game)
+* \brief Evénement de craft d'une carte développement
+*
+* Fait appel à la fonction du modèle craftDev pour modifier l'état du jeu et crée un événement pour mettre à jour la vue
+*
+* \param[in,out] the_game Pointeur vers l'état de la partie
+*
+*/
 void craftDevEvent(/*Game* the_game*/)
 {
     SDL_Event ev;
-    printf("Appel de la fonction craftDev(the_game)\n");
+    printf("Appel de la fonction du modèle craftDev(the_game)\n");
     //craftDev(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
