@@ -5,6 +5,9 @@
 #include "Plateau.h"
 #include "carte.c"
 #include "tuile.c"
+#include "architecture.c"
+#include "developpement.c"
+
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -44,6 +47,18 @@ void AfficheFenetre(){
 	
 	SDL_RenderPresent(renderer);
 		
+	AfficheDe(renderer);
+
+	AfficheChevalier(renderer);
+	AfficheMonopole(renderer);
+	AfficheInvention(renderer);
+	AfficheRouteDev(renderer);
+	AfficheUniversite(renderer);
+	AfficheGrandeArmee(renderer);
+	AfficheGrandeRoute(renderer);
+
+	//AfficheTuileRoche(renderer);
+
 	AfficheTuile(renderer);
 
 	AfficheCarteArgile(renderer);
@@ -54,7 +69,17 @@ void AfficheFenetre(){
 
 	AfficheJoueur(renderer);
 
-	//Event fermeture fenetre
+	AfficheSkip(renderer);
+	
+	AfficheHelp(renderer);
+
+	AfficheBouttonDev(renderer);
+	AfficheBouttonRoute(renderer);
+	AfficheBouttonColonie(renderer);
+	AfficheBouttonVille(renderer);
+	
+	
+//Event fermeture fenetre
 	SDL_bool program_launched = SDL_TRUE;
 
 	while(program_launched)
@@ -65,6 +90,13 @@ void AfficheFenetre(){
 		{
 			switch(event.type)
 			{
+
+				case SDL_MOUSEMOTION : //mouvement souris, déplacement
+					//event.motion.x coordonee exacte en x (id y)
+					//event.motion.xrel coordonee relative de x (id y)
+					printf("%d / %d\n", event.motion.x, event.motion.y);
+					break;
+
 
 				case SDL_KEYDOWN :
 					switch(event.key.keysym.sym)
@@ -116,5 +148,55 @@ void AfficheJoueur(SDL_Renderer* renderer)
 }
 
 
+void AfficheSkip(SDL_Renderer* renderer)
+{
+	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+	
+	SDL_Rect skip;
+	skip.x = 300;
+	skip.y = 820;
+	skip.w = 150;
+	skip.h = 75;
+	
+	if(SDL_RenderFillRect(renderer, &skip) != 0)	
+		SDL_ExitWithError("Impossible de remplir un rectangle");
+	
+	SDL_RenderPresent(renderer);
+}
 
 
+void AfficheDe(SDL_Renderer* renderer)
+{
+	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+	
+	SDL_Rect de;
+	de.x = 1570;
+	de.y = 110;
+	de.w = 100;
+	de.h = 100;
+	
+	if(SDL_RenderFillRect(renderer, &de) != 0)	
+		SDL_ExitWithError("Impossible de remplir un rectangle");
+	
+	SDL_RenderPresent(renderer);
+}
+
+
+void AfficheHelp(SDL_Renderer* renderer)
+{
+	if(SDL_SetRenderDrawColor(renderer, 206, 24, 30, SDL_ALPHA_OPAQUE) != 0)
+		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+	
+	SDL_Rect help;
+	help.x = 1875;
+	help.y = 0;
+	help.w = 35;
+	help.h = 35;
+	
+	if(SDL_RenderFillRect(renderer, &help) != 0)	
+		SDL_ExitWithError("Impossible de remplir un rectangle");
+	
+	SDL_RenderPresent(renderer);
+}

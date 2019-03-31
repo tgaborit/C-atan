@@ -179,39 +179,3 @@ void AfficheCarteRoche(SDL_Renderer* renderer)
 	
 	SDL_RenderPresent(renderer);
 }
-
-
-//Carte Developpement
-/*void AfficheCartesDev(SDL_Renderer *renderer)
-{
-	SDL_Surface *image = NULL;
-	SDL_Texture *texture = NULL;
-	
-	image = SDL_LoadBMP("imagecatane/cartedev.bmp");
-
-	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
-
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
-	
-	
-	if(texture == NULL)
-		SDL_ExitWithError("impossible de creer la texture");
-
-	SDL_Rect rectangle;
-
-	if(SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h) != 0)
-		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectangle.x = 1251.5;		
-	rectangle.y = 780;
-
-
-	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0) 
-		SDL_ExitWithError("Impossible d'afficher la texture");
-	
-	SDL_RenderPresent(renderer);
-}*/
-
-

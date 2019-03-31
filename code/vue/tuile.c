@@ -4,7 +4,12 @@
 
 
 #include "Plateau.h"
-
+#include "ressource.h"
+#include "get_plateau.h"
+#include "get_plateau.c"
+#include "joueur.h"
+#include "plateau.c"
+#include "plateau.h"
 
 void AfficheTuile(SDL_Renderer* renderer)		
 {
@@ -19,7 +24,6 @@ void AfficheTuile(SDL_Renderer* renderer)
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
 	
-	//switch avec fonction manu ?
 	if(texture == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -38,4 +42,201 @@ void AfficheTuile(SDL_Renderer* renderer)
 	SDL_RenderPresent(renderer);
 }
 
+
+void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
+{
+	SDL_Surface *image = NULL;
+	SDL_Texture *argile = NULL;
+	
+	image = SDL_LoadBMP("carte/tuileargile.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	argile = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	
+	
+	if(argile == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectargile;
+
+	if(SDL_QueryTexture(argile, NULL, NULL, &rectargile.w, &rectargile.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectargile.x = x;		
+	rectargile.y = y;
+
+
+	if(SDL_RenderCopy(renderer, argile, NULL, &rectargile) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
+	
+	SDL_RenderPresent(renderer);
+}	
+
+
+void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
+{
+	SDL_Surface *image = NULL;
+	SDL_Texture *ble = NULL;
+	
+	image = SDL_LoadBMP("carte/tuileble.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	ble = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	
+	
+	if(ble == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectble;
+
+	if(SDL_QueryTexture(ble, NULL, NULL, &rectble.w, &rectble.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectble.x = x;		
+	rectble.y = y;
+
+
+	if(SDL_RenderCopy(renderer, ble, NULL, &rectble) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
+	
+	SDL_RenderPresent(renderer);
+}
+
+
+void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
+{
+	SDL_Surface *image = NULL;
+	SDL_Texture *bois = NULL;
+	
+	image = SDL_LoadBMP("carte/tuilebois.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	bois = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	
+	
+	if(bois == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectbois;
+
+	if(SDL_QueryTexture(bois, NULL, NULL, &rectbois.w, &rectbois.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectbois.x = x;		
+	rectbois.y = y;
+
+
+	if(SDL_RenderCopy(renderer, bois, NULL, &rectbois) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
+	
+	SDL_RenderPresent(renderer);
+}
+
+void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
+{
+	SDL_Surface *image = NULL;
+	SDL_Texture *mouton = NULL;
+	
+	image = SDL_LoadBMP("carte/tuilemouton.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	mouton = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	
+	
+	if(mouton == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectmouton;
+
+	if(SDL_QueryTexture(mouton, NULL, NULL, &rectmouton.w, &rectmouton.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectmouton.x = x;		
+	rectmouton.y = y;
+
+
+	if(SDL_RenderCopy(renderer, mouton, NULL, &rectmouton) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
+	
+	SDL_RenderPresent(renderer);
+}
+
+void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
+{
+	SDL_Surface *image = NULL;
+	SDL_Texture *roche = NULL;
+	
+	image = SDL_LoadBMP("carte/tuileroche.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	roche = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	
+	
+	if(roche == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectroche;
+
+	if(SDL_QueryTexture(roche, NULL, NULL, &rectroche.w, &rectroche.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectroche.x = x;		
+	rectroche.y = y;
+
+
+	if(SDL_RenderCopy(renderer, roche, NULL, &rectroche) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
+	
+	SDL_RenderPresent(renderer);
+}
+
+
+
+
+//Pour affichage des tuiles sur le plateau
+void AfficheRandomTuile(Plateau* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
+{
+	TypeRessource type = getType(p, x, y);
+
+	switch(type)
+	{
+		case ARGILE :
+			AfficheTuileRoche(renderer, posimx, posimy);
+			break;
+
+		case BLE :
+			AfficheTuileBle(renderer, posimx, posimy);
+			break;
+
+		case BOIS :
+			AfficheTuileBois(renderer, posimx, posimy);
+			break;
+
+		case MOUTON :
+			AfficheTuileMouton(renderer, posimx, posimy);
+			break;
+
+		case PIERRE :
+			AfficheTuileRoche(renderer, posimx, posimy);
+			break;
+
+		default :
+			break;
+	}
+}
 
