@@ -26,13 +26,14 @@ static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
 static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
 
+static SDL_Rect dies_area;
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 
 void drawButtons(SDL_Renderer* renderer)
 {
-    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area, end_turn_area,
-    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area};
+    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dies_area, end_turn_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 }
@@ -53,8 +54,10 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return button_clicked;
     if((button_clicked = whichCraftButton(mouse_button)) != NO_BUTTON)
         return button_clicked;
-    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
-        return CITYCRAFT_BUTTON;
+    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
+        return ENDTURN_BUTTON;
+    if(isInArea(mouse_button, dies_area) == SDL_TRUE)
+        return DIES_BUTTON;
     return NO_BUTTON;
 }
 
@@ -93,14 +96,14 @@ TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button){
 * \return Le bouton de craft qui a été cliqué, NO_BUTTON si aucun.
 */
 TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
-    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
-        return ENDTURN_BUTTON;
     if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
         return DEVCRAFT_BUTTON;
     if(isInArea(mouse_button, road_craft_area) == SDL_TRUE)
         return ROADCRAFT_BUTTON;
     if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
         return SETTLECRAFT_BUTTON;
+    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
+        return CITYCRAFT_BUTTON;
     return NO_BUTTON;
 }
 
@@ -116,6 +119,7 @@ void initButtonsTurn()
 {
     initCardsAreas();
     initCraftAreas();
+    initDiesArea();
     initEndTurnArea();
 }
 
@@ -303,6 +307,15 @@ void initCityCraftArea()
 
     city_craft_area.x = settle_craft_area.x;
     city_craft_area.y = settle_craft_area.y + settle_craft_area.h + 50;
+}
+
+void initDiesArea()
+{
+    dies_area.w = 100;
+    dies_area.h = 100;
+
+    dies_area.x = dev_craft_area.x + dev_craft_area.w/2 - dies_area.w/2;
+    dies_area.y = 75;
 }
 
 /**

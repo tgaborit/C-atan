@@ -62,12 +62,6 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
                     printf("Clic sur carte roche\n");
                     break;
 
-                case ENDTURN_BUTTON :
-                    printf("Clic sur bouton Fin de tour\n");
-                    printf("Appel de la fonction endTurnEvent(renderer, the_game)\n");
-                    endTurnEvent(/*the_game*/);
-                    break;
-
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
                     printf("Appel de la fonction craftDevEvent(renderer, the_game)\n");
@@ -90,6 +84,16 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
                     printf("Clic sur bouton Craft ville\n");
                     printf("Appel de la fonction controllerPlaceUrb(renderer, the_game, CITY_PLACING)\n");
                     //controllerPlaceUrb(renderer, the_game, CITY_PLACING);
+                    break;
+
+                case ENDTURN_BUTTON :
+                    printf("Clic sur bouton Fin de tour\n");
+                    printf("Appel de la fonction endTurnEvent(renderer, the_game)\n");
+                    endTurnEvent(/*the_game*/);
+                    break;
+
+                case DIES_BUTTON :
+                    printf("Clic sur bouton Lancer les des\n");
                     break;
 
                 default :
