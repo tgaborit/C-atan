@@ -36,7 +36,7 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
             {
             case SDL_USEREVENT:
                 printf("Appel de la fonction displayBoardEvent(the_game)\n");
-                /*displayBoardEvent(the_game);*/
+                //displayBoardEvent(the_game);
                 break;
 
             case SDL_MOUSEBUTTONDOWN :
@@ -65,7 +65,7 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
                     printf("Appel de la fonction endTurnEvent(renderer, the_game)\n");
-                    //endTurnEvent(renderer, the_game);
+                    endTurnEvent(/*the_game*/);
                     break;
 
                 case DEVCRAFT_BUTTON :
@@ -136,6 +136,15 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* th
 void quit(SDL_bool * pprogram_launched)
 {
     *pprogram_launched = SDL_FALSE;
+}
+
+void endTurnEvent(/*Game* the_game*/)
+{
+    SDL_Event ev;
+    printf("Appel de la fonction endTurn(the_game)\n");
+    //endTurn(the_game);
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
 }
 
 void craftDevEvent(/*Game* the_game*/)

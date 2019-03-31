@@ -14,6 +14,8 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Partie* 
 
 void quit(SDL_bool * program_launched);
 
+void endTurnEvent(/*Game* the_game*/);
+
 void craftDevEvent(/*Game* the_game*/);
 
 void SDL_ExitWithError(const char *message);
