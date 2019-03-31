@@ -166,16 +166,4 @@ int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int po
 
 Noeud* deplacementPlateau(Plateau* p, double x, double y);
 
-
-/**
- * \fn int bougerVoleur(double x, double y)
- * \brief fonction permettant de déplacer le voleur d'une tuile à une autre.
- *
- *
- * \param x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
- * \return 1 si tout c est bien passé, 0 sinon.
- */
-
-int bougerVoleur(Plateau* p, double x, double y);
-
 #endif
