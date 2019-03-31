@@ -25,22 +25,6 @@ static void test_initPlateau_retourNonNul(void** state){
     assert_ptr_not_equal(p,NULL);
 }
 
-static void test_bougerVoleur_coordBonnes(void** state){
-    Plateau* p = (Plateau*) (*state);
-    bougerVoleur(p,1.5,1);
-    assert_int_equal(p->t->brigand,0);
-    assert_int_equal(deplacementPlateau(p,1.5,1)->t->brigand,1);
-}
-
-static void test_bougerVoleur_PlateauNULL(void** state){
-    assert_int_equal(bougerVoleur(NULL,2,0),-1);
-}
-
-static void test_bougerVoleur_coordFausses(void** state){
-    Plateau* p = (Plateau*) (*state);
-    assert_int_equal(bougerVoleur(p,10,10),-1);
-}
-
 static void test_deplacementPlateau_coordBonnes(void** state){
     Plateau* p = (Plateau*) (*state);
     assert_int_equal((int) p,(int)deplacementPlateau(p,0,0));
@@ -78,9 +62,6 @@ int main_test(void){
         cmocka_unit_test(test_initPlateau_retourNonNul),
         cmocka_unit_test(test_freePlateau_PlateauNULL),
         cmocka_unit_test(test_freePlateau_PlateauNonNul),
-        cmocka_unit_test(test_bougerVoleur_coordBonnes),
-        cmocka_unit_test(test_bougerVoleur_coordFausses),
-        cmocka_unit_test(test_bougerVoleur_PlateauNULL),
         cmocka_unit_test(test_deplacementPlateau_coordBonnes),
         cmocka_unit_test(test_deplacementPlateau_coordFausses),
         cmocka_unit_test(test_deplacementPlateau_PlateauNull)
