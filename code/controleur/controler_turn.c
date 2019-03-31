@@ -22,7 +22,7 @@
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur
 */
-void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie * the_partie*/) /*à appeler avec la structure the_partie*/
+void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/) /*à appeler avec la structure the_partie*/
 {
     initButtonsTurn();
     drawButtons(renderer);
@@ -35,8 +35,8 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
             switch(event.type)
             {
             case SDL_USEREVENT:
-                /*AffichePlateau(the_partie);*/
-                printf("Appel de la fonction AffichePlateau(the_partie)\n");
+                printf("Appel de la fonction displayBoardEvent(the_game)\n");
+                /*displayBoardEvent(the_game);*/
                 break;
 
             case SDL_MOUSEBUTTONDOWN :
@@ -64,40 +64,56 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
 
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
+                    printf("Appel de la fonction endTurnEvent(renderer, the_game)\n");
+                    //endTurnEvent(renderer, the_game);
                     break;
 
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
+                    printf("Appel de la fonction craftDevEvent(renderer, the_game)\n");
+                    /*craftDevEvent(the_game);*/
                     break;
 
                 case ROADCRAFT_BUTTON :
                     printf("Clic sur bouton Craft route\n");
+                    printf("Appel de la fonction controllerPlaceRoad(renderer, the_game)\n");
+                    //controllerPlaceRoad(renderer, the_game);
                     break;
 
                 case SETTLECRAFT_BUTTON :
                     printf("Clic sur bouton Craft colonie\n");
+                    printf("Appel de la fonction controllerPlaceUrb(renderer, the_game, SETTLE_PLACING)\n");
+                    //controllerPlaceUrb(renderer, the_game, SETTLE_PLACING);
                     break;
 
                 case CITYCRAFT_BUTTON :
                     printf("Clic sur bouton Craft ville\n");
+                    printf("Appel de la fonction controllerPlaceUrb(renderer, the_game, CITY_PLACING)\n");
+                    //controllerPlaceUrb(renderer, the_game, CITY_PLACING);
                     break;
 
                 default :
-                    continue;
+                    break;
                 }
+                break;
 
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_q :
+                    printf("Appui sur touche Q\n");
+                    printf("Appel de la fonction quit(&program_launched)\n");
                     quit(&program_launched);
                     break;
 
                 default :
-                    continue;
+                    break;
                 }
+                break;
 
             case SDL_QUIT :
+                printf("Evenement SDL_QUIT\n");
+                printf("Appel de la fonction quit(&program_launched)\n");
                 quit(&program_launched);
                 break;
 
@@ -120,7 +136,6 @@ void controlerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, partie *
 void quit(SDL_bool * pprogram_launched)
 {
     *pprogram_launched = SDL_FALSE;
-    printf("execution fonction quit()\n");
 }
 
 void SDL_ExitWithError(const char *message)
