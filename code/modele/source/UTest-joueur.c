@@ -14,6 +14,12 @@ static int setup_joueur (void ** state)
     Joueur* joueur_1=init_joueur(couleur_joueur_1, pseudo_joueur_1);
     if(joueur_1==NULL)
         return -1;
+   joueur_1->ressource[BLE].nb_ressource=3;
+   joueur_1->ressource[ARGILE].nb_ressource=4;
+   joueur_1->ressource[PIERRE].nb_ressource=0;
+   joueur_1->ressource[BOIS].nb_ressource=6;
+   joueur_1->ressource[MOUTON].nb_ressource=1;
+
     *state= joueur_1;
     return 0;
 
@@ -43,17 +49,16 @@ static void test_gain_ressource(void **state)
     Joueur* joueur_1= *state;
     gain_ressource(BOIS,joueur_1);
     nbBois=get_nbressource(BOIS,joueur_1);
-    assert_int_equal(1,nbBois);
+    assert_int_equal(7,nbBois);
 }
 
 static void test_perte_ressource(void **state)
 {
     int nbBois;
     Joueur* joueur_1= *state;
-    joueur_1->ressource[BOIS].nb_ressource=4;
     perte_ressource(BOIS,joueur_1);
     nbBois=get_nbressource(BOIS,joueur_1);
-    assert_int_equal(3,nbBois);
+    assert_int_equal(5,nbBois);
 }
 
 static void test_set_status(void **state)
@@ -83,6 +88,11 @@ static void test_perte_cartedev(void **state)
     assert_int_equal(1,nbChevalier);
 }
 
+static void test_get_nb_total_ressource(void** state)
+{
+    Joueur* joueur= *state;
+    assert_int_equal(14,get_nbressource_total(joueur));
+}
 
 static int teardown (void ** state)
 {
@@ -98,6 +108,7 @@ int main_joueur_test(void)
         cmocka_unit_test_setup_teardown(test_get_pseudo,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_gain_ressource,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_perte_ressource,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nb_total_ressource,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_set_status,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_gain_cartedev,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_perte_cartedev,setup_joueur,teardown),

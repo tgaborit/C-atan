@@ -74,14 +74,7 @@ Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
  */
 void set_pseudo(Joueur* joueur, char* pseudo);
 
-/**
- * \fn void set_status(Joueur joueur);
- * \brief Initialisaton status du joueur
- *
- *
- * \param Status status Joueur*: joueur dont on initialise le status
- * \return: aucun
- */
+
 
  /**
  * \fn char* get_pseudo(Joueur* joueur)
@@ -93,7 +86,14 @@ void set_pseudo(Joueur* joueur, char* pseudo);
  */
 char* get_pseudo(Joueur* joueur);
 
-
+/**
+ * \fn void set_status(Joueur joueur);
+ * \brief Initialisaton status du joueur
+ *
+ *
+ * \param Status status Joueur*: joueur dont on initialise le status
+ * \return: aucun
+ */
 void set_status(Joueur* joueur, Status satus);
 
 /**
@@ -199,6 +199,15 @@ void perte_ressource(TypeRessource type, Joueur* joueur);
  * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur
  */
 int  get_nbressource(TypeRessource type, Joueur* joueur);
+
+/**
+ * \fn int get_nbressource_total(Joueur* joueur)
+ * \brief retourne le nombre totale de carte ressource dans la main du jouuer tout type confondu
+ * \param Joueur* joueur
+ * \return: int: le nombre de carte ressource
+ */
+
+int get_nbressource_total(Joueur* joueur);
 
 
 /**

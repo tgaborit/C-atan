@@ -215,6 +215,23 @@ int  get_nbressource(TypeRessource type, Joueur* joueur)
     return joueur->ressource[type].nb_ressource;
 }
 
+/**
+ * \fn int get_nbressource_total(Joueur* joueur)
+ * \brief retourne le nombre totale de carte ressource dans la main du jouuer tout type confondu
+ * \param Joueur* joueur
+ * \return: int: le nombre de carte ressource
+ */
+
+int get_nbressource_total(Joueur* joueur)
+{
+    int i,c=0;
+    for (i=0;i<=4;++i)
+    {
+        c+= joueur->ressource[i].nb_ressource;
+    }
+    return c;
+}
+
 
 /**
  * \fn void gain_cartedev(TypeCarteDev type, Joueur* joueur)
