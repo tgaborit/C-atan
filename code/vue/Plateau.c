@@ -57,9 +57,35 @@ void AfficheFenetre(){
 	AfficheGrandeArmee(renderer);
 	AfficheGrandeRoute(renderer);
 
-	//AfficheTuileRoche(renderer);
+	
+	
+	/*AfficheTuileArgile(renderer, 756, 109);
+	AfficheTuileArgile(renderer, 891, 109);
+	AfficheTuileArgile(renderer, 1026, 109);
+
+	AfficheTuileBle(renderer, 688, 225);
+	AfficheTuileBle(renderer, 823, 225);
+	AfficheTuileBle(renderer, 959, 225);
+	AfficheTuileBle(renderer, 1094, 225);
+
+	AfficheTuileBois(renderer, 620, 343);
+	AfficheTuileBois(renderer, 755, 343);
+	AfficheTuileBois(renderer, 1026, 343);
+	AfficheTuileBois(renderer, 1161, 343);
+			
+	AfficheTuileMouton(renderer, 688, 460);
+	AfficheTuileMouton(renderer, 823, 460);
+	AfficheTuileMouton(renderer, 959, 460);
+	AfficheTuileMouton(renderer, 1094, 460);
+	
+	AfficheTuileRoche(renderer, 756, 579);
+	AfficheTuileRoche(renderer, 891, 579);
+	AfficheTuileRoche(renderer, 1026, 579);*/
 
 	AfficheTuile(renderer);
+	
+
+
 
 	AfficheCarteArgile(renderer);
 	AfficheCarteBle(renderer);
@@ -78,6 +104,7 @@ void AfficheFenetre(){
 	AfficheBouttonColonie(renderer);
 	AfficheBouttonVille(renderer);
 	
+
 	
 //Event fermeture fenetre
 	SDL_bool program_launched = SDL_TRUE;
