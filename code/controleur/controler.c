@@ -1,5 +1,5 @@
 /**
-* \file controler.c
+* \file controller.c
 * \brief Fonctions générales du contrôleur
 * \author Titouan Gaborit
 * \date 27 mars 2019
@@ -9,7 +9,7 @@
 */
 
 #include <SDL.h>
-#include "controler.h"
+#include "controller.h"
 
 /**
 * \fn SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
