@@ -192,10 +192,3 @@ void craftDevEvent(/*Game* the_game*/)
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
-
-void SDL_ExitWithError(const char *message)
-{
-    SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
-    SDL_Quit();
-    exit(EXIT_FAILURE);
-}

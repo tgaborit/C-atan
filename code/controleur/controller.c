@@ -29,3 +29,10 @@ SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
     }
     return SDL_FALSE;
 }
+
+void SDL_ExitWithError(const char *message)
+{
+    SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
+    SDL_Quit();
+    exit(EXIT_FAILURE);
+}

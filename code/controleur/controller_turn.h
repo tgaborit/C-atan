@@ -18,6 +18,4 @@ void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);
 void craftDevEvent(/*Game* the_game*/);
 
-void SDL_ExitWithError(const char *message);
-
 #endif //CATANE_CONTROLLER_TURN_H
