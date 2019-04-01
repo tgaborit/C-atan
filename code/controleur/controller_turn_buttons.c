@@ -29,11 +29,17 @@ static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
+static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone du bouton Aide*/
+
 
 void drawButtons(SDL_Renderer* renderer)
 {
+    //Couleur boutons
+    if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
     SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
-    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area};
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 }
@@ -58,6 +64,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return ENDTURN_BUTTON;
     if(isInArea(mouse_button, dice_area) == SDL_TRUE)
         return DICE_BUTTON;
+    if(isInArea(mouse_button, help_area) == SDL_TRUE)
+        return HELP_BUTTON;
     return NO_BUTTON;
 }
 
@@ -121,6 +129,7 @@ void initButtonsTurn()
     initCraftAreas();
     initDiceArea();
     initEndTurnArea();
+    initHelpArea();
 }
 
 /**
@@ -341,4 +350,21 @@ void initEndTurnArea()
 
     end_turn_area.x = 300;
     end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
+}
+
+/**
+* \fn void initHelpArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Aide
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*
+*/
+void initHelpArea()
+{
+    help_area.w = 35;
+    help_area.h = 35;
+
+    help_area.x = WINDOWW - 10 - help_area.w;
+    help_area.y = 0;
 }

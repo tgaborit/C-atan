@@ -98,6 +98,10 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
                     rollDiceEvent(/*the_game*/);
                     break;
 
+                case HELP_BUTTON :
+                    printf("Clic sur bouton Aide\n");
+                    break;
+
                 default :
                     break;
                 }

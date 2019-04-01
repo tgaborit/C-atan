@@ -29,6 +29,8 @@ typedef enum {
         DICE_BUTTON,
         ENDTURN_BUTTON,
 
+        HELP_BUTTON,
+
         NO_BUTTON
 } TurnButton;
 
@@ -36,7 +38,7 @@ typedef enum {
 * \def NTURNBUTTON
 * Définit le nombre de boutons de l'environnement "Tour du joueur"
 */
-#define NTURNBUTTON 11
+#define NTURNBUTTON 12
 
 /**
 * \def CARDW
@@ -82,5 +84,6 @@ void initButtonsTurn();
         void initCraftAreas();
     void initDiceArea();
     void initEndTurnArea();
+    void initHelpArea();
 
 #endif //CATANE_CONTROLLER_TURN_BUTTONS_H
