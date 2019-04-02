@@ -23,10 +23,10 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
                 {
-                case SDLK_q :
-                    printf("Appui sur touche Q\n");
-                    printf("Appel de la fonction quit(&program_launched)\n");
-                    quit(&program_launched);
+                case SDLK_BACKSPACE :
+                    printf("Appui sur touche Retour arriere\n");
+                    printf("Appel de la fonction quitPlacing(&placing_launched)\n");
+                    quitPlacing(&placing_launched);
                     break;
 
                 default :
@@ -59,4 +59,9 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
 void quit(SDL_bool * pprogram_launched)
 {
     *pprogram_launched = SDL_FALSE;
+}
+
+void quitPlacing(SDL_bool * pplacing_launched)
+{
+    *pplacing_launched = SDL_FALSE;
 }

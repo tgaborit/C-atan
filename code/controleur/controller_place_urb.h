@@ -14,6 +14,7 @@ typedef enum {SETTLE_PLACING, CITY_PLACING} UrbPlacing;
 
 void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
+void quitPlacing(SDL_bool * pplacing_launched);
 void quit(SDL_bool * pprogram_launched);
 
 #endif //CATANE_CONTROLLER_PLACE_URB_H
