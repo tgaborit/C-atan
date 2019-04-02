@@ -1,17 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Projet CATANE" company="" webLink="https://gitlab.insa-rennes.fr/edurel/catane" view-date="2019-01-20" view-index="0" gantt-divider-location="770" resource-divider-location="300" version="2.8.10" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet CATANE" company="" webLink="https://gitlab.insa-rennes.fr/edurel/catane" view-date="2019-04-08" view-index="0" gantt-divider-location="867" resource-divider-location="300" version="2.8.10" locale="fr">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="546" order="0"/>
-        <field id="tpd4" name="Date de début" width="101" order="1"/>
-        <field id="tpd5" name="Date de fin" width="116" order="2"/>
-        <option id="taskLabelLeft" value=""/>
-        <option id="color.recent">
-            <![CDATA[#000099 #00cc00 #d6d9df #ffff00 #ff9999 #0033cc #ff0000 #3399ff #ffffcc #0033ff]]>
-        </option>
+        <field id="tpd3" name="Nom" width="579" order="0"/>
+        <field id="tpd4" name="Date de début" width="135" order="1"/>
+        <field id="tpd5" name="Date de fin" width="149" order="2"/>
+        <option id="color.recent"><![CDATA[#00cc00 #000099 #d6d9df #ffff00 #ff9999 #0033cc #ff0000 #3399ff #ffffcc #0033ff]]></option>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="208" order="0"/>
-        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+        <field id="0" name="Nom" width="209" order="0"/>
+        <field id="1" name="Rôle par défaut" width="87" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -53,12 +50,18 @@
             <task id="369" name="Configuration CMake et configuration .gitignore [TGaborit]" color="#000099" meeting="false" start="2019-03-11" duration="14" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
             <task id="368" name="Fonction controller/callbacks pour le tour de jeu [TGaborit]" color="#000099" meeting="false" start="2019-03-18" duration="14" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
         </task>
+        <task id="755" name="Structure joueur, sous-structures et fonctions associées [RFargeon]" color="#00cc00" meeting="false" start="2019-03-04" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="757" name="Structure partie, sous-structures et fonctions associées [RFargeon]" color="#00cc00" meeting="false" start="2019-03-11" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="762" name="Fonction de lancer de dé, de distribution de ressource [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-18" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="760" name="Fonctions de craft [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-25" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="764" name="Fonctions d'initialisation du plateau et de la pile de cartes [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-25" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="766" name="Fonctions de calcul de point de victoire [EDurel/RFargeon]766" color="#00cc00" meeting="false" start="2019-03-25" duration="14" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
         <task id="280" name="Livraison du projet" color="#00ffcc" meeting="true" start="2019-05-29" duration="0" complete="0" thirdDate="2019-04-29" thirdDate-constraint="0" expand="true"/>
         <task id="22" name="Rendu rapport" color="#00ffcc" meeting="true" start="2019-05-23" duration="0" complete="0" thirdDate="2019-02-13" thirdDate-constraint="0" expand="true"/>
         <task id="268" name="Exposé" color="#00ffcc" meeting="true" start="2019-05-27" duration="0" complete="0" thirdDate="2019-07-26" thirdDate-constraint="0" expand="true"/>
         <task id="270" name="Rendu vidéo promotionnelle" color="#00ffcc" meeting="true" start="2019-05-31" duration="0" complete="0" thirdDate="2019-05-08" thirdDate-constraint="0" expand="true"/>
-        <task id="2" name="Vacances d'hiver" color="#999999" shape="0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0" meeting="false" start="2019-02-16" duration="9" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
         <task id="8" name="Vacances de Pâques" color="#999999" shape="0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0" meeting="false" start="2019-04-06" duration="17" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
+        <task id="2" name="Vacances d'hiver" color="#999999" shape="0,0,0,1,0,0,1,0,0,1,0,0,1,0,0,0" meeting="false" start="2019-02-16" duration="9" complete="0" thirdDate="2019-02-11" thirdDate-constraint="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
