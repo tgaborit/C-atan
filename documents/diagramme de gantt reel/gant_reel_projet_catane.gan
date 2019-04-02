@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Projet CATANE" company="" webLink="https://gitlab.insa-rennes.fr/edurel/catane" view-date="2018-12-31" view-index="0" gantt-divider-location="424" resource-divider-location="300" version="2.0" locale="fr">
+<?xml version="1.0" encoding="UTF-8"?><project name="Projet CATANE" company="" webLink="https://gitlab.insa-rennes.fr/edurel/catane" view-date="2018-11-26" view-index="0" gantt-divider-location="424" resource-divider-location="300" version="2.0" locale="fr">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Nom" width="100" order="0"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nom" width="56" order="0"/>
-        <field id="1" name="Rôle par défaut" width="43" order="1"/>
+        <field id="0" name="Nom" width="52" order="0"/>
+        <field id="1" name="Rôle par défaut" width="47" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -56,6 +56,14 @@
         <task id="760" name="Fonctions de craft [EDurel]" color="#00cc00" meeting="false" start="2019-03-25" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
         <task id="764" name="Fonctions d'initialisation du plateau et de la pile de cartes [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-25" duration="7" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
         <task id="766" name="Fonctions de calcul de point de victoire [EDurel/RFargeon]" color="#00cc00" meeting="false" start="2019-03-25" duration="14" complete="0" thirdDate="2019-01-21" thirdDate-constraint="0" expand="true"/>
+        <task id="772" name="Fonctions d'affichage de fenêtre [PManauthon]" color="#ff0000" meeting="false" start="2019-03-06" duration="5" complete="0" expand="true"/>
+        <task id="788" name="Fonctions d'affichage de la barre d'informations des joueurs [PManauthon]" color="#ff0000" meeting="false" start="2019-03-10" duration="1" complete="0" expand="true"/>
+        <task id="776" name="Fonctions d'affichages et design des cartes [PManauthon]" color="#ff0000" meeting="false" start="2019-03-15" duration="7" complete="0" expand="true"/>
+        <task id="778" name="Fonctions d'affichages et design des tuiles [PManauthon]" color="#ff0000" meeting="false" start="2019-03-13" duration="21" complete="0" expand="true"/>
+        <task id="780" name="Fonctions d'affichages et design des bouttons des constructions [PManauthon]" color="#ff0000" meeting="false" start="2019-03-27" duration="12" complete="0" expand="true"/>
+        <task id="782" name="Fonctions d'affichage et design des cartes développement et des réussites [PManauthon]" color="#ff0000" meeting="false" start="2019-03-27" duration="12" complete="0" expand="true"/>
+        <task id="784" name="Fonctions d'affichage et design des bouttons skip, help et dés [PManauthon]" color="#ff0000" meeting="false" start="2019-03-27" duration="12" complete="0" expand="true"/>
+        <task id="785" name="Fonctions d'affichage et design du jeton voleur [PManauthon]" color="#ff0000" meeting="false" start="2019-04-03" duration="5" complete="0" expand="true"/>
         <task id="280" name="Livraison du projet" color="#00ffcc" meeting="true" start="2019-05-29" duration="0" complete="0" thirdDate="2019-04-29" thirdDate-constraint="0" expand="true"/>
         <task id="22" name="Rendu rapport" color="#00ffcc" meeting="true" start="2019-05-23" duration="0" complete="0" thirdDate="2019-02-13" thirdDate-constraint="0" expand="true"/>
         <task id="268" name="Exposé" color="#00ffcc" meeting="true" start="2019-05-27" duration="0" complete="0" thirdDate="2019-07-26" thirdDate-constraint="0" expand="true"/>
