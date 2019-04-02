@@ -8,7 +8,6 @@
 #include "architecture.c"
 #include "developpement.c"
 
-
 #define WINDOWW 1920
 #define WINDOWH 950
 #define RED 64
@@ -57,36 +56,33 @@ void AfficheFenetre(){
 	AfficheGrandeArmee(renderer);
 	AfficheGrandeRoute(renderer);
 
-	
-	
-	/*AfficheTuileArgile(renderer, 756, 109);
-	AfficheTuileArgile(renderer, 891, 109);
-	AfficheTuileArgile(renderer, 1026, 109);
+	Plateau * p = initPlateau();
 
-	AfficheTuileBle(renderer, 688, 225);
-	AfficheTuileBle(renderer, 823, 225);
-	AfficheTuileBle(renderer, 959, 225);
-	AfficheTuileBle(renderer, 1094, 225);
+	AfficheRandomTuile(p, -1, 2, renderer, 756, 109);
+	AfficheRandomTuile(p, 0, 2, renderer, 891, 109);
+	AfficheRandomTuile(p, 1, 2, renderer, 1026, 109);
 
-	AfficheTuileBois(renderer, 620, 343);
-	AfficheTuileBois(renderer, 755, 343);
-	AfficheTuileBois(renderer, 1026, 343);
-	AfficheTuileBois(renderer, 1161, 343);
-			
-	AfficheTuileMouton(renderer, 688, 460);
-	AfficheTuileMouton(renderer, 823, 460);
-	AfficheTuileMouton(renderer, 959, 460);
-	AfficheTuileMouton(renderer, 1094, 460);
+	AfficheRandomTuile(p, -1.5, 1, renderer, 688, 225);
+	AfficheRandomTuile(p, -0.5, 1, renderer, 823, 225);
+	AfficheRandomTuile(p, 0.5, 1, renderer, 959, 225);
+	AfficheRandomTuile(p, 1.5, 1, renderer, 1094, 225);
+
+	AfficheRandomTuile(p, -2, 0, renderer, 620, 343);
+	AfficheRandomTuile(p, -1, 0, renderer, 755, 343);
+	AfficheRandomTuile(p, 1, 0, renderer, 1026, 343);
+	AfficheRandomTuile(p, 2, 0, renderer, 1161, 343);
 	
-	AfficheTuileRoche(renderer, 756, 579);
-	AfficheTuileRoche(renderer, 891, 579);
-	AfficheTuileRoche(renderer, 1026, 579);*/
+	AfficheRandomTuile(p, -1.5, -1, renderer, 688, 460);
+	AfficheRandomTuile(p, -0.5, -1, renderer, 823, 460);
+	AfficheRandomTuile(p, 0.5, -1, renderer, 959, 460);
+	AfficheRandomTuile(p, 1.5, -1, renderer, 1094, 460);
+		
+	AfficheRandomTuile(p, -1, -2, renderer, 756, 579);
+	AfficheRandomTuile(p, 0, -2, renderer, 891, 579);
+	AfficheRandomTuile(p, 1, -2, renderer, 1026, 579);
 
 	AfficheTuile(renderer);
 	
-
-
-
 	AfficheCarteArgile(renderer);
 	AfficheCarteBle(renderer);
 	AfficheCarteBois(renderer);
@@ -117,13 +113,6 @@ void AfficheFenetre(){
 		{
 			switch(event.type)
 			{
-
-				case SDL_MOUSEMOTION : //mouvement souris, déplacement
-					//event.motion.x coordonee exacte en x (id y)
-					//event.motion.xrel coordonee relative de x (id y)
-					printf("%d / %d\n", event.motion.x, event.motion.y);
-					break;
-
 
 				case SDL_KEYDOWN :
 					switch(event.key.keysym.sym)
