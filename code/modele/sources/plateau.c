@@ -90,8 +90,8 @@ static void generationProba(Noeud** tabNoeud){
     srand(time(NULL));               // Initialisation de la fonction rand en prenant comme référence le temps actuel (pour éviter le "pseudo-aléatoire")
 
     int nb = 18;
-    for(i=0;i<18;++i){                                          // tirage et affectation des probas pour chaque tuile
-        if(tabNoeud[i]->x != 0 && tabNoeud[j]->y != 0){
+    for(i=0;i<19;++i){                                          // tirage et affectation des probas pour chaque tuile
+        if(tabNoeud[i]->x != 0 || tabNoeud[i]->y != 0){
             j = rand()%nb;
             tabNoeud[i]->t->proba = proba[j];
             proba[j] = proba[nb-1];
@@ -126,7 +126,7 @@ static void generationType(Noeud** tabNoeud){
     srand(time(NULL));                                     // Initialisation de la fonction rand en prenant comme référence le temps actuel (pour éviter le "pseudo-aléatoire")
 
     int nb = 18;
-    for(i=0;i<18;++i){                                     // Boucle d'affectation aléatoire d'un type de terrain à chaque tuile.
+    for(i=0;i<19;++i){                                     // Boucle d'affectation aléatoire d'un type de terrain à chaque tuile.
         if(tabNoeud[i]->x != 0 || tabNoeud[i]->y != 0){
             j = rand()%nb;
             tabNoeud[i]->t->type = type[j];
