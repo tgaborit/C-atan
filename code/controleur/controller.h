@@ -24,6 +24,8 @@
 
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
+void quitProgram(SDL_bool * pprogram_launched);
+
 void SDL_ExitWithError(const char *message);
 
 #endif //CATANE_CONTROLLER_H

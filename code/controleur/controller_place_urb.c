@@ -8,6 +8,8 @@
 */
 
 #include <SDL.h>
+
+#include "controller.h"
 #include "controller_place_urb.h"
 
 void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
@@ -36,8 +38,8 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&program_launched)\n");
-                quit(&program_launched);
+                printf("Appel de la fonction quitProgram(&program_launched)\n");
+                quitProgram(&program_launched);
                 break;
 
             default :
@@ -48,19 +50,15 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
 }
 
 /**
-* \fn void quit(SDL_bool * program_launched)
-* \brief Fonction activant la fin du jeu
+* \fn void quitPLacing(SDL_bool * placing_launched)
+* \brief Fonction annulant le placement d'un urb
 *
-* Donne la valeur SDL_False à l'état du programme, ce qui le fera sortir de la boucle de controlerTurn et quitter du programme
+* Donne la valeur SDL_False à l'état du placement, ce qui le fera sortir de la boucle de controlerPlaceUrb
+* et revenir à l'environnement Tour du joueur.
 *
-* \param[in,out] pprogram_launched Pointeur vers l'état du programme
+* \param[in,out] pplacing_launched Pointeur vers l'état du placement
 *
 */
-void quit(SDL_bool * pprogram_launched)
-{
-    *pprogram_launched = SDL_FALSE;
-}
-
 void quitPlacing(SDL_bool * pplacing_launched)
 {
     *pplacing_launched = SDL_FALSE;
