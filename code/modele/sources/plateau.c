@@ -127,7 +127,7 @@ static void generationType(Noeud** tabNoeud){
 
     int nb = 18;
     for(i=0;i<18;++i){                                     // Boucle d'affectation aléatoire d'un type de terrain à chaque tuile.
-        if(tabNoeud[i]->x != 0 && tabNoeud[i]->y != 0){
+        if(tabNoeud[i]->x != 0 || tabNoeud[i]->y != 0){
             j = rand()%nb;
             tabNoeud[i]->t->type = type[j];
             type[j] = type[nb-1];
