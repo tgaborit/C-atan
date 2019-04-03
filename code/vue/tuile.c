@@ -48,7 +48,7 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *argile = NULL;
 	
-	image = SDL_LoadBMP("carte/tuileargile.bmp");
+	image = SDL_LoadBMP("imagecatane/tuileargile.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -81,7 +81,7 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *ble = NULL;
 	
-	image = SDL_LoadBMP("carte/tuileble.bmp");
+	image = SDL_LoadBMP("imagecatane/tuileble.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -114,7 +114,7 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *bois = NULL;
 	
-	image = SDL_LoadBMP("carte/tuilebois.bmp");
+	image = SDL_LoadBMP("imagecatane/tuilebois.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -146,7 +146,7 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *mouton = NULL;
 	
-	image = SDL_LoadBMP("carte/tuilemouton.bmp");
+	image = SDL_LoadBMP("imagecatane/tuilemouton.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -178,7 +178,7 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *roche = NULL;
 	
-	image = SDL_LoadBMP("carte/tuileroche.bmp");
+	image = SDL_LoadBMP("imagecatane/tuileroche.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -207,7 +207,6 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 
 
 
-
 //Pour affichage des tuiles sur le plateau
 void AfficheRandomTuile(Plateau* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
 {
@@ -216,7 +215,7 @@ void AfficheRandomTuile(Plateau* p, double x, double y, SDL_Renderer* renderer, 
 	switch(type)
 	{
 		case ARGILE :
-			AfficheTuileRoche(renderer, posimx, posimy);
+			AfficheTuileArgile(renderer, posimx, posimy);
 			break;
 
 		case BLE :
@@ -240,3 +239,30 @@ void AfficheRandomTuile(Plateau* p, double x, double y, SDL_Renderer* renderer, 
 	}
 }
 
+
+
+void AfficheTuilePlateau(Plateau *p, SDL_Renderer *renderer)
+{
+	AfficheRandomTuile(p, -1, 2, renderer, 756, 109);
+	AfficheRandomTuile(p, 0, 2, renderer, 891, 109);
+	AfficheRandomTuile(p, 1, 2, renderer, 1026, 109);
+
+	AfficheRandomTuile(p, -1.5, 1, renderer, 688, 225);
+	AfficheRandomTuile(p, -0.5, 1, renderer, 823, 225);
+	AfficheRandomTuile(p, 0.5, 1, renderer, 959, 225);
+	AfficheRandomTuile(p, 1.5, 1, renderer, 1094, 225);
+
+	AfficheRandomTuile(p, -2, 0, renderer, 620, 343);
+	AfficheRandomTuile(p, -1, 0, renderer, 755, 343);
+	AfficheRandomTuile(p, 1, 0, renderer, 1026, 343);
+	AfficheRandomTuile(p, 2, 0, renderer, 1161, 343);
+	
+	AfficheRandomTuile(p, -1.5, -1, renderer, 688, 460);
+	AfficheRandomTuile(p, -0.5, -1, renderer, 823, 460);
+	AfficheRandomTuile(p, 0.5, -1, renderer, 959, 460);
+	AfficheRandomTuile(p, 1.5, -1, renderer, 1094, 460);
+		
+	AfficheRandomTuile(p, -1, -2, renderer, 756, 579);
+	AfficheRandomTuile(p, 0, -2, renderer, 891, 579);
+	AfficheRandomTuile(p, 1, -2, renderer, 1026, 579);
+}

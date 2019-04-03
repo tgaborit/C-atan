@@ -7,6 +7,7 @@
 #include "tuile.c"
 #include "architecture.c"
 #include "developpement.c"
+#include "probabilite.c"
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -57,29 +58,12 @@ void AfficheFenetre(){
 	AfficheGrandeRoute(renderer);
 
 	Plateau * p = initPlateau();
-
-	AfficheRandomTuile(p, -1, 2, renderer, 756, 109);
-	AfficheRandomTuile(p, 0, 2, renderer, 891, 109);
-	AfficheRandomTuile(p, 1, 2, renderer, 1026, 109);
-
-	AfficheRandomTuile(p, -1.5, 1, renderer, 688, 225);
-	AfficheRandomTuile(p, -0.5, 1, renderer, 823, 225);
-	AfficheRandomTuile(p, 0.5, 1, renderer, 959, 225);
-	AfficheRandomTuile(p, 1.5, 1, renderer, 1094, 225);
-
-	AfficheRandomTuile(p, -2, 0, renderer, 620, 343);
-	AfficheRandomTuile(p, -1, 0, renderer, 755, 343);
-	AfficheRandomTuile(p, 1, 0, renderer, 1026, 343);
-	AfficheRandomTuile(p, 2, 0, renderer, 1161, 343);
 	
-	AfficheRandomTuile(p, -1.5, -1, renderer, 688, 460);
-	AfficheRandomTuile(p, -0.5, -1, renderer, 823, 460);
-	AfficheRandomTuile(p, 0.5, -1, renderer, 959, 460);
-	AfficheRandomTuile(p, 1.5, -1, renderer, 1094, 460);
-		
-	AfficheRandomTuile(p, -1, -2, renderer, 756, 579);
-	AfficheRandomTuile(p, 0, -2, renderer, 891, 579);
-	AfficheRandomTuile(p, 1, -2, renderer, 1026, 579);
+	AfficheTuilePlateau(p, renderer);
+	
+	//AfficheProbaNormal(renderer);
+	
+	AfficheRandomProbaPlateau(p, renderer);
 
 	AfficheTuile(renderer);
 	
@@ -166,17 +150,33 @@ void AfficheJoueur(SDL_Renderer* renderer)
 
 void AfficheSkip(SDL_Renderer* renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+	SDL_Surface *image = NULL;
+	SDL_Texture *skip = NULL;
 	
-	SDL_Rect skip;
-	skip.x = 300;
-	skip.y = 820;
-	skip.w = 150;
-	skip.h = 75;
+	image = SDL_LoadBMP("imagecatane/skip.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	skip = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
 	
-	if(SDL_RenderFillRect(renderer, &skip) != 0)	
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	
+	if(skip == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectskip;
+
+	if(SDL_QueryTexture(skip, NULL, NULL, &rectskip.w, &rectskip.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	rectskip.x = 300;		
+	rectskip.y = 820;
+
+
+	if(SDL_RenderCopy(renderer, skip, NULL, &rectskip) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
 	
 	SDL_RenderPresent(renderer);
 }
@@ -202,17 +202,33 @@ void AfficheDe(SDL_Renderer* renderer)
 
 void AfficheHelp(SDL_Renderer* renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 206, 24, 30, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+	SDL_Surface *image = NULL;
+	SDL_Texture *help = NULL;
 	
-	SDL_Rect help;
-	help.x = 1875;
-	help.y = 0;
-	help.w = 35;
-	help.h = 35;
+	image = SDL_LoadBMP("imagecatane/help.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	help = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
 	
-	if(SDL_RenderFillRect(renderer, &help) != 0)	
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	
+	if(help == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect recthelp;
+
+	if(SDL_QueryTexture(help, NULL, NULL, &recthelp.w, &recthelp.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+	
+	recthelp.x = 1875;		
+	recthelp.y = 0;
+
+
+	if(SDL_RenderCopy(renderer, help, NULL, &recthelp) !=0) 
+		SDL_ExitWithError("Impossible d'afficher la texture");
 	
 	SDL_RenderPresent(renderer);
+
 }
