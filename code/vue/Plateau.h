@@ -116,4 +116,8 @@ void AfficheDe(SDL_Renderer *renderer);
 
 void AfficheSkip(SDL_Renderer *renderer);
 
+void AfficheJetonVoleur(Plateau* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy);
+
+void AfficheVoleur(Plateau* p, SDL_Renderer* renderer);
+
 #endif

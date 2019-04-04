@@ -61,8 +61,6 @@ void AfficheFenetre(){
 	
 	AfficheTuilePlateau(p, renderer);
 	
-	//AfficheProbaNormal(renderer);
-	
 	AfficheRandomProbaPlateau(p, renderer);
 
 	AfficheTuile(renderer);
@@ -71,7 +69,9 @@ void AfficheFenetre(){
 	AfficheCarteBle(renderer);
 	AfficheCarteBois(renderer);
 	AfficheCarteMouton(renderer);
-	AfficheCarteRoche(renderer);		
+	AfficheCarteRoche(renderer);	
+
+	AfficheVoleur(p, renderer);
 
 	AfficheJoueur(renderer);
 
@@ -230,5 +230,74 @@ void AfficheHelp(SDL_Renderer* renderer)
 		SDL_ExitWithError("Impossible d'afficher la texture");
 	
 	SDL_RenderPresent(renderer);
+
+}
+
+
+
+void AfficheJetonVoleur(Plateau* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
+{
+	int v = getVoleur(p, x, y);
+
+	if (v!= 1) return;
+	
+	else {	
+
+		SDL_Surface *image = NULL;
+		SDL_Texture *voleur = NULL;
+		
+		image = SDL_LoadBMP("imagecatane/voleur.bmp");
+	
+		if(image == NULL)
+			SDL_ExitWithError("Impossible de charger l'image");
+	
+		voleur = SDL_CreateTextureFromSurface(renderer, image);
+		SDL_FreeSurface(image);
+		
+		if(voleur == NULL)
+			SDL_ExitWithError("impossible de creer la texture");
+	
+		SDL_Rect rectvoleur;
+	
+		if(SDL_QueryTexture(voleur, NULL, NULL, &rectvoleur.w, &rectvoleur.h) != 0)
+			SDL_ExitWithError("Impossible de charger la texture");
+		
+		rectvoleur.x = posimx;		
+		rectvoleur.y = posimy;
+	
+	
+		if(SDL_RenderCopy(renderer, voleur, NULL, &rectvoleur) !=0) 
+			SDL_ExitWithError("Impossible d'afficher la texture");
+		
+		SDL_RenderPresent(renderer);
+	}
+}	
+
+
+void AfficheVoleur(Plateau* p, SDL_Renderer* renderer)
+{
+	AfficheJetonVoleur(p, -1, 2, renderer, 792, 152);
+	AfficheJetonVoleur(p, 0, 2, renderer, 928, 152);
+	AfficheJetonVoleur(p, 1, 2, renderer, 1063, 152);
+
+	AfficheJetonVoleur(p, -1.5, 1, renderer, 724, 270);
+	AfficheJetonVoleur(p, -0.5, 1, renderer, 860, 270);
+	AfficheJetonVoleur(p, 0.5, 1, renderer, 996, 270);
+	AfficheJetonVoleur(p, 1.5, 1, renderer, 1130, 270);
+
+	AfficheJetonVoleur(p, -2, 0, renderer, 656, 388);
+	AfficheJetonVoleur(p, -1, 0, renderer, 792, 388);
+	AfficheJetonVoleur(p, 0, 0, renderer, 928, 388);
+	AfficheJetonVoleur(p, 1, 0, renderer, 1063, 388);
+	AfficheJetonVoleur(p, 2, 0, renderer, 1198, 388);
+
+	AfficheJetonVoleur(p, -1.5, -1, renderer, 724, 506);
+	AfficheJetonVoleur(p, -0.5, -1, renderer, 860, 506);
+	AfficheJetonVoleur(p, 0.5, -1, renderer, 996, 506);
+	AfficheJetonVoleur(p, 1.5, -1, renderer, 1130, 506);
+
+	AfficheJetonVoleur(p, -1, -2, renderer, 792, 624);
+	AfficheJetonVoleur(p, 0, -2, renderer, 928, 624);
+	AfficheJetonVoleur(p, 1, -2, renderer, 1063, 624);
 
 }
