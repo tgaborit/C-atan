@@ -1,8 +1,8 @@
 #include <stdarg.h>
 #include <stddef.h>
 #include <setjmp.h>
-#include "cmocka.h"
-#include "cmocka_pbc.h"
+#include <cmocka.h>
+#include <cmocka_pbc.h>
 #include "test_set_plateau.h"
 #include "ressource.h"
 #include "joueur.h"
@@ -28,9 +28,14 @@ static int group_teardown(void** state){
 
 static void test_setVoleur_coordBonnes(void** state){
     Plateau* p = (Plateau*) (*state);
-    setVoleur(p,1.5,1);
+    assert_int_equal(setVoleur(p,0,0),0);
+    assert_int_equal(setVoleur(p,1,0),0);
+    assert_int_equal(setVoleur(p,2,0),0);
+    assert_int_equal(setVoleur(p,1.5,-1),0);
+    assert_int_equal(deplacementPlateau(p,1.5,-1)->t->brigand,1);
     assert_int_equal(p->t->brigand,0);
-    assert_int_equal(deplacementPlateau(p,1.5,1)->t->brigand,1);
+    assert_int_equal(setVoleur(p,0,0),0);
+    assert_int_equal(deplacementPlateau(p,1.5,-1)->t->brigand,0);
 }
 
 static void test_setVoleur_PlateauNULL(void** state){
@@ -53,6 +58,7 @@ static void test_setRoute_coordFausses(void** state){
     assert_int_equal(setRoute(p,-10,5,0,j),-1);
     assert_int_equal(setRoute(p,0.5,0.5,0,j),-1);
     assert_int_equal(setRoute(p,0,0,6,j),-1);
+    assert_int_equal(setRoute(p,0,0,-3,j),-1);
     assert_int_equal(setRoute(p,0.5,0.5,-1,j),-1);
 }
 
@@ -64,6 +70,15 @@ static void test_setRoute_JoueurNULL(void** state){
 static void test_setRoute_coordBonnes(void** state){
     Plateau* p = (Plateau*) (*state);
     Joueur* j = init_joueur(VERT,"manu");
+    assert_int_equal(setRoute(p,0,0,0,j),-1);
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
     gain_ressource(ARGILE,j);
     gain_ressource(BOIS,j);
     gain_ressource(ARGILE,j);
@@ -72,17 +87,24 @@ static void test_setRoute_coordBonnes(void** state){
     gain_ressource(BOIS,j);
     assert_int_equal(setRoute(p,0,0,0,j),0);
     assert_int_equal(setRoute(p,0,0,0,j),-1);
-    assert_int_equal(setRoute(p,2,0,0,j),-1);
-    assert_int_equal(setRoute(p,-1,0,4,j),0);
-    assert_int_equal(setRoute(p,-1,0,2,j),0);
+    assert_int_equal(setRoute(p,-0.5,-1,1,j),0);
+    assert_int_equal(setRoute(p,-0.5,1,5,j),0);
+    assert_int_equal(setRoute(p,0,0,5,j),0);
+    assert_int_equal(setRoute(p,0,0,1,j),0);
+    deplacementPlateau(p,1.5,1)->t->a[2].i=ROUTE;
+    deplacementPlateau(p,1.5,1)->t->a[2].owner=j;
+    deplacementPlateau(p,1.5,1)->t->a[3].i=ROUTE;
+    deplacementPlateau(p,1.5,1)->t->a[3].owner=j;
+    assert_int_equal(setRoute(p,1,2,3,j),0);
+    assert_int_equal(setRoute(p,2,0,2,j),0);
 }
 
 static void test_setRoute_JoueurDiff(void** state){
     Plateau* p = (Plateau*) (*state);
     Joueur* j = init_joueur(ROUGE,"remi");
-    assert_int_equal(setRoute(p,-0.5,1,0,j),-1);
-    assert_int_equal(setRoute(p,0,0,1,j),-1);
-
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    assert_int_equal(setRoute(p,0,0,4,j),-1);
 }
 
 static void test_setColonie_PlateauNULL(void** state){
@@ -107,6 +129,9 @@ static void test_setColonie_JoueurNULL(void** state){
 static void test_setColonie_CoordBonnes(void** state){
     Plateau* p = (Plateau*) (*state);
     Joueur* j = init_joueur(VERT,"manu");
+    p->t->a[2].i=ROUTE;
+    p->t->a[2].owner=j;
+    assert_int_equal(setColonie(p,0,0,2,j),-1);
     gain_ressource(ARGILE,j);
     gain_ressource(BOIS,j);
     gain_ressource(MOUTON,j);
@@ -115,21 +140,27 @@ static void test_setColonie_CoordBonnes(void** state){
     gain_ressource(BOIS,j);
     gain_ressource(MOUTON,j);
     gain_ressource(BLE,j);
-
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    gain_ressource(MOUTON,j);
+    gain_ressource(BLE,j);
+    gain_ressource(ARGILE,j);
+    gain_ressource(BOIS,j);
+    gain_ressource(MOUTON,j);
+    gain_ressource(BLE,j);
     assert_int_equal(setColonie(p,0,0,0,j),-1);
     assert_int_equal(setColonie(p,0,0,1,j),-1);
+    assert_int_equal(setColonie(p,0,0,2,j),0);
+    assert_int_equal(setColonie(p,0,0,4,j),0);
     assert_int_equal(setColonie(p,0,2,0,j),-1);
-    assert_int_equal(setColonie(p,-1,0,4,j),0);
-    gain_ressource(BOIS,j);
-    gain_ressource(ARGILE,j);
-    gain_ressource(BOIS,j);
-    gain_ressource(ARGILE,j);
-    gain_ressource(BOIS,j);
-    gain_ressource(ARGILE,j);
-    setRoute(p,-1,0,5,j);
-    setRoute(p,-2,0,4,j);
-    setRoute(p,-2,0,5,j);
-    assert_int_equal(setColonie(p,-2,0,5,j),0);
+    assert_int_equal(setColonie(p,0,2,1,j),-1);
+    assert_int_equal(setColonie(p,0,2,2,j),-1);
+    deplacementPlateau(p,0,-2)->t->a[5].i = ROUTE;
+    deplacementPlateau(p,0,-2)->t->a[5].owner = j;
+    assert_int_equal(setColonie(p,0,-2,5,j),0);
+    deplacementPlateau(p,1,0)->t->a[5].i = ROUTE;
+    deplacementPlateau(p,1,0)->t->a[5].owner = j;
+    assert_int_equal(setColonie(p,1.5,-1,0,j),0);
 }
 
 static void test_setColonie_JoueurDiff(void** state){
