@@ -16,7 +16,7 @@ static int setup_joueur (void ** state)
         return -1;
    joueur_1->ressource[BLE].nb_ressource=3;
    joueur_1->ressource[ARGILE].nb_ressource=4;
-   joueur_1->ressource[PIERRE].nb_ressource=0;
+   joueur_1->ressource[PIERRE].nb_ressource=3;
    joueur_1->ressource[BOIS].nb_ressource=6;
    joueur_1->ressource[MOUTON].nb_ressource=1;
 
@@ -61,6 +61,7 @@ static void test_perte_ressource(void **state)
     assert_int_equal(5,nbBois);
 }
 
+
 static void test_set_status(void **state)
 {
     Joueur* joueur_1= *state;
@@ -91,9 +92,40 @@ static void test_perte_cartedev(void **state)
 static void test_get_nb_total_ressource(void** state)
 {
     Joueur* joueur= *state;
-    assert_int_equal(14,get_nbressource_total(joueur));
+    assert_int_equal(17,get_nbressource_total(joueur));
 }
 
+static void test_achat_route(void** state)
+{
+    Joueur* joueur1= *state;
+    assert_int_equal(0,achat_route(joueur1));
+    assert_int_equal(0,achat_route(joueur1));
+    assert_int_equal(0,achat_route(joueur1));
+    assert_int_equal(0,achat_route(joueur1));
+    assert_int_equal(-1,achat_route(joueur1));
+}
+
+static void test_achat_colonie(void** state)
+{
+    Joueur* joueur1= *state;
+    assert_int_equal(0,achat_colonie(joueur1));
+    assert_int_equal(-1,achat_colonie(joueur1));
+}
+
+
+static void test_achat_ville(void** state)
+{
+    Joueur* joueur1= *state;
+    assert_int_equal(0,achat_ville(joueur1));
+    assert_int_equal(-1,achat_ville(joueur1));
+}
+
+static void test_achat_cartedev(void** state)
+{
+    Joueur* joueur1= *state;
+    assert_int_equal(0,achat_cartedev(joueur1));
+    assert_int_equal(-1,achat_cartedev(joueur1));
+}
 static int teardown (void ** state)
 {
     free_joueur(*state);
@@ -112,6 +144,10 @@ int main_joueur_test(void)
         cmocka_unit_test_setup_teardown(test_set_status,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_gain_cartedev,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_perte_cartedev,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_achat_route,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_achat_colonie,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_achat_ville,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_achat_cartedev,setup_joueur,teardown),
         };
     return cmocka_run_group_tests(tests_joueur,NULL,NULL);
 }

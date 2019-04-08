@@ -73,10 +73,12 @@ void init_main_cartedev(Joueur* joueur)
     CarteDev chevalier ={CHEVALIER,0};
     CarteDev routes= {ROUTES,0};
     CarteDev point= {POINT,0};
+    CarteDev decouverte= {DECOUVERTE,0};
     joueur->carte_dev[0]=monopole;
     joueur->carte_dev[1]=chevalier;
     joueur->carte_dev[2]=routes;
     joueur->carte_dev[3]=point;
+    joueur->carte_dev[4]=decouverte;
 }
 
 /**
@@ -341,7 +343,7 @@ int achat_ville(Joueur* joueur)
  */
 int achat_cartedev(Joueur* joueur)
 {
-    if (get_nbressource(PIERRE,joueur)>=1 && get_nbressource(BLE,joueur)>=1 && get_nbressource(BLE,joueur)>=1)
+    if (get_nbressource(PIERRE,joueur)>=1 && get_nbressource(MOUTON,joueur)>=1 && get_nbressource(BLE,joueur)>=1)
         {
             perte_ressource(PIERRE,joueur);
             perte_ressource(BLE, joueur);
