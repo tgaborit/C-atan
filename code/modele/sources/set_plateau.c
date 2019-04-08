@@ -31,8 +31,15 @@ static int constructionVoisineSommet(Plateau* p, double x, double y, int positio
         int pattern[6] = {0,2,4,5,3,1};
         Noeud* Cur = deplacementPlateau(p,x,y);
 
-        if(Cur->adjacence[pattern[position]] == NULL){return 1;}
-        if(getInfrastructureSommet(p,Cur->adjacence[pattern[position]]->x,Cur->adjacence[pattern[position]]->y,low) == VIDE){
+        if(Cur->adjacence[pattern[high]] == NULL){
+            if(Cur->adjacence[pattern[position]] == NULL){
+                return 1;
+            }
+            if(getInfrastructureSommet(p,Cur->adjacence[pattern[position]]->x,Cur->adjacence[pattern[position]]->y,high) == VIDE){
+                return 1;
+            }
+        }
+        if(getInfrastructureSommet(p,Cur->adjacence[pattern[high]]->x,Cur->adjacence[pattern[high]]->y,low) == VIDE){
             return 1;
         }
     }
@@ -57,20 +64,29 @@ static int routeVoisineSommet(Plateau* p,double x, double y, int position, Joueu
     }
 
     int pattern[6] = {0,2,4,5,3,1};             // pattern de mouvements suivant le sommet actuel
-    int low = position-1,high = position+1;
+    int low = position-1,high = position+1, high2 = position+2;
     if(low < 0){
         low = 5;
     }
     if(high > 5){
         high = 0;
     }
+    if(high2 > 5){
+        high2 = high2 -6;
+    }
     int r1 = getInfrastructureArrete(p,x,y,position);
     int r2 = getInfrastructureArrete(p,x,y,high);
     int r3;
     Joueur* j3;
     if(Cur->adjacence[pattern[high]] == NULL){
-        r3 = VIDE;
-        j3 = NULL;
+        if(Cur->adjacence[pattern[position]] == NULL){
+            r3 = VIDE;
+            j3 = NULL;
+        }
+        else{
+            r3 = getInfrastructureArrete(p,Cur->adjacence[pattern[position]]->x,Cur->adjacence[pattern[position]]->y,high2);
+            j3 = getJoueurArrete(p,Cur->adjacence[pattern[position]]->x,Cur->adjacence[pattern[position]]->y,high2);
+        }
     }
     else{
         r3 = getInfrastructureArrete(p,Cur->adjacence[pattern[high]]->x,Cur->adjacence[pattern[high]]->y,low);
@@ -346,7 +362,7 @@ int setVoleur(Plateau* p, double x, double y){
         return -1;
     }
     int i=0;
-    int ord[6] = {1,3,0,5,2,4};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+    int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
     for(i=0;i<6;++i){                                               // On cherche le noeud ou se trouve actuellement le voleur afin de l'enlever.
         if(p->t->brigand == 1){
             p->t->brigand = 0;
