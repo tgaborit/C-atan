@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,16 +6,14 @@
 #include "Plateau.h"
 #include "ressource.h"
 #include "get_plateau.h"
-#include "get_plateau.c"
 #include "joueur.h"
-#include "plateau.c"
 #include "plateau.h"
 
-void AfficheTuile(SDL_Renderer* renderer)		
+void AfficheTuile(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *texture = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/plateau.bmp");
 
 	if(image == NULL)
@@ -23,7 +21,7 @@ void AfficheTuile(SDL_Renderer* renderer)
 
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(texture == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -31,14 +29,14 @@ void AfficheTuile(SDL_Renderer* renderer)
 
 	if(SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectangle.x = 530;		
+
+	rectangle.x = 530;
 	rectangle.y =0;
 
 
-	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0) 
+	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -47,7 +45,7 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *argile = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/tuileargile.bmp");
 
 	if(image == NULL)
@@ -55,8 +53,8 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 
 	argile = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
-	
+
+
 	if(argile == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -64,23 +62,23 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_QueryTexture(argile, NULL, NULL, &rectargile.w, &rectargile.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectargile.x = x;		
+
+	rectargile.x = x;
 	rectargile.y = y;
 
 
-	if(SDL_RenderCopy(renderer, argile, NULL, &rectargile) !=0) 
+	if(SDL_RenderCopy(renderer, argile, NULL, &rectargile) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
-}	
+}
 
 
 void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *ble = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/tuileble.bmp");
 
 	if(image == NULL)
@@ -88,8 +86,8 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 
 	ble = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
-	
+
+
 	if(ble == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -97,14 +95,14 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_QueryTexture(ble, NULL, NULL, &rectble.w, &rectble.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectble.x = x;		
+
+	rectble.x = x;
 	rectble.y = y;
 
 
-	if(SDL_RenderCopy(renderer, ble, NULL, &rectble) !=0) 
+	if(SDL_RenderCopy(renderer, ble, NULL, &rectble) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -113,7 +111,7 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *bois = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/tuilebois.bmp");
 
 	if(image == NULL)
@@ -121,8 +119,8 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 
 	bois = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
-	
+
+
 	if(bois == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -130,14 +128,14 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_QueryTexture(bois, NULL, NULL, &rectbois.w, &rectbois.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectbois.x = x;		
+
+	rectbois.x = x;
 	rectbois.y = y;
 
 
-	if(SDL_RenderCopy(renderer, bois, NULL, &rectbois) !=0) 
+	if(SDL_RenderCopy(renderer, bois, NULL, &rectbois) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -145,7 +143,7 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *mouton = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/tuilemouton.bmp");
 
 	if(image == NULL)
@@ -153,8 +151,8 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 
 	mouton = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
-	
+
+
 	if(mouton == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -162,14 +160,14 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_QueryTexture(mouton, NULL, NULL, &rectmouton.w, &rectmouton.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectmouton.x = x;		
+
+	rectmouton.x = x;
 	rectmouton.y = y;
 
 
-	if(SDL_RenderCopy(renderer, mouton, NULL, &rectmouton) !=0) 
+	if(SDL_RenderCopy(renderer, mouton, NULL, &rectmouton) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -177,7 +175,7 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *roche = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/tuileroche.bmp");
 
 	if(image == NULL)
@@ -185,8 +183,8 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 
 	roche = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
-	
+
+
 	if(roche == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -194,14 +192,14 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_QueryTexture(roche, NULL, NULL, &rectroche.w, &rectroche.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectroche.x = x;		
+
+	rectroche.x = x;
 	rectroche.y = y;
 
 
-	if(SDL_RenderCopy(renderer, roche, NULL, &rectroche) !=0) 
+	if(SDL_RenderCopy(renderer, roche, NULL, &rectroche) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
@@ -256,12 +254,12 @@ void AfficheTuilePlateau(Plateau *p, SDL_Renderer *renderer)
 	AfficheRandomTuile(p, -1, 0, renderer, 755, 343);
 	AfficheRandomTuile(p, 1, 0, renderer, 1026, 343);
 	AfficheRandomTuile(p, 2, 0, renderer, 1161, 343);
-	
+
 	AfficheRandomTuile(p, -1.5, -1, renderer, 688, 460);
 	AfficheRandomTuile(p, -0.5, -1, renderer, 823, 460);
 	AfficheRandomTuile(p, 0.5, -1, renderer, 959, 460);
 	AfficheRandomTuile(p, 1.5, -1, renderer, 1094, 460);
-		
+
 	AfficheRandomTuile(p, -1, -2, renderer, 756, 579);
 	AfficheRandomTuile(p, 0, -2, renderer, 891, 579);
 	AfficheRandomTuile(p, 1, -2, renderer, 1026, 579);

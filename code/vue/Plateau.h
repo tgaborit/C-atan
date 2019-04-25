@@ -1,10 +1,11 @@
 #ifndef PLATEAU_H
 #define PLATEAU_H
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "plateau.h"
+#include "get_plateau.h"
 
 
 
@@ -42,8 +43,8 @@ void AfficheCarteBois(SDL_Renderer *renderer);
 
 void AfficheCarteMouton(SDL_Renderer *renderer);
 
-void AfficheCarteArgile(SDL_Renderer *renderer);
-	
+void AfficheCarteRoche(SDL_Renderer *renderer);
+
 
 
 //void AfficheCartesDev(SDL_Renderer *renderer);
@@ -73,7 +74,7 @@ void AfficheBouttonColonie(SDL_Renderer *renderer);
 void AfficheBouttonVille(SDL_Renderer *renderer);
 
 
-/*void AfficheConstructions(SDL_Renderer *renderer);	
+/*void AfficheConstructions(SDL_Renderer *renderer);
 
 void AfficheProbas(SDL_Renderer *renderer);
 

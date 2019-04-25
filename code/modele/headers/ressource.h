@@ -34,7 +34,8 @@ typedef enum{
 MONOPOLE,
 CHEVALIER,
 ROUTES,
-POINT
+POINT,
+DECOUVERTE
 } TypeCarteDev;
 
 
