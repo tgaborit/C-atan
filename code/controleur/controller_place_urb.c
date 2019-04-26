@@ -12,7 +12,7 @@
 #include "controller.h"
 #include "controller_place_urb.h"
 
-void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
+void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/, UrbPlacing urb_placing)
 {
     SDL_bool placing_launched = SDL_TRUE;
     while(program_launched && placing_launched)
