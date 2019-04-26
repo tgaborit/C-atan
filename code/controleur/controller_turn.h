@@ -12,8 +12,6 @@
 
 void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
-void quit(SDL_bool * program_launched);
-
 void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);
 void craftDevEvent(/*Game* the_game*/);

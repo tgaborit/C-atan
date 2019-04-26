@@ -9,6 +9,7 @@
 */
 
 #include <SDL.h>
+#include "controller.h"
 #include "controller_turn.h"
 #include "controller_turn_buttons.h"
 
@@ -112,8 +113,8 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
                 {
                 case SDLK_q :
                     printf("Appui sur touche Q\n");
-                    printf("Appel de la fonction quit(&program_launched)\n");
-                    quit(&program_launched);
+                    printf("Appel de la fonction quitProgram(&program_launched)\n");
+                    quitProgram(&program_launched);
                     break;
 
                 default :
@@ -123,8 +124,8 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&program_launched)\n");
-                quit(&program_launched);
+                printf("Appel de la fonction quitProgram(&program_launched)\n");
+                quitProgram(&program_launched);
                 break;
 
             default :
@@ -132,20 +133,6 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
             }
         }
     }
-}
-
-/**
-* \fn void quit(SDL_bool * program_launched)
-* \brief Fonction activant la fin du jeu
-*
-* Donne la valeur SDL_False à l'état du programme, ce qui le fera sortir de la boucle de controlerTurn et quitter du programme
-*
-* \param[in,out] pprogram_launched Pointeur vers l'état du programme
-*
-*/
-void quit(SDL_bool * pprogram_launched)
-{
-    *pprogram_launched = SDL_FALSE;
 }
 
 void rollDiceEvent(/*Game* the_game*/)
