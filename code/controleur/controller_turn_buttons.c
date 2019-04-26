@@ -31,8 +31,15 @@ static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone 
 static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone du bouton Aide*/
 
 
-void drawButtons(SDL_Renderer* renderer)
+void drawButtonsTurn(SDL_Renderer* renderer)
 {
+    //Nettoyage du rendu
+    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+    if(SDL_RenderClear(renderer) != 0)
+        SDL_ExitWithError("Impossible de nettoyer le rendu");
+
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
@@ -41,6 +48,9 @@ void drawButtons(SDL_Renderer* renderer)
     dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
+
+    //Met a jour l'ecran
+    SDL_RenderPresent(renderer);
 }
 
 /**

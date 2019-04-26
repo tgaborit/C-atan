@@ -64,7 +64,7 @@ typedef enum {
 */
 #define CRAFTH 75
 
-void drawButtons(SDL_Renderer* renderer);
+void drawButtonsTurn(SDL_Renderer* renderer);
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
     TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button);

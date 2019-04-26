@@ -27,10 +27,10 @@
 void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/) /*à appeler avec la structure the_partie*/
 {
     initButtonsTurn();
-    drawButtons(renderer);
-    SDL_RenderPresent(renderer);
     while(program_launched)
     {
+        drawButtonsTurn(renderer);
+
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
