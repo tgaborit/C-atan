@@ -47,6 +47,13 @@ static SDL_Rect crossEE3_area;          /*!< Rectangle correspondant à la zone 
 static SDL_Rect crossEE4_area;          /*!< Rectangle correspondant à la zone du croisement 4 de l'hexagone Est*/
 static SDL_Rect crossEE5_area;          /*!< Rectangle correspondant à la zone du croisement 5 de l'hexagone Est*/
 
+static SDL_Rect crossSE0_area;          /*!< Rectangle correspondant à la zone du croisement 0 de l'hexagone Sud - Est*/
+static SDL_Rect crossSE1_area;          /*!< Rectangle correspondant à la zone du croisement 1 de l'hexagone Sud - Est*/
+static SDL_Rect crossSE2_area;          /*!< Rectangle correspondant à la zone du croisement 2 de l'hexagone Sud - Est*/
+static SDL_Rect crossSE3_area;          /*!< Rectangle correspondant à la zone du croisement 3 de l'hexagone Sud - Est*/
+static SDL_Rect crossSE4_area;          /*!< Rectangle correspondant à la zone du croisement 4 de l'hexagone Sud - Est*/
+static SDL_Rect crossSE5_area;          /*!< Rectangle correspondant à la zone du croisement 5 de l'hexagone Sud - Est*/
+
 
 void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 {
@@ -61,12 +68,13 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-    SDL_Rect place_urb_buttons[NPLACEURBBUTTON] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area,
-                                                   crossX0X_area, crossX1X_area, crossX2X_area, crossX3X_area, crossX4X_area, crossX5X_area,
-                                                   cross0XX_area, cross1XX_area, cross2XX_area, cross3XX_area, cross4XX_area, cross5XX_area,
-                                                   crossNE0_area, crossNE1_area, crossNE2_area, crossNE3_area, crossNE4_area, crossNE5_area,
-                                                   crossEE0_area, crossEE1_area, crossEE2_area, crossEE3_area, crossEE4_area, crossEE5_area};
-    if(SDL_RenderDrawRects(renderer, place_urb_buttons, NPLACEURBBUTTON) != 0)
+    SDL_Rect place_urb_buttons[NPLACEURBBUTTONS] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area,
+                                                    crossX0X_area, crossX1X_area, crossX2X_area, crossX3X_area, crossX4X_area, crossX5X_area,
+                                                    cross0XX_area, cross1XX_area, cross2XX_area, cross3XX_area, cross4XX_area, cross5XX_area,
+                                                    crossNE0_area, crossNE1_area, crossNE2_area, crossNE3_area, crossNE4_area, crossNE5_area,
+                                                    crossEE0_area, crossEE1_area, crossEE2_area, crossEE3_area, crossEE4_area, crossEE5_area,
+                                                    crossSE0_area, crossSE1_area, crossSE2_area, crossSE3_area, crossSE4_area, crossSE5_area};
+    if(SDL_RenderDrawRects(renderer, place_urb_buttons, NPLACEURBBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
     //Met a jour l'ecran
@@ -77,14 +85,15 @@ void initButtonsPlaceUrb()
 {
     int i, j;
 
-    SDL_Rect* place_urb_buttons[5][6] = {{&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area},
+    SDL_Rect* place_urb_buttons[6][6] = {{&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area},
                                          {&crossX0X_area, &crossX1X_area, &crossX2X_area, &crossX3X_area, &crossX4X_area, &crossX5X_area},
                                          {&cross0XX_area, &cross1XX_area, &cross2XX_area, &cross3XX_area, &cross4XX_area, &cross5XX_area},
                                          {&crossNE0_area, &crossNE1_area, &crossNE2_area, &crossNE3_area, &crossNE4_area, &crossNE5_area},
-                                         {&crossEE0_area, &crossEE1_area, &crossEE2_area, &crossEE3_area, &crossEE4_area, &crossEE5_area}};
+                                         {&crossEE0_area, &crossEE1_area, &crossEE2_area, &crossEE3_area, &crossEE4_area, &crossEE5_area},
+                                         {&crossSE0_area, &crossSE1_area, &crossSE2_area, &crossSE3_area, &crossSE4_area, &crossSE5_area}};
 
 
-    for(i = 0; i < 5; ++i)
+    for(i = 0; i < 6; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
@@ -98,6 +107,7 @@ void initButtonsPlaceUrb()
     initButtonsHex(place_urb_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);
     initButtonsHex(place_urb_buttons[3], BOARDCENTERX + sqrt(3)*HEXAGONS, BOARDCENTERY - 3*HEXAGONS, HEXAGONS);
     initButtonsHex(place_urb_buttons[4], BOARDCENTERX + 2*sqrt(3)*HEXAGONS, BOARDCENTERY, HEXAGONS);
+    initButtonsHex(place_urb_buttons[5], BOARDCENTERX + sqrt(3)*HEXAGONS, BOARDCENTERY + 3*HEXAGONS, HEXAGONS);
 
 }
 

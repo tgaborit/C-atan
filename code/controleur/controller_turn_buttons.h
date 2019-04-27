@@ -35,10 +35,10 @@ typedef enum {
 } TurnButton;
 
 /**
-* \def NTURNBUTTON
+* \def NTURNBUTTONS
 * Définit le nombre de boutons de l'environnement "Tour du joueur"
 */
-#define NTURNBUTTON 12
+#define NTURNBUTTONS 12
 
 /**
 * \def CARDW

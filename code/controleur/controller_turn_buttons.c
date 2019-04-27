@@ -44,9 +44,9 @@ void drawButtonsTurn(SDL_Renderer* renderer)
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-    SDL_Rect turn_buttons[NTURNBUTTON] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
+    SDL_Rect turn_buttons[NTURNBUTTONS] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
     dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area, help_area};
-    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTON) != 0)
+    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
     //Met a jour l'ecran
