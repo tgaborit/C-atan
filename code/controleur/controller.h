@@ -22,6 +22,12 @@
 */
 #define WINDOWH 950
 
+/**
+* \def HEXAGONS
+* Définit le côté des hexagones
+*/
+#define HEXAGONS 78
+
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
 void quitProgram(SDL_bool * pprogram_launched);

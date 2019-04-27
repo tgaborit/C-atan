@@ -16,6 +16,7 @@
 void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/, UrbPlacing urb_placing)
 {
     SDL_bool placing_launched = SDL_TRUE;
+    initButtonsPlaceUrb();
     while(program_launched && placing_launched)
     {
         drawButtonsPlaceUrb(renderer);
