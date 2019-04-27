@@ -64,6 +64,13 @@ typedef enum {
         CROSSSW4_BUTTON,
         CROSSSW5_BUTTON,
 
+        CROSSWW0_BUTTON,
+        CROSSWW1_BUTTON,
+        CROSSWW2_BUTTON,
+        CROSSWW3_BUTTON,
+        CROSSWW4_BUTTON,
+        CROSSWW5_BUTTON,
+
         NO_BUTTON
 } PlaceUrbButton;
 
@@ -71,7 +78,7 @@ typedef enum {
 * \def NPLACEURBBUTTON
 * Définit le nombre de boutons de l'environnement "Placement d'une colonie ou d'une ville"
 */
-#define NPLACEURBBUTTONS 42
+#define NPLACEURBBUTTONS 48
 
 /**
 * \def CROSSS
