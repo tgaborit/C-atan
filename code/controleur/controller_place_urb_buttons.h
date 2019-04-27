@@ -107,7 +107,9 @@ typedef enum {
 
 void drawButtonsPlaceUrb(SDL_Renderer* renderer);
 
+PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button);
+PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
 void initButtonsPlaceUrb();
-void initButtonsHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
+void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
 
 #endif //CATANE_CONTROLLER_PLACE_URB_BUTTONS_H
