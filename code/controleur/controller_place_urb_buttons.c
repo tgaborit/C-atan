@@ -19,7 +19,20 @@ static SDL_Rect crossXX3_area;          /*!< Rectangle correspondant à la zone 
 static SDL_Rect crossXX4_area;          /*!< Rectangle correspondant à la zone du croisement 5 de la première couronne*/
 static SDL_Rect crossXX5_area;          /*!< Rectangle correspondant à la zone du croisement 6 de la première couronne*/
 
-//SDL_Rect crown1_buttons[6]  = {cross001_area, cross002_area, cross003_area, cross004_area, cross005_area, cross006_area};
+static SDL_Rect crossX0X_area;          /*!< Rectangle correspondant à la zone du croisement 1 de la deuxième couronne*/
+static SDL_Rect crossX1X_area;          /*!< Rectangle correspondant à la zone du croisement 2 de la deuxième couronne*/
+static SDL_Rect crossX2X_area;          /*!< Rectangle correspondant à la zone du croisement 3 de la deuxième couronne*/
+static SDL_Rect crossX3X_area;          /*!< Rectangle correspondant à la zone du croisement 4 de la deuxième couronne*/
+static SDL_Rect crossX4X_area;          /*!< Rectangle correspondant à la zone du croisement 5 de la deuxième couronne*/
+static SDL_Rect crossX5X_area;          /*!< Rectangle correspondant à la zone du croisement 6 de la deuxième couronne*/
+
+static SDL_Rect cross0XX_area;          /*!< Rectangle correspondant à la zone du croisement 1 de la troisième couronne*/
+static SDL_Rect cross1XX_area;          /*!< Rectangle correspondant à la zone du croisement 2 de la troisième couronne*/
+static SDL_Rect cross2XX_area;          /*!< Rectangle correspondant à la zone du croisement 3 de la troisième couronne*/
+static SDL_Rect cross3XX_area;          /*!< Rectangle correspondant à la zone du croisement 4 de la troisième couronne*/
+static SDL_Rect cross4XX_area;          /*!< Rectangle correspondant à la zone du croisement 5 de la troisième couronne*/
+static SDL_Rect cross5XX_area;          /*!< Rectangle correspondant à la zone du croisement 6 de la troisième couronne*/
+
 
 void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 {
@@ -34,7 +47,9 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-    SDL_Rect place_urb_buttons[NPLACEURBBUTTON] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area};
+    SDL_Rect place_urb_buttons[NPLACEURBBUTTON] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area,
+                                                   crossX0X_area, crossX1X_area, crossX2X_area, crossX3X_area, crossX4X_area, crossX5X_area,
+                                                   cross0XX_area, cross1XX_area, cross2XX_area, cross3XX_area, cross4XX_area, cross5XX_area};
     if(SDL_RenderDrawRects(renderer, place_urb_buttons, NPLACEURBBUTTON) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -44,17 +59,25 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 
 void initButtonsPlaceUrb()
 {
-    int i = 0;
+    int i, j;
 
-    SDL_Rect* place_urb_buttons[6] = {&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area};
+    SDL_Rect* place_urb_buttons[3][6] = {{&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area},
+                                         {&crossX0X_area, &crossX1X_area, &crossX2X_area, &crossX3X_area, &crossX4X_area, &crossX5X_area},
+                                         {&cross0XX_area, &cross1XX_area, &cross2XX_area, &cross3XX_area, &cross4XX_area, &cross5XX_area}};
 
-    for(i = 0; i < 6; ++i)
+
+    for(i = 0; i < 3; ++i)
     {
-        place_urb_buttons[i]->h = CROSSS;
-        place_urb_buttons[i]->w = CROSSS;
+        for(j = 0; j < 6; ++j)
+        {
+            place_urb_buttons[i][j]->h = CROSSS;
+            place_urb_buttons[i][j]->w = CROSSS;
+        }
     }
 
-    initButtonsHex(place_urb_buttons, 960, 431, HEXAGONS);
+    initButtonsHex(place_urb_buttons[0], BOARDCENTERX, BOARDCENTERY, HEXAGONS);
+    initButtonsHex(place_urb_buttons[1], BOARDCENTERX, BOARDCENTERY, 2*HEXAGONS);
+    initButtonsHex(place_urb_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);
 
 }
 
