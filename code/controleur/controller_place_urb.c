@@ -1,9 +1,10 @@
 /**
-*
-*
+* \file controller_place_urb.c
+* \brief Fonctions du contrôleur du placement d'une colonie ou d'une ville
 * \author Titouan Gaborit
 * \date 1 avril 2019
 *
+* Programme gérant les actions du joueur lors du placement d'une colonie ou d'une ville : le choix du croisement sur lequel elle sera construite.
 *
 */
 

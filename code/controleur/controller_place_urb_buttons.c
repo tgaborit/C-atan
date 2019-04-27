@@ -1,9 +1,10 @@
 /**
-*
-*
+* \file controller_place_urb_buttons.c
+* \brief Fonctions de gestion des boutons de l'environnement "Placement d'une colonie ou d'une ville"
 * \author Titouan Gaborit
 * \date 26 avril 2019
 *
+* Fonctions gérant l'initialisation des boutons cliquables par le joueur lors du placement d'une colonie/ville et la détection d'un clic dessus.
 *
 */
 #include <math.h>

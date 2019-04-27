@@ -1,10 +1,10 @@
 /**
-*
-*
+* \file controller_place_urb_buttons.h
+* \brief En-tête des boutons de l'environnement "Placement d'une colonie ou d'une ville"
 * \author Titouan Gaborit
 * \date 26 avril 2019
 *
-*
+* En-tête déclarant les fonctions de gestion des boutons du placement d'une colonie/ville ainsi que la définition des macros relatives.
 */
 
 #ifndef CATANE_CONTROLLER_PLACE_URB_BUTTONS_H
