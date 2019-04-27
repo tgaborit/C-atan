@@ -1,6 +1,23 @@
 # include "partie.h"
 # include "plateau.h"
 
+static void cherche_infrastructure(Noeud* n){
+    Infrastructure infra;
+    Joueur* j;
+    int i;
+
+    for(i=0;i<6;++i){
+        infra = n->t->s[i].i;
+        j = n->t->s[i].owner;
+        if(infra == COLONIE){
+            gain_ressource(n->t->type,j);
+        }
+        if(infra == VILLE){
+            gain_ressource(n->t->type,j);
+            gain_ressource(n->t->type,j);
+        }
+    }
+}
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
@@ -246,4 +263,38 @@ int lancer_des()
         res+= rand()%(7-1) + 1 ;
     }
    return res;
+}
+
+void gagne_ressource(int lance_des, Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On cherche les noeuds ou la proba est celle du lancé de dés
+            if(p->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            }
+            if(p->adjacence[i]->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            }
+            if(p->adjacence[i]->adjacence[ord[i]]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+            }
+        }
+    }
+}
+
+void distribution_ressource(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On parcourt tous les noeuds du plateau
+            cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+        }
+    }
 }
