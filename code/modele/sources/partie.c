@@ -88,6 +88,7 @@ static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
 */
 int find_joueur(Partie* partie, Joueur* joueur)
 {
+    setOnFirst_list_joueur(partie->joueurs);
     int c=0;
     char* current_pseudo= partie->joueurs->current->joueur->pseudo;
     while(strcmp(current_pseudo,joueur->pseudo)!=0)

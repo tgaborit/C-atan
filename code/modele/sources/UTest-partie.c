@@ -59,7 +59,6 @@ static void test_donner_main(void **state)
     Partie* partie= *state;
     Joueur* joueur= partie->joueurs->last->joueur;
    donner_main(partie, joueur);
-   find_joueur(partie, joueur);
    assert_int_equal(0, partie->joueurs->current->joueur->status);
    assert_int_equal(1, partie->joueurs->first->joueur->status);
 }
@@ -81,8 +80,15 @@ static void test_passer_tour(void** state)
 static void test_get_joueur_score_max(void** state)
 {
     Partie* partie= *state;
+
     assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_score_max(partie));
 
+    partie->joueurs->first->joueur->score=0;
+    partie->joueurs->first->next->joueur->score=0;
+    partie->joueurs->first->next->next->joueur->score=0;
+    partie->joueurs->last->joueur->score=0;
+
+    assert_ptr_equal(partie->joueurs->current->joueur,get_joueur_score_max(partie));
 }
 
 static void test_get_score_max(void** state)
@@ -155,6 +161,12 @@ static void test_distribution_ressource(void** state){
 
 }
 
+static void test_get_joueur_actif(void** state){
+    Partie* partie = *state;
+    int valtest = strcmp(partie->joueurs->current->joueur->pseudo,get_joueur_actif(partie)->pseudo);
+    assert_int_equal(0,valtest);
+}
+
 static int teardown (void ** state)
 {
     Partie* partie= *state;
@@ -173,7 +185,8 @@ int main_partie_test(void)
         cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_lancer_des,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_gagne_ressource,setup_partie,teardown),
-        cmocka_unit_test_setup_teardown(test_distribution_ressource,setup_partie,teardown)
+        cmocka_unit_test_setup_teardown(test_distribution_ressource,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown)
                 };
     return cmocka_run_group_tests(tests_partie,NULL,NULL);
 }
