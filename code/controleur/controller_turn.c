@@ -66,7 +66,7 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
 
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
-                    printf("Appel de la fonction craftDevEvent(renderer, the_game)\n");
+                    printf("Appel de la fonction craftDevEvent(the_game)\n");
                     craftDevEvent(/*the_game*/);
                     break;
 
@@ -90,13 +90,13 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
 
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
-                    printf("Appel de la fonction endTurnEvent(renderer, the_game)\n");
+                    printf("Appel de la fonction endTurnEvent(the_game)\n");
                     endTurnEvent(/*the_game*/);
                     break;
 
                 case DICE_BUTTON :
                     printf("Clic sur bouton Lancer les des\n");
-                    printf("Appel de la fonction rollDiceEvent(renderer, the_game)\n");
+                    printf("Appel de la fonction rollDiceEvent(the_game)\n");
                     rollDiceEvent(/*the_game*/);
                     break;
 

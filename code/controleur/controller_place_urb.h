@@ -17,5 +17,6 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* pplacing_la
 
 void quitPlacing(SDL_bool * pplacing_launched);
 void quit(SDL_bool * pprogram_launched);
+void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, double y, int position, UrbPlacing urb_placing);
 
 #endif //CATANE_CONTROLLER_PLACE_URB_H
