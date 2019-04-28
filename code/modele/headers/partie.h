@@ -146,7 +146,7 @@ int get_score_max(Partie* partie);
  * \fn int lancer_des()
  * \brief Simule un lancé de dès
  *
- *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilité d'un vrai lancé de dès
+ *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilités d'un vrai lancé de dès
  * \param aucun
  * \return int: valeur obtenu
  */
@@ -155,23 +155,25 @@ int lancer_des();
 
 /**
  * \fn void distribution_ressource(List_Noeud)
- * \brief distribu les ressources en début de partie
+ * \brief distribue les ressources en début de partie
  *
  *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
  * \param Partie: etat de la partie
  * \return aucun
  */
-void distribution_ressource(Partie);
+void distribution_ressource(Partie* partie);
 
 
 /**
- * \fn gagne_ressource(int lance_des, Partie partie);
- * \brief ajoute les ressource gagner en début de partie à la main du joueur
+ * \fn void gagne_ressource(int lance_des, Partie partie);
+ * \brief distribue les ressources correspondant aux cases du numéro de dés
  *
- *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
+ *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
  * \param Partie: etat de la partie
  * \return aucun
  */
-void gagne_ressource(int lance_des, Partie partie);
+void gagne_ressource(int lance_des, Partie* partie);
+
+int main_partie_test(void);
 
 #endif //MODELE_REMI_CATANE_PARTIE_H

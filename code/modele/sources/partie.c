@@ -1,6 +1,23 @@
 # include "partie.h"
 # include "plateau.h"
 
+static void cherche_infrastructure(Noeud* n){
+    Infrastructure infra;
+    Joueur* j;
+    int i;
+
+    for(i=0;i<6;++i){
+        infra = n->t->s[i].i;
+        j = n->t->s[i].owner;
+        if(infra == COLONIE){
+            gain_ressource(n->t->type,j);
+        }
+        if(infra == VILLE){
+            gain_ressource(n->t->type,j);
+            gain_ressource(n->t->type,j);
+        }
+    }
+}
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
@@ -71,6 +88,7 @@ static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
 */
 int find_joueur(Partie* partie, Joueur* joueur)
 {
+    setOnFirst_list_joueur(partie->joueurs);
     int c=0;
     char* current_pseudo= partie->joueurs->current->joueur->pseudo;
     while(strcmp(current_pseudo,joueur->pseudo)!=0)
@@ -246,4 +264,58 @@ int lancer_des()
         res+= rand()%(7-1) + 1 ;
     }
    return res;
+}
+
+
+/**
+ * \fn void gagne_ressource(int lance_des, Partie partie);
+ * \brief distribue les ressources correspondant aux cases du numéro de dés
+ *
+ *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
+
+void gagne_ressource(int lance_des, Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On cherche les noeuds ou la proba est celle du lancé de dés
+            if(p->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            }
+            if(p->adjacence[i]->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            }
+            if(p->adjacence[i]->adjacence[ord[i]]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+            }
+        }
+    }
+}
+
+
+/**
+ * \fn void distribution_ressource(List_Noeud)
+ * \brief distribue les ressources en début de partie
+ *
+ *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
+
+void distribution_ressource(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On parcourt tous les noeuds du plateau
+            cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+        }
+    }
 }
