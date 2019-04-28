@@ -188,6 +188,4 @@ void distribution_ressource(Partie* partie);
  */
 void gagne_ressource(int lance_des, Partie* partie);
 
-int main_partie_test(void);
-
 #endif //MODELE_REMI_CATANE_PARTIE_H
