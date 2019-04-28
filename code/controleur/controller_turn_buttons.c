@@ -55,7 +55,7 @@ void drawButtonsTurn(SDL_Renderer* renderer)
 
 /**
 * \fn TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton le jouer a cliqué
+* \brief Fonction de test sur quel bouton le jouer a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -80,7 +80,7 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
 
 /**
 * \fn TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton de carte ressource le joueur a cliqué
+* \brief Fonction de test sur quel bouton de carte ressource le joueur a cliqué.
 *
 * Teste pour chaque bouton de carte ressource si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -104,7 +104,7 @@ TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button){
 
 /**
 * \fn ControlerButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton de craft le joueur a cliqué
+* \brief Fonction de test sur quel bouton de craft le joueur a cliqué.
 *
 * Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -130,7 +130,6 @@ TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
 *
 * Initialise les champs des rectangles des zones correspondant aux cartes ressources, au bouton Lancer les dés et au bouton Fin de tour.
 * Fait appel aux fonctions d'initialisation correspondantes.
-*
 */
 void initButtonsTurn()
 {
@@ -143,11 +142,10 @@ void initButtonsTurn()
 
 /**
 * \fn void initCardsAreas()
-* \brief Fonction d'initialisation des cartes ressources
+* \brief Fonction d'initialisation des cartes ressources.
 *
 * Initialise les champs des rectangles des zones correspondant aux cartes ressources.
 * Fait appel aux fonctions d'initialisation pour la carte Bois, la carte Blé, la carte Argile, la carte Moutons et la carte Roche.
-*
 */
 void initCardsAreas()
 {
@@ -160,12 +158,11 @@ void initCardsAreas()
 
 /**
 * \fn void initCraftAreas()
-* \brief Fonction d'initialisation des boutons de craft
+* \brief Fonction d'initialisation des boutons de craft.
 *
 * Initialise les champs des rectangles des zones correspondant aux boutons de craft.
 * Fait appel aux fonctions d'initialisation pour le bouton Craft d'une Carte développement, le bouton Craft d'une Route,
 * le bouton de Craft d'une Colonie et le bouton de Craft d'une Ville.
-*
 */
 void initCraftAreas(){
     initDevCraftArea();
@@ -176,11 +173,10 @@ void initCraftAreas(){
 
 /**
 * \fn void initWoodCard()
-* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte bois
+* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte bois.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des cartes ressources.
 * Assigne les valeurs de position selon le placement de la carte Bois sur l'écran du joueur.
-*
 */
 void initWoodCard()
 {
@@ -193,11 +189,10 @@ void initWoodCard()
 
 /**
 * \fn void initWheatCard()
-* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte blé
+* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte blé.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des cartes ressources.
 * Assigne les valeurs de position selon le placement de la carte Blé sur l'écran du joueur.
-*
 */
 void initWheatCard()
 {
@@ -210,11 +205,10 @@ void initWheatCard()
 
 /**
 * \fn void initClayCard()
-* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte argile
+* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte argile.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des cartes ressources.
 * Assigne les valeurs de position selon le placement de la carte Argile sur l'écran du joueur.
-*
 */
 void initClayCard()
 {
@@ -227,11 +221,10 @@ void initClayCard()
 
 /**
 * \fn void initSheepsCard()
-* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte moutons
+* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte moutons.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des cartes ressources.
 * Assigne les valeurs de position selon le placement de la carte Moutons sur l'écran du joueur.
-*
 */
 void initSheepsCard()
 {
@@ -244,11 +237,10 @@ void initSheepsCard()
 
 /**
 * \fn void initRockCard()
-* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte roche
+* \brief Fonction d'initialisation des champs du rectangle de la zone de la carte roche.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des cartes ressources.
 * Assigne les valeurs de position selon le placement de la carte Roche sur l'écran du joueur.
-*
 */
 void initRockCard()
 {
@@ -261,11 +253,10 @@ void initRockCard()
 
 /**
 * \fn void initDevCraftArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Carte développement
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Carte développement.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
 * Assigne les valeurs de position selon le placement du bouton Craft d'une Carte développement sur l'écran du joueur.
-*
 */
 void initDevCraftArea()
 {
@@ -278,11 +269,10 @@ void initDevCraftArea()
 
 /**
 * \fn void initRoadCraftArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Route
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Route.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
 * Assigne les valeurs de position selon le placement du bouton Craft d'une Route sur l'écran du joueur.
-*
 */
 void initRoadCraftArea()
 {
@@ -295,11 +285,10 @@ void initRoadCraftArea()
 
 /**
 * \fn void initSettleCraftArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Colonie
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Colonie.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
 * Assigne les valeurs de position selon le placement du bouton Craft d'une Colonie sur l'écran du joueur.
-*
 */
 void initSettleCraftArea()
 {
@@ -312,11 +301,10 @@ void initSettleCraftArea()
 
 /**
 * \fn void initCityCraftArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Ville
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Ville.
 *
 * Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
 * Assigne les valeurs de position selon le placement du bouton Craft d'une Ville sur l'écran du joueur.
-*
 */
 void initCityCraftArea()
 {
@@ -329,11 +317,10 @@ void initCityCraftArea()
 
 /**
 * \fn void initDiesArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés.
 *
 * Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
 * Assigne les valeurs de position selon le placement souhaité.
-*
 */
 void initDiceArea()
 {
@@ -346,11 +333,10 @@ void initDiceArea()
 
 /**
 * \fn void initEndTurnArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour.
 *
 * Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
 * Assigne les valeurs de position selon le placement souhaité.
-*
 */
 void initEndTurnArea()
 {
@@ -363,11 +349,10 @@ void initEndTurnArea()
 
 /**
 * \fn void initHelpArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Aide
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Aide.
 *
 * Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
 * Assigne les valeurs de position selon le placement souhaité.
-*
 */
 void initHelpArea()
 {

@@ -32,12 +32,11 @@ SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)
 
 /**
 * \fn void quit(SDL_bool * program_launched)
-* \brief Fonction activant la fin du jeu
+* \brief Fonction activant la fin du jeu.
 *
-* Donne la valeur SDL_False à l'état du programme, ce qui le fera sortir de la boucle de controlerTurn et quitter du programme
+* Donne la valeur SDL_False à l'état du programme, ce qui le fera sortir de la boucle de controlerTurn et quitter du programme.
 *
-* \param[in,out] pprogram_launched Pointeur vers l'état du programme
-*
+* \param[in,out] pprogram_launched Pointeur vers l'état du programme.
 */
 void quitProgram(SDL_bool * pprogram_launched)
 {

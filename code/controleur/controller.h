@@ -5,6 +5,7 @@
 * \date 27 mars 2019
 *
 * En-tête déclarant les fonctions générales du contrôleur ainsi que la définition des macros générales.
+*
 */
 
 #ifndef CATANE_CONTROLLER_H
@@ -12,19 +13,19 @@
 
 /**
 * \def WINDOWW
-* Définit la largeur de la fenêtre
+* Définit la largeur de la fenêtre.
 */
 #define WINDOWW 1920
 
 /**
 * \def WINDOWH
-* Définit la hauteur de la fenêtre
+* Définit la hauteur de la fenêtre.
 */
 #define WINDOWH 950
 
 /**
 * \def HEXAGONS
-* Définit le côté des hexagones
+* Définit le côté des hexagones.
 */
 #define HEXAGONS 78
 

@@ -5,6 +5,7 @@
 * \date 26 avril 2019
 *
 * En-tête déclarant les fonctions de gestion des boutons du placement d'une colonie/ville ainsi que la définition des macros relatives.
+*
 */
 
 #ifndef CATANE_CONTROLLER_PLACE_URB_BUTTONS_H
@@ -83,33 +84,34 @@ typedef enum {
 
 /**
 * \def NPLACEURBBUTTON
-* Définit le nombre de boutons de l'environnement "Placement d'une colonie ou d'une ville"
+* Définit le nombre de boutons de l'environnement "Placement d'une colonie ou d'une ville".
 */
 #define NPLACEURBBUTTONS 54
 
 /**
 * \def CROSSS
-* Définit le côté d'un bouton de croisement
+* Définit le côté d'un bouton de croisement.
 */
 #define CROSSS 40
 
 /**
 * \def BOARDCENTERX
-* Définit l'abscisse du centre du plateau
+* Définit l'abscisse du centre du plateau.
 */
 #define BOARDCENTERX 960
 
 /**
 * \def BOARDCENTERY
-* Définit l'ordonnée du centre du plateau
+* Définit l'ordonnée du centre du plateau.
 */
 #define BOARDCENTERY 431
 
 void drawButtonsPlaceUrb(SDL_Renderer* renderer);
 
 PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button);
-PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
+    PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
+
 void initButtonsPlaceUrb();
-void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
+    void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
 
 #endif //CATANE_CONTROLLER_PLACE_URB_BUTTONS_H

@@ -5,6 +5,7 @@
 * \date 29 mars 2019
 *
 * En-tête déclarant les fonctions de gestion des boutons du tour du joueur ainsi que la définition des macros relatives.
+*
 */
 
 #ifndef CATANE_CONTROLLER_TURN_BUTTONS_H
@@ -36,31 +37,31 @@ typedef enum {
 
 /**
 * \def NTURNBUTTONS
-* Définit le nombre de boutons de l'environnement "Tour du joueur"
+* Définit le nombre de boutons de l'environnement "Tour du joueur".
 */
 #define NTURNBUTTONS 12
 
 /**
 * \def CARDW
-* Définit la largeur d'une carte ressource
+* Définit la largeur d'une carte ressource.
 */
 #define CARDW 115
 
 /**
 * \def CARDH
-* Définit la hauteur d'une carte ressource
+* Définit la hauteur d'une carte ressource.
 */
 #define CARDH 166
 
 /**
 * \def CRAFTW
-* Définit la largeur d'un bouton de craft
+* Définit la largeur d'un bouton de craft.
 */
 #define CRAFTW 200
 
 /**
 * \def CRAFTH
-* Définit la hauteur d'un bouton de craft
+* Définit la hauteur d'un bouton de craft.
 */
 #define CRAFTH 75
 

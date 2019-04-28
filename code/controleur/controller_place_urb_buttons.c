@@ -107,7 +107,7 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 
 /**
 * \fn PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton le jouer a cliqué
+* \brief Fonction de test sur quel bouton le jouer a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -153,12 +153,11 @@ PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
 
 /**
 * \fn void initButtonsPlaceUrb()
-* \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une colonie ou d'une ville"
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une colonie ou d'une ville".
 *
 * Initialise les champs des rectangles des zones correspondant aux croisements du plateau.
 * Répartit la totalité des croisement selon la formation de 9 hexagones dans un tableau bidimensionnel,
 * puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
-*
 */
 void initButtonsPlaceUrb()
 {
@@ -197,7 +196,7 @@ void initButtonsPlaceUrb()
 
 /**
 * \fn void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
-* \brief Fonction d'initialisation des positions de 6 rectangles selon la formation d'un hexagone
+* \brief Fonction d'initialisation des positions de 6 rectangles selon la formation d'un hexagone.
 *
 * Initialise les positions des 6 rectangles d'un tableau en formant un hexagone centré selon l'abscisse et l'ordonnée passées en paramètre,
 * et de côté passé en paramètre.

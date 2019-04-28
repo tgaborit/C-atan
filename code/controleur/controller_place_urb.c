@@ -14,9 +14,22 @@
 #include "controller_place_urb.h"
 #include "controller_place_urb_buttons.h"
 
+/**
+* \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
+* \brief Fonction principale du contrôleur du placement d'une colonie/ville.
+*
+* Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
+* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+*
+* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] placement_launched Etat du placement : si devient SDL_False, on sort de la fonction.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+*/
 void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/, UrbPlacing urb_placing)
 {
     SDL_bool placing_launched = SDL_TRUE;
+    SDL_Event ev;
     initButtonsPlaceUrb();
     while(program_launched && placing_launched)
     {
@@ -55,26 +68,39 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
             }
         }
     }
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
 }
 
 /**
 * \fn void quitPLacing(SDL_bool * pplacing_launched)
-* \brief Fonction annulant le placement d'un urb
+* \brief Fonction annulant le placement d'un urb.
 *
 * Donne la valeur SDL_False à l'état du placement, ce qui le fera sortir de la boucle de controlerPlaceUrb
 * et revenir à l'environnement Tour du joueur.
 *
-* \param[in,out] pplacing_launched Pointeur vers l'état du placement
-*
+* \param[in,out] pplacing_launched Pointeur vers l'état du placement.
 */
 void quitPlacing(SDL_bool * pplacing_launched)
 {
     *pplacing_launched = SDL_FALSE;
 }
 
-void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* pplacing_launched/*, Game* the_game,*/, UrbPlacing urb_placing)
+/**
+* \fn void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* pplacing_launched, Game* the_game, UrbPlacing urb_placing)
+* \brief Sous-fonction de controllerPlaceUrb qui traite le clic effectué.
+*
+* Détermine le bouton sur lequel le joueur a cliqué puis appelle l'évènement de placement d'une colonie/ville sur le croisement correspondant,
+* si le clic a été effectué sur un croisement.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \param[in,out] pplaccement Pointeur vers l'état du placement.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+*/
+void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplacing_launched/*, Game* the_game,*/, UrbPlacing urb_placing)
 {
-    PlaceUrbButton button_clicked  = whichButtonPlaceUrb(button);
+    PlaceUrbButton button_clicked  = whichButtonPlaceUrb(mouse_button);
     printf("Clic sur bouton n°%d\n", button_clicked);
     switch(button_clicked)
     {
@@ -299,6 +325,21 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* pplacing_la
     }
 }
 
+/**
+* \fn void placeUrbEvent(SDL_bool* pplacing_launched, Game* the_game, double x, double y, int position, UrbPlacing urb_placing)
+* \brief Evénement de placement d'une colonie ou d'une ville.
+*
+* Fait appel à la fonction du modèle setColonie ou setVille en fonction du type de craft passé en paramètre
+* pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* L'emplacement est un croisement dont les coordonnées sont passées en paramètre.
+* Si le placement réussit, quitte l'environnement "Placement d'une colonie ou d'une ville".
+*
+* \param[in,out] pprogram_launched Ponteur vers l'état du pplacement.
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in] x Abscisse de l'hexagone où placer la colonie/ville.
+* \param[in] y Ordonnée de l'hexagone où placer la colonie/ville.
+* \param[in] position Position du croisement dans l'hexagone où placer la colonie/ville.
+*/
 void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, double y, int position, UrbPlacing urb_placing)
 {
     printf("Appel de la fonction placeUrbEvent(pplacing_launched, the_game, %f, %f, %d, urb_placing)\n", x, y, position);

@@ -5,6 +5,7 @@
 * \date 27 mars 2019
 *
 * En-tête déclarant les fonctions du contrôleur du tour du joueur.
+*
 */
 
 #ifndef CATANE_CONTROLLER_TURN_H
