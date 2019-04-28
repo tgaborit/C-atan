@@ -265,6 +265,16 @@ int lancer_des()
    return res;
 }
 
+
+/**
+ * \fn void gagne_ressource(int lance_des, Partie partie);
+ * \brief distribue les ressources correspondant aux cases du numéro de dés
+ *
+ *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
+
 void gagne_ressource(int lance_des, Partie* partie){
     if(partie != NULL && partie->plateau != NULL){
         Plateau* p = partie->plateau;
@@ -284,6 +294,16 @@ void gagne_ressource(int lance_des, Partie* partie){
         }
     }
 }
+
+
+/**
+ * \fn void distribution_ressource(List_Noeud)
+ * \brief distribue les ressources en début de partie
+ *
+ *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
 
 void distribution_ressource(Partie* partie){
     if(partie != NULL && partie->plateau != NULL){
