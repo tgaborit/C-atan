@@ -1,5 +1,18 @@
-# include "partie.h"
-# include "plateau.h"
+#include "partie.h"
+
+static void setOnNext_list_joueur(List_joueur* list)
+{
+    if(list->current != NULL){
+    list->current=list->current->next;
+    }
+}
+
+static void setOnFirst_list_joueur(List_joueur* list)
+{
+    if(list->current != NULL){
+        list->current=list->first;
+    }
+}
 
 static void cherche_infrastructure(Noeud* n){
     Infrastructure infra;
@@ -27,6 +40,10 @@ static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
     return new;
 }
 
+static void free_node_joueur(Node_joueur* n){
+    free(n);
+}
+
 static List_joueur* init_list_joueur ()
 {
     List_joueur* list= (List_joueur*) malloc(3*sizeof(Node_joueur));
@@ -38,22 +55,26 @@ static List_joueur* init_list_joueur ()
     return list;
 }
 
+static void free_list_joueur(Partie* partie){
+    int i;
+    setOnFirst_list_joueur(partie->joueurs);
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){
+        Node_joueur* n = partie->joueurs->current;
+        setOnNext_list_joueur(partie->joueurs);
+        free_node_joueur(n);
+    }
+    free_node_joueur(partie->joueurs->current);
+    free(partie->joueurs);
+}
+
 static int isempty_list_joueur (List_joueur* list)
 {
     if(list->first==NULL)
         return 1;
 
     return 0;
-}
-
-static void setOnNext_list_joueur(List_joueur* list)
-{
-    list->current=list->current->next;
-}
-
-static void setOnFirst_list_joueur(List_joueur* list)
-{
-    list->current=list->first;
 }
 
 static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
@@ -141,6 +162,12 @@ int get_nbjoueurs(Partie* partie)
     partie->joueurs= init_list_joueur();
     partie->plateau= initPlateau();
     return partie;
+ }
+
+ void free_partie(Partie* partie){
+    freePlateau(partie->plateau);
+    free_list_joueur(partie);
+    free(partie);
  }
 
   /**

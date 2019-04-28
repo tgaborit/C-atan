@@ -53,7 +53,7 @@ struct Node_joueur* next;
  }Partie;
 
   /**
-* \fn void init_partie (Partie partie)
+* \fn void init_partie ()
 * \brief initialise la strucure partie qui contient toute les information relatives à la partie
 *
 * alloue la mémoire necessaire à la structure partie,
@@ -63,6 +63,19 @@ struct Node_joueur* next;
 */
 Partie* init_partie();
 
+
+  /**
+* \fn void free_partie (Partie* partie)
+* \brief initialise la strucure partie qui contient toute les informations relatives à la partie
+*
+* supprime la mémoire allouée à la structure partie,
+*initialise le pateau aléatoirement et initialise le tableau de joueur à null
+* \param parte un pointeur vers la partie
+* \return aucun
+*/
+
+void free_partie(Partie* partie);
+
   /**
 * \fn int find_joueur(Partie* partie, Joueur* joueur)
 * \brief place le current de la liste sur le joueur passé en paramètre
@@ -70,6 +83,7 @@ Partie* init_partie();
 * \param Partie*:partie, Joueur*:joueur
 * \return int: -1 si le joueur n'est pas dans la partie, 0 tout s'est bien passé
 */
+
 int find_joueur(Partie* partie, Joueur* joueur);
 
  /**
