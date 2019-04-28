@@ -6,6 +6,7 @@
 #include <string.h>
 #include "partie.h"
 #include "get_plateau.h"
+#include "UTest-partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {

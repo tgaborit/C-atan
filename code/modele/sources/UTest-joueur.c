@@ -3,6 +3,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include "joueur.h"
+#include "UTest-joueur.h"
 
 static int setup_joueur (void ** state)
 {
