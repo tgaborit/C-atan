@@ -27,13 +27,13 @@ static void test_initPlateau_retourNonNul(void** state){
 
 static void test_deplacementPlateau_coordBonnes(void** state){
     Plateau* p = (Plateau*) (*state);
-    assert_int_equal((int) p,(int)deplacementPlateau(p,0,0));
-    assert_int_equal((int)p->adjacence[4]->adjacence[4],(int)deplacementPlateau(p,1,2));
-    assert_int_equal((int)p->adjacence[1],(int)deplacementPlateau(p,-0.5,-1));
-    assert_int_equal((int)p->adjacence[2]->adjacence[4],(int)deplacementPlateau(p,0,2));
-    assert_int_equal((int)p->adjacence[3]->adjacence[1],(int)deplacementPlateau(p,0,-2));
-    assert_int_equal((int)p->adjacence[0]->adjacence[0],(int)deplacementPlateau(p,-2,0));
-    assert_int_equal((int)p->adjacence[5]->adjacence[5],(int)deplacementPlateau(p,2,0));
+    assert_int_equal((long int) p,(long int)deplacementPlateau(p,0,0));
+    assert_int_equal((long int)p->adjacence[4]->adjacence[4],(long int)deplacementPlateau(p,1,2));
+    assert_int_equal((long int)p->adjacence[1],(long int)deplacementPlateau(p,-0.5,-1));
+    assert_int_equal((long int)p->adjacence[2]->adjacence[4],(long int)deplacementPlateau(p,0,2));
+    assert_int_equal((long int)p->adjacence[3]->adjacence[1],(long int)deplacementPlateau(p,0,-2));
+    assert_int_equal((long int)p->adjacence[0]->adjacence[0],(long int)deplacementPlateau(p,-2,0));
+    assert_int_equal((long int)p->adjacence[5]->adjacence[5],(long int)deplacementPlateau(p,2,0));
 
 }
 
