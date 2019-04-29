@@ -188,4 +188,16 @@ void distribution_ressource(Partie* partie);
  */
 void gagne_ressource(int lance_des, Partie* partie);
 
+
+/**
+ * \fn void nb_routes_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de routes
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+
+void nb_routes_max(Partie* partie);
+
 #endif //MODELE_REMI_CATANE_PARTIE_H

@@ -32,6 +32,54 @@ static void cherche_infrastructure(Noeud* n){
     }
 }
 
+static void cherche_route(Noeud* n){
+    int i;
+    for(i=0;i<6;++i){
+        if(n->t->a[i].i == ROUTE){
+            ++n->t->a[i].owner->nbRoute;
+        }
+    }
+}
+
+static Joueur* joueur_nbRoute_max(Partie* partie){
+    int i, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
+        if(j_max->nbRoute < partie->joueurs->current->joueur->nbRoute){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbRoute == partie->joueurs->current->joueur->nbRoute){           // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
+            partie->joueurs->current = tmp;
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
+static void reset_nbRoute(Partie* partie){
+    if(partie != NULL){
+        int i;
+        Node_joueur* tmp = partie->joueurs->current;
+        partie->joueurs->current = partie->joueurs->first;
+
+        for(i=0;i<get_nbjoueurs(partie);++i){                               // Parcourt la liste de joueurs et remet un a un les entiers nbRoute de chacun d'entre eux.
+            partie->joueurs->current->joueur->nbRoute = 0;
+            partie->joueurs->current = partie->joueurs->current->next;
+        }
+        partie->joueurs->current = tmp;
+    }
+}
+
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
     Node_joueur* new= (Node_joueur*) malloc(sizeof(Node_joueur));
@@ -343,6 +391,40 @@ void distribution_ressource(Partie* partie){
             cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
             cherche_infrastructure(p->adjacence[i]->adjacence[i]);
             cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+        }
+    }
+}
+
+
+/**
+ * \fn void nb_routes_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de routes
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+
+void nb_routes_max(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+        int i;
+
+        reset_nbRoute(partie);                                              // Remise à zero du nombre de routes par joueur pour un nouveau calcul
+        Joueur* j = joueur_nbRoute_max(partie);                             // Reherche de l'ancien possesseur du plus frand nombre de routes et perte de son point
+        if(j != NULL){
+            dec_score(j,1);
+        }
+
+        for(i=0;i<6;++i){                                                   // On parcourt tous les noeuds du plateau
+            cherche_route(p->adjacence[i]);                                 // On appelle cherche_route qui cherche des routes et incrémente la variable nbRoute des joueurs
+            cherche_route(p->adjacence[i]->adjacence[i]);
+            cherche_route(p->adjacence[i]->adjacence[ord[i]]);
+        }
+        j = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité)
+        if(j != NULL){
+            inc_score(j,1);
         }
     }
 }
