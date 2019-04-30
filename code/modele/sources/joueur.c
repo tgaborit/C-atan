@@ -17,7 +17,7 @@
  *
  *
  * \param Char* pseudo choisie par le joueur Joueur: joueurdont on initialise le pseudo
- * \return: aucun
+ * \return aucun
  */
 void set_pseudo(Joueur* joueur, char* pseudo)
 {
@@ -30,7 +30,7 @@ void set_pseudo(Joueur* joueur, char* pseudo)
  *
  *
  * \param Couleur: couleur choisie par le joueur Joueur: joueur dont on initialise la couleur
- * \return: aucun
+ * \return aucun
  */
 void set_couleur(Joueur* joueur, Couleur couleur)
 {
@@ -43,7 +43,7 @@ void set_couleur(Joueur* joueur, Couleur couleur)
  *
  *
  * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
- * \return: aucun
+ * \return aucun
  */
 void init_main_ressource(Joueur* joueur)
 {
@@ -65,7 +65,7 @@ void init_main_ressource(Joueur* joueur)
  *
  *
  * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
- * \return: aucun
+ * \return aucun
  */
 void init_main_cartedev(Joueur* joueur)
 {
@@ -87,7 +87,7 @@ void init_main_cartedev(Joueur* joueur)
  *
  * fonction qui alloue la mémoire necessaire à la création d'un joueur, lui donne son pseudo et sa couleur et initialise son score à 0 ainsi que le nombre de ses cartes en main
  * \param Couleur: la couleur choisi par le joueur char* le pseudo choisi par le joueur.
- * \return: aucun
+ * \return aucun
  */
 Joueur* init_joueur(Couleur couleur,char* pseudo)
 {
@@ -95,6 +95,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     set_pseudo(new_joueur,pseudo);
     set_couleur(new_joueur,couleur);
     new_joueur->score=0;
+    new_joueur->nbRoute = 0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -152,6 +153,19 @@ void inc_score(Joueur* joueur, int points)
 {
     joueur->score+=points;
 }
+
+/**
+ * \fn void dec_score(Joueur* joueur, int points)
+ * \brief Fonction qui décrémente le score d'un joueur
+ *
+ * fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+ * \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+ * \return aucun
+ */
+void dec_score(Joueur* joueur, int points){
+    joueur->score-=points;
+}
+
 
 /**
  * \fn void set_status(Joueur joueur);
@@ -221,7 +235,7 @@ int  get_nbressource(TypeRessource type, Joueur* joueur)
  * \fn int get_nbressource_total(Joueur* joueur)
  * \brief retourne le nombre totale de carte ressource dans la main du jouuer tout type confondu
  * \param Joueur* joueur
- * \return: int: le nombre de carte ressource
+ * \return int: le nombre de carte ressource
  */
 
 int get_nbressource_total(Joueur* joueur)
@@ -280,7 +294,7 @@ int  get_cartedev(TypeCarteDev type, Joueur* joueur)
  * \brief teste si le joueur à sufisament de ressource pour construire une route
  *consome les ressource si c'est le cas.
  * \param Joueur* joueur
- * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ * \return int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
 int achat_route(Joueur* joueur)
 {
@@ -288,6 +302,7 @@ int achat_route(Joueur* joueur)
         {
             perte_ressource(ARGILE,joueur);
             perte_ressource(BOIS, joueur);
+            ++joueur->nbRoute;
             return 0;
         }
     return -1;
@@ -299,7 +314,7 @@ int achat_route(Joueur* joueur)
  * \brief teste si le joueur à sufisament de ressource pour construire une colonie
  *consome les ressource si c'est le cas.
  * \param Joueur* joueur
- * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ * \return int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
 int achat_colonie(Joueur* joueur)
 {
@@ -309,6 +324,7 @@ int achat_colonie(Joueur* joueur)
             perte_ressource(BOIS, joueur);
             perte_ressource(MOUTON, joueur);
             perte_ressource(BLE, joueur);
+            inc_score(joueur,1);
             return 0;
         }
     return -1;
@@ -319,7 +335,7 @@ int achat_colonie(Joueur* joueur)
  * \brief teste si le joueur à sufisament de ressource pour construire une ville
  *consome les ressource si c'est le cas.
  * \param Joueur* joueur
- * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ * \return int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
 int achat_ville(Joueur* joueur)
 {
@@ -330,6 +346,7 @@ int achat_ville(Joueur* joueur)
             perte_ressource(PIERRE,joueur);
             perte_ressource(BLE, joueur);
             perte_ressource(BLE, joueur);
+            inc_score(joueur,1);
             return 0;
         }
     return -1;
@@ -339,7 +356,7 @@ int achat_ville(Joueur* joueur)
  * \brief teste si le joueur à sufisament de ressource pour acheter une cartedev
  *consome les ressource si c'est le cas.
  * \param Joueur* joueur
- * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
+ * \return int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
 int achat_cartedev(Joueur* joueur)
 {
@@ -352,3 +369,4 @@ int achat_cartedev(Joueur* joueur)
         }
     return -1;
 }
+

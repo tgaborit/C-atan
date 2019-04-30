@@ -32,6 +32,31 @@ static void cherche_infrastructure(Noeud* n){
     }
 }
 
+static Joueur* joueur_nbRoute_max(Partie* partie){
+    int i, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
+        if(j_max->nbRoute < partie->joueurs->current->joueur->nbRoute){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbRoute == partie->joueurs->current->joueur->nbRoute){           // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
+            partie->joueurs->current = tmp;
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
     Node_joueur* new= (Node_joueur*) malloc(sizeof(Node_joueur));
@@ -344,5 +369,30 @@ void distribution_ressource(Partie* partie){
             cherche_infrastructure(p->adjacence[i]->adjacence[i]);
             cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
         }
+    }
+}
+
+
+/**
+ * \fn void nb_routes_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de routes
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+
+void nb_routes_max(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        static Joueur* j_old = NULL;
+
+        Joueur* j_new = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité).
+        if(j_old != NULL){
+            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
+        }
+        if(j_new != NULL){
+            inc_score(j_new,1);
+        }
+        j_old = j_new;
     }
 }

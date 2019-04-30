@@ -11,13 +11,7 @@
  */
 
 static int constructionVoisineSommet(Partie* partie, double x, double y, int position){
-    if(partie == NULL){
-        return -1;
-    }
     Plateau*p = partie->plateau;
-    if(deplacementPlateau(p,x,y) == NULL || position < 0 || position > 5){
-        return -1;
-    }
     int low = position-1;
     int high = position+1;
     if(low < 0){
@@ -56,14 +50,8 @@ static int constructionVoisineSommet(Partie* partie, double x, double y, int pos
  */
 
 static int routeVoisineSommet(Partie* partie,double x, double y, int position){
-    if(partie == NULL){
-        return -1;
-    }
     Plateau* p = partie->plateau;
     Noeud* Cur = deplacementPlateau(p,x,y);
-    if(Cur == NULL || partie->joueurs->current == NULL || position < 0 || position > 5){
-        return -1;
-    }
     Joueur* owner = partie->joueurs->current->joueur;
 
     int pattern[6] = {0,2,4,5,3,1};             // pattern de mouvements suivant le sommet actuel
@@ -121,9 +109,6 @@ static int routeVoisineSommet(Partie* partie,double x, double y, int position){
  */
 
 static int constructionVoisineArrete(Partie* partie, double x, double y, int position){
-    if(partie == NULL){
-        return -1;
-    }
     Plateau* p = partie->plateau;
     Noeud* Cur = deplacementPlateau(p,x,y);
     if(Cur == NULL || partie->joueurs->current == NULL || position < 0 || position > 5){
@@ -156,9 +141,6 @@ static int constructionVoisineArrete(Partie* partie, double x, double y, int pos
  */
 
 static int routeVoisineArrete(Partie* partie, double x, double y, int position){
-    if(partie == NULL){
-        return -1;
-    }
     Plateau* p = partie->plateau;
     Noeud* Cur = deplacementPlateau(p,x,y);
     if(Cur == NULL || partie->joueurs->current == NULL || position < 0 || position > 5){
@@ -364,13 +346,32 @@ int setVille(Partie* partie, double x, double y, int position){
         return -1;
     }
 
+    int pattern[6] = {0,2,4,5,3,1};
+    int low = position-2;
+    int high = position+2;
+    int position2 = position+1;
+    if(position2 > 5){
+        position2 = 0;
+    }
+    if(low < 0){
+        low = low+6;
+    }
+    if(high > 5){
+        high = high-6;
+    }
     //verification que le joueur possede une colonie à la position indiquée.
     if(getInfrastructureSommet(partie,x,y,position) == COLONIE && strcmp(getJoueurSommet(partie,x,y,position)->pseudo,owner->pseudo) == 0){
         // verification que le joueur possede les ressources
         if(achat_ville(owner) == -1){
             return -1;
         }
-        Cur->t->s[position].i = VILLE;
+        Cur->t->s[position].i = COLONIE;
+        if(Cur->adjacence[pattern[position]] != NULL){
+            Cur->adjacence[pattern[position]]->t->s[high].i = COLONIE;
+        }
+        if(Cur->adjacence[pattern[position2]] != NULL){
+            Cur->adjacence[pattern[position2]]->t->s[low].i = COLONIE;
+        }
         return 0;
     }
 

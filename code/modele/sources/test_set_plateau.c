@@ -190,6 +190,14 @@ static void test_setVille_CoordBonnes(void** state){
     gain_ressource(BLE,j);
     gain_ressource(BLE,j);
     assert_int_equal(setVille(p,0,0,0),0);
+    gain_ressource(PIERRE,j);
+    gain_ressource(PIERRE,j);
+    gain_ressource(PIERRE,j);
+    gain_ressource(BLE,j);
+    gain_ressource(BLE,j);
+    p->plateau->adjacence[3]->adjacence[3]->t->s[5].i = COLONIE;
+    p->plateau->adjacence[3]->adjacence[3]->t->s[5].owner = p->joueurs->current->joueur;
+    assert_int_equal(setVille(p,1,-2,5),0);
 }
 
 
