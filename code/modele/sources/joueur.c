@@ -95,6 +95,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     set_pseudo(new_joueur,pseudo);
     set_couleur(new_joueur,couleur);
     new_joueur->score=0;
+    new_joueur->nbRoute = 0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -301,6 +302,7 @@ int achat_route(Joueur* joueur)
         {
             perte_ressource(ARGILE,joueur);
             perte_ressource(BOIS, joueur);
+            ++joueur->nbRoute;
             return 0;
         }
     return -1;

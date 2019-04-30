@@ -32,15 +32,6 @@ static void cherche_infrastructure(Noeud* n){
     }
 }
 
-static void cherche_route(Noeud* n){
-    int i;
-    for(i=0;i<6;++i){
-        if(n->t->a[i].i == ROUTE){
-            ++n->t->a[i].owner->nbRoute;
-        }
-    }
-}
-
 static Joueur* joueur_nbRoute_max(Partie* partie){
     int i, boolean_equal = 0;
     Node_joueur* tmp = partie->joueurs->current;
@@ -64,20 +55,6 @@ static Joueur* joueur_nbRoute_max(Partie* partie){
         return j_max;
     }
     return NULL;
-}
-
-static void reset_nbRoute(Partie* partie){
-    if(partie != NULL){
-        int i;
-        Node_joueur* tmp = partie->joueurs->current;
-        partie->joueurs->current = partie->joueurs->first;
-
-        for(i=0;i<get_nbjoueurs(partie);++i){                               // Parcourt la liste de joueurs et remet un a un les entiers nbRoute de chacun d'entre eux.
-            partie->joueurs->current->joueur->nbRoute = 0;
-            partie->joueurs->current = partie->joueurs->current->next;
-        }
-        partie->joueurs->current = tmp;
-    }
 }
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
@@ -407,24 +384,15 @@ void distribution_ressource(Partie* partie){
 
 void nb_routes_max(Partie* partie){
     if(partie != NULL && partie->plateau != NULL){
-        Plateau* p = partie->plateau;
-        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
-        int i;
+        static Joueur* j_old = NULL;
 
-        reset_nbRoute(partie);                                              // Remise à zero du nombre de routes par joueur pour un nouveau calcul
-        Joueur* j = joueur_nbRoute_max(partie);                             // Reherche de l'ancien possesseur du plus frand nombre de routes et perte de son point
-        if(j != NULL){
-            dec_score(j,1);
+        Joueur* j_new = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité).
+        if(j_old != NULL){
+            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
         }
-
-        for(i=0;i<6;++i){                                                   // On parcourt tous les noeuds du plateau
-            cherche_route(p->adjacence[i]);                                 // On appelle cherche_route qui cherche des routes et incrémente la variable nbRoute des joueurs
-            cherche_route(p->adjacence[i]->adjacence[i]);
-            cherche_route(p->adjacence[i]->adjacence[ord[i]]);
+        if(j_new != NULL){
+            inc_score(j_new,1);
         }
-        j = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité)
-        if(j != NULL){
-            inc_score(j,1);
-        }
+        j_old = j_new;
     }
 }
