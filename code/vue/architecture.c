@@ -1,9 +1,24 @@
-#include "SDL2/SDL.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "Plateau.h"
+/**
+ * \file architecture.c
+ * \brief Implémente les fonctions de architecture.h
+ * \author Pauline.M
+ * \version 1.0
+ * \date 1 mai 2019
+ *
+ * Implémente les fonctions utiles à l'affichage des constructions dans le jeu.
+ */
+
+#include "architecture.h"
 
 
+/**
+ * \fn AfficheBouttonDev(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des cartes développement
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheBouttonDev(SDL_Renderer *renderer)
 {
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -21,7 +36,14 @@ void AfficheBouttonDev(SDL_Renderer *renderer)
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn AfficheBouttonRoute(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des routes
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheBouttonRoute(SDL_Renderer *renderer)
 {
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -39,7 +61,14 @@ void AfficheBouttonRoute(SDL_Renderer *renderer)
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn AfficheBouttonColonie(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des colonies
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheBouttonColonie(SDL_Renderer *renderer)
 {
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -57,7 +86,14 @@ void AfficheBouttonColonie(SDL_Renderer *renderer)
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn AfficheBouttonVille(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des villes
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheBouttonVille(SDL_Renderer *renderer)
 {
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)

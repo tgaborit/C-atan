@@ -1,19 +1,25 @@
-#include <SDL2/SDL.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "Plateau.h"
+/**
+ * \file carte.c
+ * \brief Implémente les fonctions de carte.h
+ * \author Pauline.M
+ * \version 1.0
+ * \date 1 mai 2019
+ *
+ * Implémente les fonctions utiles à l'affichage des cartes dans le jeu.
+ */
+
+#include "carte.h"
 
 
 
-void SDL_ExitWithError(const char *message)
-{
-	SDL_Log("ERREUR : Initialisation SDL > %s\n", SDL_GetError());
-	SDL_Quit();
-        exit(EXIT_FAILURE);
-}
-
-
-//Carte Argile
+/**
+ * \fn AfficheCarteArgile(SDL_Renderer *renderer)
+ * \brief Fonction affichant les cartes argile
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheCarteArgile(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
@@ -46,7 +52,14 @@ void AfficheCarteArgile(SDL_Renderer* renderer)
 	SDL_RenderPresent(renderer);
 }
 
-//Carte Blé
+/**
+ * \fn AfficheCarteBle(SDL_Renderer *renderer)
+ * \brief Fonction affichant les cartes blé
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheCarteBle(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
@@ -79,7 +92,14 @@ void AfficheCarteBle(SDL_Renderer* renderer)
 	SDL_RenderPresent(renderer);
 }
 
-//Carte Bois
+/**
+ * \fn AfficheCarteBois(SDL_Renderer *renderer)
+ * \brief Fonction affichant les cartes bois
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheCarteBois(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
@@ -112,7 +132,14 @@ void AfficheCarteBois(SDL_Renderer* renderer)
 	SDL_RenderPresent(renderer);
 }
 
-//Carte Mouton
+/**
+ * \fn AfficheCarteMouton(SDL_Renderer *renderer)
+ * \brief Fonction affichant les cartes mouton
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheCarteMouton(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
@@ -146,8 +173,14 @@ void AfficheCarteMouton(SDL_Renderer* renderer)
 }
 
 
-
-//Carte Roche
+/**
+ * \fn AfficheCarteRoche(SDL_Renderer *renderer)
+ * \brief Fonction affichant les cartes roche
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheCarteRoche(SDL_Renderer* renderer)
 {
 	SDL_Surface *image = NULL;
