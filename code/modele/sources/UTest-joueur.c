@@ -266,6 +266,7 @@ static void test_perte_cartedev(void **state)
     perte_cartedev(DECOUVERTE,joueur_1);
     nb=get_cartedev(DECOUVERTE,joueur_1);
     assert_int_equal(3,nb);
+
 }
 
 static void test_get_nb_total_ressource(void** state)
