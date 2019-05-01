@@ -95,6 +95,8 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     set_pseudo(new_joueur,pseudo);
     set_couleur(new_joueur,couleur);
     new_joueur->score=0;
+    new_joueur->ressource= (Ressource*) malloc(5*sizeof(Ressource));
+    new_joueur->carte_dev=(CarteDev*) malloc(5*sizeof(CarteDev));
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -201,10 +203,8 @@ void gain_ressource(TypeRessource type, Joueur* joueur)
  */
 void perte_ressource(TypeRessource type, Joueur* joueur)
 {
-    if (joueur->ressource[type].nb_ressource==0)
-        return EXIT_FAILURE;
-
-    joueur->ressource[type].nb_ressource-=1;
+    if (joueur->ressource[type].nb_ressource!=0)
+        joueur->ressource[type].nb_ressource-=1;
 }
 
 /**
@@ -261,10 +261,9 @@ void gain_cartedev(TypeCarteDev type, Joueur* joueur)
  */
 void perte_cartedev(TypeCarteDev type, Joueur* joueur)
 {
-    if (joueur->carte_dev[type].nb_carte==0)
-        return EXIT_FAILURE;
+    if (joueur->carte_dev[type].nb_carte!=0)
+        joueur->carte_dev[type].nb_carte-=1;
 
-    joueur->carte_dev[type].nb_carte-=1;
 }
 
 /**
@@ -361,7 +360,7 @@ int achat_cartedev(Joueur* joueur)
 
 int voleur_perte_ressource(Joueur* joueur){
 
-    int i,j,k,l,nb;
+    int i,j,nb;
 
     int proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
     int proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
