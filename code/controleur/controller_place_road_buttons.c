@@ -83,6 +83,19 @@ static SDL_Rect pathST3_area;          /*!< Rectangle correspondant à la zone d
 static SDL_Rect pathST4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone debout*/
 static SDL_Rect pathST5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone debout*/
 
+static SDL_Rect pathO00_area;          /*!< Rectangle correspondant à la zone du chemin 00 des autres zones*/
+static SDL_Rect pathO01_area;          /*!< Rectangle correspondant à la zone du chemin 01 des autres zones*/
+static SDL_Rect pathO10_area;          /*!< Rectangle correspondant à la zone du chemin 10 des autres zones*/
+static SDL_Rect pathO11_area;          /*!< Rectangle correspondant à la zone du chemin 11 des autres zones*/
+static SDL_Rect pathO20_area;          /*!< Rectangle correspondant à la zone du chemin 20 des autres zones*/
+static SDL_Rect pathO21_area;          /*!< Rectangle correspondant à la zone du chemin 21 des autres zones*/
+static SDL_Rect pathO30_area;          /*!< Rectangle correspondant à la zone du chemin 30 des autres zones*/
+static SDL_Rect pathO31_area;          /*!< Rectangle correspondant à la zone du chemin 31 des autres zones*/
+static SDL_Rect pathO40_area;          /*!< Rectangle correspondant à la zone du chemin 40 des autres zones*/
+static SDL_Rect pathO41_area;          /*!< Rectangle correspondant à la zone du chemin 41 des autres zones*/
+static SDL_Rect pathO50_area;          /*!< Rectangle correspondant à la zone du chemin 50 des autres zones*/
+static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone du chemin 51 des autres zones*/
+
 void drawButtonsPlaceRoad(SDL_Renderer* renderer)
 {
     //Nettoyage du rendu
@@ -105,7 +118,9 @@ void drawButtonsPlaceRoad(SDL_Renderer* renderer)
                                                       pathSS0_area, pathSS1_area, pathSS2_area, pathSS3_area, pathSS4_area, pathSS5_area,
                                                       pathSW0_area, pathSW1_area, pathSW2_area, pathSW3_area, pathSW4_area, pathSW5_area,
                                                       pathNW0_area, pathNW1_area, pathNW2_area, pathNW3_area, pathNW4_area, pathNW5_area,
-                                                      pathST0_area, pathST1_area, pathST2_area, pathST3_area, pathST4_area, pathST5_area};
+                                                      pathST0_area, pathST1_area, pathST2_area, pathST3_area, pathST4_area, pathST5_area,
+                                                      pathO00_area, pathO01_area, pathO10_area, pathO11_area, pathO20_area, pathO21_area,
+                                                      pathO30_area, pathO31_area, pathO40_area, pathO41_area, pathO50_area, pathO51_area};
     if(SDL_RenderDrawRects(renderer, place_road_buttons, NPLACEROADBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -126,18 +141,20 @@ void initButtonsPlaceRoad()
     int i, j;
     float hexagonl_s;
     // Répartition des chemins selon la formation de 9 hexagones couchés
-    SDL_Rect* place_road_buttons[10][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
-                                          {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
-                                          {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
-                                          {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
-                                          {&pathNE0_area, &pathNE1_area, &pathNE2_area, &pathNE3_area, &pathNE4_area, &pathNE5_area},
-                                          {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
-                                          {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
-                                          {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
-                                          {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area},
-                                          {&pathST0_area, &pathST1_area, &pathST2_area, &pathST3_area, &pathST4_area, &pathST5_area}};
+    SDL_Rect* place_road_buttons[12][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
+                                           {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
+                                           {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
+                                           {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
+                                           {&pathNE0_area, &pathNE1_area, &pathNE2_area, &pathNE3_area, &pathNE4_area, &pathNE5_area},
+                                           {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
+                                           {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
+                                           {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
+                                           {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area},
+                                           {&pathST0_area, &pathST1_area, &pathST2_area, &pathST3_area, &pathST4_area, &pathST5_area},
+                                           {&pathO00_area, &pathO01_area, &pathO10_area, &pathO11_area, &pathO20_area, &pathO21_area},
+                                           {&pathO30_area, &pathO31_area, &pathO40_area, &pathO41_area, &pathO50_area, &pathO51_area}};
     // Initialisation des côtés des zones des boutons des chemins
-    for(i = 0; i < 10; ++i)
+    for(i = 0; i < 12; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
@@ -159,4 +176,28 @@ void initButtonsPlaceRoad()
     initPosRectHexLying(place_road_buttons[7], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Ouest
     initPosRectHexLying(place_road_buttons[8], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Nord - Ouest
     initPosRectHex(place_road_buttons[9], BOARDCENTERX, BOARDCENTERY, round(HEXAGONS + HEXAGONS/2)); // Boutons de l'hexagone debout
+    initPosRectOthers(place_road_buttons[10], place_road_buttons[11]);
+}
+
+void initPosRectOthers(SDL_Rect** other_rect1, SDL_Rect** other_rect2){
+
+    float hexagonl_s, hexagonl_h;
+
+    hexagonl_s = (sqrt(3)/2)*HEXAGONS;
+    hexagonl_h = (sqrt(3)/2)*hexagonl_s;
+
+    other_rect1[0]->y = other_rect1[1]->y = round(BOARDCENTERY - 3*HEXAGONS - hexagonl_h - other_rect1[0]->h/2);
+    other_rect1[3]->x = other_rect1[4]->x = round(BOARDCENTERX + 4*hexagonl_s + hexagonl_s/2 - other_rect1[2]->w/2);
+    other_rect2[0]->y = other_rect2[1]->y = round(BOARDCENTERY + 3*HEXAGONS + hexagonl_h - other_rect1[4]->h/2);
+    other_rect2[3]->x = other_rect2[4]->x = round(BOARDCENTERX - 4*hexagonl_s - hexagonl_s/2 - other_rect2[3]->w/2);
+
+    other_rect1[0]->x = other_rect2[1]->x = round(BOARDCENTERX - hexagonl_s - hexagonl_s/2 - other_rect1[0]->w/2);
+    other_rect1[1]->x = other_rect2[0]->x = round(BOARDCENTERX + hexagonl_s + hexagonl_s/2 - other_rect1[1]->w/2);
+    other_rect1[3]->y = other_rect2[4]->y = round(BOARDCENTERY - hexagonl_h - other_rect1[3]->h/2);
+    other_rect1[4]->y = other_rect2[3]->y = round(BOARDCENTERY + hexagonl_h - other_rect1[3]->h/2);
+
+    other_rect1[2]->x = other_rect1[5]->x = round(BOARDCENTERX + 3*hexagonl_s - other_rect1[2]->w/2);
+    other_rect1[2]->y = other_rect2[5]->y = round(BOARDCENTERY - 3*HEXAGONS - other_rect1[2]->h/2);
+    other_rect1[5]->y = other_rect2[2]->y = round(BOARDCENTERY + 3*HEXAGONS - other_rect1[5]->h/2);
+    other_rect2[2]->x = other_rect2[5]->x = round(BOARDCENTERX - 3*hexagonl_s - other_rect2[2]->w/2);
 }

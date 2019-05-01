@@ -93,7 +93,7 @@ typedef enum {
 * \def NPLACEROADBUTTON
 * Définit le nombre de boutons de l'environnement "Placement d'une route".
 */
-#define NPLACEROADBUTTONS 60
+#define NPLACEROADBUTTONS 72
 
 /**
 * \def PATHS
@@ -104,5 +104,6 @@ typedef enum {
 void drawButtonsPlaceRoad(SDL_Renderer* renderer);
 
 void initButtonsPlaceRoad();
+    void initPosRectOthers(SDL_Rect** other_rect1, SDL_Rect** other_rect2);
 
 #endif //CATANE_CONTROLLER_PLACE_ROAD_BUTTONS_H

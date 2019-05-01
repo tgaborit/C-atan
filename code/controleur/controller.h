@@ -45,8 +45,8 @@ SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
 void quit(SDL_bool * paction_launched);
 
-void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
-void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
+void initPosRectHex(SDL_Rect** hex_rect, int center_x, int center_y, int hexagon_s);
+void initPosRectHexLying(SDL_Rect** hex_rect, int center_x, int center_y, int hexagon_s);
 
 void SDL_ExitWithError(const char *message);
 
