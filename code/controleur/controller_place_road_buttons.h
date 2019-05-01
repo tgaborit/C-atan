@@ -37,19 +37,19 @@ typedef enum {
         PATH4XX_BUTTON,
         PATH5XX_BUTTON,
 
+        PATHNN0_BUTTON,
+        PATHNN1_BUTTON,
+        PATHNN2_BUTTON,
+        PATHNN3_BUTTON,
+        PATHNN4_BUTTON,
+        PATHNN5_BUTTON,
+
         PATHNE0_BUTTON,
         PATHNE1_BUTTON,
         PATHNE2_BUTTON,
         PATHNE3_BUTTON,
         PATHNE4_BUTTON,
         PATHNE5_BUTTON,
-
-        PATHEE0_BUTTON,
-        PATHEE1_BUTTON,
-        PATHEE2_BUTTON,
-        PATHEE3_BUTTON,
-        PATHEE4_BUTTON,
-        PATHEE5_BUTTON,
 
         PATHSE0_BUTTON,
         PATHSE1_BUTTON,
@@ -86,7 +86,7 @@ typedef enum {
 * \def NPLACEROADBUTTON
 * Définit le nombre de boutons de l'environnement "Placement d'une route".
 */
-#define NPLACEROADBUTTONS 18
+#define NPLACEROADBUTTONS 24
 
 /**
 * \def PATHS
