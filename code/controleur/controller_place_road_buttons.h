@@ -86,7 +86,7 @@ typedef enum {
 * \def NPLACEROADBUTTON
 * Définit le nombre de boutons de l'environnement "Placement d'une route".
 */
-#define NPLACEROADBUTTONS 6
+#define NPLACEROADBUTTONS 18
 
 /**
 * \def PATHS
