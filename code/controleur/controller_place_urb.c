@@ -48,8 +48,8 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
                 {
                 case SDLK_BACKSPACE :
                     printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quitPlacing(&placing_launched)\n");
-                    quitPlacing(&placing_launched);
+                    printf("Appel de la fonction quit(&placing_launched)\n");
+                    quit(&placing_launched);
                     break;
 
                 default :
@@ -59,8 +59,8 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quitProgram(&program_launched)\n");
-                quitProgram(&program_launched);
+                printf("Appel de la fonction quit(&program_launched)\n");
+                quit(&program_launched);
                 break;
 
             default :
@@ -70,20 +70,6 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
     }
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
-}
-
-/**
-* \fn void quitPLacing(SDL_bool * pplacing_launched)
-* \brief Fonction annulant le placement d'un urb.
-*
-* Donne la valeur SDL_False à l'état du placement, ce qui le fera sortir de la boucle de controlerPlaceUrb
-* et revenir à l'environnement Tour du joueur.
-*
-* \param[in,out] pplacing_launched Pointeur vers l'état du placement.
-*/
-void quitPlacing(SDL_bool * pplacing_launched)
-{
-    *pplacing_launched = SDL_FALSE;
 }
 
 /**
@@ -353,7 +339,7 @@ void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, d
             printf("Hypothese : setColonie(the_game, %f, %f, %d) == 1\n", x, y, position);
 
             printf("Appel de la fonction quitPlacing(pplacing_launched)\n");
-            quitPlacing(pplacing_launched);
+            quit(pplacing_launched);
         /*
         }
         */
@@ -368,7 +354,7 @@ void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, d
             printf("Hypothese : setVille(the_game, %f, %f, %d) == 1\n", x, y, position);
 
             printf("Appel de la fonction quitPlacing(pplacing_launched)\n");
-            quitPlacing(pplacing_launched);
+            quit(pplacing_launched);
         /*
         }
         */

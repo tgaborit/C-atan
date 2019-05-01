@@ -114,8 +114,8 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
                 {
                 case SDLK_q :
                     printf("Appui sur touche Q\n");
-                    printf("Appel de la fonction quitProgram(&program_launched)\n");
-                    quitProgram(&program_launched);
+                    printf("Appel de la fonction quit(&program_launched)\n");
+                    quit(&program_launched);
                     break;
 
                 default :
@@ -125,8 +125,8 @@ void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* t
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quitProgram(&program_launched)\n");
-                quitProgram(&program_launched);
+                printf("Appel de la fonction quit(&program_launched)\n");
+                quit(&program_launched);
                 break;
 
             default :

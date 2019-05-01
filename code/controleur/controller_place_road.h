@@ -13,6 +13,4 @@
 
 void controllerPlaceRoad(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
-void quitPlacing(SDL_bool * pplacing_launched);
-
 #endif //CATANE_CONTROLLER_PLACE_ROAD_H

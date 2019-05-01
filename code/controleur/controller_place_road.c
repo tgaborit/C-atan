@@ -47,8 +47,8 @@ void controllerPlaceRoad(SDL_bool program_launched, SDL_Renderer* renderer/*, Ga
                 {
                 case SDLK_BACKSPACE :
                     printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quitPlacing(&placing_launched)\n");
-                    quitPlacing(&placing_launched);
+                    printf("Appel de la fonction quit(&placing_launched)\n");
+                    quit(&placing_launched);
                     break;
 
                 default :
@@ -58,8 +58,8 @@ void controllerPlaceRoad(SDL_bool program_launched, SDL_Renderer* renderer/*, Ga
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quitProgram(&program_launched)\n");
-                quitProgram(&program_launched);
+                printf("Appel de la fonction quit(&program_launched)\n");
+                quit(&program_launched);
                 break;
 
             default :
