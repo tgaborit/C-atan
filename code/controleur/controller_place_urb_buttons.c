@@ -156,7 +156,7 @@ PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une colonie ou d'une ville".
 *
 * Initialise les champs des rectangles des zones correspondant aux croisements du plateau.
-* Répartit la totalité des croisement selon la formation de 9 hexagones dans un tableau bidimensionnel,
+* Répartit la totalité des croisements selon la formation de 9 hexagones dans un tableau bidimensionnel,
 * puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
 */
 void initButtonsPlaceUrb()
@@ -172,7 +172,7 @@ void initButtonsPlaceUrb()
                                          {&crossSW0_area, &crossSW1_area, &crossSW2_area, &crossSW3_area, &crossSW4_area, &crossSW5_area},
                                          {&crossWW0_area, &crossWW1_area, &crossWW2_area, &crossWW3_area, &crossWW4_area, &crossWW5_area},
                                          {&crossNW0_area, &crossNW1_area, &crossNW2_area, &crossNW3_area, &crossNW4_area, &crossNW5_area}};
-    // Initialisation des côtés des zones des boutons des sommets
+    // Initialisation des côtés des zones des boutons des croisements
     for(i = 0; i < 9; ++i)
     {
         for(j = 0; j < 6; ++j)
