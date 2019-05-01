@@ -185,12 +185,12 @@ void initButtonsPlaceUrb()
     initPosRectHex(place_urb_buttons[0], BOARDCENTERX, BOARDCENTERY, HEXAGONS);                                 // Boutons de la première couronne
     initPosRectHex(place_urb_buttons[1], BOARDCENTERX, BOARDCENTERY, 2*HEXAGONS);                               // Boutons de la deuxième couronne
     initPosRectHex(place_urb_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);                               // Boutons de la troisième couronne
-    initPosRectHex(place_urb_buttons[3], BOARDCENTERX + sqrt(3)*HEXAGONS, BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Est
-    initPosRectHex(place_urb_buttons[4], BOARDCENTERX + 2*sqrt(3)*HEXAGONS, BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Est
-    initPosRectHex(place_urb_buttons[5], BOARDCENTERX + sqrt(3)*HEXAGONS, BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Est
-    initPosRectHex(place_urb_buttons[6], BOARDCENTERX - sqrt(3)*HEXAGONS, BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Ouest
-    initPosRectHex(place_urb_buttons[7], BOARDCENTERX - 2*sqrt(3)*HEXAGONS, BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Ouest
-    initPosRectHex(place_urb_buttons[8], BOARDCENTERX - sqrt(3)*HEXAGONS, BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Ouest
+    initPosRectHex(place_urb_buttons[3], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Est
+    initPosRectHex(place_urb_buttons[4], round(BOARDCENTERX + 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Est
+    initPosRectHex(place_urb_buttons[5], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Est
+    initPosRectHex(place_urb_buttons[6], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Ouest
+    initPosRectHex(place_urb_buttons[7], round(BOARDCENTERX - 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Ouest
+    initPosRectHex(place_urb_buttons[8], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Ouest
 
 }
 
