@@ -79,6 +79,13 @@ typedef enum {
         PATHNW4_BUTTON,
         PATHNW5_BUTTON,
 
+        PATHST0_BUTTON,
+        PATHST1_BUTTON,
+        PATHST2_BUTTON,
+        PATHST3_BUTTON,
+        PATHST4_BUTTON,
+        PATHST5_BUTTON,
+
         NO_BUTTON
 } PlaceRoadButton;
 
@@ -86,7 +93,7 @@ typedef enum {
 * \def NPLACEROADBUTTON
 * Définit le nombre de boutons de l'environnement "Placement d'une route".
 */
-#define NPLACEROADBUTTONS 54
+#define NPLACEROADBUTTONS 60
 
 /**
 * \def PATHS
@@ -94,21 +101,8 @@ typedef enum {
 */
 #define PATHS 40
 
-/**
-* \def BOARDCENTERX
-* Définit l'abscisse du centre du plateau.
-*/
-#define BOARDCENTERX 960
-
-/**
-* \def BOARDCENTERY
-* Définit l'ordonnée du centre du plateau.
-*/
-#define BOARDCENTERY 431
-
 void drawButtonsPlaceRoad(SDL_Renderer* renderer);
 
 void initButtonsPlaceRoad();
-    void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
 
 #endif //CATANE_CONTROLLER_PLACE_ROAD_BUTTONS_H

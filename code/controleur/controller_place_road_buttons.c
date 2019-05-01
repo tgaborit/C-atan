@@ -76,6 +76,13 @@ static SDL_Rect pathNW3_area;          /*!< Rectangle correspondant à la zone d
 static SDL_Rect pathNW4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone Nord - Ouest*/
 static SDL_Rect pathNW5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone Nord - Ouest*/
 
+static SDL_Rect pathST0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de l'hexagone debout*/
+static SDL_Rect pathST1_area;          /*!< Rectangle correspondant à la zone du chemin 1 de l'hexagone debout*/
+static SDL_Rect pathST2_area;          /*!< Rectangle correspondant à la zone du chemin 2 de l'hexagone debout*/
+static SDL_Rect pathST3_area;          /*!< Rectangle correspondant à la zone du chemin 3 de l'hexagone debout*/
+static SDL_Rect pathST4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone debout*/
+static SDL_Rect pathST5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone debout*/
+
 void drawButtonsPlaceRoad(SDL_Renderer* renderer)
 {
     //Nettoyage du rendu
@@ -97,7 +104,8 @@ void drawButtonsPlaceRoad(SDL_Renderer* renderer)
                                                       pathSE0_area, pathSE1_area, pathSE2_area, pathSE3_area, pathSE4_area, pathSE5_area,
                                                       pathSS0_area, pathSS1_area, pathSS2_area, pathSS3_area, pathSS4_area, pathSS5_area,
                                                       pathSW0_area, pathSW1_area, pathSW2_area, pathSW3_area, pathSW4_area, pathSW5_area,
-                                                      pathNW0_area, pathNW1_area, pathNW2_area, pathNW3_area, pathNW4_area, pathNW5_area};
+                                                      pathNW0_area, pathNW1_area, pathNW2_area, pathNW3_area, pathNW4_area, pathNW5_area,
+                                                      pathST0_area, pathST1_area, pathST2_area, pathST3_area, pathST4_area, pathST5_area};
     if(SDL_RenderDrawRects(renderer, place_road_buttons, NPLACEROADBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -118,7 +126,7 @@ void initButtonsPlaceRoad()
     int i, j;
     float hexagonl_s;
     // Répartition des chemins selon la formation de 9 hexagones couchés
-    SDL_Rect* place_road_buttons[9][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
+    SDL_Rect* place_road_buttons[10][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
                                           {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
                                           {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
                                           {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
@@ -126,9 +134,10 @@ void initButtonsPlaceRoad()
                                           {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
                                           {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
                                           {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
-                                          {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area}};
+                                          {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area},
+                                          {&pathST0_area, &pathST1_area, &pathST2_area, &pathST3_area, &pathST4_area, &pathST5_area}};
     // Initialisation des côtés des zones des boutons des chemins
-    for(i = 0; i < 9; ++i)
+    for(i = 0; i < 10; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
@@ -149,38 +158,5 @@ void initButtonsPlaceRoad()
     initPosRectHexLying(place_road_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, round(hexagonl_s)); // Boutons de l'hexagone Sud
     initPosRectHexLying(place_road_buttons[7], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Ouest
     initPosRectHexLying(place_road_buttons[8], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Nord - Ouest
-}
-
-/**
-* \fn void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
-* \brief Fonction d'initialisation des positions de 6 rectangles selon la formation d'un hexagone couché.
-*
-* Initialise les positions des 6 rectangles d'un tableau en formant un hexagone couché centré selon l'abscisse et l'ordonnée passées en paramètre,
-* et de côté passé en paramètre.
-* \param[in] hex_buttons Tableau de pointeurs sur les rectangles à initialiser.
-* \param[in] center_x Abscisse du centre de l'hexagone formé par les 6 rectangles.
-* \param[in] center_y Ordonnée du centre de l'hexagone formé par les 6 rectangles.
-* \param[in] hexagon_s Côté de l'hexagone formé par les 6 rectangles.
-*/
-void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
-{
-    int hexagon_h = (sqrt(3)/2)*hexagon_s;
-
-    hex_buttons[0]->x = center_x + hexagon_s/2 - hex_buttons[0]->w/2;
-    hex_buttons[0]->y = center_y - hexagon_h - hex_buttons[0]->h/2;
-
-    hex_buttons[1]->x = center_x + hexagon_s - hex_buttons[0]->w/2;
-    hex_buttons[1]->y = center_y - hex_buttons[0]->h/2;
-
-    hex_buttons[2]->x = center_x + hexagon_s/2 - hex_buttons[0]->w/2;
-    hex_buttons[2]->y = center_y + hexagon_h - hex_buttons[0]->h/2;
-
-    hex_buttons[3]->x = center_x - hexagon_s/2 - hex_buttons[0]->w/2;
-    hex_buttons[3]->y = center_y + hexagon_h - hex_buttons[0]->h/2;
-
-    hex_buttons[4]->x = center_x - hexagon_s - hex_buttons[0]->w/2;
-    hex_buttons[4]->y = center_y - hex_buttons[0]->h/2;
-
-    hex_buttons[5]->x = center_x - hexagon_s/2 - hex_buttons[0]->w/2;
-    hex_buttons[5]->y = center_y - hexagon_h - hex_buttons[0]->h/2;
+    initPosRectHex(place_road_buttons[9], BOARDCENTERX, BOARDCENTERY, round(HEXAGONS + HEXAGONS/2)); // Boutons de l'hexagone debout
 }

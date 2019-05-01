@@ -24,6 +24,18 @@
 #define WINDOWH 950
 
 /**
+* \def BOARDCENTERX
+* Définit l'abscisse du centre du plateau.
+*/
+#define BOARDCENTERX 960
+
+/**
+* \def BOARDCENTERY
+* Définit l'ordonnée du centre du plateau.
+*/
+#define BOARDCENTERY 431
+
+/**
 * \def HEXAGONS
 * Définit le côté des hexagones.
 */
@@ -32,6 +44,9 @@
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
 void quit(SDL_bool * paction_launched);
+
+void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
+void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s);
 
 void SDL_ExitWithError(const char *message);
 

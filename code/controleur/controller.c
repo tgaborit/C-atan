@@ -43,6 +43,74 @@ void quit(SDL_bool * paction_launched)
     *paction_launched = SDL_FALSE;
 }
 
+/**
+* \fn void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
+* \brief Fonction d'initialisation des positions de 6 rectangles selon la formation d'un hexagone.
+*
+* Initialise les positions des 6 rectangles d'un tableau en formant un hexagone centré selon l'abscisse et l'ordonnée passées en paramètre,
+* et de côté passé en paramètre.
+* \param[in] hex_buttons Tableau de pointeurs sur les rectangles à initialiser.
+* \param[in] center_x Abscisse du centre de l'hexagone formé par les 6 rectangles.
+* \param[in] center_y Ordonnée du centre de l'hexagone formé par les 6 rectangles.
+* \param[in] hexagon_s Côté de l'hexagone formé par les 6 rectangles.
+*/
+void initPosRectHex(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
+{
+    int hexagon_h = (sqrt(3)/2)*hexagon_s;
+
+    hex_buttons[0]->x = center_x - hex_buttons[0]->w/2;
+    hex_buttons[0]->y = center_y - hexagon_s - hex_buttons[0]->h/2;
+
+    hex_buttons[1]->x = center_x + hexagon_h - hex_buttons[0]->w/2;
+    hex_buttons[1]->y = center_y - hexagon_s/2 - hex_buttons[0]->h/2;
+
+    hex_buttons[2]->x = center_x + hexagon_h - hex_buttons[0]->w/2;
+    hex_buttons[2]->y = center_y + hexagon_s/2 - hex_buttons[0]->h/2;
+
+    hex_buttons[3]->x = center_x - hex_buttons[0]->w/2;
+    hex_buttons[3]->y = center_y + hexagon_s - hex_buttons[0]->h/2;
+
+    hex_buttons[4]->x = center_x - hexagon_h - hex_buttons[0]->w/2;
+    hex_buttons[4]->y = center_y + hexagon_s/2 - hex_buttons[0]->h/2;
+
+    hex_buttons[5]->x = center_x - hexagon_h - hex_buttons[0]->w/2;
+    hex_buttons[5]->y = center_y - hexagon_s/2 - hex_buttons[0]->h/2;
+}
+
+/**
+* \fn void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
+* \brief Fonction d'initialisation des positions de 6 rectangles selon la formation d'un hexagone couché.
+*
+* Initialise les positions des 6 rectangles d'un tableau en formant un hexagone couché centré selon l'abscisse et l'ordonnée passées en paramètre,
+* et de côté passé en paramètre.
+* \param[in] hex_buttons Tableau de pointeurs sur les rectangles à initialiser.
+* \param[in] center_x Abscisse du centre de l'hexagone formé par les 6 rectangles.
+* \param[in] center_y Ordonnée du centre de l'hexagone formé par les 6 rectangles.
+* \param[in] hexagon_s Côté de l'hexagone formé par les 6 rectangles.
+*/
+void initPosRectHexLying(SDL_Rect** hex_buttons, int center_x, int center_y, int hexagon_s)
+{
+    int hexagon_h = (sqrt(3)/2)*hexagon_s;
+
+    hex_buttons[0]->x = center_x + hexagon_s/2 - hex_buttons[0]->w/2;
+    hex_buttons[0]->y = center_y - hexagon_h - hex_buttons[0]->h/2;
+
+    hex_buttons[1]->x = center_x + hexagon_s - hex_buttons[0]->w/2;
+    hex_buttons[1]->y = center_y - hex_buttons[0]->h/2;
+
+    hex_buttons[2]->x = center_x + hexagon_s/2 - hex_buttons[0]->w/2;
+    hex_buttons[2]->y = center_y + hexagon_h - hex_buttons[0]->h/2;
+
+    hex_buttons[3]->x = center_x - hexagon_s/2 - hex_buttons[0]->w/2;
+    hex_buttons[3]->y = center_y + hexagon_h - hex_buttons[0]->h/2;
+
+    hex_buttons[4]->x = center_x - hexagon_s - hex_buttons[0]->w/2;
+    hex_buttons[4]->y = center_y - hex_buttons[0]->h/2;
+
+    hex_buttons[5]->x = center_x - hexagon_s/2 - hex_buttons[0]->w/2;
+    hex_buttons[5]->y = center_y - hexagon_h - hex_buttons[0]->h/2;
+}
+
 void SDL_ExitWithError(const char *message)
 {
     SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
