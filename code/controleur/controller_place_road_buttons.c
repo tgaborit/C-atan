@@ -55,19 +55,19 @@ static SDL_Rect pathSE3_area;          /*!< Rectangle correspondant à la zone d
 static SDL_Rect pathSE4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone Sud - Est*/
 static SDL_Rect pathSE5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone Sud - Est*/
 
+static SDL_Rect pathSS0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de l'hexagone Sud*/
+static SDL_Rect pathSS1_area;          /*!< Rectangle correspondant à la zone du chemin 1 de l'hexagone Sud*/
+static SDL_Rect pathSS2_area;          /*!< Rectangle correspondant à la zone du chemin 2 de l'hexagone Sud*/
+static SDL_Rect pathSS3_area;          /*!< Rectangle correspondant à la zone du chemin 3 de l'hexagone Sud*/
+static SDL_Rect pathSS4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone Sud*/
+static SDL_Rect pathSS5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone Sud*/
+
 static SDL_Rect pathSW0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de l'hexagone Sud - Ouest*/
 static SDL_Rect pathSW1_area;          /*!< Rectangle correspondant à la zone du chemin 1 de l'hexagone Sud - Ouest*/
 static SDL_Rect pathSW2_area;          /*!< Rectangle correspondant à la zone du chemin 2 de l'hexagone Sud - Ouest*/
 static SDL_Rect pathSW3_area;          /*!< Rectangle correspondant à la zone du chemin 3 de l'hexagone Sud - Ouest*/
 static SDL_Rect pathSW4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone Sud - Ouest*/
 static SDL_Rect pathSW5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone Sud - Ouest*/
-
-static SDL_Rect pathWW0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de l'hexagone Ouest*/
-static SDL_Rect pathWW1_area;          /*!< Rectangle correspondant à la zone du chemin 1 de l'hexagone Ouest*/
-static SDL_Rect pathWW2_area;          /*!< Rectangle correspondant à la zone du chemin 2 de l'hexagone Ouest*/
-static SDL_Rect pathWW3_area;          /*!< Rectangle correspondant à la zone du chemin 3 de l'hexagone Ouest*/
-static SDL_Rect pathWW4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone Ouest*/
-static SDL_Rect pathWW5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone Ouest*/
 
 static SDL_Rect pathNW0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de l'hexagone Nord - Ouest*/
 static SDL_Rect pathNW1_area;          /*!< Rectangle correspondant à la zone du chemin 1 de l'hexagone Nord - Ouest*/
@@ -94,9 +94,9 @@ void drawButtonsPlaceRoad(SDL_Renderer* renderer)
                                                       path0XX_area, path1XX_area, path2XX_area, path3XX_area, path4XX_area, path5XX_area,
                                                       pathNN0_area, pathNN1_area, pathNN2_area, pathNN3_area, pathNN4_area, pathNN5_area,
                                                       pathNE0_area, pathNE1_area, pathNE2_area, pathNE3_area, pathNE4_area, pathNE5_area,
-                                                     pathSE0_area, pathSE1_area, pathSE2_area, pathSE3_area, pathSE4_area, pathSE5_area/*,
-                                                     pathSW0_area, pathSW1_area, pathSW2_area, pathSW3_area, pathSW4_area, pathSW5_area,
-                                                     pathWW0_area, pathWW1_area, pathWW2_area, pathWW3_area, pathWW4_area, pathWW5_area,
+                                                      pathSE0_area, pathSE1_area, pathSE2_area, pathSE3_area, pathSE4_area, pathSE5_area,
+                                                      pathSS0_area, pathSS1_area, pathSS2_area, pathSS3_area, pathSS4_area, pathSS5_area,
+                                                      pathSW0_area, pathSW1_area, pathSW2_area, pathSW3_area, pathSW4_area, pathSW5_area/*,
                                                      pathNW0_area, pathNW1_area, pathNW2_area, pathNW3_area, pathNW4_area, pathNW5_area*/};
     if(SDL_RenderDrawRects(renderer, place_road_buttons, NPLACEROADBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
@@ -118,17 +118,17 @@ void initButtonsPlaceRoad()
     int i, j;
     float hexagonl_s;
     // Répartition des chemins selon la formation de 9 hexagones couchés
-    SDL_Rect* place_road_buttons[6][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
+    SDL_Rect* place_road_buttons[8][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
                                           {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
                                           {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
                                           {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
                                           {&pathNE0_area, &pathNE1_area, &pathNE2_area, &pathNE3_area, &pathNE4_area, &pathNE5_area},
-                                          {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area}/*,
-                                          {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
-                                          {&pathWW0_area, &pathWW1_area, &pathWW2_area, &pathWW3_area, &pathWW4_area, &pathWW5_area},
+                                          {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
+                                          {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
+                                          {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area}/*,
                                           {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area}*/};
     // Initialisation des côtés des zones des boutons des chemins
-    for(i = 0; i < 6; ++i)
+    for(i = 0; i < 8; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
@@ -144,11 +144,11 @@ void initButtonsPlaceRoad()
     initPosRectHexLying(place_road_buttons[1], BOARDCENTERX, BOARDCENTERY, round(3*hexagonl_s));                               // Boutons de la deuxième couronne
     initPosRectHexLying(place_road_buttons[2], BOARDCENTERX, BOARDCENTERY, round(5*hexagonl_s));                               // Boutons de la troisième couronne
     initPosRectHexLying(place_road_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, round(hexagonl_s));                    // Boutons de l'hexagone Nord
-    initPosRectHexLying(place_road_buttons[4], round(BOARDCENTERX + 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s));            // Boutons de l'hexagone Est
+    initPosRectHexLying(place_road_buttons[4], round(BOARDCENTERX + 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Est
     initPosRectHexLying(place_road_buttons[5], round(BOARDCENTERX + 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Est
+    initPosRectHexLying(place_road_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, round(hexagonl_s)); // Boutons de l'hexagone Sud
+    initPosRectHexLying(place_road_buttons[7], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Ouest
     /*
-    initPosRectHexLying(place_road_buttons[6], BOARDCENTERX - sqrt(3)*HEXAGONS, BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Ouest
-    initPosRectHexLying(place_road_buttons[7], BOARDCENTERX - 2*sqrt(3)*HEXAGONS, BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Ouest
     initPosRectHexLying(place_road_buttons[8], BOARDCENTERX - sqrt(3)*HEXAGONS, BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Ouest
 */
 }
