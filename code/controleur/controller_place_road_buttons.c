@@ -166,16 +166,16 @@ void initButtonsPlaceRoad()
     hexagonl_s = (sqrt(3)/2)*HEXAGONS;
 
     // Initialisation de la position des zones des boutons des chemins par hexagone, selon leur position et leur côté
-    initPosRectHexLying(place_road_buttons[0], BOARDCENTERX, BOARDCENTERY, round(hexagonl_s));                                 // Boutons de la première couronne
-    initPosRectHexLying(place_road_buttons[1], BOARDCENTERX, BOARDCENTERY, round(3*hexagonl_s));                               // Boutons de la deuxième couronne
-    initPosRectHexLying(place_road_buttons[2], BOARDCENTERX, BOARDCENTERY, round(5*hexagonl_s));                               // Boutons de la troisième couronne
+    initPosRectHexLying(place_road_buttons[0], BOARDCENTERX, BOARDCENTERY, hexagonl_s);                                 // Boutons de la première couronne
+    initPosRectHexLying(place_road_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                               // Boutons de la deuxième couronne
+    initPosRectHexLying(place_road_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                               // Boutons de la troisième couronne
     initPosRectHexLying(place_road_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, round(hexagonl_s));                    // Boutons de l'hexagone Nord
-    initPosRectHexLying(place_road_buttons[4], round(BOARDCENTERX + 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Est
-    initPosRectHexLying(place_road_buttons[5], round(BOARDCENTERX + 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Est
-    initPosRectHexLying(place_road_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, round(hexagonl_s)); // Boutons de l'hexagone Sud
-    initPosRectHexLying(place_road_buttons[7], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY + HEXAGONS + HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Sud - Ouest
-    initPosRectHexLying(place_road_buttons[8], round(BOARDCENTERX - 3*hexagonl_s), round(BOARDCENTERY - HEXAGONS - HEXAGONS/2), round(hexagonl_s)); // Boutons de l'hexagone Nord - Ouest
-    initPosRectHex(place_road_buttons[9], BOARDCENTERX, BOARDCENTERY, round(HEXAGONS + HEXAGONS/2)); // Boutons de l'hexagone debout
+    initPosRectHexLying(place_road_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Est
+    initPosRectHexLying(place_road_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Sud - Est
+    initPosRectHexLying(place_road_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s); // Boutons de l'hexagone Sud
+    initPosRectHexLying(place_road_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Sud - Ouest
+    initPosRectHexLying(place_road_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Nord - Ouest
+    initPosRectHex(place_road_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2); // Boutons de l'hexagone debout
     initPosRectOthers(place_road_buttons[10], place_road_buttons[11]);
 }
 
