@@ -18,11 +18,11 @@
 * \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
 * \brief Fonction principale du contrôleur du placement d'une colonie/ville.
 *
-* Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
+* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une colonie ou d'une ville.
 * Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
 *
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placement_launched Etat du placement : si devient SDL_False, on sort de la fonction.
+* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
@@ -165,8 +165,8 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         break;
 
     case CROSS3XX_BUTTON :
-        break;
         placeUrbEvent(pplacing_launched/*, the_game,*/, 0, -2, 4, urb_placing);
+        break;
 
     case CROSS4XX_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1.5, -1, 5, urb_placing);
