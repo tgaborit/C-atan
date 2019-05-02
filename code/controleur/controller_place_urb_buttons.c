@@ -107,7 +107,7 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 
 /**
 * \fn PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton le jouer a cliqué.
+* \brief Fonction de test sur quel bouton le joueur a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.

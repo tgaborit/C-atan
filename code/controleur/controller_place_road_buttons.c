@@ -129,6 +129,55 @@ void drawButtonsPlaceRoad(SDL_Renderer* renderer)
 }
 
 /**
+* \fn PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton le joueur a cliqué.
+*
+* Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \return Le bouton de l'environnement "Placement d'une route" qui a été cliqué, NO_BUTTON si aucun.
+*/
+PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button){
+    PlaceRoadButton button_clicked;
+    if((button_clicked = whichPathButton(mouse_button)) != NO_BUTTON)
+        return button_clicked;
+    return NO_BUTTON;
+}
+
+/**
+* \fn PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de chemin le joueur a cliqué
+*
+* Teste pour chaque bouton de chemin si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de chemin qui a été cliqué, NO_BUTTON si aucun.
+*/
+PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button){
+    int i;
+    SDL_Rect place_road_buttons[NPLACEROADBUTTONS] = {pathXX0_area, pathXX1_area, pathXX2_area, pathXX3_area, pathXX4_area, pathXX5_area,
+                                                      pathX0X_area, pathX1X_area, pathX2X_area, pathX3X_area, pathX4X_area, pathX5X_area,
+                                                      path0XX_area, path1XX_area, path2XX_area, path3XX_area, path4XX_area, path5XX_area,
+                                                      pathNN0_area, pathNN1_area, pathNN2_area, pathNN3_area, pathNN4_area, pathNN5_area,
+                                                      pathNE0_area, pathNE1_area, pathNE2_area, pathNE3_area, pathNE4_area, pathNE5_area,
+                                                      pathSE0_area, pathSE1_area, pathSE2_area, pathSE3_area, pathSE4_area, pathSE5_area,
+                                                      pathSS0_area, pathSS1_area, pathSS2_area, pathSS3_area, pathSS4_area, pathSS5_area,
+                                                      pathSW0_area, pathSW1_area, pathSW2_area, pathSW3_area, pathSW4_area, pathSW5_area,
+                                                      pathNW0_area, pathNW1_area, pathNW2_area, pathNW3_area, pathNW4_area, pathNW5_area,
+                                                      pathST0_area, pathST1_area, pathST2_area, pathST3_area, pathST4_area, pathST5_area,
+                                                      pathO00_area, pathO01_area, pathO10_area, pathO11_area, pathO20_area, pathO21_area,
+                                                      pathO30_area, pathO31_area, pathO40_area, pathO41_area, pathO50_area, pathO51_area};
+    for(i = 0; i<NPLACEROADBUTTONS; ++i)
+    {
+        if(isInArea(mouse_button, place_road_buttons[i]) != SDL_FALSE)
+            return i;
+    }
+    return NO_BUTTON;
+}
+
+/**
 * \fn void initButtonsPlaceRoad()
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une route".
 *
@@ -179,6 +228,12 @@ void initButtonsPlaceRoad()
     initPosRectOthers();
 }
 
+/**
+* \fn void initPosRectOthers()
+* \brief Fonction d'initialisation de la position des rectangles des autres zones.
+*
+* Assigne les valeurs de position selon le placement souhaité.
+*/
 void initPosRectOthers(){
 
     float hexagonl_s, hexagonl_h;

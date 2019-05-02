@@ -86,6 +86,19 @@ typedef enum {
         PATHST4_BUTTON,
         PATHST5_BUTTON,
 
+        PATHO00_BUTTON,
+        PATHO01_BUTTON,
+        PATHO10_BUTTON,
+        PATHO11_BUTTON,
+        PATHO20_BUTTON,
+        PATHO21_BUTTON,
+        PATHO30_BUTTON,
+        PATHO31_BUTTON,
+        PATHO40_BUTTON,
+        PATHO41_BUTTON,
+        PATHO50_BUTTON,
+        PATHO51_BUTTON,
+
         NO_BUTTON
 } PlaceRoadButton;
 
@@ -102,6 +115,9 @@ typedef enum {
 #define PATHS 40
 
 void drawButtonsPlaceRoad(SDL_Renderer* renderer);
+
+PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button);
+    PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsPlaceRoad();
     void initPosRectOthers();
