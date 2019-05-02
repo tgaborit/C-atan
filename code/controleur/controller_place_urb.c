@@ -114,6 +114,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 0, urb_placing);
         break;
 
+
     case CROSSX0X_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 2, 4, urb_placing);
         break;
@@ -137,6 +138,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
     case CROSSX5X_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 0, 1, urb_placing);
         break;
+
 
     case CROSS0XX_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 2, 1, urb_placing);
@@ -162,6 +164,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1.5, 1, 0, urb_placing);
         break;
 
+
     case CROSSNE0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 1, urb_placing);
         break;
@@ -185,6 +188,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
     case CROSSNE5_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 0, urb_placing);
         break;
+
 
     case CROSSEE0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 1, urb_placing);
@@ -210,6 +214,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 0, urb_placing);
         break;
 
+
     case CROSSSE0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 1, urb_placing);
         break;
@@ -233,6 +238,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
     case CROSSSE5_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 0, urb_placing);
         break;
+
 
     case CROSSSW0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 1, urb_placing);
@@ -258,6 +264,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 0, urb_placing);
         break;
 
+
     case CROSSWW0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 1, urb_placing);
         break;
@@ -281,6 +288,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
     case CROSSWW5_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 0, urb_placing);
         break;
+
 
     case CROSSNW0_BUTTON :
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 1, urb_placing);
@@ -306,6 +314,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
         placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 0, urb_placing);
         break;
 
+
     default :
         break;
     }
@@ -325,6 +334,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
 * \param[in] x Abscisse de l'hexagone où placer la colonie/ville.
 * \param[in] y Ordonnée de l'hexagone où placer la colonie/ville.
 * \param[in] position Position du croisement dans l'hexagone où placer la colonie/ville.
+* \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
 void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, double y, int position, UrbPlacing urb_placing)
 {
