@@ -16,13 +16,13 @@
 #include "controller_place_road.h"
 
 /**
-* \fn void controllerTurn(SDL_bool program_launched, Game* the_game)
+* \fn void controllerTurn(SDL_bool* program_launched, Game* the_game)
 * \brief Fonction principale du contrôleur du tour du joueur.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
 * Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
 *
-* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
 void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/) /*à appeler avec la structure the_partie*/

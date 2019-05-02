@@ -15,13 +15,13 @@
 #include "controller_place_urb_buttons.h"
 
 /**
-* \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
+* \fn void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
 * \brief Fonction principale du contrôleur du placement d'une colonie/ville.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une colonie ou d'une ville.
 * Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
 *
-* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
@@ -73,245 +73,245 @@ void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer/*, Ga
 }
 
 /**
-* \fn void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* pplacing_launched, Game* the_game, UrbPlacing urb_placing)
+* \fn void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* placing_launched, Game* the_game, UrbPlacing urb_placing)
 * \brief Sous-fonction de controllerPlaceUrb qui traite le clic effectué.
 *
 * Détermine le bouton sur lequel le joueur a cliqué puis appelle l'évènement de placement d'une colonie/ville sur le croisement correspondant,
 * si le clic a été effectué sur un croisement.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \param[in,out] pplaccement Pointeur vers l'état du placement.
+* \param[in,out] placcement Pointeur vers l'état du placement.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
-void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplacing_launched/*, Game* the_game,*/, UrbPlacing urb_placing)
+void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* placing_launched/*, Game* the_game,*/, UrbPlacing urb_placing)
 {
     PlaceUrbButton button_clicked  = whichButtonPlaceUrb(mouse_button);
     printf("Clic sur bouton n°%d\n", button_clicked);
     switch(button_clicked)
     {
     case CROSSXX0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 1, urb_placing);
         break;
 
     case CROSSXX1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 2, urb_placing);
         break;
 
     case CROSSXX2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 3, urb_placing);
         break;
 
     case CROSSXX3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 4, urb_placing);
         break;
 
     case CROSSXX4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 5, urb_placing);
         break;
 
     case CROSSXX5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 0, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 0, 0, urb_placing);
         break;
 
 
     case CROSSX0X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 2, 4, urb_placing);
         break;
 
     case CROSSX1X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 0, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 0, 1, urb_placing);
         break;
 
     case CROSSX2X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 0, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 0, 4, urb_placing);
         break;
 
     case CROSSX3X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, -2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, -2, 1, urb_placing);
         break;
 
     case CROSSX4X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 0, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 0, 4, urb_placing);
         break;
 
     case CROSSX5X_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 0, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 0, 1, urb_placing);
         break;
 
 
     case CROSS0XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, 2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, 2, 1, urb_placing);
         break;
 
     case CROSS1XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1.5, 1, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1.5, 1, 2, urb_placing);
         break;
 
     case CROSS2XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1.5, -1, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1.5, -1, 3, urb_placing);
         break;
 
     case CROSS3XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 0, -2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 0, -2, 4, urb_placing);
         break;
 
     case CROSS4XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1.5, -1, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1.5, -1, 5, urb_placing);
         break;
 
     case CROSS5XX_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1.5, 1, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1.5, 1, 0, urb_placing);
         break;
 
 
     case CROSSNE0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 1, urb_placing);
         break;
 
     case CROSSNE1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 2, urb_placing);
         break;
 
     case CROSSNE2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 3, urb_placing);
         break;
 
     case CROSSNE3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 4, urb_placing);
         break;
 
     case CROSSNE4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 5, urb_placing);
         break;
 
     case CROSSNE5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, 2, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, 2, 0, urb_placing);
         break;
 
 
     case CROSSEE0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 1, urb_placing);
         break;
 
     case CROSSEE1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 2, urb_placing);
         break;
 
     case CROSSEE2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 3, urb_placing);
         break;
 
     case CROSSEE3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 4, urb_placing);
         break;
 
     case CROSSEE4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 5, urb_placing);
         break;
 
     case CROSSEE5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 2, 0, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 2, 0, 0, urb_placing);
         break;
 
 
     case CROSSSE0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 1, urb_placing);
         break;
 
     case CROSSSE1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 2, urb_placing);
         break;
 
     case CROSSSE2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 3, urb_placing);
         break;
 
     case CROSSSE3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 4, urb_placing);
         break;
 
     case CROSSSE4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 5, urb_placing);
         break;
 
     case CROSSSE5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, 1, -2, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, 1, -2, 0, urb_placing);
         break;
 
 
     case CROSSSW0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 1, urb_placing);
         break;
 
     case CROSSSW1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 2, urb_placing);
         break;
 
     case CROSSSW2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 3, urb_placing);
         break;
 
     case CROSSSW3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 4, urb_placing);
         break;
 
     case CROSSSW4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 5, urb_placing);
         break;
 
     case CROSSSW5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, -2, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, -2, 0, urb_placing);
         break;
 
 
     case CROSSWW0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 1, urb_placing);
         break;
 
     case CROSSWW1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 2, urb_placing);
         break;
 
     case CROSSWW2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 3, urb_placing);
         break;
 
     case CROSSWW3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 4, urb_placing);
         break;
 
     case CROSSWW4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 5, urb_placing);
         break;
 
     case CROSSWW5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -2, 0, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -2, 0, 0, urb_placing);
         break;
 
 
     case CROSSNW0_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 1, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 1, urb_placing);
         break;
 
     case CROSSNW1_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 2, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 2, urb_placing);
         break;
 
     case CROSSNW2_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 3, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 3, urb_placing);
         break;
 
     case CROSSNW3_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 4, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 4, urb_placing);
         break;
 
     case CROSSNW4_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 5, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 5, urb_placing);
         break;
 
     case CROSSNW5_BUTTON :
-        placeUrbEvent(pplacing_launched/*, the_game,*/, -1, 2, 0, urb_placing);
+        placeUrbEvent(placing_launched/*, the_game,*/, -1, 2, 0, urb_placing);
         break;
 
 
@@ -321,7 +321,7 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
 }
 
 /**
-* \fn void placeUrbEvent(SDL_bool* pplacing_launched, Game* the_game, double x, double y, int position, UrbPlacing urb_placing)
+* \fn void placeUrbEvent(SDL_bool* placing_launched, Game* the_game, double x, double y, int position, UrbPlacing urb_placing)
 * \brief Evénement de placement d'une colonie ou d'une ville.
 *
 * Fait appel à la fonction du modèle setColonie ou setVille en fonction du type de craft passé en paramètre
@@ -329,14 +329,14 @@ void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* pplac
 * L'emplacement est un croisement dont les coordonnées sont passées en paramètre.
 * Si le placement réussit, quitte l'environnement "Placement d'une colonie ou d'une ville".
 *
-* \param[in,out] pprogram_launched Ponteur vers l'état du pplacement.
+* \param[in,out] placing_launched Ponteur vers l'état du pplacement.
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in] x Abscisse de l'hexagone où placer la colonie/ville.
 * \param[in] y Ordonnée de l'hexagone où placer la colonie/ville.
 * \param[in] position Position du croisement dans l'hexagone où placer la colonie/ville.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
-void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, double y, int position, UrbPlacing urb_placing)
+void placeUrbEvent(SDL_bool* placing_launched/*, Game* the_game,*/, double x, double y, int position, UrbPlacing urb_placing)
 {
     printf("Appel de la fonction placeUrbEvent(pplacing_launched, the_game, %f, %f, %d, urb_placing)\n", x, y, position);
     if(urb_placing == SETTLE_PLACING)
@@ -349,7 +349,7 @@ void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, d
             printf("Hypothese : setColonie(the_game, %f, %f, %d) == 1\n", x, y, position);
 
             printf("Appel de la fonction quitPlacing(pplacing_launched)\n");
-            quit(pplacing_launched);
+            quit(placing_launched);
         /*
         }
         */
@@ -364,7 +364,7 @@ void placeUrbEvent(SDL_bool* pplacing_launched/*, Game* the_game,*/, double x, d
             printf("Hypothese : setVille(the_game, %f, %f, %d) == 1\n", x, y, position);
 
             printf("Appel de la fonction quitPlacing(pplacing_launched)\n");
-            quit(pplacing_launched);
+            quit(placing_launched);
         /*
         }
         */
