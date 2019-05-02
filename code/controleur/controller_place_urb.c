@@ -26,12 +26,12 @@
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
-void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/, UrbPlacing urb_placing)
+void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/, UrbPlacing urb_placing)
 {
     SDL_bool placing_launched = SDL_TRUE;
     SDL_Event ev;
     initButtonsPlaceUrb();
-    while(program_launched && placing_launched)
+    while(*program_launched && placing_launched)
     {
         drawButtonsPlaceUrb(renderer);
         SDL_Event event;
@@ -59,8 +59,8 @@ void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer/*, Gam
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&program_launched)\n");
-                quit(&program_launched);
+                printf("Appel de la fonction quit(program_launched)\n");
+                quit(program_launched);
                 break;
 
             default :

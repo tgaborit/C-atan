@@ -22,7 +22,7 @@ int main()
 
     SDL_bool program_launched = SDL_TRUE;
 
-    controllerTurn(program_launched, renderer);
+    controllerTurn(&program_launched, renderer);
     //controllerPlaceUrb(program_launched, renderer, SETTLE_PLACING);
     //controllerPlaceRoad(program_launched, renderer);
     //Fermeture fenetre avec destruction rendu et fenetre

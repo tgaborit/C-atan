@@ -11,7 +11,7 @@
 #ifndef CATANE_CONTROLLER_TURN_H
 #define CATANE_CONTROLLER_TURN_H
 
-void controllerTurn(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
+void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
 void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);

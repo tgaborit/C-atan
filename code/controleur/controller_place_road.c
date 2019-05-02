@@ -25,12 +25,12 @@
 * \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
-void controllerPlaceRoad(SDL_bool program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
+void controllerPlaceRoad(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
 {
     SDL_bool placing_launched = SDL_TRUE;
     SDL_Event ev;
     initButtonsPlaceRoad();
-    while(program_launched && placing_launched)
+    while(*program_launched && placing_launched)
     {
         drawButtonsPlaceRoad(renderer);
         SDL_Event event;
@@ -58,8 +58,8 @@ void controllerPlaceRoad(SDL_bool program_launched, SDL_Renderer* renderer/*, Ga
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&program_launched)\n");
-                quit(&program_launched);
+                printf("Appel de la fonction quit(program_launched)\n");
+                quit(program_launched);
                 break;
 
             default :
