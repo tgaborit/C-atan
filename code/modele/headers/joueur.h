@@ -57,7 +57,7 @@ typedef enum {
  */
 typedef struct {
 int score; /*!<entier représentant le nombre de points de victoire du joueur>*/
-char pseudo[TAILLE_MAX_PSEUDO]; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
+char *pseudo; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
 Status status; /*!<deffinie si c'est le tour du joueur ou si il est en attente>*/
 Ressource* ressource; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
 CarteDev* carte_dev; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
