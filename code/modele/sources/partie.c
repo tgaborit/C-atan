@@ -160,10 +160,31 @@ static void init_pile_cartedev(CarteDev carte_dev[4])
     Partie* partie = (Partie*) malloc(sizeof(Partie));
     partie->joueurs= init_list_joueur();
     partie->plateau= initPlateau();
+    partie->cartedev= (CarteDev*) malloc(4* sizeof(CarteDev));
     init_pile_cartedev(partie->cartedev);
     return partie;
  }
 
+   /**
+* \fn void free_partie(Partie* partie)
+* \brief libère la mémoire allouée pour une structure partie
+*
+* \param
+* \return aucun
+*/
+void free_partie(Partie* partie){
+    int i;
+    Joueur* current_joueur;
+    for (i=1;i<=get_nbjoueurs(partie);++i){
+    current_joueur=get_joueur_actif(partie);
+    setOnNext_list_joueur(partie->joueurs);
+    free_joueur(current_joueur);
+    }
+    freePlateau(partie->plateau);
+    free(partie->cartedev);
+    free(partie);
+
+ }
   /**
 * \fn void add_joueur(Joueur joueur, Partie partie)
 * \brief inscrit un nouveau joueur à la partie
@@ -411,3 +432,12 @@ int utiliser_point (Partie* partie){
     inc_score(joueur_actif,1);
     return 0;
 }
+
+/**
+ * \fn int utiliser_routes (Partie* partie)
+ * \brief si le joueur courant possède une carte point il la défausse et gagne 1 point de score
+ *
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte point
+ */
+//int utiliser_routes (Partie* partie,){

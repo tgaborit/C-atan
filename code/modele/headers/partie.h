@@ -51,7 +51,7 @@ struct Node_joueur* next;
  typedef struct{
      List_joueur* joueurs; /*!<liste contenant tout les joueurs inscrit dans la partie>*/
      Plateau* plateau; /*!<structure représentant l'état du plateau de jeu>*/
-     CarteDev cartedev[4]; /*!<tableau de la pile des carte developpement>*/
+     CarteDev* cartedev; /*!<tableau de la pile des carte developpement>*/
  }Partie;
 
   /**
@@ -64,6 +64,15 @@ struct Node_joueur* next;
 * \return aucun
 */
 Partie* init_partie();
+
+   /**
+* \fn void free_partie(Partie* partie)
+* \brief libère la mémoire allouée pour une structure partie
+*
+* \param
+* \return aucun
+*/
+void free_partie(Partie* partie);
 
   /**
 * \fn int find_joueur(Partie* partie, Joueur* joueur)
