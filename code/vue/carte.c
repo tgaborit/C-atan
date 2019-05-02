@@ -8,9 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des cartes dans le jeu.
  */
 
-#include "carte.h"
-
-
+ #include "carte.h"
 
 /**
  * \fn AfficheCarteArgile(SDL_Renderer *renderer)
@@ -20,8 +18,7 @@
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheCarteArgile(SDL_Renderer* renderer)
-{
+void AfficheCarteArgile(SDL_Renderer* renderer){
 	SDL_Surface *image = NULL;
 	SDL_Texture *cargile = NULL;
 

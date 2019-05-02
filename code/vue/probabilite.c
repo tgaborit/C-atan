@@ -10,6 +10,7 @@
 
 #include "probabilite.h"
 
+
 /**
  * \fn Affiche2(SDL_Renderer *renderer,double posx, double posy)
  * \brief Fonction affichant l'image de la probabilité 2 en posx et posy

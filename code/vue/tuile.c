@@ -302,7 +302,7 @@ void AfficheRandomTuile(Partie* p, double x, double y, SDL_Renderer* renderer, d
 
 
 /**
- * \fn AfficheTuilePlateay(Partie* p, SDL_Renderer* renderer)
+ * \fn AfficheTuilePlateau(Partie* p, SDL_Renderer* renderer)
  * \brief Fonction affichant les tuiles de manière aléatoire
  *
  *
@@ -310,6 +310,7 @@ void AfficheRandomTuile(Partie* p, double x, double y, SDL_Renderer* renderer, d
  * \param renderer, le rendu actuel
  * \return aucun
  */
+
 void AfficheTuilePlateau(Partie *p, SDL_Renderer *renderer)
 {
 	AfficheRandomTuile(p, -1, 2, renderer, 756, 109);

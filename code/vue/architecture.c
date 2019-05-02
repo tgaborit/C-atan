@@ -10,7 +10,6 @@
 
 #include "architecture.h"
 
-
 /**
  * \fn AfficheBouttonDev(SDL_Renderer *renderer)
  * \brief Fonction affichant le bouton des cartes développement
@@ -19,6 +18,7 @@
  * \param renderer, le rendu actuel
  * \return aucun
  */
+
 void AfficheBouttonDev(SDL_Renderer *renderer)
 {
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
