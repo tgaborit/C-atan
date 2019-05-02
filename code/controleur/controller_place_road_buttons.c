@@ -176,28 +176,28 @@ void initButtonsPlaceRoad()
     initPosRectHexLying(place_road_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Sud - Ouest
     initPosRectHexLying(place_road_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Nord - Ouest
     initPosRectHex(place_road_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2); // Boutons de l'hexagone debout
-    initPosRectOthers(place_road_buttons[10], place_road_buttons[11]);
+    initPosRectOthers();
 }
 
-void initPosRectOthers(SDL_Rect** other_rect1, SDL_Rect** other_rect2){
+void initPosRectOthers(){
 
     float hexagonl_s, hexagonl_h;
 
     hexagonl_s = (sqrt(3)/2)*HEXAGONS;
     hexagonl_h = (sqrt(3)/2)*hexagonl_s;
 
-    other_rect1[0]->y = other_rect1[1]->y = round(BOARDCENTERY - 3*HEXAGONS - hexagonl_h - other_rect1[0]->h/2);
-    other_rect1[3]->x = other_rect1[4]->x = round(BOARDCENTERX + 4*hexagonl_s + hexagonl_s/2 - other_rect1[2]->w/2);
-    other_rect2[0]->y = other_rect2[1]->y = round(BOARDCENTERY + 3*HEXAGONS + hexagonl_h - other_rect1[4]->h/2);
-    other_rect2[3]->x = other_rect2[4]->x = round(BOARDCENTERX - 4*hexagonl_s - hexagonl_s/2 - other_rect2[3]->w/2);
+    pathO00_area.x = pathO31_area.x = round(BOARDCENTERX - hexagonl_s - hexagonl_s/2 - pathO00_area.w/2);
+    pathO00_area.y = pathO01_area.y = round(BOARDCENTERY - 3*HEXAGONS - hexagonl_h - pathO00_area.h/2);
+    pathO01_area.x = pathO30_area.x = round(BOARDCENTERX + hexagonl_s + hexagonl_s/2 - pathO01_area.w/2);
+    pathO30_area.y = pathO31_area.y = round(BOARDCENTERY + 3*HEXAGONS + hexagonl_h - pathO20_area.h/2);
 
-    other_rect1[0]->x = other_rect2[1]->x = round(BOARDCENTERX - hexagonl_s - hexagonl_s/2 - other_rect1[0]->w/2);
-    other_rect1[1]->x = other_rect2[0]->x = round(BOARDCENTERX + hexagonl_s + hexagonl_s/2 - other_rect1[1]->w/2);
-    other_rect1[3]->y = other_rect2[4]->y = round(BOARDCENTERY - hexagonl_h - other_rect1[3]->h/2);
-    other_rect1[4]->y = other_rect2[3]->y = round(BOARDCENTERY + hexagonl_h - other_rect1[3]->h/2);
+    pathO11_area.x = pathO20_area.x = round(BOARDCENTERX + 4*hexagonl_s + hexagonl_s/2 - pathO10_area.w/2);
+    pathO11_area.y = pathO50_area.y = round(BOARDCENTERY - hexagonl_h - pathO11_area.h/2);
+    pathO41_area.x = pathO50_area.x = round(BOARDCENTERX - 4*hexagonl_s - hexagonl_s/2 - pathO41_area.w/2);
+    pathO20_area.y = pathO41_area.y = round(BOARDCENTERY + hexagonl_h - pathO11_area.h/2);
 
-    other_rect1[2]->x = other_rect1[5]->x = round(BOARDCENTERX + 3*hexagonl_s - other_rect1[2]->w/2);
-    other_rect1[2]->y = other_rect2[5]->y = round(BOARDCENTERY - 3*HEXAGONS - other_rect1[2]->h/2);
-    other_rect1[5]->y = other_rect2[2]->y = round(BOARDCENTERY + 3*HEXAGONS - other_rect1[5]->h/2);
-    other_rect2[2]->x = other_rect2[5]->x = round(BOARDCENTERX - 3*hexagonl_s - other_rect2[2]->w/2);
+    pathO10_area.x = pathO21_area.x = round(BOARDCENTERX + 3*hexagonl_s - pathO10_area.w/2);
+    pathO10_area.y = pathO51_area.y = round(BOARDCENTERY - 3*HEXAGONS - pathO10_area.h/2);
+    pathO21_area.y = pathO40_area.y = round(BOARDCENTERY + 3*HEXAGONS - pathO21_area.h/2);
+    pathO40_area.x = pathO51_area.x = round(BOARDCENTERX - 3*hexagonl_s - pathO40_area.w/2);
 }

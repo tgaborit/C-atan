@@ -104,6 +104,6 @@ typedef enum {
 void drawButtonsPlaceRoad(SDL_Renderer* renderer);
 
 void initButtonsPlaceRoad();
-    void initPosRectOthers(SDL_Rect** other_rect1, SDL_Rect** other_rect2);
+    void initPosRectOthers();
 
 #endif //CATANE_CONTROLLER_PLACE_ROAD_BUTTONS_H
