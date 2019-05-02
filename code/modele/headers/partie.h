@@ -17,6 +17,7 @@
 #include "plateau.h"
 #include <time.h>
 #include <stdlib.h>
+#include <math.h>
 
 
 /**
@@ -50,10 +51,11 @@ struct Node_joueur* next;
  typedef struct{
      List_joueur* joueurs; /*!<liste contenant tout les joueurs inscrit dans la partie>*/
      Plateau* plateau; /*!<structure représentant l'état du plateau de jeu>*/
+     CarteDev cartedev[4]; /*!<tableau de la pile des carte developpement>*/
  }Partie;
 
   /**
-* \fn void init_partie ()
+* \fn void init_partie (Partie partie)
 * \brief initialise la strucure partie qui contient toute les information relatives à la partie
 *
 * alloue la mémoire necessaire à la structure partie,
@@ -63,19 +65,6 @@ struct Node_joueur* next;
 */
 Partie* init_partie();
 
-
-  /**
-* \fn void free_partie (Partie* partie)
-* \brief initialise la strucure partie qui contient toute les informations relatives à la partie
-*
-* supprime la mémoire allouée à la structure partie,
-*initialise le pateau aléatoirement et initialise le tableau de joueur à null
-* \param parte un pointeur vers la partie
-* \return aucun
-*/
-
-void free_partie(Partie* partie);
-
   /**
 * \fn int find_joueur(Partie* partie, Joueur* joueur)
 * \brief place le current de la liste sur le joueur passé en paramètre
@@ -83,7 +72,6 @@ void free_partie(Partie* partie);
 * \param Partie*:partie, Joueur*:joueur
 * \return int: -1 si le joueur n'est pas dans la partie, 0 tout s'est bien passé
 */
-
 int find_joueur(Partie* partie, Joueur* joueur);
 
  /**
@@ -160,7 +148,7 @@ int get_score_max(Partie* partie);
  * \fn int lancer_des()
  * \brief Simule un lancé de dès
  *
- *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilités d'un vrai lancé de dès
+ *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilité d'un vrai lancé de dès
  * \param aucun
  * \return int: valeur obtenu
  */
@@ -169,35 +157,59 @@ int lancer_des();
 
 /**
  * \fn void distribution_ressource(List_Noeud)
- * \brief distribue les ressources en début de partie
+ * \brief distribu les ressources en début de partie
  *
  *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
  * \param Partie: etat de la partie
  * \return aucun
  */
-void distribution_ressource(Partie* partie);
+void distribution_ressource(Partie);
 
 
 /**
- * \fn void gagne_ressource(int lance_des, Partie partie);
- * \brief distribue les ressources correspondant aux cases du numéro de dés
+ * \fn gagne_ressource(int lance_des, Partie partie);
+ * \brief ajoute les ressource gagner en début de partie à la main du joueur
  *
- *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
+ *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
  * \param Partie: etat de la partie
  * \return aucun
  */
-void gagne_ressource(int lance_des, Partie* partie);
-
+void gagne_ressource(int lance_des, Partie partie);
 
 /**
- * \fn void nb_routes_max(Partie* partie)
- * \brief met à jour le point déscerné au détenteur du plus de routes
+ * \fn int obtenir_cartedev (Partie* partie)
+ * \brief donne une carte developpement au joueur qui en fait la demande
  *
- *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
- * \param Partie: etat de la partie
- * \return aucun retour
+ * \param Partie*: la partie en cours
+ * \return int: 0 si tout c'est bien passé -1 si le joueur ne peut pas acheter de carte
  */
+int obtenir_cartedev (Partie* partie);
 
-void nb_routes_max(Partie* partie);
+/**
+ * \fn int utiliser_monopole (Partie* partie, TypeRessource type)
+ * \brief si le joueur courant possède une carte monopole il la défausse et prend les cartes ressources du type passé en paramètre
+ *de tout les autre joueurs.
+ *
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte monopole
+ */
+int utiliser_monopole (Partie* partie, TypeRessource type);
 
+/**
+ * \fn int utiliser_decouverte (Partie* partie, TypeRessource type)
+ * \brief si le joueur courant possède une carte decouverte il la défausse et gagne 2 carte ressource du type passé en paramètre
+ *
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte decouverte
+ */
+int utiliser_decouverte (Partie* partie, TypeRessource type);
+
+/**
+ * \fn int utiliser_point (Partie* partie)
+ * \brief si le joueur courant possède une carte point il la défausse et gagne 1 point de score
+ *
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte point
+ */
+int utiliser_point (Partie* partie);
 #endif //MODELE_REMI_CATANE_PARTIE_H
