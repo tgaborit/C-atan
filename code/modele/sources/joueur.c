@@ -92,6 +92,7 @@ void init_main_cartedev(Joueur* joueur)
 Joueur* init_joueur(Couleur couleur,char* pseudo)
 {
     Joueur* new_joueur = (Joueur*) malloc(sizeof(Joueur));
+    new_joueur->pseudo= (char*) malloc(TAILLE_MAX_PSEUDO*sizeof(char));
     set_pseudo(new_joueur,pseudo);
     set_couleur(new_joueur,couleur);
     new_joueur->score=0;
