@@ -22,17 +22,15 @@ int main(int argc, char** argv)
 	SDL_Renderer* renderer = NULL;
 
 	Partie* partie = init_partie();
+	Joueur* j = init_joueur(ROUGE,"manu");
+	add_joueur(j,partie);
+	Joueur* k = init_joueur(BLEU,"remi");
 
 	renderer = updateFenetre(partie,window,renderer);
 
-    partie->plateau->adjacence[0]->adjacence[0]->t->s[2].i=COLONIE;
-    //partie->plateau->adjacence[0]->adjacence[2]->t->s[4].i=COLONIE;
-    //partie->plateau->adjacence[0]->t->s[0].i=COLONIE;
-    partie->plateau->adjacence[2]->adjacence[2]->t->s[2].i=COLONIE;
-    partie->plateau->adjacence[3]->adjacence[1]->t->s[5].i=COLONIE;
+	partie->plateau->adjacence[0]->t->s[3].i = VILLE;
+	partie->plateau->adjacence[0]->t->s[3].owner = j;
 
-    partie->plateau->adjacence[5]->t->s[3].i=VILLE;
-    partie->plateau->adjacence[5]->adjacence[3]->t->s[4].i=VILLE;
 
 	renderer = updateFenetre(partie,window,renderer);
 
