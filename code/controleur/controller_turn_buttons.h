@@ -39,7 +39,7 @@ typedef enum {
 * \def NTURNBUTTONS
 * Définit le nombre de boutons de l'environnement "Tour du joueur".
 */
-#define NTURNBUTTONS 12
+#define NTURNBUTTONS 14
 
 /**
 * \def CARDW
@@ -65,6 +65,18 @@ typedef enum {
 */
 #define CRAFTH 75
 
+/**
+* \def DEVW
+* Définit la largeur d'un bouton de carte développement.
+*/
+#define DEVW 400
+
+/**
+* \def DEVH
+* Définit la hauteur d'un bouton de carte développement.
+*/
+#define DEVH 75
+
 void drawButtonsTurn(SDL_Renderer* renderer);
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
@@ -78,11 +90,14 @@ void initButtonsTurn();
         void initClayCard();
         void initSheepsCard();
         void initRockCard();
-    void initDevCraftArea();
+    void initCraftAreas();
         void initRoadCraftArea();
         void initSettleCraftArea();
         void initCityCraftArea();
-        void initCraftAreas();
+        void initDevCraftArea();
+    void initDevCardsAreas();
+        void initKnightDevArea();
+        void initMonopDevArea();
     void initDiceArea();
     void initEndTurnArea();
     void initHelpArea();

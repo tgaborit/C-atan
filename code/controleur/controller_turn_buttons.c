@@ -25,6 +25,9 @@ static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
 static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
 
+static SDL_Rect knight_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Chevalier*/
+static SDL_Rect monop_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Monopole*/
+
 static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
@@ -45,7 +48,7 @@ void drawButtonsTurn(SDL_Renderer* renderer)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
     SDL_Rect turn_buttons[NTURNBUTTONS] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
-    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, dice_area, end_turn_area, help_area};
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, knight_dev_area, monop_dev_area, dice_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -135,6 +138,7 @@ void initButtonsTurn()
 {
     initCardsAreas();
     initCraftAreas();
+    initDevCardsAreas();
     initDiceArea();
     initEndTurnArea();
     initHelpArea();
@@ -169,6 +173,51 @@ void initCraftAreas(){
     initRoadCraftArea();
     initSettleCraftArea();
     initCityCraftArea();
+}
+
+/**
+* \fn void initDevCardsAreas()
+* \brief Fonction d'initialisation des boutons des cartes développement.
+*
+* Initialise les champs des rectangles des zones correspondant aux boutons des cartes développement.
+* Fait appel aux fonctions d'initialisation pour la carte Chevalier, la carte Monopole, la carte Invention, la carte Routes et la carte Université.
+*/
+void initDevCardsAreas()
+{
+    initKnightDevArea();
+    initMonopDevArea();
+}
+
+/**
+* \fn void initKnightDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Chevalier.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Chevalier sur l'écran du joueur.
+*/
+void initKnightDevArea()
+{
+    knight_dev_area.w = DEVW;
+    knight_dev_area.h = DEVH;
+
+    knight_dev_area.x = 100;
+    knight_dev_area.y = 240;
+}
+
+/**
+* \fn void initMonopDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Monopole.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Monopole sur l'écran du joueur.
+*/
+void initMonopDevArea()
+{
+    monop_dev_area.w = DEVW;
+    monop_dev_area.h = DEVH;
+
+    monop_dev_area.x = knight_dev_area.x;
+    monop_dev_area.y = knight_dev_area.y + 25 + monop_dev_area.h;
 }
 
 /**
