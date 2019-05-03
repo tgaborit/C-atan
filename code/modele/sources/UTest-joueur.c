@@ -3,6 +3,7 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include "joueur.h"
+#include "UTest-joueur.h"
 
 static int setup_joueur (void ** state)
 {
@@ -147,6 +148,15 @@ static void test_inc_score(void **state)
     inc_score(joueur_1,2);
     assert_int_equal(2, get_score(joueur_1));
 }
+
+static void test_dec_score(void **state)
+{
+    Joueur* joueur_1= *state;
+    joueur_1->score = 5;
+    dec_score(joueur_1,3);
+    assert_int_equal(2, get_score(joueur_1));
+}
+
 
 static void test_get_pseudo(void **state)
 {
@@ -330,6 +340,7 @@ int main_joueur_test(void)
     const struct CMUnitTest tests_joueur[]={
         cmocka_unit_test_setup_teardown(test_init_joueur,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_inc_score,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_dec_score,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_get_pseudo,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_gain_ressource,setup_joueur_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_perte_ressource,setup_joueur_ressource,teardown),

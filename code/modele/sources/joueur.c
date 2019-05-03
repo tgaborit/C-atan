@@ -98,6 +98,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     new_joueur->score=0;
     new_joueur->ressource= (Ressource*) malloc(5*sizeof(Ressource));
     new_joueur->carte_dev=(CarteDev*) malloc(5*sizeof(CarteDev));
+    new_joueur->nbRoute=0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -114,6 +115,9 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
  */
 void free_joueur(Joueur* joueur)
 {
+    free(joueur->carte_dev);
+    free(joueur->pseudo);
+    free(joueur->ressource);
     free(joueur);
 }
 
@@ -156,6 +160,19 @@ void inc_score(Joueur* joueur, int points)
     joueur->score+=points;
 }
 
+ 	/**
+	 * \fn void dec_score(Joueur* joueur, int points)
+	 * \brief Fonction qui décrémente le score d'un joueur
+	 *
+	 * fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+	 * \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+	 * \return aucun
+	 */
+	void dec_score(Joueur* joueur, int points){
+
+	    joueur->score-=points;
+
+	}
 /**
  * \fn void set_status(Joueur joueur);
  * \brief Initialisaton status du joueur
@@ -294,6 +311,7 @@ int achat_route(Joueur* joueur)
         {
             perte_ressource(ARGILE,joueur);
             perte_ressource(BOIS, joueur);
+            ++joueur->nbRoute;
             return 0;
         }
     return -1;
@@ -361,48 +379,41 @@ int achat_cartedev(Joueur* joueur)
 
 int voleur_perte_ressource(Joueur* joueur){
 
-    int i,j,nb;
+    int i,nbCartePerdues;
 
     int proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
     int proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
     int proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
     int proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
     int proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
-    Ressource* ressource = (Ressource*) malloc(5 * sizeof(Ressource));
-    for(j=0;j<=4;++j){
-    ressource[j].nb_ressource=0;
-    }
     srand(time(NULL));
     int rand_val;
     if(get_nbressource_total(joueur)>7){
-        for(i=0;i<get_nbressource_total(joueur)/2;++i){
-
-
+        nbCartePerdues=get_nbressource_total(joueur)/2;
+        for(i=0;i<nbCartePerdues;++i){
             rand_val=rand()%100;
+            proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
+            proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
+            proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
+            proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
+            proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
 
             if (rand_val<= proba_ble)
-                ressource[0].nb_ressource+=1;
+                perte_ressource(BLE,joueur);
 
             if(proba_ble<rand_val && rand_val<=(proba_ble+proba_bois))
-                ressource[1].nb_ressource+=1;
+                perte_ressource(BOIS,joueur);
 
             if((proba_ble+proba_bois)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre))
-                ressource[2].nb_ressource+=1;
+                perte_ressource(PIERRE,joueur);
 
             if((proba_ble+proba_bois+proba_pierre)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile))
-                ressource[3].nb_ressource+=1;
+                perte_ressource(ARGILE,joueur);
 
             if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton))
-                ressource[4].nb_ressource+=1;
+                perte_ressource(MOUTON,joueur);
             }
 
-        for(i=0;i<=4;++i){
-        nb=ressource[i].nb_ressource;
-
-        for (j=1;j<=nb;++j){
-            perte_ressource(i,joueur);
-        }
-    }
     return 0;
     }
     return -1;

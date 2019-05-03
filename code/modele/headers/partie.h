@@ -51,11 +51,11 @@ struct Node_joueur* next;
  typedef struct{
      List_joueur* joueurs; /*!<liste contenant tout les joueurs inscrit dans la partie>*/
      Plateau* plateau; /*!<structure représentant l'état du plateau de jeu>*/
-     CarteDev cartedev[4]; /*!<tableau de la pile des carte developpement>*/
+     CarteDev* cartedev; /*!<tableau de la pile des carte developpement>*/
  }Partie;
 
   /**
-* \fn void init_partie (Partie partie)
+* \fn void init_partie ()
 * \brief initialise la strucure partie qui contient toute les information relatives à la partie
 *
 * alloue la mémoire necessaire à la structure partie,
@@ -64,6 +64,18 @@ struct Node_joueur* next;
 * \return aucun
 */
 Partie* init_partie();
+
+ 	  /**
+
+	* \fn void free_partie (Partie* partie)
+	* \brief initialise la strucure partie qui contient toute les informations relatives à la partie
+	*
+	* supprime la mémoire allouée à la structure partie,
+	*initialise le pateau aléatoirement et initialise le tableau de joueur à null
+	* \param parte un pointeur vers la partie
+	* \return aucun
+	*/
+	void free_partie(Partie* partie);
 
   /**
 * \fn int find_joueur(Partie* partie, Joueur* joueur)
@@ -163,18 +175,28 @@ int lancer_des();
  * \param Partie: etat de la partie
  * \return aucun
  */
-void distribution_ressource(Partie);
-
+void distribution_ressource(Partie* partie);
 
 /**
- * \fn gagne_ressource(int lance_des, Partie partie);
- * \brief ajoute les ressource gagner en début de partie à la main du joueur
- *
- *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
+ * \fn void gagne_ressource(int lance_des, Partie partie);
+ * \brief distribue les ressources correspondant aux cases du numéro de dés
+ *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
  * \param Partie: etat de la partie
  * \return aucun
  */
-void gagne_ressource(int lance_des, Partie partie);
+void gagne_ressource(int lance_des, Partie* partie);
+
+
+
+
+/**
+* \fn void nb_routes_max(Partie* partie)
+* \brief met à jour le point déscerné au détenteur du plus de routes
+*  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+* \param Partie: etat de la partie
+* \return aucun retour
+*/
+void nb_routes_max(Partie* partie);
 
 /**
  * \fn int obtenir_cartedev (Partie* partie)
