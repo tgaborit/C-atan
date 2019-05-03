@@ -27,6 +27,7 @@ static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone 
 
 static SDL_Rect knight_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Chevalier*/
 static SDL_Rect monop_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Monopole*/
+static SDL_Rect invent_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Invention*/
 
 static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
@@ -48,7 +49,8 @@ void drawButtonsTurn(SDL_Renderer* renderer)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
     SDL_Rect turn_buttons[NTURNBUTTONS] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
-    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, knight_dev_area, monop_dev_area, dice_area, end_turn_area, help_area};
+    dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, knight_dev_area, monop_dev_area, invent_dev_area,
+    dice_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -186,6 +188,7 @@ void initDevCardsAreas()
 {
     initKnightDevArea();
     initMonopDevArea();
+    initInventDevArea();
 }
 
 /**
@@ -218,6 +221,22 @@ void initMonopDevArea()
 
     monop_dev_area.x = knight_dev_area.x;
     monop_dev_area.y = knight_dev_area.y + 25 + monop_dev_area.h;
+}
+
+/**
+* \fn void initInventDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Invention.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Invention sur l'écran du joueur.
+*/
+void initInventDevArea()
+{
+    invent_dev_area.w = DEVW;
+    invent_dev_area.h = DEVH;
+
+    invent_dev_area.x = knight_dev_area.x;
+    invent_dev_area.y = monop_dev_area.y + 25 + invent_dev_area.h;
 }
 
 /**
