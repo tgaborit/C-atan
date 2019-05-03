@@ -62,6 +62,7 @@ Status status; /*!<deffinie si c'est le tour du joueur ou si il est en attente>*
 Ressource* ressource; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
 CarteDev* carte_dev; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
 Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
+int nbRoute; /*!<nombre de routes possédées par le joueur>*/
 }Joueur;
 
 /**
@@ -70,7 +71,7 @@ Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
  *
  *
  * \param Char* pseudo choisie par le joueur Joueur*: joueur dont on initialise le pseudo
- * \return: aucun
+ * \return aucun
  */
 void set_pseudo(Joueur* joueur, char* pseudo);
 
@@ -169,6 +170,15 @@ int get_score(Joueur* joueur);
 void inc_score(Joueur* joueur, int points);
 
 
+/**
+* \fn void dec_score(Joueur* joueur, int points)
+* \brief Fonction qui décrémente le score d'un joueur
+*
+* fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+* \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+* \return aucun
+*/
+void dec_score(Joueur* joueur, int points);
 
 /**
  * \fn void gain_ressource(Type_ressource type, Joueur* joueur)

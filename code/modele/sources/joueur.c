@@ -98,6 +98,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     new_joueur->score=0;
     new_joueur->ressource= (Ressource*) malloc(5*sizeof(Ressource));
     new_joueur->carte_dev=(CarteDev*) malloc(5*sizeof(CarteDev));
+    new_joueur->nbRoute=0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -159,6 +160,19 @@ void inc_score(Joueur* joueur, int points)
     joueur->score+=points;
 }
 
+ 	/**
+	 * \fn void dec_score(Joueur* joueur, int points)
+	 * \brief Fonction qui décrémente le score d'un joueur
+	 *
+	 * fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+	 * \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+	 * \return aucun
+	 */
+	void dec_score(Joueur* joueur, int points){
+
+	    joueur->score-=points;
+
+	}
 /**
  * \fn void set_status(Joueur joueur);
  * \brief Initialisaton status du joueur
@@ -297,6 +311,7 @@ int achat_route(Joueur* joueur)
         {
             perte_ressource(ARGILE,joueur);
             perte_ressource(BOIS, joueur);
+            ++joueur->nbRoute;
             return 0;
         }
     return -1;

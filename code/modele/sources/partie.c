@@ -12,6 +12,27 @@
 
 
 
+static void cherche_infrastructure(Noeud* n){
+
+	    Infrastructure infra;
+	    Joueur* j;
+	    int i;
+	    for(i=0;i<6;++i){
+	        infra = n->t->s[i].i;
+	        j = n->t->s[i].owner;
+	        if(infra == COLONIE){
+	            gain_ressource(n->t->type,j);
+	        }
+
+	        if(infra == VILLE){
+	            gain_ressource(n->t->type,j);
+	            gain_ressource(n->t->type,j);
+	        }
+	    }
+
+	}
+
+
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
     Node_joueur* new= (Node_joueur*) malloc(sizeof(Node_joueur));
@@ -39,14 +60,20 @@ static int isempty_list_joueur (List_joueur* list)
     return 0;
 }
 
+
 static void setOnNext_list_joueur(List_joueur* list)
 {
-    list->current=list->current->next;
+    if(list->current != NULL){
+        list->current=list->current->next;
+    }
 }
+
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
-    list->current=list->first;
+    if(list->current != NULL){
+        list->current=list->first;
+    }
 }
 
 static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
@@ -70,6 +97,33 @@ static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
     return 1;
 }
 
+static Joueur* joueur_nbRoute_max(Partie* partie){
+    int i, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
+        if(j_max->nbRoute < partie->joueurs->current->joueur->nbRoute){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbRoute == partie->joueurs->current->joueur->nbRoute){           // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
+            partie->joueurs->current = tmp;
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
+
+
 
 
   /**
@@ -81,6 +135,7 @@ static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
 */
 int find_joueur(Partie* partie, Joueur* joueur)
 {
+
     int c=0;
     Node_joueur* savecurrent= partie->joueurs->current;
     char* current_pseudo= partie->joueurs->current->joueur->pseudo;
@@ -165,7 +220,28 @@ static void init_pile_cartedev(CarteDev carte_dev[4])
     return partie;
  }
 
-   /**
+
+	static void free_node_joueur(Node_joueur* n){
+	    free(n);
+	}
+
+static void free_list_joueur(Partie* partie){
+    int i;
+    setOnFirst_list_joueur(partie->joueurs);
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){
+
+        Node_joueur* n = partie->joueurs->current;
+        setOnNext_list_joueur(partie->joueurs);
+        free_node_joueur(n);
+    }
+
+    free_node_joueur(partie->joueurs->current);
+    free(partie->joueurs);
+	}
+
+	   /**
 * \fn void free_partie(Partie* partie)
 * \brief libère la mémoire allouée pour une structure partie
 *
@@ -173,18 +249,11 @@ static void init_pile_cartedev(CarteDev carte_dev[4])
 * \return aucun
 */
 void free_partie(Partie* partie){
-    int i;
-    Joueur* current_joueur;
-    for (i=1;i<=get_nbjoueurs(partie);++i){
-    current_joueur=get_joueur_actif(partie);
-    setOnNext_list_joueur(partie->joueurs);
-    free_joueur(current_joueur);
-    }
-    freePlateau(partie->plateau);
-    free(partie->cartedev);
-    free(partie);
+	freePlateau(partie->plateau);
+    free_list_joueur(partie);
+	free(partie);
 
- }
+}
   /**
 * \fn void add_joueur(Joueur joueur, Partie partie)
 * \brief inscrit un nouveau joueur à la partie
@@ -271,6 +340,79 @@ Joueur* get_joueur_score_max(Partie* partie)
         return partie->joueurs->current->joueur;
 
     return joueurmaxscore;
+
+}
+
+/**
+ * \fn void gagne_ressource(int lance_des, Partie partie);
+ * \brief distribue les ressources correspondant aux cases du numéro de dés
+ *  ajoute les ressources aux joueurs possédant une construction à proximité de ces cases.
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
+void gagne_ressource(int lance_des, Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On cherche les noeuds ou la proba est celle du lancé de dés
+            if(p->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            }
+            if(p->adjacence[i]->adjacence[i]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            }
+            if(p->adjacence[i]->adjacence[ord[i]]->t->proba == lance_des){
+                cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+            }
+        }
+    }
+}
+
+/**
+ * \fn void distribution_ressource(List_Noeud)
+ * \brief distribu les ressources en début de partie
+ *
+ *  ajoute les ressources juxtaposant les noeuds ou les joueurs ont placé leurs collonies au début de la partie
+ * \param Partie: etat de la partie
+ * \return aucun
+ */
+void distribution_ressource(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        Plateau* p = partie->plateau;
+        int i=0;
+        int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
+
+        for(i=0;i<6;++i){                                               // On parcourt tous les noeuds du plateau
+            cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
+            cherche_infrastructure(p->adjacence[i]->adjacence[i]);
+            cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
+        }
+    }
+}
+
+/**
+ * \fn void nb_routes_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de routes
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+
+void nb_routes_max(Partie* partie){
+    if(partie != NULL && partie->plateau != NULL){
+        static Joueur* j_old = NULL;
+        Joueur* j_new = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité).
+        if(j_old != NULL){
+            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
+        }
+     if(j_new != NULL){
+            inc_score(j_new,1);
+        }
+        j_old = j_new;
+    }
 
 }
 
@@ -440,4 +582,12 @@ int utiliser_point (Partie* partie){
  * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte point
  */
-//int utiliser_routes (Partie* partie,){
+int utiliser_routes (Partie* partie){
+    Joueur* joueur_actif= get_joueur_actif(partie);
+    if (get_cartedev(ROUTES,joueur_actif)<1)
+        return -1;
+
+    joueur_actif->ressource[BOIS].nb_ressource+=2;
+    joueur_actif->ressource[ARGILE].nb_ressource+=2;
+}
+
