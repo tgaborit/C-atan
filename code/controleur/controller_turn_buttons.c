@@ -29,6 +29,7 @@ static SDL_Rect knight_dev_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect monop_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Monopole*/
 static SDL_Rect invent_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Invention*/
 static SDL_Rect roads_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Routes*/
+static SDL_Rect univ_dev_area;          /*!< Rectangle correspondant à la zone du bouton de la carte développement Université*/
 
 static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
@@ -51,7 +52,7 @@ void drawButtonsTurn(SDL_Renderer* renderer)
 
     SDL_Rect turn_buttons[NTURNBUTTONS] = {wood_card_area, wheat_card_area, clay_card_area, sheeps_card_area, rock_card_area,
     dev_craft_area, road_craft_area, settle_craft_area, city_craft_area, knight_dev_area, monop_dev_area, invent_dev_area,
-    roads_dev_area, dice_area, end_turn_area, help_area};
+    roads_dev_area, univ_dev_area, dice_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -191,70 +192,7 @@ void initDevCardsAreas()
     initMonopDevArea();
     initInventDevArea();
     initRoadsDevArea();
-}
-
-/**
-* \fn void initKnightDevArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Chevalier.
-*
-* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
-* Assigne les valeurs de position selon le placement du bouton Chevalier sur l'écran du joueur.
-*/
-void initKnightDevArea()
-{
-    knight_dev_area.w = DEVW;
-    knight_dev_area.h = DEVH;
-
-    knight_dev_area.x = 100;
-    knight_dev_area.y = 240;
-}
-
-/**
-* \fn void initMonopDevArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Monopole.
-*
-* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
-* Assigne les valeurs de position selon le placement du bouton Monopole sur l'écran du joueur.
-*/
-void initMonopDevArea()
-{
-    monop_dev_area.w = DEVW;
-    monop_dev_area.h = DEVH;
-
-    monop_dev_area.x = knight_dev_area.x;
-    monop_dev_area.y = knight_dev_area.y + 25 + monop_dev_area.h;
-}
-
-/**
-* \fn void initInventDevArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Invention.
-*
-* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
-* Assigne les valeurs de position selon le placement du bouton Invention sur l'écran du joueur.
-*/
-void initInventDevArea()
-{
-    invent_dev_area.w = DEVW;
-    invent_dev_area.h = DEVH;
-
-    invent_dev_area.x = knight_dev_area.x;
-    invent_dev_area.y = monop_dev_area.y + 25 + invent_dev_area.h;
-}
-
-/**
-* \fn void initRoadsDevArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Routes.
-*
-* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
-* Assigne les valeurs de position selon le placement du bouton Routes sur l'écran du joueur.
-*/
-void initRoadsDevArea()
-{
-    roads_dev_area.w = DEVW;
-    roads_dev_area.h = DEVH;
-
-    roads_dev_area.x = knight_dev_area.x;
-    roads_dev_area.y = invent_dev_area.y + 25 + roads_dev_area.h;
+    initUnivDevArea();
 }
 
 /**
@@ -399,6 +337,86 @@ void initCityCraftArea()
 
     city_craft_area.x = settle_craft_area.x;
     city_craft_area.y = settle_craft_area.y + settle_craft_area.h + 50;
+}
+
+/**
+* \fn void initKnightDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Chevalier.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Chevalier sur l'écran du joueur.
+*/
+void initKnightDevArea()
+{
+    knight_dev_area.w = DEVW;
+    knight_dev_area.h = DEVH;
+
+    knight_dev_area.x = 100;
+    knight_dev_area.y = 240;
+}
+
+/**
+* \fn void initMonopDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Monopole.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Monopole sur l'écran du joueur.
+*/
+void initMonopDevArea()
+{
+    monop_dev_area.w = DEVW;
+    monop_dev_area.h = DEVH;
+
+    monop_dev_area.x = knight_dev_area.x;
+    monop_dev_area.y = knight_dev_area.y + 25 + monop_dev_area.h;
+}
+
+/**
+* \fn void initInventDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Invention.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Invention sur l'écran du joueur.
+*/
+void initInventDevArea()
+{
+    invent_dev_area.w = DEVW;
+    invent_dev_area.h = DEVH;
+
+    invent_dev_area.x = knight_dev_area.x;
+    invent_dev_area.y = monop_dev_area.y + 25 + invent_dev_area.h;
+}
+
+/**
+* \fn void initRoadsDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Routes.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Routes sur l'écran du joueur.
+*/
+void initRoadsDevArea()
+{
+    roads_dev_area.w = DEVW;
+    roads_dev_area.h = DEVH;
+
+    roads_dev_area.x = knight_dev_area.x;
+    roads_dev_area.y = invent_dev_area.y + 25 + roads_dev_area.h;
+}
+
+/**
+* \fn void initUnivDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Université.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Université sur l'écran du joueur.
+*/
+void initUnivDevArea()
+{
+    univ_dev_area.w = DEVW;
+    univ_dev_area.h = DEVH;
+
+    univ_dev_area.x = knight_dev_area.x;
+    univ_dev_area.y = roads_dev_area.y + 25 + univ_dev_area.h;
 }
 
 /**

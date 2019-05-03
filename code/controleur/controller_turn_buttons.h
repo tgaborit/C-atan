@@ -39,7 +39,7 @@ typedef enum {
 * \def NTURNBUTTONS
 * Définit le nombre de boutons de l'environnement "Tour du joueur".
 */
-#define NTURNBUTTONS 16
+#define NTURNBUTTONS 17
 
 /**
 * \def CARDW
@@ -100,6 +100,7 @@ void initButtonsTurn();
         void initMonopDevArea();
         void initInventDevArea();
         void initRoadsDevArea();
+        void initUnivDevArea();
     void initDiceArea();
     void initEndTurnArea();
     void initHelpArea();
