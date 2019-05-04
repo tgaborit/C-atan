@@ -13,9 +13,4 @@
 
 void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
-void craftDevEvent(/*Game* the_game*/);
-void useUnivEvent(/*Game* the_game*/);
-void rollDiceEvent(/*Game* the_game*/);
-void endTurnEvent(/*Game* the_game*/);
-
 #endif //CATANE_CONTROLLER_TURN_H

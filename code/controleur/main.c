@@ -22,12 +22,12 @@ int main()
     SDL_SetWindowTitle(window, "Catane");
 
     SDL_bool program_launched = SDL_TRUE;
-    ResourceButton resource_chosen;
 
-    //controllerTurn(&program_launched, renderer);
+    controllerTurn(&program_launched, renderer);
     //controllerPlaceUrb(program_launched, renderer, SETTLE_PLACING);
     //controllerPlaceRoad(program_launched, renderer);
-    controllerResource(&resource_chosen, &program_launched, renderer);
+//    ResourceButton resource_chosen;
+    //controllerResource(&resource_chosen, &program_launched, renderer);
 
     //Fermeture fenetre avec destruction rendu et fenetre
     SDL_DestroyRenderer(renderer);
