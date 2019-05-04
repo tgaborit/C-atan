@@ -14,7 +14,7 @@
 #include "controller_turn.h"
 #include "controller_turn_buttons.h"
 #include "controller_place_urb.h"
-#include "controller_place_road.h"
+//#include "controller_place_road.h"
 #include "controller_turn_events.h"
 
 /**
@@ -56,7 +56,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                 case ROADCRAFT_BUTTON :
                     printf("Clic sur bouton Craft route\n");
                     printf("Appel de la fonction controllerPlaceRoad(program_launched, renderer, the_game)\n");
-                    controllerPlaceRoad(program_launched, renderer/*, the_game*/);
+//                    controllerPlaceRoad(program_launched, renderer/*, the_game*/);
                     break;
 
                 case SETTLECRAFT_BUTTON :
