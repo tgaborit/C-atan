@@ -1,10 +1,10 @@
 /**
-* \file controller_place_road.h
+* \file controller_path.h
 * \brief En-tête du contrôleur du choix d'un chemin
 * \author Titouan Gaborit
 * \date 1 mai 2019
 *
-* En-tête déclarant les fonctions du contrôleur du choix d'un chemin.
+* En-tête déclarant les fonctions du contrôleur du choix d'un chemin ainsi que la définition des macros relatives.
 *
 */
 

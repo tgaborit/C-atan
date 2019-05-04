@@ -4,8 +4,8 @@
 * \author Titouan Gaborit
 * \date 1 mai 2019
 *
-* Programme gérant l'environnement du choix d'un chemin : l'affichage des zones corrsepondant aux chemins, la détection d'un clic dessus
-* par le joueur ou encore le fait de quitter l'environnement ou le programme.
+* Programme gérant l'environnement du choix d'un chemin : la détection d'un clic dessus par le joueur
+* ou encore le fait de quitter l'environnement ou le programme.
 *
 */
 
@@ -99,15 +99,14 @@ static SDL_Rect pathO50_area;          /*!< Rectangle correspondant à la zone d
 static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone du chemin 51 des autres zones*/
 
 /**
-* \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game)
-* \brief Fonction principale du contrôleur du placement d'une route.
+* \fn void controllerPath(PathButton* path_chosen, SDL_bool* program_launched)
+* \brief Fonction principale du contrôleur du choix d'un chemin.
 *
-* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une route.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+* Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un chemin.
+* Elle détecte les actions du joueur et enregistre le chemin cliqué le cas échéant.
 *
-* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+* \param[in,out] path_chosen Pointeur vers le chemin choisi dans lequel sera enregistré le chemin cliqué.
+* \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -229,8 +228,8 @@ PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
 }
 
 /**
-* \fn void initButtonsPlaceRoad()
-* \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une route".
+* \fn void initPathButton()
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un chemin".
 *
 * Initialise les champs des rectangles des zones correspondant aux chemin du plateau.
 * Répartit la totalité des chemins selon la formation de 9 hexagones couchés dans un tableau bidimensionnel,
@@ -266,16 +265,16 @@ void initPathButtons()
     hexagonl_s = (sqrt(3)/2)*HEXAGONS;
 
     // Initialisation de la position des zones des boutons des chemins par hexagone, selon leur position et leur côté
-    initPosRectHexLying(path_buttons[0], BOARDCENTERX, BOARDCENTERY, hexagonl_s);                                 // Boutons de la première couronne
-    initPosRectHexLying(path_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                               // Boutons de la deuxième couronne
-    initPosRectHexLying(path_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                               // Boutons de la troisième couronne
-    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, round(hexagonl_s));                    // Boutons de l'hexagone Nord
-    initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Est
-    initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Sud - Est
-    initPosRectHexLying(path_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s); // Boutons de l'hexagone Sud
-    initPosRectHexLying(path_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Sud - Ouest
-    initPosRectHexLying(path_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s); // Boutons de l'hexagone Nord - Ouest
-    initPosRectHex(path_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2); // Boutons de l'hexagone debout
+    initPosRectHexLying(path_buttons[0], BOARDCENTERX, BOARDCENTERY, hexagonl_s);                                           // Boutons de la première couronne
+    initPosRectHexLying(path_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                                         // Boutons de la deuxième couronne
+    initPosRectHexLying(path_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                                         // Boutons de la troisième couronne
+    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, round(hexagonl_s));                       // Boutons de l'hexagone Nord
+    initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Est
+    initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Est
+    initPosRectHexLying(path_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Sud
+    initPosRectHexLying(path_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Ouest
+    initPosRectHexLying(path_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Nord - Ouest
+    initPosRectHex(path_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2);                                     // Boutons de l'hexagone debout
     initPosRectOthers();
 }
 

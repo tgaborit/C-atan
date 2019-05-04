@@ -4,13 +4,17 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-* En-tête déclarant les fonctions du contrôleur du choix d'une ressource.
+* En-tête déclarant les fonctions du contrôleur du choix d'une ressource ainsi que la définition des macros relatives.
 *
 */
 
 #ifndef CATANE_CONTROLLER_RESOURCE_H
 #define CATANE_CONTROLLER_RESOURCE_H
 
+/**
+* \enum ResourceButton
+* Tous les boutons existants dans l'environnement "Choix d'une ressource" ainsi que le non-bouton.
+*/
 typedef enum {
         WOOD_BUTTON,
         WHEAT_BUTTON,
@@ -23,7 +27,7 @@ typedef enum {
 
 /**
 * \def NRESOURCEBUTTONS
-* Définit le nombre de boutons de l'environnement "Tour du joueur".
+* Définit le nombre de boutons de l'environnement "Choix d'une ressource".
 */
 #define NRESOURCEBUTTONS 5
 
@@ -39,7 +43,7 @@ typedef enum {
 */
 #define CARDH 166
 
-void controllerResource(ResourceButton* resource_chosen, SDL_bool* program_launched, SDL_Renderer* renderer);
+void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer, SDL_bool* program_launched);
 
 void drawResourceButtons(SDL_Renderer* renderer);
 

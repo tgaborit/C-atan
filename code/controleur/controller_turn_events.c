@@ -33,6 +33,31 @@ void craftDevEvent(/*Game* the_game*/)
     SDL_PushEvent(&ev);
 }
 
+/**
+* \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game)
+* \brief Fonction principale du contrôleur du placement d'une route.
+*
+* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une route.
+* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+*
+* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+*/
+/**
+* \fn void placeRoadEvent(SDL_bool* placing_launched, Game* the_game, double x, double y, int position)
+* \brief Evénement de placement d'une route.
+*
+* Fait appel à la fonction du modèle setRoute pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* L'emplacement est un chemin dont les coordonnées sont passées en paramètre.
+* Si le placement réussit, quitte l'environnement "Placement d'une route".
+*
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in] x Abscisse de l'hexagone où placer la route.
+* \param[in] y Ordonnée de l'hexagone où placer la route.
+* \param[in] position Position du chemin dans l'hexagone où placer la route.
+*/
 void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_Event ev;
@@ -69,11 +94,11 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
     ResourceButton resource_clicked1 = NO_RESOURCEBUTTON;
     ResourceButton resource_clicked2 = NO_RESOURCEBUTTON;
 
-    controllerResource(&resource_clicked1, program_launched, renderer);
+    controllerResource(&resource_clicked1, renderer, program_launched);
     if(*program_launched == SDL_FALSE)
         return;
 
-    controllerResource(&resource_clicked2, program_launched, renderer);
+    controllerResource(&resource_clicked2, renderer, program_launched);
     if(*program_launched == SDL_FALSE)
         return;
 
@@ -110,6 +135,17 @@ TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
     }
 }
 
+/**
+* \fn void controllerPlaceRoadButton(SDL_MouseButtonEvent button, SDL_bool* placing_launched, Game* the_game)
+* \brief Sous-fonction de controllerPlaceRoad qui traite le clic effectué.
+*
+* Détermine le bouton sur lequel le joueur a cliqué puis appelle l'évènement de placement d'une route sur le chemin correspondant,
+* si le clic a été effectué sur un chemin.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \param[in,out] placcement Pointeur vers l'état du placement.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+*/
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 {
     PathCoordinates path_coordinates;

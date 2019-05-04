@@ -4,8 +4,8 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-* Programme gérant l'environnement du choix d'une ressource : l'affichage des zones corrsepondant aux cartes ressources, la détection d'un clic dessus
-* par le joueur ou encore le fait de quitter le programme.
+* Programme gérant l'environnement du choix d'une ressource : la détection d'un clic dessus par le joueur
+* ou encore le fait de quitter le programme.
 *
 */
 
@@ -21,7 +21,17 @@ static SDL_Rect clay_card_area;         /*!< Rectangle correspondant à la zone 
 static SDL_Rect sheeps_card_area;       /*!< Rectangle correspondant à la zone de la carte Moutons*/
 static SDL_Rect rock_card_area;         /*!< Rectangle correspondant à la zone de la carte Roche*/
 
-void controllerResource(ResourceButton* resource_clicked, SDL_bool* program_launched, SDL_Renderer* renderer)
+/**
+* \fn void controllerResource(PathButton* path_chosen, SDL_bool* program_launched)
+* \brief Fonction principale du contrôleur du choix d'une ressource.
+*
+* Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'une ressource.
+* Elle détecte les actions du joueur et enregistre la ressource cliquée le cas échéant.
+*
+* \param[in,out] path_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée la ressource cliquée.
+* \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
+*/
+void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initResourceButtons();
@@ -39,31 +49,31 @@ void controllerResource(ResourceButton* resource_clicked, SDL_bool* program_laun
                 {
                 case WOOD_BUTTON :
                     printf("Clic sur carte bois\n");
-                    *resource_clicked = WOOD_BUTTON;
+                    *resource_chosen = WOOD_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case WHEAT_BUTTON :
                     printf("Clic sur carte ble\n");
-                    *resource_clicked = WHEAT_BUTTON;
+                    *resource_chosen = WHEAT_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case CLAY_BUTTON :
                     printf("Clic sur carte argile\n");
-                    *resource_clicked = CLAY_BUTTON;
+                    *resource_chosen = CLAY_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case SHEEPS_BUTTON :
                     printf("Clic sur carte moutons\n");
-                    *resource_clicked = SHEEPS_BUTTON;
+                    *resource_chosen = SHEEPS_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case ROCK_BUTTON :
                     printf("Clic sur carte roche\n");
-                    *resource_clicked = ROCK_BUTTON;
+                    *resource_chosen = ROCK_BUTTON;
                     quit(&choice_launched);
                     break;
 
@@ -74,7 +84,7 @@ void controllerResource(ResourceButton* resource_clicked, SDL_bool* program_laun
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                *resource_clicked = NO_RESOURCEBUTTON;
+                *resource_chosen = NO_RESOURCEBUTTON;
                 printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
@@ -110,14 +120,14 @@ void drawResourceButtons(SDL_Renderer* renderer)
 }
 
 /**
-* \fn TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button)
+* \fn TurnButton whichResourceButton(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton de carte ressource le joueur a cliqué.
 *
 * Teste pour chaque bouton de carte ressource si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
-* \return Le bouton de carte ressource qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de carte ressource qui a été cliqué, NO_RESOURCEBUTTON si aucun.
 */
 ResourceButton whichResourceButton(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, wood_card_area) == SDL_TRUE)
