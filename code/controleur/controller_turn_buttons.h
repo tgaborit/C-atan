@@ -16,11 +16,11 @@
 * Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
 */
 typedef enum {
-        WOOD_BUTTON,
-        WHEAT_BUTTON,
-        CLAY_BUTTON,
-        SHEEPS_BUTTON,
-        ROCK_BUTTON,
+//        WOOD_BUTTON,
+//        WHEAT_BUTTON,
+//        CLAY_BUTTON,
+//        SHEEPS_BUTTON,
+//        ROCK_BUTTON,
 
         DEVCRAFT_BUTTON,
         ROADCRAFT_BUTTON,
@@ -45,19 +45,19 @@ typedef enum {
 * \def NTURNBUTTONS
 * Définit le nombre de boutons de l'environnement "Tour du joueur".
 */
-#define NTURNBUTTONS 17
+#define NTURNBUTTONS 12
 
-/**
-* \def CARDW
-* Définit la largeur d'une carte ressource.
-*/
-#define CARDW 115
-
-/**
-* \def CARDH
-* Définit la hauteur d'une carte ressource.
-*/
-#define CARDH 166
+///**
+//* \def CARDW
+//* Définit la largeur d'une carte ressource.
+//*/
+//#define CARDW 115
+//
+///**
+//* \def CARDH
+//* Définit la hauteur d'une carte ressource.
+//*/
+//#define CARDH 166
 
 /**
 * \def CRAFTW
@@ -86,17 +86,17 @@ typedef enum {
 void drawButtonsTurn(SDL_Renderer* renderer);
 
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
-    TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button);
+//    TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button);
     TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button);
     TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsTurn();
-    void initCardsAreas();
-        void initWoodCard();
-        void initWheatCard();
-        void initClayCard();
-        void initSheepsCard();
-        void initRockCard();
+//    void initCardsAreas();
+//        void initWoodCard();
+//        void initWheatCard();
+//        void initClayCard();
+//        void initSheepsCard();
+//        void initRockCard();
     void initCraftAreas();
         void initRoadCraftArea();
         void initSettleCraftArea();

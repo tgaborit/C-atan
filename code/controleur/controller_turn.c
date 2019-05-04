@@ -8,6 +8,7 @@
 *
 */
 
+#include <stdio.h>
 #include <SDL.h>
 #include "controller.h"
 #include "controller_turn.h"
@@ -45,25 +46,25 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
             case SDL_MOUSEBUTTONDOWN :
                 switch(whichButtonTurn(event.button))
                 {
-                case WOOD_BUTTON :
-                    printf("Clic sur carte bois\n");
-                    break;
-
-                case WHEAT_BUTTON :
-                    printf("Clic sur carte ble\n");
-                    break;
-
-                case CLAY_BUTTON :
-                    printf("Clic sur carte argile\n");
-                    break;
-
-                case SHEEPS_BUTTON :
-                    printf("Clic sur carte moutons\n");
-                    break;
-
-                case ROCK_BUTTON :
-                    printf("Clic sur carte roche\n");
-                    break;
+//                case WOOD_BUTTON :
+//                    printf("Clic sur carte bois\n");
+//                    break;
+//
+//                case WHEAT_BUTTON :
+//                    printf("Clic sur carte ble\n");
+//                    break;
+//
+//                case CLAY_BUTTON :
+//                    printf("Clic sur carte argile\n");
+//                    break;
+//
+//                case SHEEPS_BUTTON :
+//                    printf("Clic sur carte moutons\n");
+//                    break;
+//
+//                case ROCK_BUTTON :
+//                    printf("Clic sur carte roche\n");
+//                    break;
 
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
