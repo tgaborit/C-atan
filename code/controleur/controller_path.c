@@ -1,10 +1,11 @@
 /**
-* \file controller_place_road.c
-* \brief Fonctions du contrôleur du placement d'une route
+* \file controller_path.c
+* \brief Fonctions du contrôleur du choix d'un chemin
 * \author Titouan Gaborit
 * \date 1 mai 2019
 *
-* Programme gérant les actions du joueur lors du placement d'une route : le choix du chemin sur lequel elle sera construite.
+* Programme gérant l'environnement du choix d'un chemin : l'affichage des zones corrsepondant aux chemins, la détection d'un clic dessus
+* par le joueur ou encore le fait de quitter l'environnement ou le programme.
 *
 */
 
@@ -108,7 +109,7 @@ static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone d
 * \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
-void controllerPath(PathButton* path_chosen, SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
+void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     SDL_Event ev;

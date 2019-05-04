@@ -1,10 +1,10 @@
 /**
 * \file controller_place_road.h
-* \brief En-tête du contrôleur du placement d'une route
+* \brief En-tête du contrôleur du choix d'un chemin
 * \author Titouan Gaborit
 * \date 1 mai 2019
 *
-* En-tête déclarant les fonctions du contrôleur du placement d'une route.
+* En-tête déclarant les fonctions du contrôleur du choix d'un chemin.
 *
 */
 
@@ -13,7 +13,7 @@
 
 /**
 * \enum PathButton
-* Tous les boutons existants dans l'environnement "Placement d'une route" ainsi que le non-bouton.
+* Tous les boutons existants dans l'environnement "Choix d'un chemin" ainsi que le non-bouton.
 */
 typedef enum {
         PATHXX0_BUTTON,
@@ -104,7 +104,7 @@ typedef enum {
 
 /**
 * \def NPLACEROADBUTTON
-* Définit le nombre de boutons de l'environnement "Placement d'une route".
+* Définit le nombre de boutons de l'environnement "Choix d'un chemin".
 */
 #define NPATHBUTTONS 72
 
@@ -114,7 +114,7 @@ typedef enum {
 */
 #define PATHS 40
 
-void controllerPath(PathButton* path_clicked, SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
+void controllerPath(PathButton* path_clicked, SDL_Renderer* renderer, SDL_bool* program_launched);
 
 void drawPathButtons(SDL_Renderer* renderer);
 

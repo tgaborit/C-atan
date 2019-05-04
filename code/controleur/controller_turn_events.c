@@ -12,6 +12,7 @@
 #include <string.h>
 #include <SDL.h>
 
+#include "controller_path.h"
 #include "controller_resource.h"
 #include "controller_turn_events.h"
 
@@ -28,6 +29,28 @@ void craftDevEvent(/*Game* the_game*/)
     SDL_Event ev;
     printf("Appel de la fonction du modèle craftDev(the_game)\n");
     //craftDev(the_game);
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
+}
+
+void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+{
+    SDL_Event ev;
+    PathButton path_clicked;
+
+    do
+    {
+        path_clicked = NO_PATHBUTTON;
+        controllerPath(&path_clicked, renderer, program_launched);
+        if(path_clicked == NO_PATHBUTTON || *program_launched == SDL_FALSE)
+            return;
+
+        PathCoordinates path_chosen = pathButtonToPathCoordinates(path_clicked);
+        printf("Appel de la fonction du modele setRoute(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
+        printf("Hypothese : setRoute(the_game, %f, %f, %d) == 0\n", path_chosen.x, path_chosen.y, path_chosen.position);
+    }
+    while (/*set_route(the_game, path_chosen.x, path_chosen.y, path_chosen.position)*/0 != 0);
+
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -56,8 +79,8 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 
     TypeRessource resource_chosen1 = resourceButtonToTypeRessource(resource_clicked1);
     TypeRessource resource_chosen2 = resourceButtonToTypeRessource(resource_clicked2);
-
     printf("Appel de la fonction du modele utiliser_decouverte(the_game, %d, %d)\n", resource_chosen1, resource_chosen2);
+    //utiliser_decouverte(the_game, resource_chosen1, resource_chosen2);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);

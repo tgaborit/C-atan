@@ -11,7 +11,7 @@
 #ifndef CATANE_CONTROLLER_TURN_EVENTS_H
 #define CATANE_CONTROLLER_TURN_EVENTS_H
 
-#include "controller_place_road_buttons.h"
+#include "controller_path.h"
 #include "controller_resource.h"
 
 typedef enum {
@@ -29,11 +29,11 @@ typedef struct {
 } PathCoordinates;
 
 void craftDevEvent(/*Game* the_game*/);
+void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
+    PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
 void useUnivEvent(/*Game* the_game*/);
 void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
     TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
-
-PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
 void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);
 

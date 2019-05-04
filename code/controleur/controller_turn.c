@@ -56,7 +56,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                 case ROADCRAFT_BUTTON :
                     printf("Clic sur bouton Craft route\n");
                     printf("Appel de la fonction controllerPlaceRoad(program_launched, renderer, the_game)\n");
-//                    controllerPlaceRoad(program_launched, renderer/*, the_game*/);
+                    craftRoadEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case SETTLECRAFT_BUTTON :

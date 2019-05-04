@@ -4,7 +4,8 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-* Programme gérant les actions du joueur lors de son choix d'une carte ressource : les interactions avec les cartes ressources.
+* Programme gérant l'environnement du choix d'une ressource : l'affichage des zones corrsepondant aux cartes ressources, la détection d'un clic dessus
+* par le joueur ou encore le fait de quitter le programme.
 *
 */
 
