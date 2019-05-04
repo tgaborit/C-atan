@@ -106,33 +106,33 @@ void drawButtonsPlaceUrb(SDL_Renderer* renderer)
 }
 
 /**
-* \fn PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button)
+* \fn CrossButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le joueur a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \return Le bouton de l'environnement "Placement d'une colonie ou d'une ville" qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de l'environnement "Placement d'une colonie ou d'une ville" qui a été cliqué, NO_CROSSBUTTON si aucun.
 */
-PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button){
-    PlaceUrbButton button_clicked;
-    if((button_clicked = whichCrossButton(mouse_button)) != NO_BUTTON)
+CrossButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button){
+    CrossButton button_clicked;
+    if((button_clicked = whichCrossButton(mouse_button)) != NO_CROSSBUTTON)
         return button_clicked;
-    return NO_BUTTON;
+    return NO_CROSSBUTTON;
 }
 
 /**
-* \fn PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button)
+* \fn CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton de croisement le joueur a cliqué
 *
 * Teste pour chaque bouton de croisement si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
-* \return Le bouton de croisement qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de croisement qui a été cliqué, NO_CROSSBUTTON si aucun.
 */
-PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
+CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
     int i;
     SDL_Rect place_urb_buttons[NPLACEURBBUTTONS] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area,
                                                     crossX0X_area, crossX1X_area, crossX2X_area, crossX3X_area, crossX4X_area, crossX5X_area,
@@ -148,7 +148,7 @@ PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
         if(isInArea(mouse_button, place_urb_buttons[i]) != SDL_FALSE)
             return i;
     }
-    return NO_BUTTON;
+    return NO_CROSSBUTTON;
 }
 
 /**

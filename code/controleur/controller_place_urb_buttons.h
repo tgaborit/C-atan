@@ -12,7 +12,7 @@
 #define CATANE_CONTROLLER_PLACE_URB_BUTTONS_H
 
 /**
-* \enum PlaceUrbButton
+* \enum CrossButton
 * Tous les boutons existants dans l'environnement "Placement d'une colonie ou d'une ville" ainsi que le non-bouton.
 */
 typedef enum {
@@ -79,8 +79,8 @@ typedef enum {
         CROSSNW4_BUTTON,
         CROSSNW5_BUTTON,
 
-        NO_BUTTON
-} PlaceUrbButton;
+        NO_CROSSBUTTON
+} CrossButton;
 
 /**
 * \def NPLACEURBBUTTON
@@ -96,8 +96,8 @@ typedef enum {
 
 void drawButtonsPlaceUrb(SDL_Renderer* renderer);
 
-PlaceUrbButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button);
-    PlaceUrbButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
+CrossButton whichButtonPlaceUrb(SDL_MouseButtonEvent mouse_button);
+    CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsPlaceUrb();
 

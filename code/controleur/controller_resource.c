@@ -20,7 +20,7 @@ static SDL_Rect clay_card_area;         /*!< Rectangle correspondant à la zone 
 static SDL_Rect sheeps_card_area;       /*!< Rectangle correspondant à la zone de la carte Moutons*/
 static SDL_Rect rock_card_area;         /*!< Rectangle correspondant à la zone de la carte Roche*/
 
-void controllerResource(ResourceButton* resource_chosen, SDL_bool* program_launched, SDL_Renderer* renderer)
+void controllerResource(ResourceButton* resource_clicked, SDL_bool* program_launched, SDL_Renderer* renderer)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initResourceButtons();
@@ -38,31 +38,31 @@ void controllerResource(ResourceButton* resource_chosen, SDL_bool* program_launc
                 {
                 case WOOD_BUTTON :
                     printf("Clic sur carte bois\n");
-                    *resource_chosen = WOOD_BUTTON;
+                    *resource_clicked = WOOD_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case WHEAT_BUTTON :
                     printf("Clic sur carte ble\n");
-                    *resource_chosen = WHEAT_BUTTON;
+                    *resource_clicked = WHEAT_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case CLAY_BUTTON :
                     printf("Clic sur carte argile\n");
-                    *resource_chosen = CLAY_BUTTON;
+                    *resource_clicked = CLAY_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case SHEEPS_BUTTON :
                     printf("Clic sur carte moutons\n");
-                    *resource_chosen = SHEEPS_BUTTON;
+                    *resource_clicked = SHEEPS_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case ROCK_BUTTON :
                     printf("Clic sur carte roche\n");
-                    *resource_chosen = ROCK_BUTTON;
+                    *resource_clicked = ROCK_BUTTON;
                     quit(&choice_launched);
                     break;
 
@@ -73,7 +73,7 @@ void controllerResource(ResourceButton* resource_chosen, SDL_bool* program_launc
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                *resource_chosen = NO_BUTTON;
+                *resource_clicked = NO_RESOURCEBUTTON;
                 printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
@@ -129,7 +129,7 @@ ResourceButton whichResourceButton(SDL_MouseButtonEvent mouse_button){
         return SHEEPS_BUTTON;
     if(isInArea(mouse_button, rock_card_area) == SDL_TRUE)
         return ROCK_BUTTON;
-    return NO_BUTTON;
+    return NO_RESOURCEBUTTON;
 }
 
 /**

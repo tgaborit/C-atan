@@ -27,7 +27,7 @@
 * \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
-void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/) /*à appeler avec la structure the_partie*/
+void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
 {
     initButtonsTurn();
     while(*program_launched)
@@ -47,26 +47,6 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
             case SDL_MOUSEBUTTONDOWN :
                 switch(whichButtonTurn(event.button))
                 {
-//                case WOOD_BUTTON :
-//                    printf("Clic sur carte bois\n");
-//                    break;
-//
-//                case WHEAT_BUTTON :
-//                    printf("Clic sur carte ble\n");
-//                    break;
-//
-//                case CLAY_BUTTON :
-//                    printf("Clic sur carte argile\n");
-//                    break;
-//
-//                case SHEEPS_BUTTON :
-//                    printf("Clic sur carte moutons\n");
-//                    break;
-//
-//                case ROCK_BUTTON :
-//                    printf("Clic sur carte roche\n");
-//                    break;
-
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
                     printf("Appel de la fonction craftDevEvent(the_game)\n");
@@ -105,8 +85,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
 
                 case INVENTDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Invention\n");
-//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
-//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    printf("Appel de la fonction useInventEvent(the_game, renderer, program_launched)\n");
+                    useInventEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case ROADSDEV_BUTTON :

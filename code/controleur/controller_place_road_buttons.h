@@ -12,7 +12,7 @@
 #define CATANE_CONTROLLER_PLACE_ROAD_BUTTONS_H
 
 /**
-* \enum PlaceRoadButton
+* \enum PathButton
 * Tous les boutons existants dans l'environnement "Placement d'une route" ainsi que le non-bouton.
 */
 typedef enum {
@@ -99,8 +99,8 @@ typedef enum {
         PATHO50_BUTTON,
         PATHO51_BUTTON,
 
-        NO_BUTTON
-} PlaceRoadButton;
+        NO_PATHBUTTON
+} PathButton;
 
 /**
 * \def NPLACEROADBUTTON
@@ -116,8 +116,8 @@ typedef enum {
 
 void drawButtonsPlaceRoad(SDL_Renderer* renderer);
 
-PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button);
-    PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button);
+PathButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button);
+    PathButton whichPathButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsPlaceRoad();
     void initPosRectOthers();

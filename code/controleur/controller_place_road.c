@@ -84,7 +84,7 @@ void controllerPlaceRoad(SDL_bool* program_launched, SDL_Renderer* renderer/*, G
 */
 void controllerPlaceRoadButton(SDL_MouseButtonEvent mouse_button, SDL_bool* placing_launched/*, Game* the_game*/)
 {
-    PlaceRoadButton button_clicked  = whichButtonPlaceRoad(mouse_button);
+    PathButton button_clicked  = whichButtonPlaceRoad(mouse_button);
     printf("Clic sur bouton n°%d\n", button_clicked);
     switch(button_clicked)
     {

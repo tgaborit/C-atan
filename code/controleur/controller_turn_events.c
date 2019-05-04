@@ -9,8 +9,10 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include <SDL.h>
 
+#include "controller_resource.h"
 #include "controller_turn_events.h"
 
 /**
@@ -28,6 +30,61 @@ void craftDevEvent(/*Game* the_game*/)
     //craftDev(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
+}
+
+/**
+* \fn void useInventEvent(Game* the_game)
+* \brief Evénement d'utilisation de carte développement Invention.
+*
+* Fait appel à la fonction du modèle utiliser_decouverte pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+*
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+*/
+void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+{
+    SDL_Event ev;
+    ResourceButton resource_clicked1 = NO_RESOURCEBUTTON;
+    ResourceButton resource_clicked2 = NO_RESOURCEBUTTON;
+
+    controllerResource(&resource_clicked1, program_launched, renderer);
+    if(*program_launched == SDL_FALSE)
+        return;
+
+    controllerResource(&resource_clicked2, program_launched, renderer);
+    if(*program_launched == SDL_FALSE)
+        return;
+
+    TypeRessource resource_chosen1 = resourceButtonToTypeRessource(resource_clicked1);
+    TypeRessource resource_chosen2 = resourceButtonToTypeRessource(resource_clicked2);
+
+    printf("Appel de la fonction du modele utiliser_decouverte(the_game, %d, %d)\n", resource_chosen1, resource_chosen2);
+
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
+}
+
+TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
+{
+    switch(resource_clicked)
+    {
+    case WOOD_BUTTON :
+        return BOIS;
+
+    case WHEAT_BUTTON :
+        return BLE;
+
+    case CLAY_BUTTON :
+        return ARGILE;
+
+    case SHEEPS_BUTTON :
+        return MOUTON;
+
+    case ROCK_BUTTON :
+        return PIERRE;
+
+    default :
+        return -1;
+    }
 }
 
 /**

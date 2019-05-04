@@ -129,33 +129,33 @@ void drawButtonsPlaceRoad(SDL_Renderer* renderer)
 }
 
 /**
-* \fn PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button)
+* \fn PathButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton le joueur a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \return Le bouton de l'environnement "Placement d'une route" qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de l'environnement "Placement d'une route" qui a été cliqué, NO_PATHBUTTON si aucun.
 */
-PlaceRoadButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button){
-    PlaceRoadButton button_clicked;
-    if((button_clicked = whichPathButton(mouse_button)) != NO_BUTTON)
+PathButton whichButtonPlaceRoad(SDL_MouseButtonEvent mouse_button){
+    PathButton button_clicked;
+    if((button_clicked = whichPathButton(mouse_button)) != NO_PATHBUTTON)
         return button_clicked;
-    return NO_BUTTON;
+    return NO_PATHBUTTON;
 }
 
 /**
-* \fn PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button)
+* \fn PathButton whichPathButton(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton de chemin le joueur a cliqué
 *
 * Teste pour chaque bouton de chemin si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
-* \return Le bouton de chemin qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de chemin qui a été cliqué, NO_PATHBUTTON si aucun.
 */
-PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button){
+PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
     int i;
     SDL_Rect place_road_buttons[NPLACEROADBUTTONS] = {pathXX0_area, pathXX1_area, pathXX2_area, pathXX3_area, pathXX4_area, pathXX5_area,
                                                       pathX0X_area, pathX1X_area, pathX2X_area, pathX3X_area, pathX4X_area, pathX5X_area,
@@ -174,7 +174,7 @@ PlaceRoadButton whichPathButton(SDL_MouseButtonEvent mouse_button){
         if(isInArea(mouse_button, place_road_buttons[i]) != SDL_FALSE)
             return i;
     }
-    return NO_BUTTON;
+    return NO_PATHBUTTON;
 }
 
 /**

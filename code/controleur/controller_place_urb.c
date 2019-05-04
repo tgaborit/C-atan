@@ -86,7 +86,7 @@ void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer/*, Ga
 */
 void controllerPlaceUrbButton(SDL_MouseButtonEvent mouse_button, SDL_bool* placing_launched/*, Game* the_game,*/, UrbPlacing urb_placing)
 {
-    PlaceUrbButton button_clicked  = whichButtonPlaceUrb(mouse_button);
+    CrossButton button_clicked  = whichButtonPlaceUrb(mouse_button);
     printf("Clic sur bouton n°%d\n", button_clicked);
     switch(button_clicked)
     {

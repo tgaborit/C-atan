@@ -18,7 +18,7 @@ typedef enum {
         SHEEPS_BUTTON,
         ROCK_BUTTON,
 
-        NO_BUTTON
+        NO_RESOURCEBUTTON
 } ResourceButton;
 
 /**
