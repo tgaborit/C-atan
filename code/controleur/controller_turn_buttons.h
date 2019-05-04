@@ -27,6 +27,12 @@ typedef enum {
         SETTLECRAFT_BUTTON,
         CITYCRAFT_BUTTON,
 
+        KNIGHTDEV_BUTTON,
+        MONOPDEV_BUTTON,
+        INVENTDEV_BUTTON,
+        ROADSDEV_BUTTON,
+        UNIVDEV_BUTTON,
+
         DICE_BUTTON,
         ENDTURN_BUTTON,
 
@@ -82,6 +88,7 @@ void drawButtonsTurn(SDL_Renderer* renderer);
 TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
     TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button);
     TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button);
+    TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button);
 
 void initButtonsTurn();
     void initCardsAreas();

@@ -89,6 +89,36 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                     controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
                     break;
 
+                case KNIGHTDEV_BUTTON :
+                    printf("Clic sur bouton de carte développement Chevalier\n");
+//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    break;
+
+                case MONOPDEV_BUTTON :
+                    printf("Clic sur bouton de carte développement Monopole\n");
+//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    break;
+
+                case INVENTDEV_BUTTON :
+                    printf("Clic sur bouton de carte développement Invention\n");
+//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    break;
+
+                case ROADSDEV_BUTTON :
+                    printf("Clic sur bouton de carte développement Routes\n");
+//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    break;
+
+                case UNIVDEV_BUTTON :
+                    printf("Clic sur bouton de carte développement Universite\n");
+//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    break;
+
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
                     printf("Appel de la fonction endTurnEvent(the_game)\n");

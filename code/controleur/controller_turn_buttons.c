@@ -76,6 +76,8 @@ TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
         return button_clicked;
     if((button_clicked = whichCraftButton(mouse_button)) != NO_BUTTON)
         return button_clicked;
+    if((button_clicked = whichDevButton(mouse_button)) != NO_BUTTON)
+        return button_clicked;
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
     if(isInArea(mouse_button, dice_area) == SDL_TRUE)
@@ -110,7 +112,7 @@ TurnButton whichCardButton(SDL_MouseButtonEvent mouse_button){
 }
 
 /**
-* \fn ControlerButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
+* \fn TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
 * \brief Fonction de test sur quel bouton de craft le joueur a cliqué.
 *
 * Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
@@ -128,6 +130,30 @@ TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
         return SETTLECRAFT_BUTTON;
     if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
         return CITYCRAFT_BUTTON;
+    return NO_BUTTON;
+}
+
+/**
+* \fn TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de carte développement le joueur a cliqué.
+*
+* Teste pour chaque bouton de carte développement si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de carte développement qui a été cliqué, NO_BUTTON si aucun.
+*/
+TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, knight_dev_area) == SDL_TRUE)
+        return KNIGHTDEV_BUTTON;
+    if(isInArea(mouse_button, monop_dev_area) == SDL_TRUE)
+        return MONOPDEV_BUTTON;
+    if(isInArea(mouse_button, invent_dev_area) == SDL_TRUE)
+        return INVENTDEV_BUTTON;
+    if(isInArea(mouse_button, roads_dev_area) == SDL_TRUE)
+        return ROADSDEV_BUTTON;
+    if(isInArea(mouse_button, univ_dev_area) == SDL_TRUE)
+        return UNIVDEV_BUTTON;
     return NO_BUTTON;
 }
 
