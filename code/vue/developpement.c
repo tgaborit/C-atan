@@ -254,17 +254,32 @@ void AfficheUniversite(SDL_Renderer *renderer)
  */
 void AfficheGrandeArmee(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+    SDL_Surface* image = NULL;
+	SDL_Texture* reussitechevalier = NULL;
 
-	SDL_Rect universite;
-	universite.x = 150;
-	universite.y = 75;
-	universite.w = 125;
-	universite.h = 175;
+	image = SDL_LoadBMP("imagecatane/cartereussitechevalier.bmp");
 
-	if(SDL_RenderFillRect(renderer, &universite) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	reussitechevalier = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(reussitechevalier == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectreussitechevalier;
+
+	if(SDL_QueryTexture(reussitechevalier, NULL, NULL, &rectreussitechevalier.w, &rectreussitechevalier.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectreussitechevalier.x = 150;
+	rectreussitechevalier.y = 75;
+
+
+	if(SDL_RenderCopy(renderer, reussitechevalier, NULL, &rectreussitechevalier) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }
@@ -279,17 +294,32 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
  */
 void AfficheGrandeRoute(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+    SDL_Surface* image = NULL;
+	SDL_Texture* reussiteroute = NULL;
 
-	SDL_Rect universite;
-	universite.x = 325;
-	universite.y = 75;
-	universite.w = 125;
-	universite.h = 175;
+	image = SDL_LoadBMP("imagecatane/cartereussiteroute.bmp");
 
-	if(SDL_RenderFillRect(renderer, &universite) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	reussiteroute = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(reussiteroute == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectreussiteroute;
+
+	if(SDL_QueryTexture(reussiteroute, NULL, NULL, &rectreussiteroute.w, &rectreussiteroute.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectreussiteroute.x = 325;
+	rectreussiteroute.y = 75;
+
+
+	if(SDL_RenderCopy(renderer, reussiteroute, NULL, &rectreussiteroute) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }
