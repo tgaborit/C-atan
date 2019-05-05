@@ -36,6 +36,10 @@
 SDL_Window* InitFenetre(){
     SDL_Window *window = NULL;
 
+    if(TTF_Init()!=0){
+        fprintf(stderr, "Erreur d'initialisation TTf : %s\n", TTF_GetError());
+    }
+
 	if(SDL_Init(SDL_INIT_VIDEO)!=0)
 		SDL_ExitWithError("Initialisation SDL impossible");
 
@@ -81,7 +85,7 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	if(renderer == NULL)
 		SDL_ExitWithError("Creation rendu echouee");
 
-    AfficheDe(renderer);
+    AfficheDe(window, renderer);
 	AfficheChevalier(renderer);
 	AfficheMonopole(renderer);
 	AfficheInvention(renderer);
@@ -99,13 +103,14 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheCarteRoche(renderer);
 	AfficheVoleur(p, renderer);
 	AfficheJoueur(renderer);
+
 	AfficheSkip(renderer);
 	AfficheHelp(renderer);
 	AfficheBouttonDev(renderer);
 	AfficheBouttonRoute(renderer);
 	AfficheBouttonColonie(renderer);
 	AfficheBouttonVille(renderer);
-	Affiche_Infrastructures(p,renderer);
+	//Affiche_Infrastructures(p,renderer);
     SDL_RenderPresent(renderer);
     return renderer;
 
@@ -121,6 +126,8 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
  * \return aucun
  */
 void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer){
+
+    TTF_Quit();
     SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -137,7 +144,6 @@ void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer){
  */
 void AfficheJoueur(SDL_Renderer* renderer)
 {
-
 	//Creation de la barre avec les noms des joueurs et le score
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
@@ -151,8 +157,9 @@ void AfficheJoueur(SDL_Renderer* renderer)
 	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)
 		SDL_ExitWithError("Impossible de remplir un rectangle");
 
-	SDL_RenderPresent(renderer);
+    SDL_RenderPresent(renderer);
 }
+
 
 /**
  * \fn void AfficheSkip(SDL_Renderer* renderer)
@@ -203,21 +210,46 @@ void AfficheSkip(SDL_Renderer* renderer)
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheDe(SDL_Renderer* renderer)
+void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 {
+
+    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 105);
+    //TTF_SetFontStyle(police, TTF_STYLE_BOLD);
+    SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
+    char de[20] = "";
+
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-	SDL_Rect de;
-	de.x = 1570;
-	de.y = 110;
-	de.w = 100;
-	de.h = 100;
+	SDL_Rect rectde;
+	rectde.x = 1570;
+	rectde.y = 110;
+	rectde.w = 100;
+	rectde.h = 100;
 
-	if(SDL_RenderFillRect(renderer, &de) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	SDL_Rect rect;
+	rect.x = 1570;
+	rect.y = 120;
+	rect.w = 100;
+	rect.h = 100;
 
-	SDL_RenderPresent(renderer);
+	/*if(SDL_RenderFillRect(renderer, &rectde) != 0)
+		SDL_ExitWithError("Impossible de remplir un rectangle");*/
+
+
+    sprintf(de, "%d", 12); //lancer_des()
+    SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
+    SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
+
+    SDL_QueryTexture(textde, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textde, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    TTF_CloseFont(police);
+
+    //SDL_RenderPresent(renderer);
 }
 
 /**

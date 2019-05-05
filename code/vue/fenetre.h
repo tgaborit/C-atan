@@ -24,6 +24,7 @@
 #include "developpement.h"
 #include "probabilite.h"
 #include "place_infra.h"
+#include "affiche_joueur.h"
 #include "SDL_erreur.h"
 
 /**
@@ -77,7 +78,7 @@ void AfficheHelp(SDL_Renderer *renderer);
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheDe(SDL_Renderer *renderer);
+void AfficheDe(SDL_Window* window, SDL_Renderer *renderer);
 
 /**
  * \fn void AfficheSkip(SDL_Renderer* renderer)
@@ -123,4 +124,6 @@ void AfficheVoleur(Partie* p, SDL_Renderer* renderer);
  */
 void AfficheJoueur(SDL_Renderer* renderer);
 
+
+void AfficheInfoJoueur(SDL_Renderer* renderer, List_joueur* j);
 #endif
