@@ -213,13 +213,13 @@ void AfficheSkip(SDL_Renderer* renderer)
 void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 {
 
-    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 105);
-    //TTF_SetFontStyle(police, TTF_STYLE_BOLD);
-    SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
+    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 100);
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     char de[20] = "";
 
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
 
 	SDL_Rect rectde;
 	rectde.x = 1570;
@@ -228,16 +228,18 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 	rectde.h = 100;
 
 	SDL_Rect rect;
-	rect.x = 1570;
-	rect.y = 120;
+	rect.x = 1596;
+	rect.y = 125;
 	rect.w = 100;
 	rect.h = 100;
 
-	/*if(SDL_RenderFillRect(renderer, &rectde) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");*/
+	if(SDL_RenderFillRect(renderer, &rectde) != 0)
+		SDL_ExitWithError("Impossible de remplir un rectangle");
 
-
-    sprintf(de, "%d", 12); //lancer_des()
+    if(lancer_des() == 10 | lancer_des() == 11 | lancer_des() == 12){
+        rect.x = 1572;
+    }
+    sprintf(de, "%d", lancer_des()); //lancer_des()
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
     SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
 
@@ -249,7 +251,6 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 
     TTF_CloseFont(police);
 
-    //SDL_RenderPresent(renderer);
 }
 
 /**
