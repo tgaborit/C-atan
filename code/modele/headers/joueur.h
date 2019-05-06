@@ -31,7 +31,7 @@
  */
 
 typedef enum {
-    ROUGE, VERT, ORANGE, BLEU}
+    ROUGE, BLANC, ORANGE, BLEU}
     Couleur;
 
 /**

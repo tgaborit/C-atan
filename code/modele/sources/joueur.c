@@ -231,10 +231,12 @@ void perte_ressource(TypeRessource type, Joueur* joueur)
  *
  * fonction renvoillant le nombre de ressource d'un certain type possédé par un joueur
  * \param Type_ressource: le type de la ressource dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de ressource
- * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur
+ * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
 int  get_nbressource(TypeRessource type, Joueur* joueur)
 {
+    if (joueur==NULL)
+        return -1;
     return joueur->ressource[type].nb_ressource;
 }
 
@@ -290,10 +292,14 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur)
  *
  * fonction renvoillant le nombre de carte developpement d'un certain type possédé par un joueur
  * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de carte developpment
- * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur
+ * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
+
 int  get_cartedev(TypeCarteDev type, Joueur* joueur)
 {
+    if (joueur==NULL)
+        return -1;
+
     return joueur->carte_dev[type].nb_carte;
 }
 
