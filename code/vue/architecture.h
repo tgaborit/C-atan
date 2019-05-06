@@ -17,45 +17,45 @@
 
 
 /**
- * \fn AfficheBouttonDev(SDL_Renderer *renderer)
+ * \fn AfficheBoutonDev(SDL_Renderer *renderer)
  * \brief Fonction affichant le bouton des cartes développement
  *
  *
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheBouttonDev(SDL_Renderer *renderer);
+void AfficheBoutonDev(SDL_Renderer *renderer);
 
 
 /**
- * \fn AfficheBouttonRoute(SDL_Renderer *renderer)
+ * \fn AfficheBoutonRoute(SDL_Renderer *renderer)
  * \brief Fonction affichant le bouton des routes
  *
  *
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheBouttonRoute(SDL_Renderer *renderer);
+void AfficheBoutonRoute(SDL_Renderer *renderer);
 
 /**
- * \fn AfficheBouttonColonie(SDL_Renderer *renderer)
+ * \fn AfficheBoutonColonie(SDL_Renderer *renderer)
  * \brief Fonction affichant le bouton des colonies
  *
  *
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheBouttonColonie(SDL_Renderer *renderer);
+void AfficheBoutonColonie(SDL_Renderer *renderer);
 
 
 /**
- * \fn AfficheBouttonVille(SDL_Renderer *renderer)
+ * \fn AfficheBoutonVille(SDL_Renderer *renderer)
  * \brief Fonction affichant le bouton des villes
  *
  *
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheBouttonVille(SDL_Renderer *renderer);
+void AfficheBoutonVille(SDL_Renderer *renderer);
 
 #endif

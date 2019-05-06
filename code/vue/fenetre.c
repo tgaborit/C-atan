@@ -107,10 +107,10 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 
 	AfficheSkip(renderer);
 	AfficheHelp(renderer);
-	AfficheBouttonDev(renderer);
-	AfficheBouttonRoute(renderer);
-	AfficheBouttonColonie(renderer);
-	AfficheBouttonVille(renderer);
+	AfficheBoutonDev(renderer);
+	AfficheBoutonRoute(renderer);
+	AfficheBoutonColonie(renderer);
+	AfficheBoutonVille(renderer);
 	//Affiche_Infrastructures(p,renderer);
     SDL_RenderPresent(renderer);
     return renderer;
