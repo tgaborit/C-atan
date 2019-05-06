@@ -31,9 +31,10 @@ typedef struct {
 void craftDevEvent(/*Game* the_game*/);
 void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
     PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
-void useUnivEvent(/*Game* the_game*/);
+void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
 void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
     TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
+void useUnivEvent(/*Game* the_game*/);
 void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);
 

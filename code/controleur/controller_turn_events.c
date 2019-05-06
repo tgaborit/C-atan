@@ -603,6 +603,32 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 }
 
 /**
+* \fn void useMonopEvent(Game* the_game)
+* \brief Evénement d'utilisation de carte développement Monopole.
+*
+* Fait appel à la fonction du modèle utiliser_monopole pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+*
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+*/
+void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+{
+    SDL_Event ev;
+
+    ResourceButton resource_clicked = NO_RESOURCEBUTTON;
+
+    controllerResource(&resource_clicked, renderer, program_launched);
+    if(*program_launched == SDL_FALSE)
+        return;
+
+    TypeRessource resource_chosen = resourceButtonToTypeRessource(resource_clicked);
+    printf("Appel de la fonction du modele utiliser_monopole(the_game, %d)\n", resource_chosen);
+    //utiliser_monopole(the_game, resource_chosen);
+
+    ev.type = SDL_USEREVENT;
+    SDL_PushEvent(&ev);
+}
+
+/**
 * \fn void useUnivEvent(Game* the_game)
 * \brief Evénement d'utilisation de carte développement Université.
 *
