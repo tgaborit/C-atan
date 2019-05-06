@@ -111,7 +111,6 @@ static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone d
 void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
-    SDL_Event ev;
     initPathButtons();
     while(choice_launched)
     {
@@ -159,8 +158,6 @@ void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* p
             }
         }
     }
-    ev.type = SDL_USEREVENT;
-    SDL_PushEvent(&ev);
 }
 
 void drawPathButtons(SDL_Renderer* renderer)

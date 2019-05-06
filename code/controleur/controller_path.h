@@ -11,6 +11,8 @@
 #ifndef CATANE_CONTROLLER_PATH_H
 #define CATANE_CONTROLLER_PATH_H
 
+#include <SDL.h>
+
 /**
 * \enum PathButton
 * Tous les boutons existants dans l'environnement "Choix d'un chemin" ainsi que le non-bouton.

@@ -11,30 +11,16 @@
 #ifndef CATANE_CONTROLLER_TURN_EVENTS_H
 #define CATANE_CONTROLLER_TURN_EVENTS_H
 
-#include "controller_path.h"
-#include "controller_resource.h"
-
-typedef enum {
-        BLE,
-        BOIS,
-        PIERRE,
-        ARGILE,
-        MOUTON
-} TypeRessource;/* pour tester */
-
-typedef struct {
-        double x;
-        double y;
-        int position;
-} PathCoordinates;
+#include <SDL.h>
 
 void craftDevEvent(/*Game* the_game*/);
 void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
-    PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
+
 void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
 void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
-    TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
+void useRoadsEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
 void useUnivEvent(/*Game* the_game*/);
+
 void rollDiceEvent(/*Game* the_game*/);
 void endTurnEvent(/*Game* the_game*/);
 

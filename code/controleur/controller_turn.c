@@ -14,7 +14,6 @@
 #include "controller_turn.h"
 #include "controller_turn_buttons.h"
 #include "controller_place_urb.h"
-//#include "controller_place_road.h"
 #include "controller_turn_events.h"
 
 /**
@@ -71,6 +70,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                     controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
                     break;
 
+
                 case KNIGHTDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Chevalier\n");
 //                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
@@ -91,8 +91,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
 
                 case ROADSDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Routes\n");
-//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
-//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    printf("Appel de la fonction useRoadsEvent(the_game, renderer, program_launched)\n");
+                    useRoadsEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case UNIVDEV_BUTTON :
@@ -100,6 +100,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                     printf("Appel de la fonction useUnivEvent(the_game)\n");
                     useUnivEvent(/*the_game*/);
                     break;
+
 
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
@@ -116,6 +117,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                 case HELP_BUTTON :
                     printf("Clic sur bouton Aide\n");
                     break;
+
 
                 default :
                     break;

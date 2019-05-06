@@ -11,6 +11,8 @@
 #ifndef CATANE_CONTROLLER_RESOURCE_H
 #define CATANE_CONTROLLER_RESOURCE_H
 
+#include <SDL.h>
+
 /**
 * \enum ResourceButton
 * Tous les boutons existants dans l'environnement "Choix d'une ressource" ainsi que le non-bouton.
