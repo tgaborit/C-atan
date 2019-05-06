@@ -183,7 +183,7 @@ void initDevCraftArea()
     dev_craft_area.w = CRAFTW;
     dev_craft_area.h = CRAFTH;
 
-    dev_craft_area.x = WINDOWW - 200 - dev_craft_area.w;
+    dev_craft_area.x = WINDOWW - 150 - dev_craft_area.w;
     dev_craft_area.y = 300;
 }
 

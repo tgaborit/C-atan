@@ -228,9 +228,9 @@ PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
 * \fn void initPathButton()
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un chemin".
 *
-* Initialise les champs des rectangles des zones correspondant aux chemin du plateau.
-* Répartit la totalité des chemins selon la formation de 9 hexagones couchés dans un tableau bidimensionnel,
-* puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
+* Initialise les champs des rectangles des zones correspondant aux chemins du plateau.
+* Répartit la totalité des chemins selon la formation de 8 hexagones couchés, 1 hexagone debout, et 12 chemins orphelins
+* dans un tableau bidimensionnel, puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
 */
 void initPathButtons()
 {
@@ -238,17 +238,18 @@ void initPathButtons()
     float hexagonl_s;
     // Répartition des chemins selon la formation de 9 hexagones couchés
     SDL_Rect* path_buttons[12][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
-                                           {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
-                                           {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
-                                           {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
-                                           {&pathNE0_area, &pathNE1_area, &pathNE2_area, &pathNE3_area, &pathNE4_area, &pathNE5_area},
-                                           {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
-                                           {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
-                                           {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
-                                           {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area},
-                                           {&pathST0_area, &pathST1_area, &pathST2_area, &pathST3_area, &pathST4_area, &pathST5_area},
-                                           {&pathO00_area, &pathO01_area, &pathO10_area, &pathO11_area, &pathO20_area, &pathO21_area},
-                                           {&pathO30_area, &pathO31_area, &pathO40_area, &pathO41_area, &pathO50_area, &pathO51_area}};
+                                     {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
+                                     {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
+                                     {&pathNN0_area, &pathNN1_area, &pathNN2_area, &pathNN3_area, &pathNN4_area, &pathNN5_area},
+                                     {&pathNE0_area, &pathNE1_area, &pathNE2_area, &pathNE3_area, &pathNE4_area, &pathNE5_area},
+                                     {&pathSE0_area, &pathSE1_area, &pathSE2_area, &pathSE3_area, &pathSE4_area, &pathSE5_area},
+                                     {&pathSS0_area, &pathSS1_area, &pathSS2_area, &pathSS3_area, &pathSS4_area, &pathSS5_area},
+                                     {&pathSW0_area, &pathSW1_area, &pathSW2_area, &pathSW3_area, &pathSW4_area, &pathSW5_area},
+                                     {&pathNW0_area, &pathNW1_area, &pathNW2_area, &pathNW3_area, &pathNW4_area, &pathNW5_area},
+                                     {&pathST0_area, &pathST1_area, &pathST2_area, &pathST3_area, &pathST4_area, &pathST5_area},
+                                     {&pathO00_area, &pathO01_area, &pathO10_area, &pathO11_area, &pathO20_area, &pathO21_area},
+                                     {&pathO30_area, &pathO31_area, &pathO40_area, &pathO41_area, &pathO50_area, &pathO51_area}};
+
     // Initialisation des côtés des zones des boutons des chemins
     for(i = 0; i < 12; ++i)
     {
@@ -265,7 +266,7 @@ void initPathButtons()
     initPosRectHexLying(path_buttons[0], BOARDCENTERX, BOARDCENTERY, hexagonl_s);                                           // Boutons de la première couronne
     initPosRectHexLying(path_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                                         // Boutons de la deuxième couronne
     initPosRectHexLying(path_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                                         // Boutons de la troisième couronne
-    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, round(hexagonl_s));                       // Boutons de l'hexagone Nord
+    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, hexagonl_s);                       // Boutons de l'hexagone Nord
     initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Est
     initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Est
     initPosRectHexLying(path_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Sud

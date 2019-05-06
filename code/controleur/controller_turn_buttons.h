@@ -45,7 +45,7 @@ typedef enum {
 * \def CRAFTW
 * Définit la largeur d'un bouton de craft.
 */
-#define CRAFTW 200
+#define CRAFTW 250
 
 /**
 * \def CRAFTH
