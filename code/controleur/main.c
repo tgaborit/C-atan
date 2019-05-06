@@ -4,9 +4,9 @@
 #include "controller.h"
 #include "controller_turn.h"
 #include "controller_place_urb.h"
-//#include "controller_place_road.h"
 #include "controller_resource.h"
 #include "controller_path.h"
+#include "controller_terrain.h"
 
 int main()
 {
@@ -24,13 +24,14 @@ int main()
 
     SDL_bool program_launched = SDL_TRUE;
 
-    controllerTurn(&program_launched, renderer);
+//    controllerTurn(&program_launched, renderer);
     //controllerPlaceUrb(program_launched, renderer, SETTLE_PLACING);
     //controllerPlaceRoad(program_launched, renderer);
 //    ResourceButton resource_chosen;
     //controllerResource(&resource_chosen, &program_launched, renderer);
 //    PathButton path_chosen;
 //    controllerPath(&path_chosen, renderer, &program_launched);
+    controllerTerrain(renderer, &program_launched);
 
     //Fermeture fenetre avec destruction rendu et fenetre
     SDL_DestroyRenderer(renderer);
