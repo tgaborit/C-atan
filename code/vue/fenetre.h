@@ -114,16 +114,6 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
  */
 void AfficheVoleur(Partie* p, SDL_Renderer* renderer);
 
-/**
- * \fn void AfficheJoueur(SDL_Renderer* renderer)
- * \brief Fonction affichant les noms et les scores des joueurs
- *
- *
- * \param renderer, le rendu actuel
- * \return aucun
- */
-void AfficheJoueur(SDL_Renderer* renderer);
 
 
-void AfficheInfoJoueur(SDL_Renderer* renderer, List_joueur* j);
 #endif

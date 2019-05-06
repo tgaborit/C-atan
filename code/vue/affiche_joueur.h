@@ -17,7 +17,18 @@
 #include <stdlib.h>
 #include "partie.h"
 #include "get_plateau.h"
+#include "SDL_erreur.h"
 
+
+/**
+ * \fn void AfficheJoueur(SDL_Renderer* renderer)
+ * \brief Fonction affichant les noms et les scores des joueurs
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheJoueur(SDL_Renderer* renderer);
 
 /**
  * \fn void AffichePseudoJ1(SDL_Renderer* renderer, Joueur* j);
@@ -62,5 +73,16 @@ void AffichePseudoJ3(SDL_Renderer* renderer, Joueur* j);
  * \return aucun
  */
 void AffichePseudoJ4(SDL_Renderer* renderer, Joueur* j);
+
+/**
+ * \fn void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le pseudo et le score tous les joueurs participant à la partie.
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer);
 
 #endif

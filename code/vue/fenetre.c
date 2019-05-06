@@ -103,6 +103,7 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheCarteRoche(renderer);
 	AfficheVoleur(p, renderer);
 	AfficheJoueur(renderer);
+	AfficheListeJoueurs(p, renderer);
 
 	AfficheSkip(renderer);
 	AfficheHelp(renderer);
@@ -131,33 +132,6 @@ void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer){
     SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-}
-
-
-/**
- * \fn void AfficheJoueur(SDL_Renderer* renderer)
- * \brief Fonction affichant les noms et les scores des joueurs
- *
- *
- * \param renderer, le rendu actuel
- * \return aucun
- */
-void AfficheJoueur(SDL_Renderer* renderer)
-{
-	//Creation de la barre avec les noms des joueurs et le score
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-	SDL_Rect barrejoueurs;
-	barrejoueurs.x = 0;
-	barrejoueurs.y = 0;
-	barrejoueurs.w = WINDOWW;
-	barrejoueurs.h = 35;
-
-	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -236,10 +210,10 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 	if(SDL_RenderFillRect(renderer, &rectde) != 0)
 		SDL_ExitWithError("Impossible de remplir un rectangle");
 
-    if(lancer_des() == 10 | lancer_des() == 11 | lancer_des() == 12){
+    if((lancer_des() == 10) | (lancer_des() == 11) | (lancer_des() == 12)){
         rect.x = 1572;
     }
-    sprintf(de, "%d", lancer_des()); //lancer_des()
+    sprintf(de, "%d", lancer_des());
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
     SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
 

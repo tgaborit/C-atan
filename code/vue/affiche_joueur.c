@@ -10,6 +10,33 @@
 
 #include "affiche_joueur.h"
 
+
+/**
+ * \fn void AfficheJoueur(SDL_Renderer* renderer)
+ * \brief Fonction affichant les noms et les scores des joueurs
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheJoueur(SDL_Renderer* renderer)
+{
+	//Creation de la barre avec les noms des joueurs et le score
+	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+	SDL_Rect barrejoueurs;
+	barrejoueurs.x = 0;
+	barrejoueurs.y = 0;
+	barrejoueurs.w = 1920;
+	barrejoueurs.h = 35;
+
+	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)
+		SDL_ExitWithError("Impossible de remplir un rectangle");
+
+    SDL_RenderPresent(renderer);
+}
+
 /**
  * \fn void AffichePseudoJ1(SDL_Renderer* renderer, Joueur* j);
  * \brief Fonction affichant le pseudo et le score du joueur 1.
@@ -353,3 +380,36 @@ void AffichePseudoJ4(SDL_Renderer* renderer, Joueur*j)
         TTF_CloseFont(police);
 }
 
+
+/**
+ * \fn void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le pseudo et le score tous les joueurs participant à la partie.
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
+{
+    if(p->joueurs->first->next != p->joueurs->last){
+
+        AffichePseudoJ1(renderer, p->joueurs->first->joueur);
+        AffichePseudoJ2(renderer, p->joueurs->first->next->joueur);
+
+        if(p->joueurs->first->next->next == p->joueurs->last){
+            AffichePseudoJ3(renderer, p->joueurs->last->joueur);
+        }else{
+            AffichePseudoJ3(renderer, p->joueurs->first->next->next->joueur);
+            AffichePseudoJ4(renderer, p->joueurs->last->joueur);
+        }
+
+    }else{
+
+    AffichePseudoJ1(renderer, p->joueurs->first->joueur);
+    AffichePseudoJ2(renderer, p->joueurs->first->next->joueur);
+
+    }
+
+    SDL_RenderPresent(renderer);
+}
