@@ -21,6 +21,13 @@ static SDL_Rect terrX3_area;          /*!< Rectangle correspondant à la zone du
 static SDL_Rect terrX4_area;          /*!< Rectangle correspondant à la zone du terrain 4 de la première couronne*/
 static SDL_Rect terrX5_area;          /*!< Rectangle correspondant à la zone du terrain 5 de la première couronne*/
 
+static SDL_Rect terr0X_area;          /*!< Rectangle correspondant à la zone du terrain 0 de la deuxième couronne*/
+static SDL_Rect terr1X_area;          /*!< Rectangle correspondant à la zone du terrain 1 de la deuxième couronne*/
+static SDL_Rect terr2X_area;          /*!< Rectangle correspondant à la zone du terrain 2 de la deuxième couronne*/
+static SDL_Rect terr3X_area;          /*!< Rectangle correspondant à la zone du terrain 3 de la deuxième couronne*/
+static SDL_Rect terr4X_area;          /*!< Rectangle correspondant à la zone du terrain 4 de la deuxième couronne*/
+static SDL_Rect terr5X_area;          /*!< Rectangle correspondant à la zone du terrain 5 de la deuxième couronne*/
+
 /**
 * \fn void controllerTerrain(PathButton* path_chosen, SDL_bool* program_launched)
 * \brief Fonction principale du contrôleur du choix d'une ressource.
@@ -78,7 +85,8 @@ void drawTerrainButtons(SDL_Renderer* renderer)
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-    SDL_Rect terrain_buttons[NTERRAINBUTTONS] = {terrX0_area, terrX1_area, terrX2_area, terrX3_area, terrX4_area, terrX5_area};
+    SDL_Rect terrain_buttons[NTERRAINBUTTONS] = {terrX0_area, terrX1_area, terrX2_area, terrX3_area, terrX4_area, terrX5_area,
+                                                 terr0X_area, terr1X_area, terr2X_area, terr3X_area, terr4X_area, terr5X_area};
     if(SDL_RenderDrawRects(renderer, terrain_buttons, NTERRAINBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -100,10 +108,11 @@ void initTerrainButtons()
     float hexagonl_s;
 
     // Répartition des chemins selon la formation de 9 hexagones couchés
-    SDL_Rect* terrain_buttons[1][6] = {{&terrX0_area, &terrX1_area, &terrX2_area, &terrX3_area, &terrX4_area, &terrX5_area}};
+    SDL_Rect* terrain_buttons[2][6] = {{&terrX0_area, &terrX1_area, &terrX2_area, &terrX3_area, &terrX4_area, &terrX5_area},
+                                      {&terr0X_area, &terr1X_area, &terr2X_area, &terr3X_area, &terr4X_area, &terr5X_area}};
 
     // Initialisation des côtés des zones des boutons des chemins
-    for(i = 0; i < 1; ++i)
+    for(i = 0; i < 2; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
@@ -116,4 +125,5 @@ void initTerrainButtons()
 
     // Initialisation de la position des zones des boutons des terrains par hexagone, selon leur position et leur côté
     initPosRectHexLying(terrain_buttons[0], BOARDCENTERX, BOARDCENTERY, 2*hexagonl_s);
+    initPosRectHexLying(terrain_buttons[1], BOARDCENTERX, BOARDCENTERY, 4*hexagonl_s);
 }
