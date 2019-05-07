@@ -502,3 +502,362 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
     }
     return path_coordinates;
 }
+
+/**
+* \fn void controllerPlaceUrbButton(SDL_MouseButtonEvent button, SDL_bool* placing_launched, Game* the_game, UrbPlacing urb_placing)
+* \brief Sous-fonction de controllerPlaceUrb qui traite le clic effectué.
+*
+* Détermine le bouton sur lequel le joueur a cliqué puis appelle l'évènement de placement d'une colonie/ville sur le croisement correspondant,
+* si le clic a été effectué sur un croisement.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \param[in,out] placcement Pointeur vers l'état du placement.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+*/
+CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
+{
+    CrossCoordinates cross_coordinates;
+    switch(cross_clicked)
+    {
+    case CROSSXX0_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSXX1_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSXX2_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSXX3_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSXX4_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSXX5_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSX0X_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSX1X_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSX2X_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSX3X_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSX4X_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSX5X_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 1;
+        break;
+
+
+    case CROSS0XX_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSS1XX_BUTTON :
+        cross_coordinates.x = 1.5;
+        cross_coordinates.y = 1;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSS2XX_BUTTON :
+        cross_coordinates.x = 1.5;
+        cross_coordinates.y = -1;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSS3XX_BUTTON :
+        cross_coordinates.x = 0;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSS4XX_BUTTON :
+        cross_coordinates.x = -1.5;
+        cross_coordinates.y = -1;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSS5XX_BUTTON :
+        cross_coordinates.x = -1.5;
+        cross_coordinates.y = 1;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSNE0_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSNE1_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSNE2_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSNE3_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSNE4_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSNE5_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSEE0_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSEE1_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSEE2_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSEE3_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSEE4_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSEE5_BUTTON :
+        cross_coordinates.x = 2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSSE0_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSSE1_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSSE2_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSSE3_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSSE4_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSSE5_BUTTON :
+        cross_coordinates.x = 1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSSW0_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSSW1_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSSW2_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSSW3_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSSW4_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSSW5_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -2;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSWW0_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSWW1_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSWW2_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSWW3_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSWW4_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSWW5_BUTTON :
+        cross_coordinates.x = -2;
+        cross_coordinates.y = 0;
+        cross_coordinates.position = 0;
+        break;
+
+
+    case CROSSNW0_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 1;
+        break;
+
+    case CROSSNW1_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 2;
+        break;
+
+    case CROSSNW2_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 3;
+        break;
+
+    case CROSSNW3_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 4;
+        break;
+
+    case CROSSNW4_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 5;
+        break;
+
+    case CROSSNW5_BUTTON :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = 2;
+        cross_coordinates.position = 0;
+        break;
+
+
+    default :
+        cross_coordinates.x = -1;
+        cross_coordinates.y = -1;
+        cross_coordinates.position = -1;
+        break;
+    }
+    return cross_coordinates;
+}

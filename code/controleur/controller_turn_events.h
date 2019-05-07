@@ -15,6 +15,8 @@
 
 void craftDevEvent(/*Game* the_game*/);
 void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
+void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
+void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
 
 void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);
 void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched);

@@ -25,7 +25,7 @@ int main()
 
     SDL_bool program_launched = SDL_TRUE;
 
-    //controllerTurn(&program_launched, renderer);
+    controllerTurn(&program_launched, renderer);
     //controllerPlaceUrb(program_launched, renderer, SETTLE_PLACING);
     //controllerPlaceRoad(program_launched, renderer);
 //    ResourceButton resource_chosen;
@@ -33,8 +33,8 @@ int main()
 //    PathButton path_chosen;
 //    controllerPath(&path_chosen, renderer, &program_launched);
  //   controllerTerrain(renderer, &program_launched);
-    CrossButton crossing_chosen;
-    controllerCrossing(&crossing_chosen, renderer, &program_launched);
+//    CrossButton crossing_chosen;
+//    controllerCrossing(&crossing_chosen, renderer, &program_launched);
 
     //Fermeture fenetre avec destruction rendu et fenetre
     SDL_DestroyRenderer(renderer);

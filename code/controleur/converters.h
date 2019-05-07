@@ -11,6 +11,7 @@
 #ifndef CONVERTERS_H
 #define CONVERTERS_H
 
+#include "controller_crossing.h"
 #include "controller_resource.h"
 #include "controller_path.h"
 
@@ -28,7 +29,14 @@ typedef struct {
         int position;
 } PathCoordinates;
 
+typedef struct {
+        double x;
+        double y;
+        int position;
+} CrossCoordinates;
+
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
+CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked);
 TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
 
 #endif //CONVERTERS_H

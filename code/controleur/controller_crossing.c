@@ -89,11 +89,11 @@ static SDL_Rect crossNW5_area;          /*!< Rectangle correspondant à la zone 
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
-void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initCrossButtons();
-    while(*program_launched)
+    while(choice_launched)
     {
         drawCrossButtons(renderer);
 
@@ -108,7 +108,7 @@ void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SD
                 if((cross_clicked = whichCrossButton(event.button)) != NO_CROSSBUTTON)
                 {
                     printf("Clic sur croisement %d\n", cross_clicked);
-                    *crossing_chosen = cross_clicked;
+                    *cross_chosen = cross_clicked;
                     quit(&choice_launched);
                 }
                 break;
@@ -129,7 +129,8 @@ void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SD
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-                *crossing_chosen = NO_CROSSBUTTON;
+                printf("Appel de la fonction quit(&choice_launched)\n");
+                quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;

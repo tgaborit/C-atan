@@ -54,20 +54,20 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
 
                 case ROADCRAFT_BUTTON :
                     printf("Clic sur bouton Craft route\n");
-                    printf("Appel de la fonction controllerPlaceRoad(program_launched, renderer, the_game)\n");
+                    printf("Appel de la fonction craftRoadEvent(the_game, renderer, program_launched)\n");
                     craftRoadEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case SETTLECRAFT_BUTTON :
                     printf("Clic sur bouton Craft colonie\n");
-                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, SETTLE_PLACING)\n");
-//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, SETTLE_PLACING);
+                    printf("Appel de la fonction craftSettleEvent(the_game, renderer, program_launched)\n");
+                    craftSettleEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case CITYCRAFT_BUTTON :
                     printf("Clic sur bouton Craft ville\n");
-                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
- //                   controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    printf("Appel de la fonction craftCityEvent(the_game, renderer, program_launched)\n");
+                    craftCityEvent(/*the_game, */renderer, program_launched);
                     break;
 
 
