@@ -91,6 +91,7 @@ static SDL_Rect crossNW5_area;          /*!< Rectangle correspondant à la zone 
 */
 void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
+    SDL_bool choice_launched = SDL_TRUE;
     initCrossButtons();
     while(*program_launched)
     {
@@ -99,15 +100,32 @@ void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SD
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
+            CrossButton cross_clicked;
             switch(event.type)
             {
-//            case SDL_MOUSEBUTTONDOWN :
-//                switch(whichTerrainButton(event.button))
-//                {
-//                default :
-//                    break;
-//                }
-//                break;
+            case SDL_MOUSEBUTTONDOWN :
+
+                if((cross_clicked = whichCrossButton(event.button)) != NO_CROSSBUTTON)
+                {
+                    printf("Clic sur croisement %d\n", cross_clicked);
+                    *crossing_chosen = cross_clicked;
+                    quit(&choice_launched);
+                }
+                break;
+
+            case SDL_KEYDOWN :
+                switch(event.key.keysym.sym)
+                {
+                case SDLK_BACKSPACE :
+                    printf("Appui sur touche Retour arriere\n");
+                    printf("Appel de la fonction quit(&placing_launched)\n");
+                    quit(&choice_launched);
+                    break;
+
+                default :
+                    break;
+                }
+                break;
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
