@@ -13,7 +13,7 @@
 #include "controller.h"
 #include "controller_turn.h"
 #include "controller_turn_buttons.h"
-#include "controller_place_urb.h"
+//#include "controller_place_urb.h"
 #include "controller_turn_events.h"
 
 /**
@@ -61,13 +61,13 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                 case SETTLECRAFT_BUTTON :
                     printf("Clic sur bouton Craft colonie\n");
                     printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, SETTLE_PLACING)\n");
-                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, SETTLE_PLACING);
+//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, SETTLE_PLACING);
                     break;
 
                 case CITYCRAFT_BUTTON :
                     printf("Clic sur bouton Craft ville\n");
                     printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
-                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+ //                   controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
                     break;
 
 
