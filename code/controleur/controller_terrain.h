@@ -27,7 +27,7 @@ typedef enum {
 * \def NTERRAINBUTTONS
 * Définit le nombre de boutons de l'environnement "Choix d'un terrain".
 */
-#define NTERRAINBUTTONS 12
+#define NTERRAINBUTTONS 18
 
 /**
 * \def TERRAINS
