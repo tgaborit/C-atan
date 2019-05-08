@@ -139,6 +139,36 @@ void AfficheTexte_PosRoute(SDL_Renderer* renderer){
     AfficheTexte(renderer,txt,0);
 }
 
+
+/**
+ * \fn AfficheTexte_PosRoute_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de ressources pour poser une route
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosRoute_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette route ou bien l'emplacement est invalide.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_PosRoute_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de ressources pour poser une route
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosRoute_Succes(SDL_Renderer* renderer){
+    char txt[80] = "La route a ete posee avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+
 /**
  * \fn AfficheTexte_PosColonie(SDL_Renderer* renderer)
  * \brief affiche un message d'indication pour poser une colonie
@@ -149,6 +179,34 @@ void AfficheTexte_PosRoute(SDL_Renderer* renderer){
  */
 void AfficheTexte_PosColonie(SDL_Renderer* renderer){
     char txt[80] = "Selectionez un sommet ou vous souhaitez poser une colonie.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_PosColonie_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, la colonie n'a pas pu etre posée.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosColonie_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette colonie ou bien l'emplacement est invalide.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_PosColonie_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, la colonie a été posée.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosColonie_Succes(SDL_Renderer* renderer){
+    char txt[80] = "La colonie a ete posee avec succes !";
     AfficheTexte(renderer,txt,0);
 }
 
@@ -165,3 +223,197 @@ void AfficheTexte_PosVille(SDL_Renderer* renderer){
     AfficheTexte(renderer,txt,0);
 }
 
+
+/**
+ * \fn AfficheTexte_PosVille_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, la ville n'a pas pu etre posee
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosVille_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette ville ou bien l'emplacement est invalide.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_PosVille_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, la ville a ete posee.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_PosVille_Succes(SDL_Renderer* renderer){
+    char txt[110] = "La ville a ete posee avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_CarteDev_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, une carte developpement a ete choisie.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_CarteDev_Succes(SDL_Renderer* renderer){
+    char txt[110] = "Vous venez d'acheter une carte developpement !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_CarteDev_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, une carte developpement n'a pas pu etre choisie.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_CarteDev_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Echec, vous n'avez pas assez de ressources pour acheter une carte developpement.";
+    AfficheTexte(renderer,txt,0);
+}
+
+/**
+ * \fn AfficheTexte_ChoixRessource(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur doit choisir un type de ressource.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_ChoixRessource(SDL_Renderer* renderer){
+    char txt[110] = "Veuillez choisir un type de ressource.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Monopole_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur a utilisé une carte monopole.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Monopole_Succes(SDL_Renderer* renderer){
+    char txt[110] = "Utilisation d'une carte Monopole avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Monopole_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas de carte monopole à jouer.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Monopole_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Vous n'avez pas de carte Monopole a jouer.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Decouverte_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur a utilisé une carte decouverte.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Decouverte_Succes(SDL_Renderer* renderer){
+    char txt[110] = "Utilisation d'une carte Decouverte avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Decouverte_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas de carte decouverte à jouer.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Decouverte_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Vous n'avez pas de carte Decouverte a jouer.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Point_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur a utilisé une carte point.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Point_Succes(SDL_Renderer* renderer){
+    char txt[110] = "Utilisation d'une carte Point avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Point_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas de carte point à jouer.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Point_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Vous n'avez pas de carte Point a jouer.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Routes_Succes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur a utilisé une carte routes.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Routes_Succes(SDL_Renderer* renderer){
+    char txt[110] = "Utilisation d'une carte Routes avec succes !";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_Routes_Echec(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, le joueur n'a pas de carte routes à jouer ou les emplacements des routes sont invalides.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_Routes_Echec(SDL_Renderer* renderer){
+    char txt[110] = "Vous n'avez pas de carte Routes a jouer, ou bien les lieux choisis pour vos routes sont invalides.";
+    AfficheTexte(renderer,txt,0);
+}
+
+
+/**
+ * \fn AfficheTexte_ChoixRoutes(SDL_Renderer* renderer)
+ * \brief affiche un message d'indication, demande au joueur de choisir deux emplacements pour les routes à poser.
+ *
+ *
+ * \param renderer le rendu actuel
+ * \return aucun
+ */
+void AfficheTexte_ChoixRoutes(SDL_Renderer* renderer){
+    char txt[110] = "Veuillez choisir deux emplacements ou poser vos routes.";
+    AfficheTexte(renderer,txt,0);
+}

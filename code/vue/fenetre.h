@@ -30,7 +30,6 @@
 #include "affiche_texte.h"
 #include "set_partie.h"
 
-
 /**
  * \fn SDL_Window* InitFenetre()
  * \brief Fonction créant une fenêtre.
