@@ -92,18 +92,9 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheCarteBois(renderer);
 	AfficheCarteMouton(renderer);
 	AfficheCarteRoche(renderer);
-	AfficheNombreRessources(ARGILE, p, renderer);
-	AfficheNombreRessources(BLE, p, renderer);
-	AfficheNombreRessources(BOIS, p, renderer);
-	AfficheNombreRessources(MOUTON, p, renderer);
-	AfficheNombreRessources(PIERRE, p, renderer);
-	AfficheNombreDev(CHEVALIER, p, renderer);
-	AfficheNombreDev(MONOPOLE, p, renderer);
-	AfficheNombreDev(DECOUVERTE, p, renderer);
-	AfficheNombreDev(ROUTES, p, renderer);
-	AfficheNombreDev(POINT, p, renderer);
 	AfficheVoleur(p, renderer);
 	AfficheJoueur(renderer);
+	AfficheListeJoueurs(p,renderer);
 
 	AfficheSkip(renderer);
 	AfficheHelp(renderer);
