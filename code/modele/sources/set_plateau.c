@@ -269,6 +269,7 @@ int setRouteFree(Partie* partie, double x, double y, int position){
         Cur->adjacence[pattern[position]]->t->a[pos2].i = ROUTE;
         Cur->adjacence[pattern[position]]->t->a[pos2].owner = owner;
     }
+    ++partie->joueurs->current->joueur->nbRoute;
     return 0;
 }
 

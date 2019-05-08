@@ -317,7 +317,6 @@ int achat_route(Joueur* joueur)
         {
             perte_ressource(ARGILE,joueur);
             perte_ressource(BOIS, joueur);
-            ++joueur->nbRoute;
             return 0;
         }
     return -1;

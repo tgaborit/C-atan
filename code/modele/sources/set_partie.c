@@ -411,19 +411,59 @@ int utiliser_point (Partie* partie){
 }
 
 /**
- * \fn int utiliser_routes (Partie* partie)
- * \brief si le joueur courant possède une carte point il la défausse et gagne 1 point de score
+ * \fn int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2)
+ * \brief si le joueur courant possede une carte routes il la defausse et pose deux routes.
  *
- * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
- * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte point
+ * \param Partie*: la partie en cours, puis les parametres des endroits ou poser les deux routes
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte routes ou si la pose a échoué
  */
-int utiliser_routes (Partie* partie){
+int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2){
     Joueur* joueur_actif= get_joueur_actif(partie);
     if (get_cartedev(ROUTES,joueur_actif)<1)
         return -1;
 
-    joueur_actif->ressource[BOIS].nb_ressource+=2;
-    joueur_actif->ressource[ARGILE].nb_ressource+=2;
-    return 0;
+    int cond1 = setRouteFree(partie,x1,y1,position1);
+    int cond2 = setRouteFree(partie,x2,y2,position2);
+
+    if(cond1 == 0 && cond2 == 0){
+        perte_cartedev(ROUTES,joueur_actif);
+        return 0;
+    }
+    if(cond1 == -1 && cond2 == -1){
+        return -1;
+    }
+    int pattern[6] = {0,2,4,5,3,1};
+    if(cond1 == 0){
+        Noeud* cur = deplacementPlateau(partie->plateau,x1,y1);
+        cur->t->a[position1].i = VIDE;
+        cur->t->a[position1].owner = NULL;
+
+        int indice = position1+3;
+        if(indice > 5){
+            indice = indice-6;
+        }
+
+        if(cur->adjacence[pattern[position1]] != NULL){
+            cur->adjacence[pattern[position1]]->t->a[indice].i = VIDE;
+            cur->adjacence[pattern[position1]]->t->a[indice].owner = NULL;
+        }
+        --get_joueur_actif(partie)->nbRoute;
+        return -1;
+    }
+    Noeud* cur = deplacementPlateau(partie->plateau,x2,y2);
+    cur->t->a[position2].i = VIDE;
+    cur->t->a[position2].owner = NULL;
+
+    int indice = position2+3;
+        if(indice > 5){
+            indice = indice-6;
+        }
+
+    if(cur->adjacence[pattern[position2]] != NULL){
+        cur->adjacence[pattern[position2]]->t->a[indice].i = VIDE;
+        cur->adjacence[pattern[position2]]->t->a[indice].owner = NULL;
+    }
+    --get_joueur_actif(partie)->nbRoute;
+    return -1;
 }
 

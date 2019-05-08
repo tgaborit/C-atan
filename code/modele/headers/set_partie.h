@@ -15,6 +15,7 @@
 
 #include "partie.h"
 #include "get_partie.h"
+#include "set_plateau.h"
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
@@ -137,4 +138,16 @@ int utiliser_decouverte (Partie* partie, TypeRessource type);
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte point
  */
 int utiliser_point (Partie* partie);
+
+
+/**
+ * \fn int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2)
+ * \brief si le joueur courant possede une carte routes il la defausse et pose deux routes.
+ *
+ * \param Partie*: la partie en cours, puis les parametres des endroits ou poser les deux routes
+ * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte routes ou si la pose a échoué
+ */
+int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2);
+
+
 #endif //MODELE_REMI_CATANE_PARTIE_H

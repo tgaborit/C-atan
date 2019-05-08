@@ -21,7 +21,7 @@
 
 
 
-#define TAILLE_MAX_PSEUDO  16 //taille max de caractère dans le pseudo d'un joueur
+#define TAILLE_MAX_PSEUDO  8 //taille max de caractère dans le pseudo d'un joueur
 
 /**
  * \enum Couleur
