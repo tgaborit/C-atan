@@ -8,6 +8,7 @@
 #include "test_set_plateau.h"
 #include "UTest-joueur.h"
 #include "UTest-partie.h"
+#include "affiche_texte.h"
 #include "fenetre.h"
 
 
@@ -28,11 +29,56 @@ int main(int argc, char** argv)
 
 	renderer = updateFenetre(partie,window,renderer);
 
-	partie->plateau->adjacence[0]->t->s[3].i = VILLE;
-	partie->plateau->adjacence[0]->t->s[3].owner = j;
+    AfficheTexte_Init(renderer);
+
+    SDL_Delay(1000);
+
+    partie->plateau->adjacence[0]->t->a[4].i = ROUTE;
+    partie->plateau->adjacence[0]->t->a[4].owner = k;
+
+    partie->plateau->adjacence[0]->t->a[3].i = ROUTE;
+    partie->plateau->adjacence[0]->t->a[3].owner = k;
+
+    partie->plateau->adjacence[0]->t->s[3].i = VILLE;
+    partie->plateau->adjacence[0]->t->s[3].owner = k;
+
+    partie->plateau->adjacence[5]->t->s[2].i = VILLE;
+    partie->plateau->adjacence[5]->t->s[2].owner = j;
+
+    partie->plateau->adjacence[5]->t->s[3].i = VILLE;
+    partie->plateau->adjacence[5]->t->s[3].owner = j;
+
+    partie->plateau->adjacence[5]->t->a[2].i = ROUTE;
+    partie->plateau->adjacence[5]->t->a[2].owner = j;
+
+    partie->plateau->adjacence[5]->t->a[3].i = ROUTE;
+    partie->plateau->adjacence[5]->t->a[3].owner = j;
 
 
-	renderer = updateFenetre(partie,window,renderer);
+
+    renderer = updateFenetre(partie,window,renderer);
+
+    SDL_Delay(2000);
+    AfficheTexte_PosColonie(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosRoute(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosVille(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_Joueur(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosRoute(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosVille(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosRoute(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_Joueur(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosVille(renderer);
+    SDL_Delay(2000);
+    AfficheTexte_PosRoute(renderer);
+    SDL_Delay(2000);
 
     SDL_bool program_launched = SDL_TRUE;
 

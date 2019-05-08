@@ -9,15 +9,6 @@
  */
 
 #include "fenetre.h"
-#include "partie.h"
-#include "architecture.h"
-#include "carte.h"
-#include "tuile.h"
-#include "developpement.h"
-#include "probabilite.h"
-#include "place_infra.h"
-#include "SDL_erreur.h"
-
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -83,7 +74,7 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 
 
 	if(renderer == NULL)
-		SDL_ExitWithError("Creation rendu echouee");
+		SDL_ExitWithError("Creation rendu echouée");
 
     AfficheDe(window, renderer);
 	AfficheChevalier(renderer);
@@ -94,7 +85,7 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheGrandeArmee(renderer);
 	AfficheGrandeRoute(renderer);
 	AfficheTuilePlateau(p,renderer);
-	AfficheRandomProbaPlateau(p, renderer);
+	AfficheRandomProbaPlateau(p,renderer);
 	AfficheTuile(renderer);
 	AfficheCarteArgile(renderer);
 	AfficheCarteBle(renderer);
@@ -103,7 +94,6 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheCarteRoche(renderer);
 	AfficheVoleur(p, renderer);
 	AfficheJoueur(renderer);
-	AfficheListeJoueurs(p, renderer);
 
 	AfficheSkip(renderer);
 	AfficheHelp(renderer);
@@ -111,7 +101,8 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheBoutonRoute(renderer);
 	AfficheBoutonColonie(renderer);
 	AfficheBoutonVille(renderer);
-	//Affiche_Infrastructures(p,renderer);
+	Affiche_Infrastructures(p,renderer);
+	AfficheTexte_MAJ(renderer);
     SDL_RenderPresent(renderer);
     return renderer;
 
@@ -143,6 +134,8 @@ void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer){
  * \param renderer, le rendu actuel
  * \return aucun
  */
+
+
 void AfficheSkip(SDL_Renderer* renderer)
 {
 
@@ -189,8 +182,8 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 
     TTF_Font* police = TTF_OpenFont("Vogue.ttf", 100);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+    int lancer = lancer_des();
     char de[20] = "";
-
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
@@ -210,10 +203,12 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 	if(SDL_RenderFillRect(renderer, &rectde) != 0)
 		SDL_ExitWithError("Impossible de remplir un rectangle");
 
-    if((lancer_des() == 10) | (lancer_des() == 11) | (lancer_des() == 12)){
+    if((lancer == 10) | (lancer == 11) | (lancer == 12)){
         rect.x = 1572;
     }
     sprintf(de, "%d", lancer_des());
+
+
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
     SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
 

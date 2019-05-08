@@ -16,6 +16,7 @@
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "developpement.h"
 #include "partie.h"
 #include "get_plateau.h"
 #include "architecture.h"
@@ -26,6 +27,7 @@
 #include "place_infra.h"
 #include "affiche_joueur.h"
 #include "SDL_erreur.h"
+#include "affiche_texte.h"
 
 /**
  * \fn SDL_Window* InitFenetre()
