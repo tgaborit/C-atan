@@ -5,13 +5,12 @@
 * \date 4 mai 2019
 *
 * Programme gérant l'environnement du choix d'une ressource : la détection d'un clic dessus par le joueur
-* ou encore le fait de quitter le programme.
+* ou encore le fait de quitter l'environnement ou le programme.
 *
 */
 
 #include <stdio.h>
 #include <SDL.h>
-
 #include "controller.h"
 #include "controller_resource.h"
 
@@ -26,7 +25,7 @@ static SDL_Rect rock_card_area;         /*!< Rectangle correspondant à la zone 
 * \brief Fonction principale du contrôleur du choix d'une ressource.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'une ressource.
-* Elle détecte les actions du joueur et enregistre la ressource cliquée le cas échéant.
+* Elle détecte les actions du joueur et enregistre la ressource cliquée le cas échéant, quitte le programme ou l'environnement.
 *
 * \param[in,out] path_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée la ressource cliquée.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
@@ -74,6 +73,20 @@ void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer,
                 case ROCK_BUTTON :
                     printf("Clic sur carte roche\n");
                     *resource_chosen = ROCK_BUTTON;
+                    quit(&choice_launched);
+                    break;
+
+                default :
+                    break;
+                }
+                break;
+
+            case SDL_KEYDOWN :
+                switch(event.key.keysym.sym)
+                {
+                case SDLK_BACKSPACE :
+                    printf("Appui sur touche Retour arriere\n");
+                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 

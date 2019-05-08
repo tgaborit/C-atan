@@ -37,17 +37,18 @@ static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone 
 * \brief Fonction principale du contrôleur du tour du joueur.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+* Elle détecte les actions du joueur et fait appel aux fonctions de callback de craft, de carte développement, de lancer de dé, de fin de tour,
+* d'aide ou de fin du programme en fonction de ces actions.
 *
 * \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
 void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/)
 {
-    initButtonsTurn();
+    initTurnButtons();
     while(*program_launched)
     {
-        drawButtonsTurn(renderer);
+        drawTurnButtons(renderer);
 
         SDL_Event event;
         while(SDL_PollEvent(&event))
@@ -60,7 +61,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
                 break;
 
             case SDL_MOUSEBUTTONDOWN :
-                switch(whichButtonTurn(event.button))
+                switch(whichTurnButton(event.button))
                 {
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
@@ -167,7 +168,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
     }
 }
 
-void drawButtonsTurn(SDL_Renderer* renderer)
+void drawTurnButtons(SDL_Renderer* renderer)
 {
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -190,8 +191,8 @@ void drawButtonsTurn(SDL_Renderer* renderer)
 }
 
 /**
-* \fn TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton le jouer a cliqué.
+* \fn TurnButton whichTurnButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton le joueur a cliqué.
 *
 * Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -199,7 +200,7 @@ void drawButtonsTurn(SDL_Renderer* renderer)
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
 * \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué, NO_TURNBUTTON si aucun.
 */
-TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+TurnButton whichTurnButton(SDL_MouseButtonEvent mouse_button){
     TurnButton button_clicked;
     if((button_clicked = whichCraftButton(mouse_button)) != NO_TURNBUTTON)
         return button_clicked;
@@ -261,13 +262,13 @@ TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button){
 }
 
 /**
-* \fn void initButtonsTurn()
+* \fn void initTurnButtons()
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
 *
 * Initialise les champs des rectangles des zones correspondant aux cartes ressources, au bouton Lancer les dés et au bouton Fin de tour.
 * Fait appel aux fonctions d'initialisation correspondantes.
 */
-void initButtonsTurn()
+void initTurnButtons()
 {
     initCraftAreas();
     initDevCardsAreas();

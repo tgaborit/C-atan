@@ -5,7 +5,7 @@
 * \date 6 mai 2019
 *
 * Programme gérant l'environnement du choix d'une terrain : la détection d'un clic dessus par le joueur
-* ou encore le fait de quitter le programme.
+* ou encore le fait de quitter l'environnement ou le programme.
 *
 */
 
@@ -37,20 +37,21 @@ static SDL_Rect terrNW_area;          /*!< Rectangle correspondant à la zone du
 
 /**
 * \fn void controllerTerrain(PathButton* path_chosen, SDL_bool* program_launched)
-* \brief Fonction principale du contrôleur du choix d'une ressource.
+* \brief Fonction principale du contrôleur du choix d'un terrain.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un terrain.
-* Elle détecte les actions du joueur et enregistre le terrain cliqué le cas échéant.
+* Elle détecte les actions du joueur et enregistre le terrain cliqué le cas échéant, quitte le programme ou l'environnement.
 *
-* \param[in,out] terrain_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée la ressource cliquée.
+* \param[in,out] terrain_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée le terrain cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
-    initTerrainButtons();
-    while(*program_launched)
+    SDL_bool choice_launched = SDL_TRUE;
+    initTerrButtons();
+    while(choice_launched)
     {
-        drawTerrainButtons(renderer);
+        drawTerrButtons(renderer);
 
         SDL_Event event;
         while(SDL_PollEvent(&event))
@@ -65,9 +66,25 @@ void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer
 //                }
 //                break;
 
+            case SDL_KEYDOWN :
+                switch(event.key.keysym.sym)
+                {
+                case SDLK_BACKSPACE :
+                    printf("Appui sur touche Retour arriere\n");
+                    printf("Appel de la fonction quit(&choice_launched)\n");
+                    quit(&choice_launched);
+                    break;
+
+                default :
+                    break;
+                }
+                break;
+
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
 //                *resource_chosen = NO_RESOURCEBUTTON;
+                printf("Appel de la fonction quit(&choice_launched)\n");
+                quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
@@ -79,7 +96,7 @@ void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer
     }
 }
 
-void drawTerrainButtons(SDL_Renderer* renderer)
+void drawTerrButtons(SDL_Renderer* renderer)
 {
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -92,10 +109,10 @@ void drawTerrainButtons(SDL_Renderer* renderer)
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
-    SDL_Rect terrain_buttons[NTERRAINBUTTONS] = {terrX0_area, terrX1_area, terrX2_area, terrX3_area, terrX4_area, terrX5_area,
-                                                 terr0X_area, terr1X_area, terr2X_area, terr3X_area, terr4X_area, terr5X_area,
-                                                 terrNN_area, terrNE_area, terrSE_area, terrSS_area, terrSW_area, terrNW_area};
-    if(SDL_RenderDrawRects(renderer, terrain_buttons, NTERRAINBUTTONS) != 0)
+    SDL_Rect terr_buttons[NTERRBUTTONS] = {terrX0_area, terrX1_area, terrX2_area, terrX3_area, terrX4_area, terrX5_area,
+                                           terr0X_area, terr1X_area, terr2X_area, terr3X_area, terr4X_area, terr5X_area,
+                                           terrNN_area, terrNE_area, terrSE_area, terrSS_area, terrSW_area, terrNW_area};
+    if(SDL_RenderDrawRects(renderer, terr_buttons, NTERRBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
     //Met a jour l'ecran
@@ -103,37 +120,39 @@ void drawTerrainButtons(SDL_Renderer* renderer)
 }
 
 /**
-* \fn void initTerrainButton()
+* \fn void initTerrButtons()
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un terrain".
 *
 * Initialise les champs des rectangles des zones correspondant aux terrains du plateau.
-* Répartit la totalité des terrains selon la formation de 3 hexagones dans un tableau bidimensionnel,
-* puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
+* Répartit la totalité des terrains selon la formation de 2 hexagones couchés et 1 hexagone debout
+* dans un tableau bidimensionnel, puis utilise une fonction d'initialisation de position pour chaque hexagone, selon la position et le côté
+* de cet hexagone.
+* De plus, initialise le côté de toutes les zones selon une constante.
 */
-void initTerrainButtons()
+void initTerrButtons()
 {
     int i, j;
     float hexagonl_s;
 
-    // Répartition des chemins selon la formation de 9 hexagones couchés
-    SDL_Rect* terrain_buttons[3][6] = {{&terrX0_area, &terrX1_area, &terrX2_area, &terrX3_area, &terrX4_area, &terrX5_area},
+    // Répartition des terrains selon la formation de 2 hexagones couchés et 1 hexagone debout
+    SDL_Rect* terr_buttons[3][6] = {{&terrX0_area, &terrX1_area, &terrX2_area, &terrX3_area, &terrX4_area, &terrX5_area},
                                        {&terr0X_area, &terr1X_area, &terr2X_area, &terr3X_area, &terr4X_area, &terr5X_area},
                                        {&terrNN_area, &terrNE_area, &terrSE_area, &terrSS_area, &terrSW_area, &terrNW_area}};
 
-    // Initialisation des côtés des zones des boutons des chemins
+    // Initialisation des côtés des zones des boutons des terrains
     for(i = 0; i < 3; ++i)
     {
         for(j = 0; j < 6; ++j)
         {
-            terrain_buttons[i][j]->h = TERRAINS;
-            terrain_buttons[i][j]->w = TERRAINS;
+            terr_buttons[i][j]->h = TERRAINS;
+            terr_buttons[i][j]->w = TERRAINS;
         }
     }
 
     hexagonl_s = (sqrt(3)/2)*HEXAGONS;
 
     // Initialisation de la position des zones des boutons des terrains par hexagone, selon leur position et leur côté
-    initPosRectHexLying(terrain_buttons[0], BOARDCENTERX, BOARDCENTERY, 2*hexagonl_s);
-    initPosRectHexLying(terrain_buttons[1], BOARDCENTERX, BOARDCENTERY, 4*hexagonl_s);
-    initPosRectHex(terrain_buttons[2], BOARDCENTERX, BOARDCENTERY, 3*HEXAGONS);
+    initPosRectHexLying(terr_buttons[0], BOARDCENTERX, BOARDCENTERY, 2*hexagonl_s);
+    initPosRectHexLying(terr_buttons[1], BOARDCENTERX, BOARDCENTERY, 4*hexagonl_s);
+    initPosRectHex(terr_buttons[2], BOARDCENTERX, BOARDCENTERY, 3*HEXAGONS);
 }

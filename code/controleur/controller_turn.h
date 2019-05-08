@@ -4,12 +4,14 @@
 * \author Titouan Gaborit
 * \date 27 mars 2019
 *
-* En-tête déclarant les fonctions du contrôleur du tour du joueur.
+* En-tête déclarant les fonctions du contrôleur du tour du joueur, ainsi que la définition des macros relatives.
 *
 */
 
 #ifndef CATANE_CONTROLLER_TURN_H
 #define CATANE_CONTROLLER_TURN_H
+
+#include <SDL.h>
 
 /**
 * \enum TurnButton
@@ -67,13 +69,13 @@ typedef enum {
 
 void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
 
-void drawButtonsTurn(SDL_Renderer* renderer);
+void drawTurnButtons(SDL_Renderer* renderer);
 
-TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
+TurnButton whichTurnButton(SDL_MouseButtonEvent mouse_button);
     TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button);
     TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button);
 
-void initButtonsTurn();
+void initTurnButtons();
     void initCraftAreas();
         void initRoadCraftArea();
         void initSettleCraftArea();

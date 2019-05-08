@@ -5,12 +5,12 @@
 * \date 1 avril 2019
 *
 * Programme gérant l'environnement du choix d'un croisement : la détection d'un clic dessus par le joueur
-* ou encore le fait de quitter le programme.
+* ou encore le fait de quitter l'environnement ou le programme.
 *
 */
 
+#include <stdio.h>
 #include <SDL.h>
-
 #include "controller.h"
 #include "controller_crossing.h"
 
@@ -79,15 +79,13 @@ static SDL_Rect crossNW5_area;          /*!< Rectangle correspondant à la zone 
 
 /**
 * \fn void controllerCrossing(SDL_bool* program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
-* \brief Fonction principale du contrôleur du placement d'une colonie/ville.
+* \brief Fonction principale du contrôleur du choix d'un croisement.
 *
-* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une colonie ou d'une ville.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+* Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un croisement.
+* Elle détecte les actions du joueur et enregistre le croisement cliqué le cas échéant, quitte le programme ou l'environnement.
 *
-* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
-* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+* \param[in,out] path_chosen Pointeur vers le croisement choisi dans lequel sera enregistré le croisement cliqué.
+* \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -118,7 +116,7 @@ void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_b
                 {
                 case SDLK_BACKSPACE :
                     printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quit(&placing_launched)\n");
+                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 
@@ -202,15 +200,18 @@ CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
 
 /**
 * \fn void initCrossButtons()
-* \brief Fonction d'initialisation des zones des boutons de l'environnement "Placement d'une colonie ou d'une ville".
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un croisement".
 *
 * Initialise les champs des rectangles des zones correspondant aux croisements du plateau.
-* Répartit la totalité des croisements selon la formation de 9 hexagones dans un tableau bidimensionnel,
-* puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
+* Répartit la totalité des croisements selon la formation de 9 hexagones
+* dans un tableau bidimensionnel, puis utilise une fonction d'initialisation de position pour chaque hexagone, selon la position et le côté
+* de cet hexagone.
+* De plus, initialise le côté de toutes les zones selon une constante.
 */
 void initCrossButtons()
 {
     int i, j;
+
     // Répartition des croisements selon la formation de 9 hexagones
     SDL_Rect* cross_buttons[9][6] = {{&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area},
                                      {&crossX0X_area, &crossX1X_area, &crossX2X_area, &crossX3X_area, &crossX4X_area, &crossX5X_area},
@@ -231,15 +232,15 @@ void initCrossButtons()
             cross_buttons[i][j]->w = CROSSS;
         }
     }
-    // Initialisation de la position des zones des boutons des croisements par hexagone, selon leur position et leur côté
 
-    initPosRectHex(cross_buttons[0], BOARDCENTERX, BOARDCENTERY, HEXAGONS);                                 // Boutons de la première couronne
-    initPosRectHex(cross_buttons[1], BOARDCENTERX, BOARDCENTERY, 2*HEXAGONS);                               // Boutons de la deuxième couronne
-    initPosRectHex(cross_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);                               // Boutons de la troisième couronne
-    initPosRectHex(cross_buttons[3], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Est
-    initPosRectHex(cross_buttons[4], round(BOARDCENTERX + 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Est
-    initPosRectHex(cross_buttons[5], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Est
-    initPosRectHex(cross_buttons[6], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Sud - Ouest
-    initPosRectHex(cross_buttons[7], round(BOARDCENTERX - 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);            // Boutons de l'hexagone Ouest
-    initPosRectHex(cross_buttons[8], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS); // Boutons de l'hexagone Nord - Ouest
+    // Initialisation de la position des zones des boutons des croisements par hexagone, selon leur position et leur côté
+    initPosRectHex(cross_buttons[0], BOARDCENTERX, BOARDCENTERY, HEXAGONS);                                         // Boutons de la première couronne
+    initPosRectHex(cross_buttons[1], BOARDCENTERX, BOARDCENTERY, 2*HEXAGONS);                                       // Boutons de la deuxième couronne
+    initPosRectHex(cross_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);                                       // Boutons de la troisième couronne
+    initPosRectHex(cross_buttons[3], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Est
+    initPosRectHex(cross_buttons[4], round(BOARDCENTERX + 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Est
+    initPosRectHex(cross_buttons[5], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Est
+    initPosRectHex(cross_buttons[6], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Ouest
+    initPosRectHex(cross_buttons[7], round(BOARDCENTERX - 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Ouest
+    initPosRectHex(cross_buttons[8], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Ouest
 }

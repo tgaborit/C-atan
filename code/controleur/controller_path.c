@@ -9,9 +9,9 @@
 *
 */
 
+#include <stdio.h>
 #include <math.h>
 #include <SDL.h>
-
 #include "controller.h"
 #include "controller_path.h"
 
@@ -85,25 +85,25 @@ static SDL_Rect pathST3_area;          /*!< Rectangle correspondant à la zone d
 static SDL_Rect pathST4_area;          /*!< Rectangle correspondant à la zone du chemin 4 de l'hexagone debout*/
 static SDL_Rect pathST5_area;          /*!< Rectangle correspondant à la zone du chemin 5 de l'hexagone debout*/
 
-static SDL_Rect pathO00_area;          /*!< Rectangle correspondant à la zone du chemin 00 des autres zones*/
-static SDL_Rect pathO01_area;          /*!< Rectangle correspondant à la zone du chemin 01 des autres zones*/
-static SDL_Rect pathO10_area;          /*!< Rectangle correspondant à la zone du chemin 10 des autres zones*/
-static SDL_Rect pathO11_area;          /*!< Rectangle correspondant à la zone du chemin 11 des autres zones*/
-static SDL_Rect pathO20_area;          /*!< Rectangle correspondant à la zone du chemin 20 des autres zones*/
-static SDL_Rect pathO21_area;          /*!< Rectangle correspondant à la zone du chemin 21 des autres zones*/
-static SDL_Rect pathO30_area;          /*!< Rectangle correspondant à la zone du chemin 30 des autres zones*/
-static SDL_Rect pathO31_area;          /*!< Rectangle correspondant à la zone du chemin 31 des autres zones*/
-static SDL_Rect pathO40_area;          /*!< Rectangle correspondant à la zone du chemin 40 des autres zones*/
-static SDL_Rect pathO41_area;          /*!< Rectangle correspondant à la zone du chemin 41 des autres zones*/
-static SDL_Rect pathO50_area;          /*!< Rectangle correspondant à la zone du chemin 50 des autres zones*/
-static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone du chemin 51 des autres zones*/
+static SDL_Rect pathO00_area;          /*!< Rectangle correspondant à la zone du chemin 00 des chemins orphelins*/
+static SDL_Rect pathO01_area;          /*!< Rectangle correspondant à la zone du chemin 01 des chemins orphelins*/
+static SDL_Rect pathO10_area;          /*!< Rectangle correspondant à la zone du chemin 10 des chemins orphelins*/
+static SDL_Rect pathO11_area;          /*!< Rectangle correspondant à la zone du chemin 11 des chemins orphelins*/
+static SDL_Rect pathO20_area;          /*!< Rectangle correspondant à la zone du chemin 20 des chemins orphelins*/
+static SDL_Rect pathO21_area;          /*!< Rectangle correspondant à la zone du chemin 21 des chemins orphelins*/
+static SDL_Rect pathO30_area;          /*!< Rectangle correspondant à la zone du chemin 30 des chemins orphelins*/
+static SDL_Rect pathO31_area;          /*!< Rectangle correspondant à la zone du chemin 31 des chemins orphelins*/
+static SDL_Rect pathO40_area;          /*!< Rectangle correspondant à la zone du chemin 40 des chemins orphelins*/
+static SDL_Rect pathO41_area;          /*!< Rectangle correspondant à la zone du chemin 41 des chemins orphelins*/
+static SDL_Rect pathO50_area;          /*!< Rectangle correspondant à la zone du chemin 50 des chemins orphelins*/
+static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone du chemin 51 des chemins orphelins*/
 
 /**
 * \fn void controllerPath(PathButton* path_chosen, SDL_bool* program_launched)
 * \brief Fonction principale du contrôleur du choix d'un chemin.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un chemin.
-* Elle détecte les actions du joueur et enregistre le chemin cliqué le cas échéant.
+* Elle détecte les actions du joueur et enregistre le chemin cliqué le cas échéant, quitte le programme ou l'environnement.
 *
 * \param[in,out] path_chosen Pointeur vers le chemin choisi dans lequel sera enregistré le chemin cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
@@ -136,7 +136,7 @@ void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* p
                 {
                 case SDLK_BACKSPACE :
                     printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quit(&placing_launched)\n");
+                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 
@@ -194,7 +194,7 @@ void drawPathButtons(SDL_Renderer* renderer)
 
 /**
 * \fn PathButton whichPathButton(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton de chemin le joueur a cliqué
+* \brief Fonction de test sur quel bouton de chemin le joueur a cliqué.
 *
 * Teste pour chaque bouton de chemin si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
@@ -229,14 +229,17 @@ PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un chemin".
 *
 * Initialise les champs des rectangles des zones correspondant aux chemins du plateau.
-* Répartit la totalité des chemins selon la formation de 8 hexagones couchés, 1 hexagone debout, et 12 chemins orphelins
-* dans un tableau bidimensionnel, puis utilise une fonction d'initialisation pour chaque hexagone, selon sa position et son côté.
+* Répartit la totalité des chemins selon la formation de 9 hexagones couchés, 1 hexagone debout, et 12 chemins orphelins
+* dans un tableau bidimensionnel, puis utilise une fonction d'initialisation de position pour chaque hexagone, selon la position et le côté
+* de cet hexagone, ainsi qu'une fonction d'initialisation pour les chemisn orphelins.
+* De plus, initialise le côté de toutes les zones selon une constante.
 */
 void initPathButtons()
 {
     int i, j;
     float hexagonl_s;
-    // Répartition des chemins selon la formation de 9 hexagones couchés
+
+    // Répartition des chemins selon la formation de 9 hexagones couchés, 1 hexagone debout et 2x6 chemins orphelins
     SDL_Rect* path_buttons[12][6] = {{&pathXX0_area, &pathXX1_area, &pathXX2_area, &pathXX3_area, &pathXX4_area, &pathXX5_area},
                                      {&pathX0X_area, &pathX1X_area, &pathX2X_area, &pathX3X_area, &pathX4X_area, &pathX5X_area},
                                      {&path0XX_area, &path1XX_area, &path2XX_area, &path3XX_area, &path4XX_area, &path5XX_area},
@@ -266,19 +269,19 @@ void initPathButtons()
     initPosRectHexLying(path_buttons[0], BOARDCENTERX, BOARDCENTERY, hexagonl_s);                                           // Boutons de la première couronne
     initPosRectHexLying(path_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                                         // Boutons de la deuxième couronne
     initPosRectHexLying(path_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                                         // Boutons de la troisième couronne
-    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, hexagonl_s);                       // Boutons de l'hexagone Nord
+    initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Nord
     initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Est
     initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Est
     initPosRectHexLying(path_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Sud
     initPosRectHexLying(path_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Ouest
     initPosRectHexLying(path_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Nord - Ouest
     initPosRectHex(path_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2);                                     // Boutons de l'hexagone debout
-    initPosRectOthers();
+    initPosRectOthers();                                                                                                    // Boutons des 12 chemins orphelins
 }
 
 /**
 * \fn void initPosRectOthers()
-* \brief Fonction d'initialisation de la position des rectangles des autres zones.
+* \brief Fonction d'initialisation de la position des rectangles chemins orphelins.
 *
 * Assigne les valeurs de position selon le placement souhaité.
 */

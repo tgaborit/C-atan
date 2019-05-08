@@ -14,20 +14,39 @@
 #include <SDL.h>
 
 /**
-* \enum TerrainButton
+* \enum TerrButton
 * Tous les boutons existants dans l'environnement "Choix d'un terrain" ainsi que le non-bouton.
 */
 typedef enum {
+        TERRX0_BUTTON,
+        TERRX1_BUTTON,
+        TERRX2_BUTTON,
+        TERRX3_BUTTON,
+        TERRX4_BUTTON,
+        TERRX5_BUTTON,
 
+        TERR0X_BUTTON,
+        TERR1X_BUTTON,
+        TERR2X_BUTTON,
+        TERR3X_BUTTON,
+        TERR4X_BUTTON,
+        TERR5X_BUTTON,
 
-        NO_TERRAINBUTTON
-} TerrainButton;
+        TERRNN_BUTTON,
+        TERRNE_BUTTON,
+        TERRSE_BUTTON,
+        TERRSS_BUTTON,
+        TERRSW_BUTTON,
+        TERRNW_BUTTON,
+
+        NO_TERRBUTTON
+} TerrButton;
 
 /**
-* \def NTERRAINBUTTONS
+* \def NTERRBUTTONS
 * Définit le nombre de boutons de l'environnement "Choix d'un terrain".
 */
-#define NTERRAINBUTTONS 18
+#define NTERRBUTTONS 18
 
 /**
 * \def TERRAINS
@@ -37,8 +56,8 @@ typedef enum {
 
 void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer, SDL_bool* program_launched);
 
-void drawTerrainButtons(SDL_Renderer* renderer);
+void drawTerrButtons(SDL_Renderer* renderer);
 
-void initTerrainButtons();
+void initTerrButtons();
 
 #endif //CATANE_CONTROLLER_TERRAIN_H

@@ -105,7 +105,7 @@ typedef enum {
 } PathButton;
 
 /**
-* \def NPLACEROADBUTTON
+* \def NPATHBUTTONS
 * Définit le nombre de boutons de l'environnement "Choix d'un chemin".
 */
 #define NPATHBUTTONS 72

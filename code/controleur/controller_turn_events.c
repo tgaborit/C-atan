@@ -179,9 +179,13 @@ void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program
 
     ResourceButton resource_clicked = NO_RESOURCEBUTTON;
 
+    do
+    {
     controllerResource(&resource_clicked, renderer, program_launched);
     if(*program_launched == SDL_FALSE)
         return;
+    }
+    while(resource_clicked == NO_RESOURCEBUTTON);
 
     TypeRessource resource_chosen = resourceButtonToTypeRessource(resource_clicked);
     printf("Appel de la fonction du modele utiliser_monopole(the_game, %d)\n", resource_chosen);
@@ -205,13 +209,21 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
     ResourceButton resource_clicked1 = NO_RESOURCEBUTTON;
     ResourceButton resource_clicked2 = NO_RESOURCEBUTTON;
 
-    controllerResource(&resource_clicked1, renderer, program_launched);
-    if(*program_launched == SDL_FALSE)
-        return;
+    do
+    {
+        controllerResource(&resource_clicked1, renderer, program_launched);
+        if(*program_launched == SDL_FALSE)
+            return;
+    }
+    while(resource_clicked1 == NO_RESOURCEBUTTON);
 
+    do
+    {
     controllerResource(&resource_clicked2, renderer, program_launched);
     if(*program_launched == SDL_FALSE)
         return;
+    }
+    while(resource_clicked2 == NO_RESOURCEBUTTON);
 
     TypeRessource resource_chosen1 = resourceButtonToTypeRessource(resource_clicked1);
     TypeRessource resource_chosen2 = resourceButtonToTypeRessource(resource_clicked2);
