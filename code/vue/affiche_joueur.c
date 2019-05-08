@@ -413,3 +413,114 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
 
     SDL_RenderPresent(renderer);
 }
+
+
+
+
+/**
+ * \fn void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de chaque ressource pour le joueur courant
+ *
+ *
+ * \param type, le type de ressource
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 20);
+    SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
+    char nb[20] = "";
+
+	SDL_Rect rect;
+	rect.y = 788;
+	rect.w = 100;
+	rect.h = 100;
+
+	int n = get_nbressource_joueuractif(type, p);
+
+	switch(type){
+        case ARGILE:
+            rect.x = 657;
+            break;
+        case BLE:
+            rect.x = 829.5;
+            break;
+        case BOIS:
+            rect.x = 1002.5;
+            break;
+        case MOUTON:
+            rect.x = 1175.5;
+            break;
+        case PIERRE:
+            rect.x = 1351.5;
+            break;
+    }
+
+    sprintf(nb, "%d", n);
+    SDL_Surface* surfnb = TTF_RenderText_Blended(police, nb, couleur);
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    TTF_CloseFont(police);
+}
+
+/**
+ * \fn void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de chaque carte développement pour le joueur courant
+ *
+ *
+ * \param type, le type de développement
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 20);
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+    char nb[20] = "";
+
+	SDL_Rect rect;
+	rect.x = 102;
+	rect.w = 100;
+	rect.h = 100;
+
+	int n = get_nbcartedev_joueuractif(type, p);
+
+	switch(type){
+        case CHEVALIER:
+            rect.y = 277;
+            break;
+        case MONOPOLE:
+            rect.y = 377;
+            break;
+        case DECOUVERTE:
+            rect.y = 477;
+            break;
+        case ROUTES:
+            rect.y = 577;
+            break;
+        case POINT:
+            rect.y = 677;
+            break;
+    }
+
+    sprintf(nb, "%d", n);
+    SDL_Surface* surfnb = TTF_RenderText_Blended(police, nb, couleur);
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    TTF_CloseFont(police);
+}

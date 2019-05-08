@@ -28,6 +28,8 @@
 #include "affiche_joueur.h"
 #include "SDL_erreur.h"
 #include "affiche_texte.h"
+#include "set_partie.h"
+
 
 /**
  * \fn SDL_Window* InitFenetre()

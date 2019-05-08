@@ -17,7 +17,9 @@
 #include <stdlib.h>
 #include "partie.h"
 #include "get_plateau.h"
+#include "get_partie.h"
 #include "SDL_erreur.h"
+#include "ressource.h"
 
 
 /**
@@ -85,4 +87,27 @@ void AffichePseudoJ4(SDL_Renderer* renderer, Joueur* j);
  */
 void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer);
 
+/**
+ * \fn void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de chaque ressource pour le joueur courant
+ *
+ *
+ * \param type, le type de ressource
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer);
+
+/**
+ * \fn void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de chaque carte développement pour le joueur courant
+ *
+ *
+ * \param type, le type de développement
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer);
 #endif
