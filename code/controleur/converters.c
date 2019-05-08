@@ -1,6 +1,6 @@
 /**
 * \file converters.c
-* \brief
+* \brief Fonctions de conversion des boutons vers des données utilisables par le modèle.
 * \author Titouan Gaborit
 * \date 6 mai 2019
 *
@@ -19,7 +19,7 @@
 * Remplit les champs d'une structure de coordonnées de chemin en fonction du bouton de chemin passé en paramètre.
 *
 * \param[in] path_clicked Bouton de chemin qui a été cliqué par le joueur.
-* \return Une structure PathCoordinates contenant les coordonnées du modèle corrsepondant au bouton de chemin cliqué.
+* \return Une structure PathCoordinates contenant les coordonnées du modèle correspondant au bouton de chemin cliqué.
 */
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 {
@@ -496,7 +496,7 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 * Remplit les champs d'une structure de coordonnées de croisement en fonction du bouton de croisement passé en paramètre.
 *
 * \param[in] cross_clicked Bouton de croisement qui a été cliqué par le joueur.
-* \return Une structure CrossCoordinates contenant les coordonnées du modèle corrsepondant au bouton de croisement cliqué.
+* \return Une structure CrossCoordinates contenant les coordonnées du modèle correspondant au bouton de croisement cliqué.
 */
 CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
 {
@@ -845,6 +845,15 @@ CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
     return cross_coordinates;
 }
 
+/**
+* \fn TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked)
+* \brief Fonction de conversion de bouton de terrrain vers les coordonnées du modèle.
+*
+* Remplit les champs d'une structure de coordonnées de terrrain en fonction du bouton de terrrain passé en paramètre.
+*
+* \param[in] terr_clicked Bouton de terrrain qui a été cliqué par le joueur.
+* \return Une structure TerrCoordinates contenant les coordonnées du modèle correspondant au bouton de terrrain cliqué.
+*/
 TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked)
 {
     TerrCoordinates terr_coordinates;
@@ -951,6 +960,15 @@ TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked)
     return terr_coordinates;
 }
 
+/**
+* \fn TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
+* \brief Fonction de conversion de bouton de ressource vers une constante du modèle.
+*
+* Retourne une constante de ressource en fonction du bouton de croisement passé en paramètre.
+*
+* \param[in] resource Bouton de ressource qui a été cliqué par le joueur.
+* \return Une constante TypeRessource du modèle correspondant au bouton de ressource cliqué.
+*/
 TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
 {
     switch(resource_clicked)

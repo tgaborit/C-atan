@@ -35,29 +35,15 @@ void craftDevEvent(/*Game* the_game*/)
 }
 
 /**
-* \fn void controllerPlaceUrb(SDL_bool program_launched, SDL_Renderer* renderer, Game* the_game)
-* \brief Fonction principale du contrôleur du placement d'une route.
-*
-* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une route.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
-*
-* \param[in,out] program_launched Etat du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
-*/
-/**
 * \fn void craftRoadEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
 * \brief Evénement de craft d'une route.
 *
-* Fait appel à la fonction du modèle setRoute pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
-* L'emplacement est un chemin dont les coordonnées sont passées en paramètre.
-* Si le placement réussit, quitte l'environnement "Placement d'une route".
+* Demande au joueur de sélectionner un chemin où construire une route, convertit cet emplacement en données du modèle,
+* puis fait appel à la fonction du modèle setRoute pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Si le placement échoue, on reste dans l'environnement "Choix d'un chemin".
 *
-* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 * \param[in,out] the_game Pointeur vers l'état de la partie.
-* \param[in] x Abscisse de l'hexagone où placer la route.
-* \param[in] y Ordonnée de l'hexagone où placer la route.
-* \param[in] position Position du chemin dans l'hexagone où placer la route.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -82,32 +68,15 @@ void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 }
 
 /**
-* \fn void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
-* \brief Fonction principale du contrôleur du placement d'une colonie/ville.
+* \fn void craftSettleEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \brief Evénement de craft d'une colonie.
 *
-* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une colonie ou d'une ville.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+* Demande au joueur de sélectionner un croisement où construire une colonie, convertit cet emplacement en données du modèle,
+* puis fait appel à la fonction du modèle setColonie pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Si le placement échoue, on reste dans l'environnement "Choix d'un croisement".
 *
-* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
-* \param[in] urb_placing Placement d'une colonie ou d'une ville.
-*/
-/**
-* \fn void placeUrbEvent(SDL_bool* placing_launched, Game* the_game, double x, double y, int position, UrbPlacing urb_placing)
-* \brief Evénement de placement d'une colonie ou d'une ville.
-*
-* Fait appel à la fonction du modèle setColonie ou setVille en fonction du type de craft passé en paramètre
-* pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
-* L'emplacement est un croisement dont les coordonnées sont passées en paramètre.
-* Si le placement réussit, quitte l'environnement "Placement d'une colonie ou d'une ville".
-*
-* \param[in,out] placing_launched Ponteur vers l'état du pplacement.
 * \param[in,out] the_game Pointeur vers l'état de la partie.
-* \param[in] x Abscisse de l'hexagone où placer la colonie/ville.
-* \param[in] y Ordonnée de l'hexagone où placer la colonie/ville.
-* \param[in] position Position du croisement dans l'hexagone où placer la colonie/ville.
-* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -132,16 +101,15 @@ void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* prog
 }
 
 /**
-* \fn void controllerPlaceUrb(SDL_bool* program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
-* \brief Fonction principale du contrôleur du placement d'une colonie/ville.
+* \fn void craftCityEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \brief Evénement de craft d'une ville.
 *
-* Cette fonction se répète tant que le joueur reste dans l'environnement du placement d'une colonie ou d'une ville.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback en fonction de ces actions.
+* Demande au joueur de sélectionner un croisement où construire une ville, convertit cet emplacement en données du modèle,
+* puis fait appel à la fonction du modèle setVille pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Si le placement échoue, on reste dans l'environnement "Choix d'un croisement".
 *
-* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
-* \param[in,out] placing_launched Etat du placement : si devient SDL_False, on sort de la fonction.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
-* \param[in] urb_placing Placement d'une colonie ou d'une ville.
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -169,9 +137,10 @@ void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \fn void useKnightEvent(Game* the_game)
 * \brief Evénement d'utilisation de carte développement Chevalier.
 *
-* Fait appel à la fonction du modèle utiliser_chevalier pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Fait appel à la fonction à la fonction activateRobberEvent pour activer le brigand et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void useKnightEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -188,9 +157,11 @@ void useKnightEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \fn void useMonopEvent(Game* the_game)
 * \brief Evénement d'utilisation de carte développement Monopole.
 *
-* Fait appel à la fonction du modèle utiliser_monopole pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Demande au joueur de sélectionner une ressource pour la carte, convertit ce choix en données du modèle,
+* puis fait appel à la fonction du modèle utiliser_monopole pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -217,9 +188,11 @@ void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program
 * \fn void useInventEvent(Game* the_game)
 * \brief Evénement d'utilisation de carte développement Invention.
 *
-* Fait appel à la fonction du modèle utiliser_decouverte pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Demande au joueur de sélectionner deux ressources pour la carte, convertit ce choix en données du modèle,
+* puis fait appel à la fonction du modèle utiliser_decouverte pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -256,9 +229,12 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \fn void useRoadsEvent(Game* the_game)
 * \brief Evénement d'utilisation de carte développement Routes.
 *
-* Fait appel à la fonction du modèle  pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Demande au joueur de sélectionner un chemin où placer une route, convertit cet emplacement en données du modèle,
+* puis fait appel à la fonction du modèle setRoute pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Répète l'opération deux fois.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
 void useRoadsEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
@@ -337,6 +313,16 @@ void endTurnEvent(/*Game* the_game*/)
     SDL_PushEvent(&ev);
 }
 
+/**
+* \fn void activateRobberEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \brief Evénement d'activation du brigand.
+*
+* Demande au joueur de sélectionner un terrain où déplacer le brigand, convertit cet emplacement en données du modèle,
+* puis fait appel à la fonction du modèle set_voleur pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+*
+* \param[in,out] the_game Pointeur vers l'état de la partie.
+* \param[in,out] program_launched Ponteur vers l'état du pplacement.
+*/
 void activateRobberEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_Event ev;

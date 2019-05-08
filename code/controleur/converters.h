@@ -1,6 +1,6 @@
 /**
 * \file converters.h
-* \brief
+* \brief En-tête de la conversion des boutons vers des données utilisables par le modèle.
 * \author Titouan Gaborit
 * \date 6 mai 2019
 *
@@ -24,21 +24,39 @@ typedef enum {
         MOUTON
 } TypeRessource;/* pour tester */
 
+/**
+* \struct PathCoordinates
+* \brief Structure contenant les coordonnées dans le modèle d'un chemin.
+*
+* Les coordonnées d'un chemin comprennent une abscisse x, une ordonnée y et une position dans l'hexagone.
+*/
 typedef struct {
-        double x;
-        double y;
-        int position;
+        double x;       /*!< Abscisse de l'hexagone où se trouve le chemin.*/
+        double y;       /*!< Ordonnée de l'hexagone où se trouve le chemin.*/
+        int position;   /*!< Position du chemin dans l'hexagone.*/
 } PathCoordinates;
 
+/**
+* \struct CrossCoordinates
+* \brief Structure contenant les coordonnées dans le modèle d'un croisement.
+*
+* Les coordonnées d'un croisement comprennent une abscisse x, une ordonnée y et une position dans l'hexagone.
+*/
 typedef struct {
-        double x;
-        double y;
-        int position;
+        double x;       /*!< Abscisse de l'hexagone où se trouve le croisement.*/
+        double y;       /*!< Ordonnée de l'hexagone où se trouve le croisement.*/
+        int position;   /*!< Position du croisement dans l'hexagone.*/
 } CrossCoordinates;
 
+/**
+* \struct TerrCoordinates
+* \brief Structure contenant les coordonnées dans le modèle d'un terrain.
+*
+* Les coordonnées d'un terrain comprennent une abscisse x et une ordonnée y.
+*/
 typedef struct {
-        double x;
-        double y;
+        double x;       /*!< Abscisse de l'hexagone correspondant au terrain.*/
+        double y;       /*!< Ordonnée de l'hexagone correspondant au terrain.*/
 } TerrCoordinates;
 
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
