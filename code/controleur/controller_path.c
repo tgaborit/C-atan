@@ -122,7 +122,6 @@ void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* p
             switch(event.type)
             {
             case SDL_MOUSEBUTTONDOWN :
-
                 if((path_clicked = whichPathButton(event.button)) != NO_PATHBUTTON)
                 {
                     printf("Clic sur chemin %d\n", path_clicked);
@@ -204,6 +203,7 @@ void drawPathButtons(SDL_Renderer* renderer)
 */
 PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
     int i;
+
     SDL_Rect path_buttons[NPATHBUTTONS] = {pathXX0_area, pathXX1_area, pathXX2_area, pathXX3_area, pathXX4_area, pathXX5_area,
                                            pathX0X_area, pathX1X_area, pathX2X_area, pathX3X_area, pathX4X_area, pathX5X_area,
                                            path0XX_area, path1XX_area, path2XX_area, path3XX_area, path4XX_area, path5XX_area,
@@ -216,11 +216,13 @@ PathButton whichPathButton(SDL_MouseButtonEvent mouse_button){
                                            pathST0_area, pathST1_area, pathST2_area, pathST3_area, pathST4_area, pathST5_area,
                                            pathO00_area, pathO01_area, pathO10_area, pathO11_area, pathO20_area, pathO21_area,
                                            pathO30_area, pathO31_area, pathO40_area, pathO41_area, pathO50_area, pathO51_area};
+
     for(i = 0; i<NPATHBUTTONS; ++i)
     {
         if(isInArea(mouse_button, path_buttons[i]) != SDL_FALSE)
             return i;
     }
+
     return NO_PATHBUTTON;
 }
 

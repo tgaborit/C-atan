@@ -45,7 +45,7 @@ static SDL_Rect terrNW_area;          /*!< Rectangle correspondant à la zone du
 * \param[in,out] terrain_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée le terrain cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerTerrain(TerrButton* terr_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initTerrButtons();
@@ -56,15 +56,17 @@ void controllerTerrain(/*TerrainButton* terrain_chosen, */SDL_Renderer* renderer
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
+            TerrButton terr_clicked;
             switch(event.type)
             {
-//            case SDL_MOUSEBUTTONDOWN :
-//                switch(whichTerrainButton(event.button))
-//                {
-//                default :
-//                    break;
-//                }
-//                break;
+            case SDL_MOUSEBUTTONDOWN :
+                if((terr_clicked = whichTerrButton(event.button)) != NO_TERRBUTTON)
+                {
+                    printf("Clic sur terrain %d\n", terr_clicked);
+                    *terr_chosen = terr_clicked;
+                    quit(&choice_launched);
+                }
+                break;
 
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
@@ -117,6 +119,32 @@ void drawTerrButtons(SDL_Renderer* renderer)
 
     //Met a jour l'ecran
     SDL_RenderPresent(renderer);
+}
+
+/**
+* \fn TerrButton whichTerrButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de terrain le joueur a cliqué
+*
+* Teste pour chaque bouton de terrain si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de terrain qui a été cliqué, NO_TERRBUTTON si aucun.
+*/
+TerrButton whichTerrButton(SDL_MouseButtonEvent mouse_button){
+    int i;
+
+    SDL_Rect terr_buttons[NTERRBUTTONS] = {terrX0_area, terrX1_area, terrX2_area, terrX3_area, terrX4_area, terrX5_area,
+                                           terr0X_area, terr1X_area, terr2X_area, terr3X_area, terr4X_area, terr5X_area,
+                                           terrNN_area, terrNE_area, terrSE_area, terrSS_area, terrSW_area, terrNW_area};
+
+    for(i = 0; i < NTERRBUTTONS; ++i)
+    {
+        if(isInArea(mouse_button, terr_buttons[i]) != SDL_FALSE)
+            return i;
+    }
+
+    return NO_TERRBUTTON;
 }
 
 /**

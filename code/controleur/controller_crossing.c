@@ -102,7 +102,6 @@ void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_b
             switch(event.type)
             {
             case SDL_MOUSEBUTTONDOWN :
-
                 if((cross_clicked = whichCrossButton(event.button)) != NO_CROSSBUTTON)
                 {
                     printf("Clic sur croisement %d\n", cross_clicked);
@@ -181,6 +180,7 @@ void drawCrossButtons(SDL_Renderer* renderer)
 */
 CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
     int i;
+
     SDL_Rect cross_buttons[NCROSSBUTTONS] = {crossXX0_area, crossXX1_area, crossXX2_area, crossXX3_area, crossXX4_area, crossXX5_area,
                                              crossX0X_area, crossX1X_area, crossX2X_area, crossX3X_area, crossX4X_area, crossX5X_area,
                                              cross0XX_area, cross1XX_area, cross2XX_area, cross3XX_area, cross4XX_area, cross5XX_area,
@@ -190,11 +190,13 @@ CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
                                              crossSW0_area, crossSW1_area, crossSW2_area, crossSW3_area, crossSW4_area, crossSW5_area,
                                              crossWW0_area, crossWW1_area, crossWW2_area, crossWW3_area, crossWW4_area, crossWW5_area,
                                              crossNW0_area, crossNW1_area, crossNW2_area, crossNW3_area, crossNW4_area, crossNW5_area};
+
     for(i = 0; i < NCROSSBUTTONS; ++i)
     {
         if(isInArea(mouse_button, cross_buttons[i]) != SDL_FALSE)
             return i;
     }
+
     return NO_CROSSBUTTON;
 }
 
