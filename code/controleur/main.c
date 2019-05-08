@@ -5,8 +5,8 @@
 #include "controller_turn.h"
 #include "controller_path.h"
 #include "controller_crossing.h"
-#include "controller_resource.h"
 #include "controller_terrain.h"
+#include "controller_resource.h"
 
 int main()
 {
@@ -24,15 +24,15 @@ int main()
 
     SDL_bool program_launched = SDL_TRUE;
 
-//    controllerTurn(&program_launched, renderer);
+    controllerTurn(&program_launched, renderer);
     //controllerPlaceUrb(program_launched, renderer, SETTLE_PLACING);
     //controllerPlaceRoad(program_launched, renderer);
 //    ResourceButton resource_chosen;
     //controllerResource(&resource_chosen, &program_launched, renderer);
 //    PathButton path_chosen;
 //    controllerPath(&path_chosen, renderer, &program_launched);
-    TerrButton terr_chosen;
-    controllerTerrain(&terr_chosen, renderer, &program_launched);
+//    TerrButton terr_chosen;
+//    controllerTerrain(&terr_chosen, renderer, &program_launched);
 //    CrossButton crossing_chosen;
 //    controllerCrossing(&crossing_chosen, renderer, &program_launched);
 

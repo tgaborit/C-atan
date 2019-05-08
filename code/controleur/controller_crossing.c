@@ -213,6 +213,7 @@ CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button){
 void initCrossButtons()
 {
     int i, j;
+    float hexagon_h;
 
     // Répartition des croisements selon la formation de 9 hexagones
     SDL_Rect* cross_buttons[9][6] = {{&crossXX0_area, &crossXX1_area, &crossXX2_area, &crossXX3_area, &crossXX4_area, &crossXX5_area},
@@ -235,14 +236,16 @@ void initCrossButtons()
         }
     }
 
+    hexagon_h = (sqrt(3)/2)*HEXAGONS;
+
     // Initialisation de la position des zones des boutons des croisements par hexagone, selon leur position et leur côté
     initPosRectHex(cross_buttons[0], BOARDCENTERX, BOARDCENTERY, HEXAGONS);                                         // Boutons de la première couronne
     initPosRectHex(cross_buttons[1], BOARDCENTERX, BOARDCENTERY, 2*HEXAGONS);                                       // Boutons de la deuxième couronne
     initPosRectHex(cross_buttons[2], BOARDCENTERX, BOARDCENTERY, 4*HEXAGONS);                                       // Boutons de la troisième couronne
-    initPosRectHex(cross_buttons[3], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Est
-    initPosRectHex(cross_buttons[4], round(BOARDCENTERX + 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Est
-    initPosRectHex(cross_buttons[5], round(BOARDCENTERX + sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Est
-    initPosRectHex(cross_buttons[6], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Ouest
-    initPosRectHex(cross_buttons[7], round(BOARDCENTERX - 2*sqrt(3)*HEXAGONS), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Ouest
-    initPosRectHex(cross_buttons[8], round(BOARDCENTERX - sqrt(3)*HEXAGONS), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Ouest
+    initPosRectHex(cross_buttons[3], round(BOARDCENTERX + 2*hexagon_h), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Est
+    initPosRectHex(cross_buttons[4], round(BOARDCENTERX + 4*hexagon_h), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Est
+    initPosRectHex(cross_buttons[5], round(BOARDCENTERX + 2*hexagon_h), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Est
+    initPosRectHex(cross_buttons[6], round(BOARDCENTERX - 2*hexagon_h), BOARDCENTERY + 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Sud - Ouest
+    initPosRectHex(cross_buttons[7], round(BOARDCENTERX - 4*hexagon_h), BOARDCENTERY, HEXAGONS);             // Boutons de l'hexagone Ouest
+    initPosRectHex(cross_buttons[8], round(BOARDCENTERX - 2*hexagon_h), BOARDCENTERY - 3*HEXAGONS, HEXAGONS);  // Boutons de l'hexagone Nord - Ouest
 }

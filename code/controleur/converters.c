@@ -12,40 +12,14 @@
 #include "controller_resource.h"
 #include "controller_path.h"
 
-TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
-{
-    switch(resource_clicked)
-    {
-    case WOOD_BUTTON :
-        return BOIS;
-
-    case WHEAT_BUTTON :
-        return BLE;
-
-    case CLAY_BUTTON :
-        return ARGILE;
-
-    case SHEEPS_BUTTON :
-        return MOUTON;
-
-    case ROCK_BUTTON :
-        return PIERRE;
-
-    default :
-        return -1;
-    }
-}
-
 /**
-* \fn void controllerPlaceRoadButton(SDL_MouseButtonEvent button, SDL_bool* placing_launched, Game* the_game)
-* \brief Sous-fonction de controllerPlaceRoad qui traite le clic effectué.
+* \fn PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
+* \brief Fonction de conversion de bouton de chemin vers les coordonnées du modèle.
 *
-* Détermine le bouton sur lequel le joueur a cliqué puis appelle l'évènement de placement d'une route sur le chemin correspondant,
-* si le clic a été effectué sur un chemin.
+* Remplit les champs d'une structure de coordonnées de chemin en fonction du bouton de chemin passé en paramètre.
 *
-* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
-* \param[in,out] placcement Pointeur vers l'état du placement.
-* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+* \param[in] path_clicked Bouton de chemin qui a été cliqué par le joueur.
+* \return Une structure PathCoordinates contenant les coordonnées du modèle corrsepondant au bouton de chemin cliqué.
 */
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 {
@@ -515,6 +489,15 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 * \param[in] urb_placing Placement d'une colonie ou d'une ville.
 */
+/**
+* \fn CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
+* \brief Fonction de conversion de bouton de croisement vers les coordonnées du modèle.
+*
+* Remplit les champs d'une structure de coordonnées de croisement en fonction du bouton de croisement passé en paramètre.
+*
+* \param[in] cross_clicked Bouton de croisement qui a été cliqué par le joueur.
+* \return Une structure CrossCoordinates contenant les coordonnées du modèle corrsepondant au bouton de croisement cliqué.
+*/
 CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
 {
     CrossCoordinates cross_coordinates;
@@ -860,4 +843,134 @@ CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked)
         break;
     }
     return cross_coordinates;
+}
+
+TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked)
+{
+    TerrCoordinates terr_coordinates;
+    switch(terr_clicked)
+    {
+    case TERRX0_BUTTON :
+        terr_coordinates.x = 0.5;
+        terr_coordinates.y = 1;
+        break;
+
+    case TERRX1_BUTTON :
+        terr_coordinates.x = 1;
+        terr_coordinates.y = 0;
+        break;
+
+    case TERRX2_BUTTON :
+        terr_coordinates.x = 0.5;
+        terr_coordinates.y = -1;
+        break;
+
+    case TERRX3_BUTTON :
+        terr_coordinates.x = -0.5;
+        terr_coordinates.y = -1;
+        break;
+
+    case TERRX4_BUTTON :
+        terr_coordinates.x = -1;
+        terr_coordinates.y = 0;
+        break;
+
+    case TERRX5_BUTTON :
+        terr_coordinates.x = -0.5;
+        terr_coordinates.y = 1;
+        break;
+
+
+    case TERR0X_BUTTON :
+        terr_coordinates.x = 1;
+        terr_coordinates.y = 2;
+        break;
+
+    case TERR1X_BUTTON :
+        terr_coordinates.x = 2;
+        terr_coordinates.y = 0;
+        break;
+
+    case TERR2X_BUTTON :
+        terr_coordinates.x = 1;
+        terr_coordinates.y = -2;
+        break;
+
+    case TERR3X_BUTTON :
+        terr_coordinates.x = -1;
+        terr_coordinates.y = -2;
+        break;
+
+    case TERR4X_BUTTON :
+        terr_coordinates.x = -2;
+        terr_coordinates.y = 0;
+        break;
+
+    case TERR5X_BUTTON :
+        terr_coordinates.x = -1;
+        terr_coordinates.y = 2;
+        break;
+
+
+    case TERRNN_BUTTON :
+        terr_coordinates.x = 0;
+        terr_coordinates.y = 2;
+        break;
+
+    case TERRNE_BUTTON :
+        terr_coordinates.x = 1.5;
+        terr_coordinates.y = 1;
+        break;
+
+    case TERRSE_BUTTON :
+        terr_coordinates.x = 1.5;
+        terr_coordinates.y = -1;
+        break;
+
+    case TERRSS_BUTTON :
+        terr_coordinates.x = 0;
+        terr_coordinates.y = -2;
+        break;
+
+    case TERRSW_BUTTON :
+        terr_coordinates.x = -1.5;
+        terr_coordinates.y = -1;
+        break;
+
+    case TERRNW_BUTTON :
+        terr_coordinates.x = -1.5;
+        terr_coordinates.y = 1;
+        break;
+
+
+    default :
+        terr_coordinates.x = -1;
+        terr_coordinates.y = -1;
+        break;
+    }
+    return terr_coordinates;
+}
+
+TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
+{
+    switch(resource_clicked)
+    {
+    case WOOD_BUTTON :
+        return BOIS;
+
+    case WHEAT_BUTTON :
+        return BLE;
+
+    case CLAY_BUTTON :
+        return ARGILE;
+
+    case SHEEPS_BUTTON :
+        return MOUTON;
+
+    case ROCK_BUTTON :
+        return PIERRE;
+
+    default :
+        return -1;
+    }
 }

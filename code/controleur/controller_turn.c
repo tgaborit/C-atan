@@ -90,8 +90,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
 
                 case KNIGHTDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Chevalier\n");
-//                    printf("Appel de la fonction controllerPlaceUrb(program_launched, renderer, the_game, CITY_PLACING)\n");
-//                    controllerPlaceUrb(program_launched, renderer/*, the_game*/, CITY_PLACING);
+                    printf("Appel de la fonction useKnightEvent(the_game, renderer, program_launched)\n");
+                    useKnightEvent(/*the_game, */renderer, program_launched);
                     break;
 
                 case MONOPDEV_BUTTON :

@@ -11,9 +11,10 @@
 #ifndef CONVERTERS_H
 #define CONVERTERS_H
 
-#include "controller_crossing.h"
-#include "controller_resource.h"
 #include "controller_path.h"
+#include "controller_crossing.h"
+#include "controller_terrain.h"
+#include "controller_resource.h"
 
 typedef enum {
         BLE,
@@ -35,8 +36,14 @@ typedef struct {
         int position;
 } CrossCoordinates;
 
+typedef struct {
+        double x;
+        double y;
+} TerrCoordinates;
+
 PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
 CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked);
+TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked);
 TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
 
 #endif //CONVERTERS_H
