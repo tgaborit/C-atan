@@ -202,7 +202,7 @@ static int routeVoisineArrete(Partie* partie, double x, double y, int position){
 
 /**
  * \fn int setRoute(Partie* partie,double x, double y, int position, Infrastructure i)
- * \brief fonction permettant de placer une route appartenant à un joueur sur l'arrete d'une tuile.
+ * \brief fonction permettant de placer une route appartenant à un joueur sur l'arrete d'une tuile et payer.
  *
  *
  * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est l'arrête.
@@ -210,6 +210,31 @@ static int routeVoisineArrete(Partie* partie, double x, double y, int position){
  */
 
 int setRoute(Partie* partie, double x, double y, int position){
+    if(partie == NULL){
+        return -1;
+    }
+    if(get_nbressource_joueuractif(ARGILE,partie)>=1 && get_nbressource_joueuractif(BOIS,partie)>=1){
+        if(setRouteFree(partie,x,y,position) == 0){
+            achat_route(partie->joueurs->current->joueur);
+            return 0;
+        }
+    }
+    return -1;
+}
+
+
+
+
+/**
+ * \fn int setRouteFree(Partie* partie,double x, double y, int position, Infrastructure i)
+ * \brief fonction permettant de placer une route appartenant à un joueur sur l'arrete d'une tuile.
+ *
+ *
+ * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est l'arrête.
+ * \return 0 si la route a été posée, -1 si ce n'est pas possible.
+ */
+
+int setRouteFree(Partie* partie, double x, double y, int position){
     if(partie == NULL){
         return -1;
     }
@@ -221,7 +246,7 @@ int setRoute(Partie* partie, double x, double y, int position){
     }
     Joueur* owner = partie->joueurs->current->joueur;
 
-    if(position < 0 || position > 6){
+    if(position < 0 || position >= 6){
         return -1;
     }
 
@@ -231,11 +256,6 @@ int setRoute(Partie* partie, double x, double y, int position){
     int cond1 = constructionVoisineArrete(partie,x,y,position);      // verif si le joueur possede une construction adjacente
     int cond2 = routeVoisineArrete(partie,x,y,position);             // verif si le joueur possede une route adjacente
     if(cond1 != 1 && cond2 != 1){
-        return -1;
-    }
-
-    // verification que le joueur possede les ressources
-    if(achat_route(owner) == -1){
         return -1;
     }
     int pattern[6] = {0,2,4,5,3,1};                             // création de la route, sur les deux tuiles la contenant
@@ -253,9 +273,10 @@ int setRoute(Partie* partie, double x, double y, int position){
 }
 
 
+
 /**
  * \fn int setColonie(Partie* partie, double x, double y, int position)
- * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile.
+ * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile et de payer.
  *
  *
  * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
@@ -266,6 +287,28 @@ int setColonie(Partie* partie, double x, double y, int position){
     if(partie == NULL){
         return -1;
     }
+    if(get_nbressource_joueuractif(ARGILE,partie)>=1 && get_nbressource_joueuractif(BOIS,partie)>=1 && get_nbressource_joueuractif(MOUTON,partie)>=1 && get_nbressource_joueuractif(BLE,partie)>=1){
+        if(setColonieFree(partie,x,y,position) == 0){
+            achat_colonie(partie->joueurs->current->joueur);
+            return 0;
+        }
+    }
+    return -1;
+}
+
+/**
+ * \fn int setColonieFree(Partie* partie, double x, double y, int position)
+ * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile.
+ *
+ *
+ * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
+ * \return 0 si la colonie a été posée, -1 si ce n'est pas possible.
+ */
+
+int setColonieFree(Partie* partie, double x, double y, int position){
+    if(partie == NULL){
+        return -1;
+    }
     Plateau* p = partie->plateau;
     Noeud* Cur = deplacementPlateau(p,x,y);
     if(p == NULL || Cur == NULL || partie->joueurs->current == NULL){
@@ -273,7 +316,7 @@ int setColonie(Partie* partie, double x, double y, int position){
     }
     Joueur* owner = partie->joueurs->current->joueur;
 
-    if(position < 0 || position > 6){
+    if(position < 0 || position >= 6){
         return -1;
     }
 
@@ -303,10 +346,6 @@ int setColonie(Partie* partie, double x, double y, int position){
         high = high-6;
     }
 
-    // verification que le joueur possede les ressources
-    if(achat_colonie(owner) == -1){
-        return -1;
-    }
     Cur->t->s[position].i = COLONIE;
     Cur->t->s[position].owner = owner;
     if(Cur->adjacence[pattern[position]] != NULL){
@@ -323,7 +362,7 @@ int setColonie(Partie* partie, double x, double y, int position){
 
 /**
  * \fn int setVille(Partie* partie, double x, double y, int position)
- * \brief fonction permettant de placer une ville sur la colonie d'un joueur.
+ * \brief fonction permettant de placer une ville sur la colonie d'un joueur et de payer.
  *
  *
  * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
@@ -331,6 +370,29 @@ int setColonie(Partie* partie, double x, double y, int position){
  */
 
 int setVille(Partie* partie, double x, double y, int position){
+    if(partie == NULL){
+        return -1;
+    }
+    if(get_nbressource_joueuractif(PIERRE,partie) >=3 && get_nbressource_joueuractif(BLE,partie) >=2){
+        if(setVilleFree(partie,x,y,position)== 0){
+            achat_ville(partie->joueurs->current->joueur);
+            return 0;
+        }
+    }
+    return -1;
+}
+
+
+/**
+ * \fn int setVilleFree(Partie* partie, double x, double y, int position)
+ * \brief fonction permettant de placer une ville sur la colonie d'un joueur.
+ *
+ *
+ * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
+ * \return 0 si la colonie a été changée en ville, -1 si ce n'est pas possible.
+ */
+
+int setVilleFree(Partie* partie, double x, double y, int position){
     if(partie == NULL){
         return -1;
     }
@@ -342,7 +404,7 @@ int setVille(Partie* partie, double x, double y, int position){
     }
     Joueur* owner = partie->joueurs->current->joueur;
 
-    if(position < 0 || position > 6){
+    if(position < 0 || position >= 6){
         return -1;
     }
 
@@ -361,16 +423,12 @@ int setVille(Partie* partie, double x, double y, int position){
     }
     //verification que le joueur possede une colonie à la position indiquée.
     if(getInfrastructureSommet(partie,x,y,position) == COLONIE && strcmp(getJoueurSommet(partie,x,y,position)->pseudo,owner->pseudo) == 0){
-        // verification que le joueur possede les ressources
-        if(achat_ville(owner) == -1){
-            return -1;
-        }
-        Cur->t->s[position].i = COLONIE;
+        Cur->t->s[position].i = VILLE;
         if(Cur->adjacence[pattern[position]] != NULL){
-            Cur->adjacence[pattern[position]]->t->s[high].i = COLONIE;
+            Cur->adjacence[pattern[position]]->t->s[high].i = VILLE;
         }
         if(Cur->adjacence[pattern[position2]] != NULL){
-            Cur->adjacence[pattern[position2]]->t->s[low].i = COLONIE;
+            Cur->adjacence[pattern[position2]]->t->s[low].i = VILLE;
         }
         return 0;
     }

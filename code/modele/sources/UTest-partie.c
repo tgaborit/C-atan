@@ -5,8 +5,9 @@
 #include <cmocka_pbc.h>
 #include <string.h>
 #include "get_plateau.h"
-#include "UTest-partie.h"
 #include "partie.h"
+#include "set_partie.h"
+#include "get_partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -26,7 +27,7 @@ static int setup_partie (void ** state)
 
     Joueur* joueur_1=init_joueur(ROUGE,"joueur1");
     Joueur* joueur_2=init_joueur(BLEU,"joueur2");
-    Joueur* joueur_3=init_joueur(VERT,"joueur3");
+    Joueur* joueur_3=init_joueur(BLANC,"joueur3");
     Joueur* joueur_4=init_joueur(ORANGE,"joueur4");
 
     if (joueur_1==NULL || joueur_2==NULL || joueur_3==NULL || joueur_4==NULL )
@@ -61,7 +62,7 @@ static int setup_partie_ressource (void ** state)
 
     Joueur* joueur_1=init_joueur(ROUGE,"joueur1");
     Joueur* joueur_2=init_joueur(BLEU,"joueur2");
-    Joueur* joueur_3=init_joueur(VERT,"joueur3");
+    Joueur* joueur_3=init_joueur(BLANC,"joueur3");
     Joueur* joueur_4=init_joueur(ORANGE,"joueur4");
 
     if (joueur_1==NULL || joueur_2==NULL || joueur_3==NULL || joueur_4==NULL )

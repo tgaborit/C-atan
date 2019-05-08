@@ -1,15 +1,6 @@
 
-#include <stdarg.h>
-#include <stddef.h>
-#include <setjmp.h>
-#include <cmocka.h>
-#include <cmocka_pbc.h>
-#include "plateau.h"
-#include "get_plateau.h"
+
 #include "test_get_plateau.h"
-#include "joueur.h"
-#include "partie.h"
-#include <string.h>
 
 
 static int group_setup(void** state){
@@ -26,7 +17,7 @@ static int infra_setup(void** state){
     if(partie == NULL){
         return -1;
     }
-    Joueur* manu = init_joueur(VERT,"manu");
+    Joueur* manu = init_joueur(BLANC,"manu");
     Joueur* remi = init_joueur(ROUGE,"remi");
     add_joueur(manu,partie);
     add_joueur(remi,partie);

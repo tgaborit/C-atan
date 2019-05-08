@@ -424,5 +424,6 @@ int utiliser_routes (Partie* partie){
 
     joueur_actif->ressource[BOIS].nb_ressource+=2;
     joueur_actif->ressource[ARGILE].nb_ressource+=2;
+    return 0;
 }
 
