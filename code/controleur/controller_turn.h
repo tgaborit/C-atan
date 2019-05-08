@@ -11,6 +11,82 @@
 #ifndef CATANE_CONTROLLER_TURN_H
 #define CATANE_CONTROLLER_TURN_H
 
+/**
+* \enum TurnButton
+* Tous les boutons existants dans l'environnement "Tour du joueur" ainsi que le non-bouton.
+*/
+typedef enum {
+        DEVCRAFT_BUTTON,
+        ROADCRAFT_BUTTON,
+        SETTLECRAFT_BUTTON,
+        CITYCRAFT_BUTTON,
+
+        KNIGHTDEV_BUTTON,
+        MONOPDEV_BUTTON,
+        INVENTDEV_BUTTON,
+        ROADSDEV_BUTTON,
+        UNIVDEV_BUTTON,
+
+        DICE_BUTTON,
+        ENDTURN_BUTTON,
+
+        HELP_BUTTON,
+
+        NO_TURNBUTTON
+} TurnButton;
+
+/**
+* \def NTURNBUTTONS
+* Définit le nombre de boutons de l'environnement "Tour du joueur".
+*/
+#define NTURNBUTTONS 12
+
+/**
+* \def CRAFTW
+* Définit la largeur d'un bouton de craft.
+*/
+#define CRAFTW 250
+
+/**
+* \def CRAFTH
+* Définit la hauteur d'un bouton de craft.
+*/
+#define CRAFTH 75
+
+/**
+* \def DEVW
+* Définit la largeur d'un bouton de carte développement.
+*/
+#define DEVW 400
+
+/**
+* \def DEVH
+* Définit la hauteur d'un bouton de carte développement.
+*/
+#define DEVH 75
+
 void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* the_game*/);
+
+void drawButtonsTurn(SDL_Renderer* renderer);
+
+TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button);
+    TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button);
+    TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button);
+
+void initButtonsTurn();
+    void initCraftAreas();
+        void initRoadCraftArea();
+        void initSettleCraftArea();
+        void initCityCraftArea();
+        void initDevCraftArea();
+    void initDevCardsAreas();
+        void initKnightDevArea();
+        void initMonopDevArea();
+        void initInventDevArea();
+        void initRoadsDevArea();
+        void initUnivDevArea();
+    void initDiceArea();
+    void initEndTurnArea();
+    void initHelpArea();
 
 #endif //CATANE_CONTROLLER_TURN_H

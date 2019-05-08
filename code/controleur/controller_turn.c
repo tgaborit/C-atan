@@ -12,9 +12,25 @@
 #include <SDL.h>
 #include "controller.h"
 #include "controller_turn.h"
-#include "controller_turn_buttons.h"
-//#include "controller_place_urb.h"
 #include "controller_turn_events.h"
+
+
+static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
+static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Route*/
+static SDL_Rect settle_craft_area;      /*!< Rectangle correspondant à la zone du bouton Craft d'une Colonie*/
+static SDL_Rect city_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Ville*/
+
+static SDL_Rect knight_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Chevalier*/
+static SDL_Rect monop_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Monopole*/
+static SDL_Rect invent_dev_area;        /*!< Rectangle correspondant à la zone du bouton de la carte développement Invention*/
+static SDL_Rect roads_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Routes*/
+static SDL_Rect univ_dev_area;          /*!< Rectangle correspondant à la zone du bouton de la carte développement Université*/
+
+static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
+static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
+
+static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone du bouton Aide*/
+
 
 /**
 * \fn void controllerTurn(SDL_bool* program_launched, Game* the_game)
@@ -149,4 +165,336 @@ void controllerTurn(SDL_bool* program_launched, SDL_Renderer* renderer/*, Game* 
             }
         }
     }
+}
+
+void drawButtonsTurn(SDL_Renderer* renderer)
+{
+    //Nettoyage du rendu
+    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+    if(SDL_RenderClear(renderer) != 0)
+        SDL_ExitWithError("Impossible de nettoyer le rendu");
+
+    //Couleur boutons
+    if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+    SDL_Rect turn_buttons[NTURNBUTTONS] = {dev_craft_area, road_craft_area, settle_craft_area, city_craft_area,
+    knight_dev_area, monop_dev_area, invent_dev_area, roads_dev_area, univ_dev_area, dice_area, end_turn_area, help_area};
+    if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
+        SDL_ExitWithError("Impossible de dessiner les boutons");
+
+    //Met a jour l'ecran
+    SDL_RenderPresent(renderer);
+}
+
+/**
+* \fn TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton le jouer a cliqué.
+*
+* Teste pour chaque bouton si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient les informations sur sa position notamment.
+* \return Le bouton de l'environnement "Tour du joueur" qui a été cliqué, NO_TURNBUTTON si aucun.
+*/
+TurnButton whichButtonTurn(SDL_MouseButtonEvent mouse_button){
+    TurnButton button_clicked;
+    if((button_clicked = whichCraftButton(mouse_button)) != NO_TURNBUTTON)
+        return button_clicked;
+    if((button_clicked = whichDevButton(mouse_button)) != NO_TURNBUTTON)
+        return button_clicked;
+    if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
+        return ENDTURN_BUTTON;
+    if(isInArea(mouse_button, dice_area) == SDL_TRUE)
+        return DICE_BUTTON;
+    if(isInArea(mouse_button, help_area) == SDL_TRUE)
+        return HELP_BUTTON;
+    return NO_TURNBUTTON;
+}
+
+/**
+* \fn TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de craft le joueur a cliqué.
+*
+* Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de craft qui a été cliqué, NO_BUTTON si aucun.
+*/
+TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, dev_craft_area) == SDL_TRUE)
+        return DEVCRAFT_BUTTON;
+    if(isInArea(mouse_button, road_craft_area) == SDL_TRUE)
+        return ROADCRAFT_BUTTON;
+    if(isInArea(mouse_button, settle_craft_area) == SDL_TRUE)
+        return SETTLECRAFT_BUTTON;
+    if(isInArea(mouse_button, city_craft_area) == SDL_TRUE)
+        return CITYCRAFT_BUTTON;
+    return NO_TURNBUTTON;
+}
+
+/**
+* \fn TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de carte développement le joueur a cliqué.
+*
+* Teste pour chaque bouton de carte développement si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de carte développement qui a été cliqué, NO_BUTTON si aucun.
+*/
+TurnButton whichDevButton(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, knight_dev_area) == SDL_TRUE)
+        return KNIGHTDEV_BUTTON;
+    if(isInArea(mouse_button, monop_dev_area) == SDL_TRUE)
+        return MONOPDEV_BUTTON;
+    if(isInArea(mouse_button, invent_dev_area) == SDL_TRUE)
+        return INVENTDEV_BUTTON;
+    if(isInArea(mouse_button, roads_dev_area) == SDL_TRUE)
+        return ROADSDEV_BUTTON;
+    if(isInArea(mouse_button, univ_dev_area) == SDL_TRUE)
+        return UNIVDEV_BUTTON;
+    return NO_TURNBUTTON;
+}
+
+/**
+* \fn void initButtonsTurn()
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Tour du joueur"
+*
+* Initialise les champs des rectangles des zones correspondant aux cartes ressources, au bouton Lancer les dés et au bouton Fin de tour.
+* Fait appel aux fonctions d'initialisation correspondantes.
+*/
+void initButtonsTurn()
+{
+    initCraftAreas();
+    initDevCardsAreas();
+    initDiceArea();
+    initEndTurnArea();
+    initHelpArea();
+}
+
+/**
+* \fn void initCraftAreas()
+* \brief Fonction d'initialisation des boutons de craft.
+*
+* Initialise les champs des rectangles des zones correspondant aux boutons de craft.
+* Fait appel aux fonctions d'initialisation pour le bouton Craft d'une Carte développement, le bouton Craft d'une Route,
+* le bouton de Craft d'une Colonie et le bouton de Craft d'une Ville.
+*/
+void initCraftAreas(){
+    initDevCraftArea();
+    initRoadCraftArea();
+    initSettleCraftArea();
+    initCityCraftArea();
+}
+
+/**
+* \fn void initDevCardsAreas()
+* \brief Fonction d'initialisation des boutons des cartes développement.
+*
+* Initialise les champs des rectangles des zones correspondant aux boutons des cartes développement.
+* Fait appel aux fonctions d'initialisation pour la carte Chevalier, la carte Monopole, la carte Invention, la carte Routes et la carte Université.
+*/
+void initDevCardsAreas()
+{
+    initKnightDevArea();
+    initMonopDevArea();
+    initInventDevArea();
+    initRoadsDevArea();
+    initUnivDevArea();
+}
+
+/**
+* \fn void initDevCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Carte développement.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Carte développement sur l'écran du joueur.
+*/
+void initDevCraftArea()
+{
+    dev_craft_area.w = CRAFTW;
+    dev_craft_area.h = CRAFTH;
+
+    dev_craft_area.x = WINDOWW - 150 - dev_craft_area.w;
+    dev_craft_area.y = 300;
+}
+
+/**
+* \fn void initRoadCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Route.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Route sur l'écran du joueur.
+*/
+void initRoadCraftArea()
+{
+    road_craft_area.w = CRAFTW;
+    road_craft_area.h = CRAFTH;
+
+    road_craft_area.x = dev_craft_area.x;
+    road_craft_area.y = dev_craft_area.y + dev_craft_area.h + 50;
+}
+
+/**
+* \fn void initSettleCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Colonie.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Colonie sur l'écran du joueur.
+*/
+void initSettleCraftArea()
+{
+    settle_craft_area.w = CRAFTW;
+    settle_craft_area.h = CRAFTH;
+
+    settle_craft_area.x = road_craft_area.x;
+    settle_craft_area.y = road_craft_area.y + road_craft_area.h + 50;
+}
+
+/**
+* \fn void initCityCraftArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Craft d'une Ville.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de craft.
+* Assigne les valeurs de position selon le placement du bouton Craft d'une Ville sur l'écran du joueur.
+*/
+void initCityCraftArea()
+{
+    city_craft_area.w = CRAFTW;
+    city_craft_area.h = CRAFTH;
+
+    city_craft_area.x = settle_craft_area.x;
+    city_craft_area.y = settle_craft_area.y + settle_craft_area.h + 50;
+}
+
+/**
+* \fn void initKnightDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Chevalier.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Chevalier sur l'écran du joueur.
+*/
+void initKnightDevArea()
+{
+    knight_dev_area.w = DEVW;
+    knight_dev_area.h = DEVH;
+
+    knight_dev_area.x = 100;
+    knight_dev_area.y = 240;
+}
+
+/**
+* \fn void initMonopDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Monopole.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Monopole sur l'écran du joueur.
+*/
+void initMonopDevArea()
+{
+    monop_dev_area.w = DEVW;
+    monop_dev_area.h = DEVH;
+
+    monop_dev_area.x = knight_dev_area.x;
+    monop_dev_area.y = knight_dev_area.y + 25 + monop_dev_area.h;
+}
+
+/**
+* \fn void initInventDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Invention.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Invention sur l'écran du joueur.
+*/
+void initInventDevArea()
+{
+    invent_dev_area.w = DEVW;
+    invent_dev_area.h = DEVH;
+
+    invent_dev_area.x = knight_dev_area.x;
+    invent_dev_area.y = monop_dev_area.y + 25 + invent_dev_area.h;
+}
+
+/**
+* \fn void initRoadsDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Routes.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Routes sur l'écran du joueur.
+*/
+void initRoadsDevArea()
+{
+    roads_dev_area.w = DEVW;
+    roads_dev_area.h = DEVH;
+
+    roads_dev_area.x = knight_dev_area.x;
+    roads_dev_area.y = invent_dev_area.y + 25 + roads_dev_area.h;
+}
+
+/**
+* \fn void initUnivDevArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton de la carte développement Université.
+*
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de carte développement.
+* Assigne les valeurs de position selon le placement du bouton Université sur l'écran du joueur.
+*/
+void initUnivDevArea()
+{
+    univ_dev_area.w = DEVW;
+    univ_dev_area.h = DEVH;
+
+    univ_dev_area.x = knight_dev_area.x;
+    univ_dev_area.y = roads_dev_area.y + 25 + univ_dev_area.h;
+}
+
+/**
+* \fn void initDiesArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés.
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*/
+void initDiceArea()
+{
+    dice_area.w = 100;
+    dice_area.h = 100;
+
+    dice_area.x = dev_craft_area.x + dev_craft_area.w/2 - dice_area.w/2;
+    dice_area.y = 75;
+}
+
+/**
+* \fn void initEndTurnArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Fin de tour.
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*/
+void initEndTurnArea()
+{
+    end_turn_area.w = 150;
+    end_turn_area.h = 75;
+
+    end_turn_area.x = 300;
+    end_turn_area.y = WINDOWH - 55 - end_turn_area.h;
+}
+
+/**
+* \fn void initHelpArea()
+* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Aide.
+*
+* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
+* Assigne les valeurs de position selon le placement souhaité.
+*/
+void initHelpArea()
+{
+    help_area.w = 35;
+    help_area.h = 35;
+
+    help_area.x = WINDOWW - 10 - help_area.w;
+    help_area.y = 0;
 }
