@@ -13,11 +13,19 @@
 
 #define NB_JOUEUR_MAX
 
-#include"joueur.h"
-#include "plateau.h"
+#include "partie.h"
 #include <time.h>
 #include <stdlib.h>
 #include <math.h>
+
+/**
+* \fn Joueur get_joueur_actif(Partie* partie);
+* \brief renvoie le Joueur qui a la main
+*
+* \param Partie*: partie en cours
+* \return Joueur: joueur qui a la main
+*/
+Joueur* get_joueur_actif(Partie* partie);
 
 /**
  * \fn int  get_nbcartedev(TypeCarteDev type, Joueur* joueur)
@@ -38,7 +46,47 @@ int  get_nbcartedev_joueuractif(TypeCarteDev type,Partie* partie);
  */
 int  get_nbressource_joueuractif(TypeRessource type, Partie* partie);
 
+/**
+ * \fn int get_score_joueuractif(Joueur joueur)
+ * \brief Fonction qui retourne le score du joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return int:le score du joueur actif.
+ */
 
+int get_score_joueuractif(Partie* partie);
+
+  /**
+* \fn int get_nbjoueurs(Partie* partie)
+* \brief renvoie le nombre de joueurs dans la partie
+*
+* \param Partie*:partie
+* \return int: nombre de joueurs.
+*/
+int get_nbjoueurs(Partie* partie);
+
+/**
+* \fn int get_score_max
+* \brief retourne le score du joueur le plus fort
+*
+* renvoie le score du joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie
+ * le score le plus fort
+* \param Partie: partie en cours
+* \return int: score max dans la partie
+*/
+int get_score_max(Partie* partie);
+
+/**
+* \fn Joueur* get_score_max
+* \brief retourne un pointeur sur le joueur qui a le score le plus fort
+*
+* renvoie le joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie le joeur qui a joué le plus tot au premier tour
+* exemple: si tout les score sont à 2 renvoie le joueur qui a jouer en premier
+*
+* \param Partie: partie en cours
+* \return Joueur*: joueur ayant le plus haut score
+*/
+Joueur* get_joueur_score_max(Partie* partie);
 
 
 
