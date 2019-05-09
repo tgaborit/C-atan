@@ -37,112 +37,27 @@ void AfficheJoueur(SDL_Renderer* renderer)
     SDL_RenderPresent(renderer);
 }
 
-/**
- * \fn void AffichePseudoJ1(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 1.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 1
- * \return aucun
- */
-void AffichePseudoJ1(SDL_Renderer* renderer, Joueur*j)
-{
-    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 30);
-    TTF_SetFontStyle(police, TTF_STYLE_BOLD);
-    char score[20]="";
-    SDL_Color couleur;
-
-
-    SDL_Rect rect;
-
-    rect.x = 5;
-    rect.y = 8.5;
-    rect.w = 1920;
-    rect.h = 35;
-
-    SDL_Rect rectscore;
-    rectscore.x = rect.x + 210;
-    rectscore.y = 8.5;
-    rectscore.w = 1920;
-    rectscore.h = 35;
-
-        switch(j->couleur)
-        {
-            case ROUGE :
-                couleur.r = 255;
-                couleur.g = 18;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLANC:
-                couleur.r = 255;
-                couleur.g = 255;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case ORANGE:
-                couleur.r = 255;
-                couleur.g = 138;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLEU:
-                couleur.r = 0;
-                couleur.g = 0;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            default:
-                break;
-        }
-
-
-        SDL_Surface* surfpseudo = TTF_RenderText_Blended(police, j->pseudo, couleur);
-        SDL_Texture* textpseudo = SDL_CreateTextureFromSurface(renderer, surfpseudo);
-
-        SDL_QueryTexture(textpseudo, NULL, NULL, &rect.w, &rect.h);
-
-        SDL_RenderCopy(renderer, textpseudo, NULL, &rect);
-
-        sprintf(score, "Points : %d", j->score);
-        SDL_Surface* surfscore = TTF_RenderText_Blended(police, score, couleur);
-        SDL_Texture* textscore = SDL_CreateTextureFromSurface(renderer, surfscore);
-
-        SDL_QueryTexture(textscore, NULL, NULL, &rectscore.w, &rectscore.h);
-
-        SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
-
-        SDL_RenderPresent(renderer);
-
-        TTF_CloseFont(police);
-}
-
-
 
 /**
- * \fn void AffichePseudoJ2(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 2.
+ * \fn void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x);
+ * \brief Fonction affichant le pseudo et le score d'un joueur.
  *
  *
+ * \param j, le joueur
  * \param renderer, le rendu actuel
- * \param j, le joueur 2
+ * \param x, la coordonnée x du rectangle d'affichage des informations
  * \return aucun
  */
-void AffichePseudoJ2(SDL_Renderer* renderer, Joueur*j)
+void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 {
+
     TTF_Font* police = TTF_OpenFont("Vogue.ttf", 30);
     TTF_SetFontStyle(police, TTF_STYLE_BOLD);
     char score[20]="";
     SDL_Color couleur;
 
     SDL_Rect rect;
-
-    rect.x = 468.5;
+    rect.x = x;
     rect.y = 8.5;
     rect.w = 1920;
     rect.h = 35;
@@ -153,232 +68,60 @@ void AffichePseudoJ2(SDL_Renderer* renderer, Joueur*j)
     rectscore.w = 1920;
     rectscore.h = 35;
 
-        switch(j->couleur)
-        {
-            case ROUGE :
-                couleur.r = 255;
-                couleur.g = 18;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
+    switch(j->couleur)
+    {
+        case ROUGE :
+            couleur.r = 255;
+            couleur.g = 18;
+            couleur.b = 0;
+            couleur.a = SDL_ALPHA_OPAQUE;
+            break;
 
-            case BLANC:
-                couleur.r = 255;
-                couleur.g = 255;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
+        case BLANC:
+            couleur.r = 255;
+            couleur.g = 255;
+            couleur.b = 255;
+            couleur.a = SDL_ALPHA_OPAQUE;
+            break;
 
-            case ORANGE:
-                couleur.r = 255;
-                couleur.g = 138;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
+        case ORANGE:
+            couleur.r = 255;
+            couleur.g = 138;
+            couleur.b = 0;
+            couleur.a = SDL_ALPHA_OPAQUE;
+            break;
 
-            case BLEU:
-                couleur.r = 0;
-                couleur.g = 0;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
+        case BLEU:
+            couleur.r = 0;
+            couleur.g = 0;
+            couleur.b = 255;
+            couleur.a = SDL_ALPHA_OPAQUE;
+            break;
 
-            default:
-                break;
-        }
+        default:
+            break;
+    }
 
+    SDL_Surface* surfpseudo = TTF_RenderText_Blended(police, j->pseudo, couleur);
+    SDL_Texture* textpseudo = SDL_CreateTextureFromSurface(renderer, surfpseudo);
 
-        SDL_Surface* surfpseudo = TTF_RenderText_Blended(police, j->pseudo, couleur);
-        SDL_Texture* textpseudo = SDL_CreateTextureFromSurface(renderer, surfpseudo);
+    SDL_QueryTexture(textpseudo, NULL, NULL, &rect.w, &rect.h);
 
-        SDL_QueryTexture(textpseudo, NULL, NULL, &rect.w, &rect.h);
+    SDL_RenderCopy(renderer, textpseudo, NULL, &rect);
 
-        SDL_RenderCopy(renderer, textpseudo, NULL, &rect);
+    sprintf(score, "Points : %d", j->score);
+    SDL_Surface* surfscore = TTF_RenderText_Blended(police, score, couleur);
+    SDL_Texture* textscore = SDL_CreateTextureFromSurface(renderer, surfscore);
 
+    SDL_QueryTexture(textscore, NULL, NULL, &rectscore.w, &rectscore.h);
 
-        sprintf(score, "Points : %d", j->score);
-        SDL_Surface* surfscore = TTF_RenderText_Blended(police, score, couleur);
-        SDL_Texture* textscore = SDL_CreateTextureFromSurface(renderer, surfscore);
+    SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
 
-        SDL_QueryTexture(textscore, NULL, NULL, &rectscore.w, &rectscore.h);
+    SDL_RenderPresent(renderer);
 
-        SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
-
-        SDL_RenderPresent(renderer);
-
-        TTF_CloseFont(police);
+    TTF_CloseFont(police);
 }
 
-
-
-/**
- * \fn void AffichePseudoJ3(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 3.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 3
- * \return aucun
- */
-void AffichePseudoJ3(SDL_Renderer* renderer, Joueur*j)
-{
-    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 30);
-    TTF_SetFontStyle(police, TTF_STYLE_BOLD);
-    SDL_Color couleur;
-    char score[20]="";
-
-    SDL_Rect rect;
-
-    rect.x = 937;
-    rect.y = 8.5;
-    rect.w = 1920;
-    rect.h = 35;
-
-    SDL_Rect rectscore;
-    rectscore.x = rect.x + 210;
-    rectscore.y = 8.5;
-    rectscore.w = 1920;
-    rectscore.h = 35;
-
-        switch(j->couleur)
-        {
-            case ROUGE :
-                couleur.r = 255;
-                couleur.g = 18;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLANC:
-                couleur.r = 255;
-                couleur.g = 255;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case ORANGE:
-                couleur.r = 255;
-                couleur.g = 138;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLEU:
-                couleur.r = 0;
-                couleur.g = 0;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            default:
-                break;
-        }
-
-
-        SDL_Surface* surfpseudo = TTF_RenderText_Blended(police, j->pseudo, couleur);
-        SDL_Texture* textpseudo = SDL_CreateTextureFromSurface(renderer, surfpseudo);
-
-        SDL_QueryTexture(textpseudo, NULL, NULL, &rect.w, &rect.h);
-
-        SDL_RenderCopy(renderer, textpseudo, NULL, &rect);
-
-        sprintf(score, "Points : %d", j->score);
-        SDL_Surface* surfscore = TTF_RenderText_Blended(police, score, couleur);
-        SDL_Texture* textscore = SDL_CreateTextureFromSurface(renderer, surfscore);
-
-        SDL_QueryTexture(textscore, NULL, NULL, &rectscore.w, &rectscore.h);
-
-        SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
-
-        SDL_RenderPresent(renderer);
-
-        TTF_CloseFont(police);
-}
-
-
-/**
- * \fn void AffichePseudoJ4(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 4.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 4
- * \return aucun
- */
-void AffichePseudoJ4(SDL_Renderer* renderer, Joueur*j)
-{
-    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 30);
-    TTF_SetFontStyle(police, TTF_STYLE_BOLD);
-    SDL_Color couleur;
-    char score[20] = "";
-
-    SDL_Rect rect;
-
-    rect.x = 1405.5;
-    rect.y = 8.5;
-    rect.w = 1920;
-    rect.h = 35;
-
-    SDL_Rect rectscore;
-    rectscore.x = rect.x + 210;
-    rectscore.y = 8.5;
-    rectscore.w = 1920;
-    rectscore.h = 35;
-
-        switch(j->couleur)
-        {
-            case ROUGE :
-                couleur.r = 255;
-                couleur.g = 18;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLANC:
-                couleur.r = 255;
-                couleur.g = 255;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case ORANGE:
-                couleur.r = 255;
-                couleur.g = 138;
-                couleur.b = 0;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            case BLEU:
-                couleur.r = 0;
-                couleur.g = 0;
-                couleur.b = 255;
-                couleur.a = SDL_ALPHA_OPAQUE;
-                break;
-
-            default:
-                break;
-        }
-
-
-        SDL_Surface* surfpseudo = TTF_RenderText_Blended(police, j->pseudo, couleur);
-        SDL_Texture* textpseudo = SDL_CreateTextureFromSurface(renderer, surfpseudo);
-
-        SDL_QueryTexture(textpseudo, NULL, NULL, &rect.w, &rect.h);
-
-        SDL_RenderCopy(renderer, textpseudo, NULL, &rect);
-
-        sprintf(score, "Points : %d", j->score);
-        SDL_Surface* surfscore = TTF_RenderText_Blended(police, score, couleur);
-        SDL_Texture* textscore = SDL_CreateTextureFromSurface(renderer, surfscore);
-
-        SDL_QueryTexture(textscore, NULL, NULL, &rectscore.w, &rectscore.h);
-
-        SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
-
-        SDL_RenderPresent(renderer);
-
-        TTF_CloseFont(police);
-}
 
 
 /**
@@ -394,20 +137,20 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
 {
     if(p->joueurs->first->next != p->joueurs->last){
 
-        AffichePseudoJ1(renderer, p->joueurs->first->joueur);
-        AffichePseudoJ2(renderer, p->joueurs->first->next->joueur);
+        AfficheInfoJoueurs(p->joueurs->first->joueur, renderer, 5);
+        AfficheInfoJoueurs(p->joueurs->first->next->joueur,renderer, 468.5);
 
         if(p->joueurs->first->next->next == p->joueurs->last){
-            AffichePseudoJ3(renderer, p->joueurs->last->joueur);
+            AfficheInfoJoueurs(p->joueurs->last->joueur, renderer, 937);
         }else{
-            AffichePseudoJ3(renderer, p->joueurs->first->next->next->joueur);
-            AffichePseudoJ4(renderer, p->joueurs->last->joueur);
+            AfficheInfoJoueurs(p->joueurs->first->next->next->joueur, renderer, 937);
+            AfficheInfoJoueurs(p->joueurs->last->joueur, renderer, 1405.5);
         }
 
     }else{
 
-    AffichePseudoJ1(renderer, p->joueurs->first->joueur);
-    AffichePseudoJ2(renderer, p->joueurs->first->next->joueur);
+    AfficheInfoJoueurs(p->joueurs->first->joueur, renderer, 5);
+    AfficheInfoJoueurs(p->joueurs->first->next->joueur,renderer, 468.5);
 
     }
 
@@ -442,19 +185,19 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
 
 	switch(type){
         case ARGILE:
-            rect.x = 657;
+            rect.x = 565;
             break;
         case BLE:
-            rect.x = 829.5;
+            rect.x = 738.5;
             break;
         case BOIS:
-            rect.x = 1002.5;
+            rect.x = 910.5;
             break;
         case MOUTON:
-            rect.x = 1175.5;
+            rect.x = 1084.5;
             break;
         case PIERRE:
-            rect.x = 1351.5;
+            rect.x = 1259.5;
             break;
     }
 
@@ -523,4 +266,28 @@ void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
     SDL_RenderPresent(renderer);
 
     TTF_CloseFont(police);
+}
+
+/**
+ * \fn void AfficheNbCarte(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de toutes les cartes pour le joueur courant
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbCarte(Partie* p, SDL_Renderer* renderer)
+{
+    AfficheNombreRessources(ARGILE, p, renderer);
+	AfficheNombreRessources(BLE, p, renderer);
+	AfficheNombreRessources(BOIS, p, renderer);
+	AfficheNombreRessources(MOUTON, p, renderer);
+	AfficheNombreRessources(PIERRE, p, renderer);
+	AfficheNombreDev(CHEVALIER, p, renderer);
+	AfficheNombreDev(MONOPOLE, p, renderer);
+	AfficheNombreDev(DECOUVERTE, p, renderer);
+	AfficheNombreDev(ROUTES, p, renderer);
+	AfficheNombreDev(POINT, p, renderer);
+	SDL_RenderPresent(renderer);
 }

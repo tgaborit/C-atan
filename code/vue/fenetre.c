@@ -104,6 +104,8 @@ SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrend
 	AfficheBoutonVille(renderer);
 	Affiche_Infrastructures(p,renderer);
 	AfficheTexte_MAJ(renderer);
+	AfficheListeJoueurs(p, renderer);
+	AfficheNbCarte(p, renderer);
     SDL_RenderPresent(renderer);
     return renderer;
 

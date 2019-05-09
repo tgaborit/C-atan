@@ -22,6 +22,7 @@
 #include "ressource.h"
 
 
+
 /**
  * \fn void AfficheJoueur(SDL_Renderer* renderer)
  * \brief Fonction affichant les noms et les scores des joueurs
@@ -33,48 +34,16 @@
 void AfficheJoueur(SDL_Renderer* renderer);
 
 /**
- * \fn void AffichePseudoJ1(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 1.
+ * \fn void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x);
+ * \brief Fonction affichant le pseudo et le score d'un joueur.
  *
  *
+ * \param j, le joueur
  * \param renderer, le rendu actuel
- * \param j, le joueur 1
+ * \param x, la coordonnée x du rectangle d'affichage des informations
  * \return aucun
  */
-void AffichePseudoJ1(SDL_Renderer* renderer, Joueur* j);
-
-/**
- * \fn void AffichePseudoJ2(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 2.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 2
- * \return aucun
- */
-void AffichePseudoJ2(SDL_Renderer* renderer, Joueur* j);
-
-/**
- * \fn void AffichePseudoJ3(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 3.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 3
- * \return aucun
- */
-void AffichePseudoJ3(SDL_Renderer* renderer, Joueur* j);
-
-/**
- * \fn void AffichePseudoJ4(SDL_Renderer* renderer, Joueur* j);
- * \brief Fonction affichant le pseudo et le score du joueur 4.
- *
- *
- * \param renderer, le rendu actuel
- * \param j, le joueur 4
- * \return aucun
- */
-void AffichePseudoJ4(SDL_Renderer* renderer, Joueur* j);
+void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x);
 
 /**
  * \fn void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer);
@@ -110,4 +79,15 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
  * \return aucun
  */
 void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer);
+
+/**
+ * \fn void AfficheNbCarte(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant le nombre de toutes les cartes pour le joueur courant
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbCarte(Partie* p, SDL_Renderer* renderer);
 #endif
