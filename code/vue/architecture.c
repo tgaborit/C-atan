@@ -1,76 +1,172 @@
-#include "SDL2/SDL.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "Plateau.h"
+/*
+ * \file architecture.c
+ * \brief Implémente les fonctions de architecture.h
+ * \author Pauline.M
+ * \version 1.0
+ * \date 1 mai 2019
+ *
+ * Implémente les fonctions utiles à l'affichage des constructions dans le jeu.
+ */
 
+#include "architecture.h"
 
-void AfficheBouttonDev(SDL_Renderer *renderer)
+/**
+ * \fn AfficheBoutonDev(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des cartes développement
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+
+void AfficheBoutonDev(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+    SDL_Surface* image = NULL;
+	SDL_Texture* boutondev = NULL;
 
-	SDL_Rect bouttondev;
-	bouttondev.x = 1520;
-	bouttondev.y = 300;
-	bouttondev.w = 200;
-	bouttondev.h = 75;
+	image = SDL_LoadBMP("imagecatane/dev.bmp");
 
-	if(SDL_RenderFillRect(renderer, &bouttondev) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	boutondev = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(boutondev == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectboutondev;
+
+	if(SDL_QueryTexture(boutondev, NULL, NULL, &rectboutondev.w, &rectboutondev.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectboutondev.x = 1520;
+	rectboutondev.y = 300;
+
+
+	if(SDL_RenderCopy(renderer, boutondev, NULL, &rectboutondev) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }
 
-
-void AfficheBouttonRoute(SDL_Renderer *renderer)
+/**
+ * \fn AfficheBoutonRoute(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des routes
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheBoutonRoute(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+    SDL_Surface* image = NULL;
+	SDL_Texture* boutonroute = NULL;
 
-	SDL_Rect bouttonroute;
-	bouttonroute.x = 1520;
-	bouttonroute.y = 425;
-	bouttonroute.w = 200;
-	bouttonroute.h = 75;
+	image = SDL_LoadBMP("imagecatane/boutonroute.bmp");
 
-	if(SDL_RenderFillRect(renderer, &bouttonroute) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	boutonroute = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(boutonroute == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectboutonroute;
+
+	if(SDL_QueryTexture(boutonroute, NULL, NULL, &rectboutonroute.w, &rectboutonroute.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectboutonroute.x = 1520;
+	rectboutonroute.y = 425;
+
+
+	if(SDL_RenderCopy(renderer, boutonroute, NULL, &rectboutonroute) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }
 
-
-void AfficheBouttonColonie(SDL_Renderer *renderer)
+/**
+ * \fn AfficheBoutonColonie(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des colonies
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheBoutonColonie(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+ SDL_Surface* image = NULL;
+	SDL_Texture* boutoncolonie = NULL;
 
-	SDL_Rect bouttoncolonie;
-	bouttoncolonie.x = 1520;
-	bouttoncolonie.y = 550;
-	bouttoncolonie.w = 200;
-	bouttoncolonie.h = 75;
+	image = SDL_LoadBMP("imagecatane/boutoncolonie.bmp");
 
-	if(SDL_RenderFillRect(renderer, &bouttoncolonie) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	boutoncolonie = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(boutoncolonie == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectboutoncolonie;
+
+	if(SDL_QueryTexture(boutoncolonie, NULL, NULL, &rectboutoncolonie.w, &rectboutoncolonie.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectboutoncolonie.x = 1520;
+	rectboutoncolonie.y = 550;
+
+
+	if(SDL_RenderCopy(renderer, boutoncolonie, NULL, &rectboutoncolonie) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }
 
-
-void AfficheBouttonVille(SDL_Renderer *renderer)
+/**
+ * \fn AfficheBoutonVille(SDL_Renderer *renderer)
+ * \brief Fonction affichant le bouton des villes
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheBoutonVille(SDL_Renderer *renderer)
 {
-	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-		SDL_ExitWithError("Impossible de changer la couleur du rendu");
+    SDL_Surface* image = NULL;
+	SDL_Texture* boutonville = NULL;
 
-	SDL_Rect bouttonville;
-	bouttonville.x = 1520;
-	bouttonville.y = 675;
-	bouttonville.w = 200;
-	bouttonville.h = 75;
+	image = SDL_LoadBMP("imagecatane/boutonville.bmp");
 
-	if(SDL_RenderFillRect(renderer, &bouttonville) != 0)
-		SDL_ExitWithError("Impossible de remplir un rectangle");
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image");
+
+	boutonville = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(boutonville == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect rectboutonville;
+
+	if(SDL_QueryTexture(boutonville, NULL, NULL, &rectboutonville.w, &rectboutonville.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	rectboutonville.x = 1520;
+	rectboutonville.y = 675;
+
+
+	if(SDL_RenderCopy(renderer, boutonville, NULL, &rectboutonville) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
 
 	SDL_RenderPresent(renderer);
 }

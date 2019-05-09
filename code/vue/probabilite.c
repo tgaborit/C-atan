@@ -1,12 +1,30 @@
-#include "Plateau.h"
-#include "get_plateau.h"
-#include "plateau.h"
+/**
+ * \file probabilite.c
+ * \brief Implémente les fonctions de probabilite.h
+ * \author Pauline.M
+ * \version 1.0
+ * \date 1 mai 2019
+ *
+ * Implémente les fonctions utiles à l'affichage des probabilites dans le jeu.
+ */
 
+#include "probabilite.h"
+
+
+/**
+ * \fn Affiche2(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 2 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p2 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/2.bmp");
 
 	if(image == NULL)
@@ -14,7 +32,7 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 
 	p2 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p2 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -22,23 +40,31 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p2, NULL, NULL, &rectp2.w, &rectp2.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp2.x = posx;		
+
+	rectp2.x = posx;
 	rectp2.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p2, NULL, &rectp2) !=0) 
+	if(SDL_RenderCopy(renderer, p2, NULL, &rectp2) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn Affiche3(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 3 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p3 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/3.bmp");
 
 	if(image == NULL)
@@ -46,7 +72,7 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 
 	p3 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p3 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -54,23 +80,31 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p3, NULL, NULL, &rectp3.w, &rectp3.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp3.x = posx;		
+
+	rectp3.x = posx;
 	rectp3.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p3, NULL, &rectp3) !=0) 
+	if(SDL_RenderCopy(renderer, p3, NULL, &rectp3) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn Affiche4(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 4 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p4 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/4.bmp");
 
 	if(image == NULL)
@@ -78,7 +112,7 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 
 	p4 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p4 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -86,23 +120,31 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p4, NULL, NULL, &rectp4.w, &rectp4.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp4.x = posx;		
+
+	rectp4.x = posx;
 	rectp4.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p4, NULL, &rectp4) !=0) 
+	if(SDL_RenderCopy(renderer, p4, NULL, &rectp4) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn Affiche5(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 5 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p5 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/5.bmp");
 
 	if(image == NULL)
@@ -110,7 +152,7 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 
 	p5 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p5 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -118,24 +160,32 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p5, NULL, NULL, &rectp5.w, &rectp5.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp5.x = posx;		
+
+	rectp5.x = posx;
 	rectp5.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p5, NULL, &rectp5) !=0) 
+	if(SDL_RenderCopy(renderer, p5, NULL, &rectp5) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
 
-
+/**
+ * \fn Affiche6(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 6 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p6 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/6.bmp");
 
 	if(image == NULL)
@@ -143,7 +193,7 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 
 	p6 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p6 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -151,28 +201,34 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p6, NULL, NULL, &rectp6.w, &rectp6.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp6.x = posx;		
+
+	rectp6.x = posx;
 	rectp6.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p6, NULL, &rectp6) !=0) 
+	if(SDL_RenderCopy(renderer, p6, NULL, &rectp6) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
 
 
 
-
-
-
+/**
+ * \fn Affiche7(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 7 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p7 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/7.bmp");
 
 	if(image == NULL)
@@ -180,7 +236,7 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 
 	p7 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p7 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -188,25 +244,33 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p7, NULL, NULL, &rectp7.w, &rectp7.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp7.x = posx;		
+
+	rectp7.x = posx;
 	rectp7.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p7, NULL, &rectp7) !=0) 
+	if(SDL_RenderCopy(renderer, p7, NULL, &rectp7) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
 
 
-
+/**
+ * \fn Affiche8(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 8 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p8 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/8.bmp");
 
 	if(image == NULL)
@@ -214,7 +278,7 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 
 	p8 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p8 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -222,22 +286,31 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p8, NULL, NULL, &rectp8.w, &rectp8.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp8.x = posx;		
+
+	rectp8.x = posx;
 	rectp8.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p8, NULL, &rectp8) !=0) 
+	if(SDL_RenderCopy(renderer, p8, NULL, &rectp8) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
+/**
+ * \fn Affiche9(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 9 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p9 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/9.bmp");
 
 	if(image == NULL)
@@ -245,7 +318,7 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 
 	p9 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p9 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -253,22 +326,31 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p9, NULL, NULL, &rectp9.w, &rectp9.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp9.x = posx;		
+
+	rectp9.x = posx;
 	rectp9.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p9, NULL, &rectp9) !=0) 
+	if(SDL_RenderCopy(renderer, p9, NULL, &rectp9) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
+/**
+ * \fn Affiche10(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 10 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p10 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/10.bmp");
 
 	if(image == NULL)
@@ -276,7 +358,7 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 
 	p10 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p10 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -284,22 +366,31 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p10, NULL, NULL, &rectp10.w, &rectp10.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp10.x = posx;		
+
+	rectp10.x = posx;
 	rectp10.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p10, NULL, &rectp10) !=0) 
+	if(SDL_RenderCopy(renderer, p10, NULL, &rectp10) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
+/**
+ * \fn Affiche11(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 11 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p11 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/11.bmp");
 
 	if(image == NULL)
@@ -307,7 +398,7 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 
 	p11 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p11 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -315,22 +406,31 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p11, NULL, NULL, &rectp11.w, &rectp11.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp11.x = posx;		
+
+	rectp11.x = posx;
 	rectp11.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p11, NULL, &rectp11) !=0) 
+	if(SDL_RenderCopy(renderer, p11, NULL, &rectp11) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
+/**
+ * \fn Affiche12(SDL_Renderer *renderer,double posx, double posy)
+ * \brief Fonction affichant l'image de la probabilité 12 en posx et posy
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \param posx et posy, la position de l'image en pixel
+ * \return aucun
+ */
 void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 {
 	SDL_Surface *image = NULL;
 	SDL_Texture *p12 = NULL;
-	
+
 	image = SDL_LoadBMP("imagecatane/12.bmp");
 
 	if(image == NULL)
@@ -338,7 +438,7 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 
 	p12 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
-	
+
 	if(p12 == NULL)
 		SDL_ExitWithError("impossible de creer la texture");
 
@@ -346,18 +446,25 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_QueryTexture(p12, NULL, NULL, &rectp12.w, &rectp12.h) != 0)
 		SDL_ExitWithError("Impossible de charger la texture");
-	
-	rectp12.x = posx;		
+
+	rectp12.x = posx;
 	rectp12.y = posy;
 
 
-	if(SDL_RenderCopy(renderer, p12, NULL, &rectp12) !=0) 
+	if(SDL_RenderCopy(renderer, p12, NULL, &rectp12) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-	
+
 	SDL_RenderPresent(renderer);
 }
 
-
+/**
+ * \fn AfficheProbaNormal(SDL_Renderer *renderer)
+ * \brief Fonction affichant les probabiltés tel que c'est décrit dans les règles du jeu classique
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
 void AfficheProbaNormal(SDL_Renderer* renderer)
 {
 	Affiche6(renderer, 814, 135);
@@ -382,15 +489,26 @@ void AfficheProbaNormal(SDL_Renderer* renderer)
 	Affiche8(renderer, 814, 605);
 	Affiche4(renderer, 949, 605);
 	Affiche11(renderer, 1084, 605);
-	
+
 	SDL_RenderPresent(renderer);
 }
 
-void AfficheRandomProba(Plateau* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
+/**
+ * \fn AfficheRandomProba(Partie* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
+ * \brief Fonction affichant les probabiltés de manière aléatoire
+ *
+ *
+ * \param p, la partie actuelle
+ * \param x et y les coordonnées du noeud recherché
+ * \param renderer, le rendu actuel
+ * \param posimx et posimy les coordonnées en pixel de l'image à afficher
+ * \return aucun
+ */
+void AfficheRandomProba(Partie* p, double x, double y, SDL_Renderer* renderer, double posimx, double posimy)
 {
 	int proba = getProba(p, x, y);
 
-	switch(proba) 
+	switch(proba)
 	{
 		case 2 :
 			Affiche2(renderer, posimx, posimy);
@@ -440,7 +558,16 @@ void AfficheRandomProba(Plateau* p, double x, double y, SDL_Renderer* renderer, 
 }
 
 
-void AfficheRandomProbaPlateau(Plateau *p, SDL_Renderer *renderer)
+/**
+ * \fn AfficheRandomProbaPlateau(Partie* p, SDL_Renderer* renderer)
+ * \brief Fonction affichant les probabiltés de manière aléatoire sur le plateau
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheRandomProbaPlateau(Partie *p, SDL_Renderer *renderer)
 {
 	AfficheRandomProba(p, -1, 2, renderer, 814, 135);
 	AfficheRandomProba(p, 0, 2, renderer, 949, 135);
