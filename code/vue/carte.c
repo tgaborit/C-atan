@@ -9,6 +9,7 @@
  */
 
  #include "carte.h"
+ #include "SDL_erreur.h"
 
 /**
  * \fn AfficheCarteArgile(SDL_Renderer *renderer)

@@ -14,21 +14,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "developpement.h"
 #include "partie.h"
-#include "get_plateau.h"
-#include "architecture.h"
-#include "carte.h"
-#include "tuile.h"
-#include "developpement.h"
-#include "probabilite.h"
-#include "place_infra.h"
-#include "affiche_joueur.h"
-#include "SDL_erreur.h"
-#include "affiche_texte.h"
-#include "set_partie.h"
 
 /**
  * \fn SDL_Window* InitFenetre()
@@ -41,27 +27,25 @@
 SDL_Window* InitFenetre();
 
 /**
- * \fn SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrenderer)
+ * \fn SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window)
  * \brief Fonction mettant à jour le plateau de jeu en fonction de la partie
  *
  *
  * \param p, la partie de jeu
  * \param window, la fenêtre du jeu
- * \param oldrenderer, le rendu actuel à détruire pour mettre le jeu à jour
- * \return le nouveau renderer, et affiche le plateau à jour
+ * \return le nouveau renderer
  */
-SDL_Renderer* updateFenetre(Partie* p, SDL_Window* window, SDL_Renderer* oldrenderer);
+void updateFenetre(Partie* p, SDL_Window* window);
 
 /**
- * \fn void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer)
+ * \fn void destroyFenetre(SDL_Window* window)
  * \brief Fonction détruisant la fenêtre et le renderer, et permettant de quitter SDL.
  *
  *
  * \param window, la fenêtre du jeu
- * \param renderer, le rendu actuel
  * \return aucun
  */
-void destroyFenetre(SDL_Window* window, SDL_Renderer* renderer);
+void destroyFenetre(SDL_Window* window);
 
 /**
  * \fn void AfficheHelp(SDL_Renderer* renderer)

@@ -21,28 +21,19 @@ int main(int argc, char** argv)
 	main_joueur_test();
 
 	SDL_Window* window = InitFenetre();
-	SDL_Renderer* renderer = NULL;
 
 	Partie* partie = init_partie();
 	Joueur* j = init_joueur(ROUGE,"Emmanuel Durel");
 	add_joueur(j,partie);
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
+    updateFenetre(partie,window);
 
-	renderer = updateFenetre(partie,window,renderer);
-
-	AfficheTexte_CarteDev_Succes(renderer);
-	AfficheTexte_CarteDev_Echec(renderer);
-	AfficheTexte_ChoixRessource(renderer);
-	AfficheTexte_Monopole_Echec(renderer);
-	AfficheTexte_Monopole_Succes(renderer);
-    AfficheTexte_Decouverte_Echec(renderer);
-	AfficheTexte_Decouverte_Succes(renderer);
-    AfficheTexte_Point_Echec(renderer);
-	AfficheTexte_Point_Succes(renderer);
-	AfficheTexte_Routes_Echec(renderer);
-	AfficheTexte_Routes_Succes(renderer);
-	AfficheTexte_ChoixRoutes(renderer);
+    AfficheTexte_LancerDe(window);
+    AfficheTexte_Chevalier_Echec(window);
+    AfficheTexte_Chevalier_Succes(window);
+    AfficheTexte_ChoixTuileVoleur(window);
+    AfficheTexte_ChoixJoueurVoler(window);
 
     SDL_bool program_launched = SDL_TRUE;
 
@@ -75,7 +66,7 @@ int main(int argc, char** argv)
 			}
 		}
 	}
-	destroyFenetre(window,renderer);
+	destroyFenetre(window);
 
 	return EXIT_SUCCESS;
 }

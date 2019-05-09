@@ -9,7 +9,8 @@
  */
 
 #include "place_infra.h"
-#include "math.h"
+#include <math.h>
+#include "SDL_erreur.h"
 
 
 static double calcul_offset_x(int position){

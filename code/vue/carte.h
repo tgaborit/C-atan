@@ -8,12 +8,10 @@
  * Déclare les fonctions utiles à l'affichage des cartes dans le jeu.
  */
 
-#ifndef TUILE_H
-#define TUILE_H
+#ifndef CARTE_H
+#define CARTE_H
 
 #include <SDL.h>
-#include <SDL_ttf.h>
-#include "SDL_erreur.h"
 
 /**
  * \fn AfficheCarteArgile(SDL_Renderer *renderer)
