@@ -15,6 +15,7 @@
 #include "controller_crossing.h"
 #include "controller_terrain.h"
 #include "controller_resource.h"
+#include "controller_player.h"
 //#include "ressource.h"
 
 typedef enum {
@@ -64,5 +65,6 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked);
 CrossCoordinates crossButtonToCrossCoordinates(CrossButton cross_clicked);
 TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked);
 TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked);
+int playerButtonToInteger(PlayerButton player_clicked);
 
 #endif //CONVERTERS_H

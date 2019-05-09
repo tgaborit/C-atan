@@ -993,3 +993,33 @@ TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
         return -1;
     }
 }
+
+/**
+* \fn TypeRessource playerButtonToTypeRessource(ResourceButton resource_clicked)
+* \brief Fonction de conversion de bouton de ressource vers une constante du modèle.
+*
+* Retourne une constante de ressource en fonction du bouton de croisement passé en paramètre.
+*
+* \param[in] resource Bouton de ressource qui a été cliqué par le joueur.
+* \return Une constante TypeRessource du modèle correspondant au bouton de ressource cliqué.
+*/
+int playerButtonToInteger(PlayerButton player_clicked)
+{
+    switch(player_clicked)
+    {
+    case PLAYER1_BUTTON :
+        return 1;
+
+    case PLAYER2_BUTTON :
+        return 2;
+
+    case PLAYER3_BUTTON :
+        return 3;
+
+    case PLAYER4_BUTTON :
+        return 4;
+
+    default :
+        return -1;
+    }
+}

@@ -15,6 +15,7 @@
 #include "controller_crossing.h"
 #include "controller_terrain.h"
 #include "controller_resource.h"
+#include "controller_player.h"
 #include "converters.h"
 //#include "partie.h"
 //#include "set_plateau.h"
@@ -362,6 +363,7 @@ void activateRobberEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* pro
 {
     SDL_Event ev;
     TerrButton terr_clicked = NO_TERRBUTTON;
+    PlayerButton player_clicked = NO_PLAYERBUTTON;
 
     do
     {
@@ -374,6 +376,17 @@ void activateRobberEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* pro
     TerrCoordinates terr_chosen = terrButtonToTerrCoordinates(terr_clicked);
     printf("Appel de la fonction du modele setVoleur(the_game, %f, %f)\n", terr_chosen.x, terr_chosen.y);
     //setVoleur(the_game, terr_chosen.x, terr_chosen.y);
+
+    do
+    {
+        controllerPlayer(&player_clicked, window, program_launched);
+        if(*program_launched == SDL_FALSE)
+            return;
+    }
+    while(player_clicked == NO_PLAYERBUTTON);
+
+    int player_chosen = playerButtonToInteger(player_clicked);
+    printf("Appel de la fonction du modele volVoleur(the_game, %d)\n", player_chosen);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
