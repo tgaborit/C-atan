@@ -319,22 +319,26 @@ static void test_utiliser_monopole(void** state){
 static void test_utiliser_decouverte(void** state){
     Partie* partie= *state;
     int flag;
-    int nb;
+    int nb1,nb2;
     get_joueur_actif(partie)->carte_dev[DECOUVERTE].nb_carte=2;
-    flag=utiliser_decouverte(partie,BLE);
-    nb=get_nbressource(BLE,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,BLE,BLE);
+    nb1=get_nbressource(BLE,get_joueur_actif(partie));
     assert_int_equal(0,flag);
-    assert_int_equal(2,nb);
+    assert_int_equal(2,nb1);
 
-    flag=utiliser_decouverte(partie,BOIS);
-    nb=get_nbressource(BOIS,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,BOIS,BLE);
+    nb1=get_nbressource(BOIS,get_joueur_actif(partie));
+    nb2=get_nbressource(BLE,get_joueur_actif(partie));
     assert_int_equal(0,flag);
-    assert_int_equal(3,nb);
+    assert_int_equal(2,nb1);
+    assert_int_equal(3,nb2);
 
-    flag=utiliser_decouverte(partie,PIERRE);
-    nb=get_nbressource(PIERRE,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,PIERRE,BOIS);
+    nb1=get_nbressource(PIERRE,get_joueur_actif(partie));
+    nb2=get_nbressource(BOIS,get_joueur_actif(partie));
     assert_int_equal(-1,flag);
-    assert_int_equal(2,nb);
+    assert_int_equal(2,nb1);
+    assert_int_equal(2,nb2);
 }
 
 static void test_utiliser_point(void** state){

@@ -99,6 +99,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
     new_joueur->ressource= (Ressource*) malloc(5*sizeof(Ressource));
     new_joueur->carte_dev=(CarteDev*) malloc(5*sizeof(CarteDev));
     new_joueur->nbRoute=0;
+    new_joueur->nbChevalier=0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -303,6 +304,22 @@ int  get_cartedev(TypeCarteDev type, Joueur* joueur)
     return joueur->carte_dev[type].nb_carte;
 }
 
+/**
+ * \fn int  get_nbChevalier(Joueur* joueur)
+ * \brief Fonction qui retourne le nombre de chevalier activés par un joueur
+ *
+ * \param Joueur: le joeur dont on veut connaitre le nombre de chevalier activés
+ * \return int:le nombre de chevalier activés ou -1 si le joueur passé en paramètre n'est pas définie
+ */
+
+int  get_nbChevalier (Joueur* joueur)
+{
+    if (joueur==NULL)
+        return -1;
+
+    return joueur->nbChevalier;
+}
+
 
 /**
  * \fn int achat_route(Joueur* joueur);
@@ -385,17 +402,18 @@ int achat_cartedev(Joueur* joueur)
 int voleur_perte_ressource(Joueur* joueur){
 
     int i,nbCartePerdues;
+    int proba_ble,proba_bois,proba_pierre,proba_mouton,proba_argile;
 
-    int proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
-    int proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
-    int proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
-    int proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
-    int proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
+
     srand(time(NULL));
     int rand_val;
     if(get_nbressource_total(joueur)>7){
+
+
         nbCartePerdues=get_nbressource_total(joueur)/2;
         for(i=0;i<nbCartePerdues;++i){
+
+
             rand_val=rand()%100;
             proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
             proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
