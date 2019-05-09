@@ -116,9 +116,9 @@ typedef enum {
 */
 #define PATHS 40
 
-void controllerPath(PathButton* path_clicked, SDL_Renderer* renderer, SDL_bool* program_launched);
+void controllerPath(PathButton* path_clicked, SDL_Window* window, SDL_bool* program_launched);
 
-void drawPathButtons(SDL_Renderer* renderer);
+void drawPathButtons(SDL_Window* window);
 
 PathButton whichPathButton(SDL_MouseButtonEvent mouse_button);
 

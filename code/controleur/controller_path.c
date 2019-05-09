@@ -108,13 +108,13 @@ static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone d
 * \param[in,out] path_chosen Pointeur vers le chemin choisi dans lequel sera enregistré le chemin cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initPathButtons();
     while(choice_launched)
     {
-        drawPathButtons(renderer);
+        drawPathButtons(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -159,8 +159,10 @@ void controllerPath(PathButton* path_chosen, SDL_Renderer* renderer, SDL_bool* p
     }
 }
 
-void drawPathButtons(SDL_Renderer* renderer)
+void drawPathButtons(SDL_Window* window)
 {
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");

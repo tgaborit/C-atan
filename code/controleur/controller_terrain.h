@@ -54,9 +54,9 @@ typedef enum {
 */
 #define TERRAINS 80
 
-void controllerTerrain(TerrButton* terrain_chosen, SDL_Renderer* renderer, SDL_bool* program_launched);
+void controllerTerrain(TerrButton* terrain_chosen, SDL_Window* window, SDL_bool* program_launched);
 
-void drawTerrButtons(SDL_Renderer* renderer);
+void drawTerrButtons(SDL_Window* window);
 
 TerrButton whichTerrButton(SDL_MouseButtonEvent mouse_button);
 

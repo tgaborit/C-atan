@@ -96,9 +96,9 @@ typedef enum {
 */
 #define CROSSS 40
 
-void controllerCrossing(CrossButton* crossing_chosen, SDL_Renderer* renderer, SDL_bool* program_launched);
+void controllerCrossing(CrossButton* crossing_chosen, SDL_Window* window, SDL_bool* program_launched);
 
-void drawCrossButtons(SDL_Renderer* renderer);
+void drawCrossButtons(SDL_Window* window);
 
 CrossButton whichCrossButton(SDL_MouseButtonEvent mouse_button);
 

@@ -78,7 +78,7 @@ static SDL_Rect crossNW4_area;          /*!< Rectangle correspondant à la zone 
 static SDL_Rect crossNW5_area;          /*!< Rectangle correspondant à la zone du croisement 5 de l'hexagone Nord - Ouest*/
 
 /**
-* \fn void controllerCrossing(SDL_bool* program_launched, SDL_Renderer* renderer, Game* the_game, UrbPlacing urb_placing)
+* \fn void controllerCrossing(SDL_bool* program_launched, SDL_Window* window, Game* the_game, UrbPlacing urb_placing)
 * \brief Fonction principale du contrôleur du choix d'un croisement.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un croisement.
@@ -87,14 +87,13 @@ static SDL_Rect crossNW5_area;          /*!< Rectangle correspondant à la zone 
 * \param[in,out] path_chosen Pointeur vers le croisement choisi dans lequel sera enregistré le croisement cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerCrossing(CrossButton* cross_chosen, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initCrossButtons();
     while(choice_launched)
     {
-        drawCrossButtons(renderer);
-
+        drawCrossButtons(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -139,8 +138,10 @@ void controllerCrossing(CrossButton* cross_chosen, SDL_Renderer* renderer, SDL_b
     }
 }
 
-void drawCrossButtons(SDL_Renderer* renderer)
+void drawCrossButtons(SDL_Window* window)
 {
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");

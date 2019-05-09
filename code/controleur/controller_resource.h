@@ -45,9 +45,9 @@ typedef enum {
 */
 #define CARDH 166
 
-void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer, SDL_bool* program_launched);
+void controllerResource(ResourceButton* resource_chosen, SDL_Window* window, SDL_bool* program_launched);
 
-void drawResourceButtons(SDL_Renderer* renderer);
+void drawResourceButtons(SDL_Window* window);
 
 ResourceButton whichResourceButton(SDL_MouseButtonEvent mouse_button);
 

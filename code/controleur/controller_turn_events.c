@@ -16,26 +16,30 @@
 #include "controller_terrain.h"
 #include "controller_resource.h"
 #include "converters.h"
+//#include "partie.h"
+//#include "set_plateau.h"
+//#include "set_partie.h"
+//#include "ressource.h"
 
 /**
-* \fn void craftDevEvent(Game* the_game)
+* \fn void craftDevEvent(Partie* the_game)
 * \brief Evénement de craft d'une carte développement.
 *
-* Fait appel à la fonction du modèle craftDev pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Fait appel à la fonction du modèle obtenir_cartedev pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void craftDevEvent(/*Game* the_game*/)
+void craftDevEvent(/*Partie* the_game*/)
 {
     SDL_Event ev;
-    printf("Appel de la fonction du modèle craftDev(the_game)\n");
-    //craftDev(the_game);
+    printf("Appel de la fonction du modèle obtenir_cartedev(the_game)\n");
+    //obtenir_cartedev(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void craftRoadEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \fn void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 * \brief Evénement de craft d'une route.
 *
 * Demande au joueur de sélectionner un chemin où construire une route, convertit cet emplacement en données du modèle,
@@ -45,7 +49,7 @@ void craftDevEvent(/*Game* the_game*/)
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void craftRoadEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
     PathButton path_clicked;
@@ -53,7 +57,7 @@ void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
     do
     {
         path_clicked = NO_PATHBUTTON;
-        controllerPath(&path_clicked, renderer, program_launched);
+        controllerPath(&path_clicked, window, program_launched);
         if(path_clicked == NO_PATHBUTTON || *program_launched == SDL_FALSE)
             return;
 
@@ -61,14 +65,14 @@ void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
         printf("Appel de la fonction du modele setRoute(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
         printf("Hypothese : setRoute(the_game, %f, %f, %d) == 0\n", path_chosen.x, path_chosen.y, path_chosen.position);
     }
-    while (/*set_route(the_game, path_chosen.x, path_chosen.y, path_chosen.position)*/0 != 0);
+    while (/*setRoute(the_game, path_chosen.x, path_chosen.y, path_chosen.position)*/0 != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void craftSettleEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \fn void craftSettleEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 * \brief Evénement de craft d'une colonie.
 *
 * Demande au joueur de sélectionner un croisement où construire une colonie, convertit cet emplacement en données du modèle,
@@ -78,7 +82,7 @@ void craftRoadEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void craftSettleEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
     CrossButton cross_clicked;
@@ -86,7 +90,7 @@ void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* prog
     do
     {
         cross_clicked = NO_PATHBUTTON;
-        controllerCrossing(&cross_clicked, renderer, program_launched);
+        controllerCrossing(&cross_clicked, window, program_launched);
         if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE)
             return;
 
@@ -94,14 +98,14 @@ void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* prog
         printf("Appel de la fonction du modele setColonie(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
         printf("Hypothese : setColonie(the_game, %f, %f, %d) == 0\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
     }
-    while (/*set_colonie(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position)*/0 != 0);
+    while (/*setColonie(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position)*/0 != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void craftCityEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \fn void craftCityEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 * \brief Evénement de craft d'une ville.
 *
 * Demande au joueur de sélectionner un croisement où construire une ville, convertit cet emplacement en données du modèle,
@@ -111,7 +115,7 @@ void craftSettleEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* prog
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void craftCityEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
     CrossButton cross_clicked;
@@ -119,7 +123,7 @@ void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
     do
     {
         cross_clicked = NO_PATHBUTTON;
-        controllerCrossing(&cross_clicked, renderer, program_launched);
+        controllerCrossing(&cross_clicked, window, program_launched);
         if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE)
             return;
 
@@ -127,14 +131,14 @@ void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
         printf("Appel de la fonction du modele setVille(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
         printf("Hypothese : setVille(the_game, %f, %f, %d) == 0\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
     }
-    while (/*set_ville(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position)*/0 != 0);
+    while (/*setVille(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position)*/0 != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void useKnightEvent(Game* the_game)
+* \fn void useKnightEvent(Partie* the_game)
 * \brief Evénement d'utilisation de carte développement Chevalier.
 *
 * Fait appel à la fonction à la fonction activateRobberEvent pour activer le brigand et crée un événement pour mettre à jour la vue.
@@ -142,19 +146,23 @@ void craftCityEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void useKnightEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void useKnightEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
 
+    printf("Hypothese : get_nbchevalier_joueuractif(the_game) != 0\n");
+//    if(get_nbchevalier_joueuractif(the_game) == 0)
+//        return;
+
     printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
-    activateRobberEvent(/*the_game, */renderer, program_launched);
+    activateRobberEvent(/*the_game, */window, program_launched);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void useMonopEvent(Game* the_game)
+* \fn void useMonopEvent(Partie* the_game)
 * \brief Evénement d'utilisation de carte développement Monopole.
 *
 * Demande au joueur de sélectionner une ressource pour la carte, convertit ce choix en données du modèle,
@@ -163,14 +171,18 @@ void useKnightEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void useMonopEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
-    ResourceButton resource_clicked = NO_RESOURCEBUTTON;
 
+    printf("Hypothese : get_nbmonopole_joueuractif(the_game) != 0\n");
+//    if(get_nbmonopole_joueuractif(the_game) == 0)
+//        return;
+
+    ResourceButton resource_clicked = NO_RESOURCEBUTTON;
     do
     {
-    controllerResource(&resource_clicked, renderer, program_launched);
+    controllerResource(&resource_clicked, window, program_launched);
     if(*program_launched == SDL_FALSE)
         return;
     }
@@ -185,7 +197,7 @@ void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program
 }
 
 /**
-* \fn void useInventEvent(Game* the_game)
+* \fn void useInventEvent(Partie* the_game)
 * \brief Evénement d'utilisation de carte développement Invention.
 *
 * Demande au joueur de sélectionner deux ressources pour la carte, convertit ce choix en données du modèle,
@@ -194,15 +206,20 @@ void useMonopEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void useInventEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
+
+    printf("Hypothese : get_nbdecouverte_joueuractif(the_game) != 0\n");
+//    if(get_nbdecouverte_joueuractif(the_game) == 0)
+//        return;
+
     ResourceButton resource_clicked1 = NO_RESOURCEBUTTON;
     ResourceButton resource_clicked2 = NO_RESOURCEBUTTON;
 
     do
     {
-        controllerResource(&resource_clicked1, renderer, program_launched);
+        controllerResource(&resource_clicked1, window, program_launched);
         if(*program_launched == SDL_FALSE)
             return;
     }
@@ -210,9 +227,9 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 
     do
     {
-    controllerResource(&resource_clicked2, renderer, program_launched);
-    if(*program_launched == SDL_FALSE)
-        return;
+        controllerResource(&resource_clicked2, window, program_launched);
+        if(*program_launched == SDL_FALSE)
+            return;
     }
     while(resource_clicked2 == NO_RESOURCEBUTTON);
 
@@ -226,7 +243,7 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 }
 
 /**
-* \fn void useRoadsEvent(Game* the_game)
+* \fn void useRoadsEvent(Partie* the_game)
 * \brief Evénement d'utilisation de carte développement Routes.
 *
 * Demande au joueur de sélectionner un chemin où placer une route, convertit cet emplacement en données du modèle,
@@ -236,26 +253,30 @@ void useInventEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* progra
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void useRoadsEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void useRoadsEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
+
+    printf("Hypothese : get_nbroutes_joueuractif(the_game) != 0\n");
+//    if(get_nbroutes_joueuractif(the_game) == 0)
+//        return;
+
     PathButton path_clicked;
     int i;
-
     for(i=0; i<2; ++i)
     {
         do
         {
             path_clicked = NO_PATHBUTTON;
-            controllerPath(&path_clicked, renderer, program_launched);
+            controllerPath(&path_clicked, window, program_launched);
             if(*program_launched == SDL_FALSE)
                 return;
 
             PathCoordinates path_chosen = pathButtonToPathCoordinates(path_clicked);
             printf("Appel de la fonction du modele setRouteGratuite(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
-            printf("Hypothese : setRoute(the_game, %f, %f, %d) == 0\n", path_chosen.x, path_chosen.y, path_chosen.position);
+            printf("Hypothese : setRouteFree(the_game, %f, %f, %d) == 0\n", path_chosen.x, path_chosen.y, path_chosen.position);
         }
-        while (/*set_route(the_game, path_chosen.x, path_chosen.y, path_chosen.position)*/0 != 0 || path_clicked == NO_PATHBUTTON);
+        while (/*setRouteFree(the_game, path_chosen.x, path_chosen.y, path_chosen.position)*/0 != 0 || path_clicked == NO_PATHBUTTON);
     }
 
     ev.type = SDL_USEREVENT;
@@ -263,16 +284,21 @@ void useRoadsEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program
 }
 
 /**
-* \fn void useUnivEvent(Game* the_game)
+* \fn void useUnivEvent(Partie* the_game)
 * \brief Evénement d'utilisation de carte développement Université.
 *
 * Fait appel à la fonction du modèle utiliser_point pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void useUnivEvent(/*Game* the_game*/)
+void useUnivEvent(/*Partie* the_game*/)
 {
     SDL_Event ev;
+
+    printf("Hypothese : get_nbpoint_joueuractif(the_game) != 0\n");
+//    if(get_nbpoint_joueuractif(the_game) == 0)
+//        return;
+
     printf("Appel de la fonction du modèle utiliser_point(the_game)\n");
     //utiliser_point(the_game);
     ev.type = SDL_USEREVENT;
@@ -280,65 +306,74 @@ void useUnivEvent(/*Game* the_game*/)
 }
 
 /**
-* \fn void rollDiceEvent(Game* the_game)
+* \fn void rollDiceEvent(Partie* the_game)
 * \brief Evénement de lancer des dés.
 *
-* Fait appel à la fonction du modèle rollDice pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Fait appel à la fonction du modèle lancer_des pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void rollDiceEvent(/*Game* the_game*/)
+void rollDiceEvent(/*Partie* the_game*/SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
-    printf("Appel de la fonction du modèle rollDice(the_game)\n");
-    //rollDice(the_game);
+
+    printf("Appel de la fonction du modèle lancer_des()\n");
+    //int des = lancer_des();
+    printf("Hypothese : lancer_des() == 7\n");
+    if(/*des*/7 == 7)
+    {
+        printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
+        activateRobberEvent(/*the_game, */window, program_launched);
+    }
+//    gagne_resource(des, the_game);
+
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void endTurnEvent(Game* the_game)
+* \fn void endTurnEvent(Partie* the_game)
 * \brief Evénement de fin de tour du joueur.
 *
-* Fait appel à la fonction du modèle endTurn pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* Fait appel à la fonction du modèle passer_tour pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void endTurnEvent(/*Game* the_game*/)
+void endTurnEvent(/*Partie* the_game*/)
 {
     SDL_Event ev;
-    printf("Appel de la fonction du modèle endTurn(the_game)\n");
-    //endTurn(the_game);
+    printf("Appel de la fonction du modèle passer_tour(the_game)\n");
+    //passer_tour(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
 
 /**
-* \fn void activateRobberEvent(Game* the_game, SDL_Renderer* renderer, SDL_bool* program_launched)
+* \fn void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 * \brief Evénement d'activation du brigand.
 *
 * Demande au joueur de sélectionner un terrain où déplacer le brigand, convertit cet emplacement en données du modèle,
-* puis fait appel à la fonction du modèle set_voleur pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
+* puis fait appel à la fonction du modèle setVoleur pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 * \param[in,out] program_launched Ponteur vers l'état du pplacement.
 */
-void activateRobberEvent(/*Game* the_game, */SDL_Renderer* renderer, SDL_bool* program_launched)
+void activateRobberEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
     TerrButton terr_clicked = NO_TERRBUTTON;
 
     do
     {
-        controllerTerrain(&terr_clicked, renderer, program_launched);
+        controllerTerrain(&terr_clicked, window, program_launched);
         if(*program_launched == SDL_FALSE)
             return;
     }
     while(terr_clicked == NO_TERRBUTTON);
 
     TerrCoordinates terr_chosen = terrButtonToTerrCoordinates(terr_clicked);
-    printf("Appel de la fonction du modele set_voleur(the_game, %f, %f)\n", terr_chosen.x, terr_chosen.y);
-    //set_voleur(the_game, terr_chosen.x, terr_chosen.y);
+    printf("Appel de la fonction du modele setVoleur(the_game, %f, %f)\n", terr_chosen.x, terr_chosen.y);
+    //setVoleur(the_game, terr_chosen.x, terr_chosen.y);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);

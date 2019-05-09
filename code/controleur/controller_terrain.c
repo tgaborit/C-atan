@@ -45,14 +45,13 @@ static SDL_Rect terrNW_area;          /*!< Rectangle correspondant à la zone du
 * \param[in,out] terrain_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée le terrain cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerTerrain(TerrButton* terr_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initTerrButtons();
     while(choice_launched)
     {
-        drawTerrButtons(renderer);
-
+        drawTerrButtons(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -84,7 +83,6 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Renderer* renderer, SDL_bool
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-//                *resource_chosen = NO_RESOURCEBUTTON;
                 printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
@@ -98,8 +96,10 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Renderer* renderer, SDL_bool
     }
 }
 
-void drawTerrButtons(SDL_Renderer* renderer)
+void drawTerrButtons(SDL_Window* window)
 {
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
@@ -164,8 +164,8 @@ void initTerrButtons()
 
     // Répartition des terrains selon la formation de 2 hexagones couchés et 1 hexagone debout
     SDL_Rect* terr_buttons[3][6] = {{&terrX0_area, &terrX1_area, &terrX2_area, &terrX3_area, &terrX4_area, &terrX5_area},
-                                       {&terr0X_area, &terr1X_area, &terr2X_area, &terr3X_area, &terr4X_area, &terr5X_area},
-                                       {&terrNN_area, &terrNE_area, &terrSE_area, &terrSS_area, &terrSW_area, &terrNW_area}};
+                                    {&terr0X_area, &terr1X_area, &terr2X_area, &terr3X_area, &terr4X_area, &terr5X_area},
+                                    {&terrNN_area, &terrNE_area, &terrSE_area, &terrSS_area, &terrSW_area, &terrNW_area}};
 
     // Initialisation des côtés des zones des boutons des terrains
     for(i = 0; i < 3; ++i)

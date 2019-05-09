@@ -30,14 +30,13 @@ static SDL_Rect rock_card_area;         /*!< Rectangle correspondant à la zone 
 * \param[in,out] path_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée la ressource cliquée.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer, SDL_bool* program_launched)
+void controllerResource(ResourceButton* resource_chosen, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
     initResourceButtons();
     while(choice_launched)
     {
-        drawResourceButtons(renderer);
-
+        drawResourceButtons(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -111,8 +110,10 @@ void controllerResource(ResourceButton* resource_chosen, SDL_Renderer* renderer,
     }
 }
 
-void drawResourceButtons(SDL_Renderer* renderer)
+void drawResourceButtons(SDL_Window* window)
 {
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
     //Nettoyage du rendu
     if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
