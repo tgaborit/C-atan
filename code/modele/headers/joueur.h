@@ -63,6 +63,7 @@ Ressource* ressource; /*!<tableau de ressource représentant les ressources en m
 CarteDev* carte_dev; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
 Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
 int nbRoute; /*!<nombre de routes possédées par le joueur>*/
+int nbChevalier; /*!<nombre de chevalier activés par le joueur>*/
 }Joueur;
 
 /**
@@ -249,6 +250,17 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur);
  * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur
  */
 int  get_cartedev(TypeCarteDev type, Joueur* joueur);
+
+/**
+ * \fn int  get_nbChevalier(Joueur* joueur)
+ * \brief Fonction qui retourne le nombre de chevalier activés par un joueur
+ *
+ * \param Joueur: le joeur dont on veut connaitre le nombre de chevalier activés
+ * \return int:le nombre de chevalier activés ou -1 si le joueur passé en paramètre n'est pas définie
+ */
+
+int  get_nbChevalier (Joueur* joueur);
+
 
 /**
  * \fn int achat_route(Joueur* joueur);

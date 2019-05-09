@@ -204,13 +204,13 @@ void gagne_ressource(int lance_des, Partie* partie){
         int ord[6] = {HG,G,HD,BG,D,BD};                                     // Tableau de chiffres en liaison avec un pattern de mouvements.
 
         for(i=0;i<6;++i){                                               // On cherche les noeuds ou la proba est celle du lancé de dés
-            if(p->adjacence[i]->t->proba == lance_des){
+            if(p->adjacence[i]->t->proba == lance_des && p->adjacence[i]->t->brigand == 0){
                 cherche_infrastructure(p->adjacence[i]);                // On appelle cherche_infrastructure pour distribuer les ressources au constructions voisines
             }
-            if(p->adjacence[i]->adjacence[i]->t->proba == lance_des){
+            if(p->adjacence[i]->adjacence[i]->t->proba == lance_des && p->adjacence[i]->adjacence[i]->t->brigand == 0){
                 cherche_infrastructure(p->adjacence[i]->adjacence[i]);
             }
-            if(p->adjacence[i]->adjacence[ord[i]]->t->proba == lance_des){
+            if(p->adjacence[i]->adjacence[ord[i]]->t->proba == lance_des && p->adjacence[i]->adjacence[ord[i]]->t->brigand == 0){
                 cherche_infrastructure(p->adjacence[i]->adjacence[ord[i]]);
             }
         }
@@ -328,9 +328,7 @@ int obtenir_cartedev (Partie* partie)
 
 
     if (rand_val<= proba_chevalier)
-    retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
-
-
+        retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
 
     if(proba_chevalier<rand_val && rand_val<=(proba_chevalier+proba_point))
         retirer_cartedev_pile(cartedev,joueur,POINT);
@@ -377,18 +375,19 @@ int utiliser_monopole (Partie* partie, TypeRessource type){
 
 /**
  * \fn int utiliser_decouverte (Partie* partie, TypeRessource type)
- * \brief si le joueur courant possède une carte decouverte il la défausse et gagne 2 carte ressource du type passé en paramètre
+ * \brief si le joueur courant possède une carte decouverte il la défausse et gagne 2 carte ressource des types passés en paramètre
  *
- * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé, TypeRessource: type de ressource demandé.
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte decouverte
  */
-int utiliser_decouverte (Partie* partie, TypeRessource type){
+int utiliser_decouverte (Partie* partie, TypeRessource type1, TypeRessource type2){
     Joueur* joueur_actif=get_joueur_actif(partie);
     if(get_cartedev(DECOUVERTE, joueur_actif)<1)
         return -1;
 
     perte_cartedev(DECOUVERTE,joueur_actif);
-    joueur_actif->ressource[type].nb_ressource+=2;
+    joueur_actif->ressource[type1].nb_ressource+=1;
+    joueur_actif->ressource[type2].nb_ressource+=1;
     return 0;
 }
 
@@ -410,14 +409,16 @@ int utiliser_point (Partie* partie){
     return 0;
 }
 
+
+
 /**
- * \fn int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2)
+ * \fn int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2
  * \brief si le joueur courant possede une carte routes il la defausse et pose deux routes.
  *
  * \param Partie*: la partie en cours, puis les parametres des endroits ou poser les deux routes
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte routes ou si la pose a échoué
  */
-int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2){
+int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int position1,int position2){
     Joueur* joueur_actif= get_joueur_actif(partie);
     if (get_cartedev(ROUTES,joueur_actif)<1)
         return -1;
@@ -467,3 +468,82 @@ int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int
     return -1;
 }
 
+/**
+ * \fn int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur)
+ * \brief utilise une carte développemnt chevalier, bouge le voleur sur une nouvelle tuile de coordonée passé en paramètre,
+ *vole une carte aléatoirement dans la main du joueur passé en paramètre et la donne au joueur qui appelle la carte chevalier.
+ * \param Partie: etat de la partie
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructuresur un sommet de la tuile de coordonnées (x,y)
+ */
+int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
+    int i,rand_val;
+    Noeud* current = deplacementPlateau(partie->plateau,x,y);
+    Joueur* joueur_actif=get_joueur_actif(partie);
+    for(i=0;i<=6;++i){
+        if(strcmp(joueur->pseudo,current->t->s[i].owner->pseudo) ==0 && current->t->brigand!=0) {
+            setVoleur(partie,x,y);
+            if (get_nbressource_total(joueur)==0){
+                int proba_ble,proba_bois,proba_pierre,proba_mouton,proba_argile;
+                rand_val=rand()%100;
+                proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
+                proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
+                proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
+                proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
+                proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
+
+            if (rand_val<= proba_ble){
+                perte_ressource(BLE,joueur);
+                gain_ressource(BLE,joueur_actif);
+                }
+
+            if(proba_ble<rand_val && rand_val<=(proba_ble+proba_bois))
+                {
+                perte_ressource(BOIS,joueur);
+                gain_ressource(BOIS,joueur_actif);
+                }
+
+            if((proba_ble+proba_bois)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre))
+                {
+                perte_ressource(PIERRE,joueur);
+                gain_ressource(PIERRE,joueur_actif);
+                }
+
+            if((proba_ble+proba_bois+proba_pierre)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile))
+                {
+                perte_ressource(ARGILE,joueur);
+                gain_ressource(ARGILE,joueur_actif);
+                }
+
+            if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton))
+                {
+                perte_ressource(MOUTON,joueur);
+                gain_ressource(MOUTON,joueur_actif);
+                }
+            }
+     joueur_actif->nbChevalier+=1;
+     return 0;
+            }
+        }
+    return -1;
+    }
+
+    /**
+ * \fn int action_voleur(Partie* partie,int des);
+ * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
+ *
+ * \param Partie*: la partie en cours, int: résultat aux des
+ * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
+ */
+int action_voleur(Partie* partie,int des){
+    int i;
+    Joueur* current_joueur;
+    if (des==7){
+        for(i=0;i<=get_nbjoueurs(partie);++i){
+            current_joueur=partie->joueurs->current->joueur;
+            voleur_perte_ressource(current_joueur);
+            setOnNext_list_joueur(partie->joueurs);
+            }
+        return 0;
+    }
+    return -1;
+}

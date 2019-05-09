@@ -65,7 +65,7 @@ int  get_nbressource_joueuractif(TypeRessource type, Partie* partie){
 }
 
 /**
- * \fn int get_score_joueuractif(Joueur joueur)
+ * \fn int get_score_joueuractif(Partie* partie)
  * \brief Fonction qui retourne le score du joueur actif
  *
  * \param Partie* partie en cours
@@ -76,6 +76,20 @@ int get_score_joueuractif(Partie* partie)
 {
     Joueur* joueur= get_joueur_actif(partie);
     return get_score(joueur);
+}
+
+/**
+ * \fn int get_nbChevalier_joueuractif(Partie* partie)
+ * \brief Fonction qui retourne le nombre de chevaliers activés par le joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return int:le nombre de chevaliers activés par le joueur actif
+ */
+
+int get_score_nbChevalier(Partie* partie)
+{
+    Joueur* joueur= get_joueur_actif(partie);
+    return get_nbChevalier(joueur);
 }
 
 /**

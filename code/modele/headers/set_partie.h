@@ -123,12 +123,12 @@ int utiliser_monopole (Partie* partie, TypeRessource type);
 
 /**
  * \fn int utiliser_decouverte (Partie* partie, TypeRessource type)
- * \brief si le joueur courant possède une carte decouverte il la défausse et gagne 2 carte ressource du type passé en paramètre
+ * \brief si le joueur courant possède une carte decouverte il la défausse et gagne 2 carte ressource des types passés en paramètre
  *
- * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
+ * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé, TypeRessource: type de ressource demandé.
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte decouverte
  */
-int utiliser_decouverte (Partie* partie, TypeRessource type);
+int utiliser_decouverte (Partie* partie, TypeRessource type1, TypeRessource type2);
 
 /**
  * \fn int utiliser_point (Partie* partie)
@@ -147,7 +147,25 @@ int utiliser_point (Partie* partie);
  * \param Partie*: la partie en cours, puis les parametres des endroits ou poser les deux routes
  * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte routes ou si la pose a échoué
  */
-int utiliser_routes(Partie* partie,int x1,int y1,int x2,int y2,int position1,int position2);
+int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int position1,int position2);
 
+
+/**
+ * \fn int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur)
+ * \brief utilise une carte développemnt chevalier, bouge le voleur sur une nouvelle tuile de coordonée passé en paramètre,
+ *vole une carte aléatoirement dans la main du joueur passé en paramètre et la donne au joueur qui appelle la carte chevalier.
+ * \param Partie: etat de la partie
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructuresur un sommet de la tuile de coordonnées (x,y)
+ */
+int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur);
+
+    /**
+ * \fn int action_voleur(Partie* partie,int des);
+ * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
+ *
+ * \param Partie*: la partie en cours, int: résultat aux des
+ * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
+ */
+int action_voleur(Partie* partie,int des);
 
 #endif //MODELE_REMI_CATANE_PARTIE_H
