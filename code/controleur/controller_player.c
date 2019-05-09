@@ -42,37 +42,37 @@ void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool*
         {
             switch(event.type)
             {
-//            case SDL_MOUSEBUTTONDOWN :
-//                switch(whichPlayerButton(event.button))
-//                {
-//                case WOOD_BUTTON :
-//                    printf("Clic sur joueur 1\n");
-//                    *player_chosen = WOOD_BUTTON;
-//                    quit(&choice_launched);
-//                    break;
-//
-//                case WHEAT_BUTTON :
-//                    printf("Clic sur joueur 2\n");
-//                    *player_chosen = WHEAT_BUTTON;
-//                    quit(&choice_launched);
-//                    break;
-//
-//                case CLAY_BUTTON :
-//                    printf("Clic sur joueur 2\n");
-//                    *player_chosen = CLAY_BUTTON;
-//                    quit(&choice_launched);
-//                    break;
-//
-//                case SHEEPS_BUTTON :
-//                    printf("Clic sur joueur 2\n");
-//                    *player_chosen = SHEEPS_BUTTON;
-//                    quit(&choice_launched);
-//                    break;
-//
-//                default :
-//                    break;
-//                }
-//                break;
+            case SDL_MOUSEBUTTONDOWN :
+                switch(whichPlayerButton(event.button))
+                {
+                case PLAYER1_BUTTON :
+                    printf("Clic sur joueur 1\n");
+                    *player_chosen = PLAYER1_BUTTON;
+                    quit(&choice_launched);
+                    break;
+
+                case PLAYER2_BUTTON :
+                    printf("Clic sur joueur 2\n");
+                    *player_chosen = PLAYER2_BUTTON;
+                    quit(&choice_launched);
+                    break;
+
+                case PLAYER3_BUTTON :
+                    printf("Clic sur joueur 3\n");
+                    *player_chosen = PLAYER3_BUTTON;
+                    quit(&choice_launched);
+                    break;
+
+                case PLAYER4_BUTTON :
+                    printf("Clic sur joueur 4\n");
+                    *player_chosen = PLAYER4_BUTTON;
+                    quit(&choice_launched);
+                    break;
+
+                default :
+                    break;
+                }
+                break;
 
             case SDL_KEYDOWN :
                 switch(event.key.keysym.sym)
@@ -90,7 +90,7 @@ void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool*
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
-//                *player_chosen = NO_PLAYERBUTTON;
+                *player_chosen = NO_PLAYERBUTTON;
                 printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
@@ -125,6 +125,28 @@ void drawPlayerButtons(SDL_Window* window)
 
     //Met a jour l'ecran
     SDL_RenderPresent(renderer);
+}
+
+/**
+* \fn TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de craft le joueur a cliqué.
+*
+* Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
+* Si c'est le cas, communique lequel.
+*
+* \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
+* \return Le bouton de craft qui a été cliqué, NO_BUTTON si aucun.
+*/
+PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button){
+    if(isInArea(mouse_button, player1_area) == SDL_TRUE)
+        return PLAYER1_BUTTON;
+    if(isInArea(mouse_button, player2_area) == SDL_TRUE)
+        return PLAYER2_BUTTON;
+    if(isInArea(mouse_button, player3_area) == SDL_TRUE)
+        return PLAYER3_BUTTON;
+    if(isInArea(mouse_button, player4_area) == SDL_TRUE)
+        return PLAYER4_BUTTON;
+    return NO_PLAYERBUTTON;
 }
 
 /**

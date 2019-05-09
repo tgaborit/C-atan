@@ -48,6 +48,8 @@ void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool*
 
 void drawPlayerButtons(SDL_Window* window);
 
+PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button);
+
 void initPlayerButtons();
     void initPlayer1Placement();
     void initPlayer2Placement();
