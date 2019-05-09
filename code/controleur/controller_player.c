@@ -128,14 +128,14 @@ void drawPlayerButtons(SDL_Window* window)
 }
 
 /**
-* \fn TurnButton whichCraftButton(SDL_MouseButtonEvent mouse_button)
-* \brief Fonction de test sur quel bouton de craft le joueur a cliqué.
+* \fn PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button)
+* \brief Fonction de test sur quel bouton de joueur le joueur a cliqué.
 *
-* Teste pour chaque bouton de craft si le clic effectué correspond à la zone de ce bouton.
+* Teste pour chaque bouton de joueur si le clic effectué correspond à la zone de ce bouton.
 * Si c'est le cas, communique lequel.
 *
 * \param[in] mouse_button Clic qui a été effectué par le joueur. Contient notamment les informations sur sa position.
-* \return Le bouton de craft qui a été cliqué, NO_BUTTON si aucun.
+* \return Le bouton de joueur qui a été cliqué, NO_PLAYERBUTTON si aucun.
 */
 PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button){
     if(isInArea(mouse_button, player1_area) == SDL_TRUE)
@@ -154,7 +154,9 @@ PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button){
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un joueur".
 *
 * Initialise les champs des rectangles des zones correspondant aux boutons des joueurs.
-* Fait appel aux fonctions d'initialisation pour la carte Bois, la carte Blé, la carte Argile, la carte Moutons et la carte Roche.
+* Fait appel aux fonctions d'initialisation de placement pour le bouton du joueur 1, le bouton du joueur 2, le bouton du joueur 3,
+* et le bouton du joueur 4.
+* Initialise le
 */
 void initPlayerButtons()
 {

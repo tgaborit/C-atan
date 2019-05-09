@@ -967,7 +967,7 @@ TerrCoordinates terrButtonToTerrCoordinates(TerrButton terr_clicked)
 *
 * Retourne une constante de ressource en fonction du bouton de croisement passé en paramètre.
 *
-* \param[in] resource Bouton de ressource qui a été cliqué par le joueur.
+* \param[in] resource_clicked Bouton de ressource qui a été cliqué par le joueur.
 * \return Une constante TypeRessource du modèle correspondant au bouton de ressource cliqué.
 */
 TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
@@ -995,13 +995,13 @@ TypeRessource resourceButtonToTypeRessource(ResourceButton resource_clicked)
 }
 
 /**
-* \fn TypeRessource playerButtonToTypeRessource(ResourceButton resource_clicked)
-* \brief Fonction de conversion de bouton de ressource vers une constante du modèle.
+* \fn int playerButtonToTypeRessource(ResourceButton resource_clicked)
+* \brief Fonction de conversion de bouton de joueur vers un entier utilisé par le modèle.
 *
-* Retourne une constante de ressource en fonction du bouton de croisement passé en paramètre.
+* Retourne un entier en fonction du bouton de joueur passé en paramètre.
 *
 * \param[in] resource Bouton de ressource qui a été cliqué par le joueur.
-* \return Une constante TypeRessource du modèle correspondant au bouton de ressource cliqué.
+* \return Un entier utilisé par le modèle correspondant au bouton de joueur cliqué.
 */
 int playerButtonToInteger(PlayerButton player_clicked)
 {
