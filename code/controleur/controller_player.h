@@ -26,7 +26,32 @@ typedef enum {
         NO_PLAYERBUTTON
 } PlayerButton;
 
+/**
+* \def NPLAYERBUTTONS
+* Définit le nombre de boutons de l'environnement "Choix d'un joueur".
+*/
+#define NPLAYERBUTTONS 4
+
+/**
+* \def PLAYERW
+* Définit la largeur d'un bouton de joueur.
+*/
+#define PLAYERW 460
+
+/**
+* \def PLAYERH
+* Définit la hauteur d'un bouton de joueur.
+*/
+#define PLAYERH 35
 
 void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool* program_launched);
+
+void drawPlayerButtons(SDL_Window* window);
+
+void initPlayerButtons();
+    void initPlayer1Placement();
+    void initPlayer2Placement();
+    void initPlayer3Placement();
+    void initPlayer4Placement();
 
 #endif //CATANE_CONTROLLER_PLAYER_H

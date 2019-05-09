@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include "controller.h"
 #include "controller_player.h"
+//#include "get_partie.h"
 
 static SDL_Rect player1_area;           /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect player2_area;           /*!< Rectangle correspondant à la zone de la carte Blé*/
@@ -32,10 +33,10 @@ static SDL_Rect player4_area;           /*!< Rectangle correspondant à la zone 
 void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
-//    initResourceButtons();
+    initPlayerButtons();
     while(choice_launched)
     {
-//        drawPlayerButtons(window);
+        drawPlayerButtons(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -101,4 +102,71 @@ void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool*
             }
         }
     }
+}
+
+void drawPlayerButtons(SDL_Window* window)
+{
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
+
+    //Nettoyage du rendu
+    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+    if(SDL_RenderClear(renderer) != 0)
+        SDL_ExitWithError("Impossible de nettoyer le rendu");
+
+    //Couleur boutons
+    if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
+        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+
+    SDL_Rect player_buttons[NPLAYERBUTTONS] = {player1_area, player2_area, player3_area, player4_area};
+    if(SDL_RenderDrawRects(renderer, player_buttons, NPLAYERBUTTONS) != 0)
+        SDL_ExitWithError("Impossible de dessiner les boutons");
+
+    //Met a jour l'ecran
+    SDL_RenderPresent(renderer);
+}
+
+/**
+* \fn void initPlayerButtons()
+* \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un joueur".
+*
+* Initialise les champs des rectangles des zones correspondant aux boutons des joueurs.
+* Fait appel aux fonctions d'initialisation pour la carte Bois, la carte Blé, la carte Argile, la carte Moutons et la carte Roche.
+*/
+void initPlayerButtons()
+{
+    SDL_Rect* player_buttons[NPLAYERBUTTONS] = {&player1_area, &player2_area, &player3_area, &player4_area};
+    int i;
+
+    for(i = 0; i < /*get_nbjoueurs()*/4; ++i)
+    {
+        player_buttons[i]->h = PLAYERH;
+        player_buttons[i]->w = PLAYERW;
+    }
+
+    initPlayer1Placement();
+    initPlayer2Placement();
+    initPlayer3Placement();
+    initPlayer4Placement();
+}
+
+void initPlayer1Placement()
+{
+    player1_area.x = 10;
+}
+
+void initPlayer2Placement()
+{
+    player2_area.x = player1_area.x + player1_area.w + 5;
+}
+
+void initPlayer3Placement()
+{
+    player3_area.x = player2_area.x + player2_area.w + 5;
+}
+
+void initPlayer4Placement()
+{
+    player4_area.x = player3_area.x + player3_area.w + 5;
 }
