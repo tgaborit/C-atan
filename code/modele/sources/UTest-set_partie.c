@@ -5,9 +5,10 @@
 #include <cmocka_pbc.h>
 #include <string.h>
 #include "get_plateau.h"
+#include "UTest-partie.h"
 #include "partie.h"
-#include "set_partie.h"
 #include "get_partie.h"
+#include "set_partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -115,12 +116,6 @@ static void test_findjoueur(void** state)
     assert_ptr_equal(joueur_1,partie->joueurs->current->joueur);
 }
 
-static void test_get_nb_joueur(void **state)
-{
-    Partie* partie= *state;
-    int c= get_nbjoueurs(partie);
-    assert_int_equal(4, c);
-}
 
 static void test_donner_main(void **state)
 {
@@ -144,32 +139,6 @@ static void test_passer_tour(void** state)
     passer_tour(partie);
     assert_int_equal(0, partie->joueurs->last->joueur->status);
 
-}
-
-static void test_get_joueur_score_max(void** state)
-{
-    Partie* partie= *state;
-    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_score_max(partie));
-    partie->joueurs->first->joueur->score=0;
-    partie->joueurs->first->next->joueur->score=0;
-    partie->joueurs->first->next->next->joueur->score=0;
-    partie->joueurs->last->joueur->score=0;
-
-    assert_ptr_equal(partie->joueurs->current->joueur,get_joueur_score_max(partie));
-}
-
-static void test_get_score_max(void** state)
-{
-    Partie* partie= *state;
-    Node_joueur* savecurrentnode=partie->joueurs->current;
-    assert_int_equal(7,get_score_max(partie));
-    assert_ptr_equal(partie->joueurs->current,savecurrentnode);
-}
-
-static void test_get_joueur_actif(void** state){
-    Partie* partie = *state;
-    int valtest = strcmp(partie->joueurs->current->joueur->pseudo,get_joueur_actif(partie)->pseudo);
-    assert_int_equal(0,valtest);
 }
 
 static void test_lancer_des(void** state)
@@ -319,26 +288,22 @@ static void test_utiliser_monopole(void** state){
 static void test_utiliser_decouverte(void** state){
     Partie* partie= *state;
     int flag;
-    int nb1,nb2;
+    int nb;
     get_joueur_actif(partie)->carte_dev[DECOUVERTE].nb_carte=2;
-    flag=utiliser_decouverte(partie,BLE,BLE);
-    nb1=get_nbressource(BLE,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,BLE);
+    nb=get_nbressource(BLE,get_joueur_actif(partie));
     assert_int_equal(0,flag);
-    assert_int_equal(2,nb1);
+    assert_int_equal(2,nb);
 
-    flag=utiliser_decouverte(partie,BOIS,BLE);
-    nb1=get_nbressource(BOIS,get_joueur_actif(partie));
-    nb2=get_nbressource(BLE,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,BOIS);
+    nb=get_nbressource(BOIS,get_joueur_actif(partie));
     assert_int_equal(0,flag);
-    assert_int_equal(2,nb1);
-    assert_int_equal(3,nb2);
+    assert_int_equal(3,nb);
 
-    flag=utiliser_decouverte(partie,PIERRE,BOIS);
-    nb1=get_nbressource(PIERRE,get_joueur_actif(partie));
-    nb2=get_nbressource(BOIS,get_joueur_actif(partie));
+    flag=utiliser_decouverte(partie,PIERRE);
+    nb=get_nbressource(PIERRE,get_joueur_actif(partie));
     assert_int_equal(-1,flag);
-    assert_int_equal(2,nb1);
-    assert_int_equal(2,nb2);
+    assert_int_equal(2,nb);
 }
 
 static void test_utiliser_point(void** state){
@@ -375,21 +340,14 @@ static int teardown (void ** state)
 int main_partie_test(void)
 {
     const struct CMUnitTest tests_partie[]={
-        cmocka_unit_test_setup_teardown(test_get_nb_joueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_findjoueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_donner_main,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_passer_tour,setup_partie,teardown),
-        cmocka_unit_test_setup_teardown(test_get_joueur_score_max,setup_partie,teardown),
-        cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
-
-        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_nb_routes_max,setup_partie,teardown),
         cmocka_unit_test(test_nb_routes_max_partieNULL),
-
         cmocka_unit_test_setup_teardown(test_lancer_des,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_gagne_ressource,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_distribution_ressource,setup_partie,teardown),
-        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_obtenir_cartedev,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_monopole,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_decouverte,setup_partie_ressource,teardown),

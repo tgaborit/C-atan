@@ -92,9 +92,14 @@ void init_main_cartedev(Joueur* joueur)
 Joueur* init_joueur(Couleur couleur,char* pseudo)
 {
     Joueur* new_joueur = (Joueur*) malloc(sizeof(Joueur));
+    new_joueur->pseudo= (char*) malloc(TAILLE_MAX_PSEUDO*sizeof(char));
     set_pseudo(new_joueur,pseudo);
     set_couleur(new_joueur,couleur);
     new_joueur->score=0;
+    new_joueur->ressource= (Ressource*) malloc(5*sizeof(Ressource));
+    new_joueur->carte_dev=(CarteDev*) malloc(5*sizeof(CarteDev));
+    new_joueur->nbRoute=0;
+    new_joueur->nbChevalier=0;
     init_main_ressource(new_joueur);
     init_main_cartedev(new_joueur);
     set_status(new_joueur,ATTEND);
@@ -111,6 +116,9 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
  */
 void free_joueur(Joueur* joueur)
 {
+    free(joueur->carte_dev);
+    free(joueur->pseudo);
+    free(joueur->ressource);
     free(joueur);
 }
 
@@ -153,6 +161,19 @@ void inc_score(Joueur* joueur, int points)
     joueur->score+=points;
 }
 
+ 	/**
+	 * \fn void dec_score(Joueur* joueur, int points)
+	 * \brief Fonction qui décrémente le score d'un joueur
+	 *
+	 * fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+	 * \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+	 * \return aucun
+	 */
+	void dec_score(Joueur* joueur, int points){
+
+	    joueur->score-=points;
+
+	}
 /**
  * \fn void set_status(Joueur joueur);
  * \brief Initialisaton status du joueur
@@ -201,7 +222,8 @@ void gain_ressource(TypeRessource type, Joueur* joueur)
  */
 void perte_ressource(TypeRessource type, Joueur* joueur)
 {
-    joueur->ressource[type].nb_ressource-=1;
+    if (joueur->ressource[type].nb_ressource!=0)
+        joueur->ressource[type].nb_ressource-=1;
 }
 
 /**
@@ -210,10 +232,12 @@ void perte_ressource(TypeRessource type, Joueur* joueur)
  *
  * fonction renvoillant le nombre de ressource d'un certain type possédé par un joueur
  * \param Type_ressource: le type de la ressource dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de ressource
- * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur
+ * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
 int  get_nbressource(TypeRessource type, Joueur* joueur)
 {
+    if (joueur==NULL)
+        return -1;
     return joueur->ressource[type].nb_ressource;
 }
 
@@ -258,7 +282,9 @@ void gain_cartedev(TypeCarteDev type, Joueur* joueur)
  */
 void perte_cartedev(TypeCarteDev type, Joueur* joueur)
 {
-    joueur->carte_dev[type].nb_carte-=1;
+    if (joueur->carte_dev[type].nb_carte!=0)
+        joueur->carte_dev[type].nb_carte-=1;
+
 }
 
 /**
@@ -267,11 +293,31 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur)
  *
  * fonction renvoillant le nombre de carte developpement d'un certain type possédé par un joueur
  * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de carte developpment
- * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur
+ * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
+
 int  get_cartedev(TypeCarteDev type, Joueur* joueur)
 {
+    if (joueur==NULL)
+        return -1;
+
     return joueur->carte_dev[type].nb_carte;
+}
+
+/**
+ * \fn int  get_nbChevalier(Joueur* joueur)
+ * \brief Fonction qui retourne le nombre de chevalier activés par un joueur
+ *
+ * \param Joueur: le joeur dont on veut connaitre le nombre de chevalier activés
+ * \return int:le nombre de chevalier activés ou -1 si le joueur passé en paramètre n'est pas définie
+ */
+
+int  get_nbChevalier (Joueur* joueur)
+{
+    if (joueur==NULL)
+        return -1;
+
+    return joueur->nbChevalier;
 }
 
 
@@ -352,3 +398,47 @@ int achat_cartedev(Joueur* joueur)
         }
     return -1;
 }
+
+int voleur_perte_ressource(Joueur* joueur){
+
+    int i,nbCartePerdues;
+    int proba_ble,proba_bois,proba_pierre,proba_mouton,proba_argile;
+
+
+    srand(time(NULL));
+    int rand_val;
+    if(get_nbressource_total(joueur)>7){
+
+
+        nbCartePerdues=get_nbressource_total(joueur)/2;
+        for(i=0;i<nbCartePerdues;++i){
+
+
+            rand_val=rand()%100;
+            proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
+            proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
+            proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
+            proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
+            proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
+
+            if (rand_val<= proba_ble)
+                perte_ressource(BLE,joueur);
+
+            if(proba_ble<rand_val && rand_val<=(proba_ble+proba_bois))
+                perte_ressource(BOIS,joueur);
+
+            if((proba_ble+proba_bois)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre))
+                perte_ressource(PIERRE,joueur);
+
+            if((proba_ble+proba_bois+proba_pierre)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile))
+                perte_ressource(ARGILE,joueur);
+
+            if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton))
+                perte_ressource(MOUTON,joueur);
+            }
+
+    return 0;
+    }
+    return -1;
+}
+

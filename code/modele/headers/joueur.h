@@ -17,11 +17,11 @@
 #include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
+#include <time.h>
 
 
 
-
-#define TAILLE_MAX_PSEUDO  16 //taille max de caractère dans le pseudo d'un joueur
+#define TAILLE_MAX_PSEUDO  8 //taille max de caractère dans le pseudo d'un joueur
 
 /**
  * \enum Couleur
@@ -31,7 +31,7 @@
  */
 
 typedef enum {
-    ROUGE, VERT, ORANGE, BLEU}
+    ROUGE, BLANC, ORANGE, BLEU}
     Couleur;
 
 /**
@@ -57,11 +57,13 @@ typedef enum {
  */
 typedef struct {
 int score; /*!<entier représentant le nombre de points de victoire du joueur>*/
-char pseudo[TAILLE_MAX_PSEUDO]; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
-Status status; /*<deffinie si c'est le tour du joueur ou si il est en attente>*/
-Ressource ressource[4] ; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
-CarteDev carte_dev [4] ; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
+char *pseudo; /*!<chaine de caractères stokant le pseudo choisi par le joueur>*/
+Status status; /*!<deffinie si c'est le tour du joueur ou si il est en attente>*/
+Ressource* ressource; /*!<tableau de ressource représentant les ressources en main du joueur classé par type (une case par type de ressource)>*/
+CarteDev* carte_dev; /*!<tableau de Developpement représentant les cartes_dev en main du joueur classé par type (une case par type de ressource)>*/
 Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
+int nbRoute; /*!<nombre de routes possédées par le joueur>*/
+int nbChevalier; /*!<nombre de chevalier activés par le joueur>*/
 }Joueur;
 
 /**
@@ -70,7 +72,7 @@ Couleur couleur; /*!<couleur associé au joueur choisie au début de la parie>*/
  *
  *
  * \param Char* pseudo choisie par le joueur Joueur*: joueur dont on initialise le pseudo
- * \return: aucun
+ * \return aucun
  */
 void set_pseudo(Joueur* joueur, char* pseudo);
 
@@ -169,6 +171,15 @@ int get_score(Joueur* joueur);
 void inc_score(Joueur* joueur, int points);
 
 
+/**
+* \fn void dec_score(Joueur* joueur, int points)
+* \brief Fonction qui décrémente le score d'un joueur
+*
+* fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
+* \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+* \return aucun
+*/
+void dec_score(Joueur* joueur, int points);
 
 /**
  * \fn void gain_ressource(Type_ressource type, Joueur* joueur)
@@ -241,6 +252,17 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur);
 int  get_cartedev(TypeCarteDev type, Joueur* joueur);
 
 /**
+ * \fn int  get_nbChevalier(Joueur* joueur)
+ * \brief Fonction qui retourne le nombre de chevalier activés par un joueur
+ *
+ * \param Joueur: le joeur dont on veut connaitre le nombre de chevalier activés
+ * \return int:le nombre de chevalier activés ou -1 si le joueur passé en paramètre n'est pas définie
+ */
+
+int  get_nbChevalier (Joueur* joueur);
+
+
+/**
  * \fn int achat_route(Joueur* joueur);
  * \brief teste si le joueur à sufisament de ressource pour construire une route
  *consome les ressource si c'est le cas.
@@ -275,5 +297,23 @@ int achat_ville(Joueur* joueur);
  * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
 int achat_cartedev(Joueur* joueur);
+
+/**
+ * \fn voleur_perte_ressource(Joueur* joueur);
+ * \brief fonction qui test si le joueur passé en paramètre possède plus de 7 cartes ressources si c'est le cas il pert la moitier arondit à l'infèrieur de ses cartes
+ *les cartes perdu sont choisient aléatoirement.
+ * \param Joueur* joueur
+ * \return: 0 si tout c'est bien passé, -1 si le joueur n'a pas à perdre de ressource
+ */
+int voleur_perte_ressource(Joueur* joueur);
+
+
+/**
+ * \fn void utilisation_chevalier(Partie* partie, Joueur* joueur);
+ * \brief le joueur passé en paramètre déplace le voleur et prend une carte à un des joueur autour de cette tuile.
+ * \param Joueur* joueur
+ * \return: 0 si tout c'est bien passé, -1 si le joueur n'a pas à perdre de ressource
+ */
+//void utilisation_chevalier(Partie* partie, Joueur* joueur);
 
 #endif // JOUEUR_H
