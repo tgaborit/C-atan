@@ -12,6 +12,7 @@
 #define CATANE_CONTROLLER_TURN_H
 
 #include <SDL.h>
+#include "modele/headers/partie.h"
 
 /**
 * \enum TurnButton
@@ -67,7 +68,7 @@ typedef enum {
 */
 #define DEVH 75
 
-void controllerTurn(SDL_bool* program_launched, SDL_Window* window/*, Game* the_game*/);
+void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_game);
 
 void drawTurnButtons(SDL_Window* window);
 

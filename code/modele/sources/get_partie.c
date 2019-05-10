@@ -7,7 +7,7 @@
  *
  */
 
-# include "get_partie.h"
+#include "modele/headers/get_partie.h"
 
 
 static void setOnNext_list_joueur(List_joueur* list)

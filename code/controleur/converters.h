@@ -16,15 +16,15 @@
 #include "controller_terrain.h"
 #include "controller_resource.h"
 #include "controller_player.h"
-//#include "ressource.h"
+#include "modele/headers/ressource.h"
 
-typedef enum {
-        BLE,
-        BOIS,
-        PIERRE,
-        ARGILE,
-        MOUTON
-} TypeRessource;/* pour tester */
+//typedef enum {
+//        BLE,
+//        BOIS,
+//        PIERRE,
+//        ARGILE,
+//        MOUTON
+//} TypeRessource;/* pour tester */
 
 /**
 * \struct PathCoordinates

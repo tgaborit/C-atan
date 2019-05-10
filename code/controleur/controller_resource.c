@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include "controller.h"
 #include "controller_resource.h"
+#include "vue/SDL_erreur.h"
 
 static SDL_Rect wood_card_area;         /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect wheat_card_area;        /*!< Rectangle correspondant à la zone de la carte Blé*/
@@ -114,12 +115,12 @@ void drawResourceButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-    //Nettoyage du rendu
-    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-    if(SDL_RenderClear(renderer) != 0)
-        SDL_ExitWithError("Impossible de nettoyer le rendu");
+//    //Nettoyage du rendu
+//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+//
+//    if(SDL_RenderClear(renderer) != 0)
+//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

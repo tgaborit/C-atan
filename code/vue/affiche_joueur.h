@@ -15,11 +15,11 @@
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "partie.h"
-#include "get_plateau.h"
-#include "get_partie.h"
-#include "SDL_erreur.h"
-#include "ressource.h"
+#include "modele/headers/partie.h"
+#include "modele/headers/get_plateau.h"
+#include "modele/headers/get_partie.h"
+#include "vue/SDL_erreur.h"
+#include "modele/headers/ressource.h"
 
 
 

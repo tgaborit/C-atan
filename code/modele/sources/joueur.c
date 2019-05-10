@@ -8,7 +8,7 @@
  *
  */
 
-#include "joueur.h"
+#include "modele/headers/joueur.h"
 #include <string.h>
 
 /**

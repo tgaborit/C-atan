@@ -13,19 +13,19 @@
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "developpement.h"
-#include "partie.h"
-#include "get_plateau.h"
-#include "architecture.h"
-#include "tuile.h"
-#include "carte.h"
-#include "developpement.h"
-#include "probabilite.h"
-#include "place_infra.h"
-#include "affiche_joueur.h"
-#include "SDL_erreur.h"
-#include "affiche_texte.h"
-#include "set_partie.h"
+#include "vue/developpement.h"
+#include "modele/headers/partie.h"
+#include "modele/headers/get_plateau.h"
+#include "vue/architecture.h"
+#include "vue/tuile.h"
+#include "vue/carte.h"
+#include "vue/developpement.h"
+#include "vue/probabilite.h"
+#include "vue/place_infra.h"
+#include "vue/affiche_joueur.h"
+#include "vue/SDL_erreur.h"
+#include "vue/affiche_texte.h"
+#include "modele/headers/set_partie.h"
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -52,7 +52,7 @@ SDL_Window* InitFenetre(){
 		SDL_ExitWithError("Initialisation SDL impossible");
 
 	//Creation de la fenetre en fullscreen et rendu
-	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, SDL_WINDOW_FULLSCREEN_DESKTOP)) == NULL)
+	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, 0)) == NULL)
 		SDL_ExitWithError("Impossible de creer la fenetre");
 
     return window;
@@ -119,7 +119,7 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	AfficheBoutonColonie(renderer);
 	AfficheBoutonVille(renderer);
 	Affiche_Infrastructures(p,renderer);
-	AfficheTexte_MAJ(renderer);
+	AfficheTexte_MAJ(window);
 	AfficheListeJoueurs(p, renderer);
 	AfficheNbCarte(p, renderer);
     SDL_RenderPresent(renderer);
@@ -199,7 +199,7 @@ void AfficheSkip(SDL_Renderer* renderer)
 void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 {
 
-    TTF_Font* police = TTF_OpenFont("Vogue.ttf", 100);
+    TTF_Font* police = TTF_OpenFont("vue/Vogue.ttf", 100);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     int lancer = lancer_des();
     char de[20] = "";

@@ -374,13 +374,13 @@ PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
 
     case PATHST2_BUTTON :
         path_coordinates.x = 0.5;
-        path_coordinates.y = 1;
+        path_coordinates.y = -1;
         path_coordinates.position = 2;
         break;
 
     case PATHST3_BUTTON :
         path_coordinates.x = -0.5;
-        path_coordinates.y = 1;
+        path_coordinates.y = -1;
         path_coordinates.position = 3;
         break;
 

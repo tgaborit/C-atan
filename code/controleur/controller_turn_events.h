@@ -12,22 +12,22 @@
 #define CATANE_CONTROLLER_TURN_EVENTS_H
 
 #include <SDL.h>
-//#include "partie.h"
+#include "modele/headers/partie.h"
 
-void craftDevEvent(/*Partie* the_game*/);
-void craftRoadEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void craftSettleEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void craftCityEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
+void craftDevEvent(Partie* the_game);
+void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void craftSettleEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void craftCityEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
 
-void useKnightEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void useMonopEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void useInventEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void useRoadsEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
-void useUnivEvent(/*Partie* the_game*/);
+void useKnightEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void useMonopEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void useInventEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void useUnivEvent(Partie* the_game);
 
-void rollDiceEvent(/*Partie* the_game*/SDL_Window* window, SDL_bool* program_launched);
-void endTurnEvent(/*Partie* the_game*/);
+void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void endTurnEvent(Partie* the_game);
 
-void activateRobberEvent(/*Partie* the_game, */SDL_Window* window, SDL_bool* program_launched);
+void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
 
 #endif //CATANE_CONTROLLER_TURN_EVENTS_H

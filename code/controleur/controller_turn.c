@@ -13,8 +13,10 @@
 #include "controller.h"
 #include "controller_turn.h"
 #include "controller_turn_events.h"
-//#include "partie.h"
-//#include "fenetre.h"
+#include "modele/headers/partie.h"
+#include "vue/fenetre.h"
+#include "vue/SDL_erreur.h"
+
 
 static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
 static SDL_Rect road_craft_area;        /*!< Rectangle correspondant à la zone du bouton Craft d'une Route*/
@@ -44,12 +46,13 @@ static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone 
 * \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
-void controllerTurn(SDL_bool* program_launched, SDL_Window* window/*, Partie* the_game*/)
+void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
 {
+    updateFenetre(the_game, window);
     initTurnButtons();
     while(*program_launched)
     {
-        drawTurnButtons(window);
+//        drawTurnButtons(window);
 
         SDL_Event event;
         while(SDL_PollEvent(&event))
@@ -58,7 +61,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window/*, Partie* th
             {
             case SDL_USEREVENT:
                 printf("Appel de la fonction de la vue updateFenetre(the_game, window)\n");
-                //updateFenetre(the_game, window);
+                updateFenetre(the_game, window);
                 break;
 
             case SDL_MOUSEBUTTONDOWN :
@@ -67,69 +70,69 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window/*, Partie* th
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
                     printf("Appel de la fonction craftDevEvent(the_game)\n");
-                    craftDevEvent(/*the_game*/);
+                    craftDevEvent(the_game);
                     break;
 
                 case ROADCRAFT_BUTTON :
                     printf("Clic sur bouton Craft route\n");
                     printf("Appel de la fonction craftRoadEvent(the_game, window, program_launched)\n");
-                    craftRoadEvent(/*the_game, */window, program_launched);
+                    craftRoadEvent(the_game, window, program_launched);
                     break;
 
                 case SETTLECRAFT_BUTTON :
                     printf("Clic sur bouton Craft colonie\n");
                     printf("Appel de la fonction craftSettleEvent(the_game, window, program_launched)\n");
-                    craftSettleEvent(/*the_game, */window, program_launched);
+                    craftSettleEvent(the_game, window, program_launched);
                     break;
 
                 case CITYCRAFT_BUTTON :
                     printf("Clic sur bouton Craft ville\n");
                     printf("Appel de la fonction craftCityEvent(the_game, window, program_launched)\n");
-                    craftCityEvent(/*the_game, */window, program_launched);
+                    craftCityEvent(the_game, window, program_launched);
                     break;
 
 
                 case KNIGHTDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Chevalier\n");
                     printf("Appel de la fonction useKnightEvent(the_game, window, program_launched)\n");
-                    useKnightEvent(/*the_game, */window, program_launched);
+                    useKnightEvent(the_game, window, program_launched);
                     break;
 
                 case MONOPDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Monopole\n");
                     printf("Appel de la fonction useMonopEvent(the_game, window, program_launched)\n");
-                    useMonopEvent(/*the_game, */window, program_launched);
+                    useMonopEvent(the_game, window, program_launched);
                     break;
 
                 case INVENTDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Invention\n");
                     printf("Appel de la fonction useInventEvent(the_game, window, program_launched)\n");
-                    useInventEvent(/*the_game, */window, program_launched);
+                    useInventEvent(the_game, window, program_launched);
                     break;
 
                 case ROADSDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Routes\n");
                     printf("Appel de la fonction useRoadsEvent(the_game, window, program_launched)\n");
-                    useRoadsEvent(/*the_game, */window, program_launched);
+                    useRoadsEvent(the_game, window, program_launched);
                     break;
 
                 case UNIVDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Universite\n");
                     printf("Appel de la fonction useUnivEvent(the_game)\n");
-                    useUnivEvent(/*the_game*/);
+                    useUnivEvent(the_game);
                     break;
 
 
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
                     printf("Appel de la fonction endTurnEvent(the_game)\n");
-                    endTurnEvent(/*the_game*/);
+                    endTurnEvent(the_game);
                     break;
 
                 case DICE_BUTTON :
                     printf("Clic sur bouton Lancer les des\n");
                     printf("Appel de la fonction rollDiceEvent(the_game)\n");
-                    rollDiceEvent(/*the_game*/window, program_launched);
+                    rollDiceEvent(the_game, window, program_launched);
                     break;
 
                 case HELP_BUTTON :
@@ -173,12 +176,12 @@ void drawTurnButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-    //Nettoyage du rendu
-    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-    if(SDL_RenderClear(renderer) != 0)
-        SDL_ExitWithError("Impossible de nettoyer le rendu");
+//    //Nettoyage du rendu
+//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+//
+//    if(SDL_RenderClear(renderer) != 0)
+//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

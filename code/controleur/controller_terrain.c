@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include "controller_terrain.h"
 #include "controller.h"
+#include "vue/SDL_erreur.h"
 
 static SDL_Rect terrX0_area;          /*!< Rectangle correspondant à la zone du terrain 0 de la première couronne*/
 static SDL_Rect terrX1_area;          /*!< Rectangle correspondant à la zone du terrain 1 de la première couronne*/
@@ -100,12 +101,12 @@ void drawTerrButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-    //Nettoyage du rendu
-    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-    if(SDL_RenderClear(renderer) != 0)
-        SDL_ExitWithError("Impossible de nettoyer le rendu");
+//    //Nettoyage du rendu
+//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+//
+//    if(SDL_RenderClear(renderer) != 0)
+//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

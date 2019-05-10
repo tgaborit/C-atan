@@ -2,8 +2,8 @@
 #include <stddef.h>
 #include <setjmp.h>
 #include <cmocka.h>
-#include "joueur.h"
-#include "UTest-joueur.h"
+#include "modele/headers/joueur.h"
+#include "modele/headers/UTest-joueur.h"
 
 static int setup_joueur (void ** state)
 {

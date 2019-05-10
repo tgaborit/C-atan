@@ -8,7 +8,7 @@
  */
 
 
-#include "set_partie.h"
+#include "modele/headers/set_partie.h"
 
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
@@ -316,33 +316,36 @@ int obtenir_cartedev (Partie* partie)
 {
     Joueur* joueur = get_joueur_actif(partie);
     CarteDev* cartedev= partie->cartedev;
-    if (achat_cartedev(joueur)==0)
+    if(get_nbcartedev_total_pile(cartedev) !=0 )
     {
-    int proba_chevalier=(get_nbcartedev_pile(cartedev,CHEVALIER)*100)/get_nbcartedev_total_pile(cartedev);
-    int proba_point=(get_nbcartedev_pile(cartedev,POINT)*100)/get_nbcartedev_total_pile(cartedev);
-    int proba_route=(get_nbcartedev_pile(cartedev,ROUTES)*100)/get_nbcartedev_total_pile(cartedev);
-    int proba_monopole=(get_nbcartedev_pile(cartedev,MONOPOLE)*100)/get_nbcartedev_total_pile(cartedev);
-    int proba_decouverte=(get_nbcartedev_pile(cartedev,DECOUVERTE)*100)/get_nbcartedev_total_pile(cartedev);
-    srand(time(NULL));
-    int rand_val=rand()%100;
+        if (achat_cartedev(joueur)==0)
+        {
+        int proba_chevalier=(get_nbcartedev_pile(cartedev,CHEVALIER)*100)/get_nbcartedev_total_pile(cartedev);
+        int proba_point=(get_nbcartedev_pile(cartedev,POINT)*100)/get_nbcartedev_total_pile(cartedev);
+        int proba_route=(get_nbcartedev_pile(cartedev,ROUTES)*100)/get_nbcartedev_total_pile(cartedev);
+        int proba_monopole=(get_nbcartedev_pile(cartedev,MONOPOLE)*100)/get_nbcartedev_total_pile(cartedev);
+        int proba_decouverte=(get_nbcartedev_pile(cartedev,DECOUVERTE)*100)/get_nbcartedev_total_pile(cartedev);
+        srand(time(NULL));
+        int rand_val=rand()%100;
 
 
-    if (rand_val<= proba_chevalier)
-        retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
+        if (rand_val<= proba_chevalier)
+            retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
 
-    if(proba_chevalier<rand_val && rand_val<=(proba_chevalier+proba_point))
-        retirer_cartedev_pile(cartedev,joueur,POINT);
+        if(proba_chevalier<rand_val && rand_val<=(proba_chevalier+proba_point))
+            retirer_cartedev_pile(cartedev,joueur,POINT);
 
-    if((proba_chevalier+proba_point)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte))
-        retirer_cartedev_pile(cartedev,joueur,DECOUVERTE);
+        if((proba_chevalier+proba_point)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte))
+            retirer_cartedev_pile(cartedev,joueur,DECOUVERTE);
 
-    if((proba_chevalier+proba_point+proba_decouverte)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole))
-        retirer_cartedev_pile(cartedev,joueur,MONOPOLE);
+        if((proba_chevalier+proba_point+proba_decouverte)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole))
+            retirer_cartedev_pile(cartedev,joueur,MONOPOLE);
 
-    if ((proba_chevalier+proba_point+proba_decouverte+proba_monopole)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole+proba_route))
-        retirer_cartedev_pile(cartedev,joueur,ROUTES);
+        if ((proba_chevalier+proba_point+proba_decouverte+proba_monopole)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole+proba_route))
+            retirer_cartedev_pile(cartedev,joueur,ROUTES);
 
-    return 0;
+        return 0;
+        }
     }
     return -1;
 }

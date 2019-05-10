@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="catane" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/catane" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/catane" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="`sdl2-config --cflags`" />
+		</Compiler>
+		<Linker>
+			<Add option="`sdl2-config --libs` -lSDL2_ttf" />
+		</Linker>
+		<Unit filename="controleur/controller.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller.h" />
+		<Unit filename="controleur/controller_crossing.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_crossing.h" />
+		<Unit filename="controleur/controller_path.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_path.h" />
+		<Unit filename="controleur/controller_player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_player.h" />
+		<Unit filename="controleur/controller_resource.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_resource.h" />
+		<Unit filename="controleur/controller_terrain.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_terrain.h" />
+		<Unit filename="controleur/controller_turn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_turn.h" />
+		<Unit filename="controleur/controller_turn_events.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/controller_turn_events.h" />
+		<Unit filename="controleur/converters.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/converters.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/headers/get_partie.h" />
+		<Unit filename="modele/headers/get_plateau.h" />
+		<Unit filename="modele/headers/joueur.h" />
+		<Unit filename="modele/headers/partie.h" />
+		<Unit filename="modele/headers/plateau.h" />
+		<Unit filename="modele/headers/ressource.h" />
+		<Unit filename="modele/headers/set_partie.h" />
+		<Unit filename="modele/headers/set_plateau.h" />
+		<Unit filename="modele/sources/get_partie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/get_plateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/partie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/plateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/set_partie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="modele/sources/set_plateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/SDL_erreur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/SDL_erreur.h" />
+		<Unit filename="vue/affiche_joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/affiche_joueur.h" />
+		<Unit filename="vue/affiche_texte.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/affiche_texte.h" />
+		<Unit filename="vue/architecture.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/architecture.h" />
+		<Unit filename="vue/carte.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/carte.h" />
+		<Unit filename="vue/developpement.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/developpement.h" />
+		<Unit filename="vue/fenetre.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/fenetre.h" />
+		<Unit filename="vue/place_infra.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/place_infra.h" />
+		<Unit filename="vue/probabilite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/probabilite.h" />
+		<Unit filename="vue/tuile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="vue/tuile.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

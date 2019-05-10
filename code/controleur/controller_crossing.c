@@ -13,6 +13,7 @@
 #include <SDL.h>
 #include "controller.h"
 #include "controller_crossing.h"
+#include "vue/SDL_erreur.h"
 
 static SDL_Rect crossXX0_area;          /*!< Rectangle correspondant à la zone du croisement 0 de la première couronne*/
 static SDL_Rect crossXX1_area;          /*!< Rectangle correspondant à la zone du croisement 1 de la première couronne*/
@@ -142,12 +143,12 @@ void drawCrossButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-    //Nettoyage du rendu
-    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-    if(SDL_RenderClear(renderer) != 0)
-        SDL_ExitWithError("Impossible de nettoyer le rendu");
+//    //Nettoyage du rendu
+//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+//
+//    if(SDL_RenderClear(renderer) != 0)
+//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

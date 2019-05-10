@@ -1,5 +1,5 @@
 
-#include "partie.h"
+#include "modele/headers/partie.h"
 
 
 

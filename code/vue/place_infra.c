@@ -176,18 +176,18 @@ void Affiche_Infrastructures(Partie* partie, SDL_Renderer* renderer){
             if(j_borne>5){
                 j_borne -= 6;
             }
-            if(p->adjacence[i]->t->a[j].i == ROUTE){
-                Affiche_Route(p->adjacence[i]->x,p->adjacence[i]->y,j,p->adjacence[i]->t->a[j].owner->couleur,renderer);
+            if(p->adjacence[i]->t->a[j_borne].i == ROUTE){
+                Affiche_Route(p->adjacence[i]->x,p->adjacence[i]->y,j_borne,p->adjacence[i]->t->a[j_borne].owner->couleur,renderer);
             }
             ++j_borne;
             if(j_borne>5){
                 j_borne -= 6;
             }
-            if(p->adjacence[i]->adjacence[i]->t->a[j].i == ROUTE){
-                Affiche_Route(p->adjacence[i]->adjacence[i]->x,p->adjacence[i]->adjacence[i]->y,j,p->adjacence[i]->adjacence[i]->t->a[j].owner->couleur,renderer);
+            if(p->adjacence[i]->adjacence[i]->t->a[j_borne].i == ROUTE){
+                Affiche_Route(p->adjacence[i]->adjacence[i]->x,p->adjacence[i]->adjacence[i]->y,j_borne,p->adjacence[i]->adjacence[i]->t->a[j_borne].owner->couleur,renderer);
             }
-            if(p->adjacence[i]->adjacence[ord[i]]->t->a[j].i == ROUTE){
-                Affiche_Route(p->adjacence[i]->adjacence[ord[i]]->x,p->adjacence[i]->adjacence[ord[i]]->y,j,p->adjacence[i]->adjacence[ord[i]]->t->a[j].owner->couleur,renderer);
+            if(p->adjacence[i]->adjacence[ord[i]]->t->a[j_borne].i == ROUTE){
+                Affiche_Route(p->adjacence[i]->adjacence[ord[i]]->x,p->adjacence[i]->adjacence[ord[i]]->y,j_borne,p->adjacence[i]->adjacence[ord[i]]->t->a[j_borne].owner->couleur,renderer);
             }
         }
 

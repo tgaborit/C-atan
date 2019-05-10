@@ -13,7 +13,8 @@
 #include <SDL.h>
 #include "controller.h"
 #include "controller_player.h"
-//#include "get_partie.h"
+#include "modele/headers/get_partie.h"
+#include "vue/SDL_erreur.h"
 
 static SDL_Rect player1_area;           /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect player2_area;           /*!< Rectangle correspondant à la zone de la carte Blé*/
@@ -30,10 +31,10 @@ static SDL_Rect player4_area;           /*!< Rectangle correspondant à la zone 
 * \param[in,out] player_chosen Pointeur vers le joueur choisi dans lequel sera enregistré le joueur cliqué.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
-void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool* program_launched)
+void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_bool choice_launched = SDL_TRUE;
-    initPlayerButtons();
+    initPlayerButtons(the_game);
     while(choice_launched)
     {
         drawPlayerButtons(window);
@@ -108,12 +109,12 @@ void drawPlayerButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-    //Nettoyage du rendu
-    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-
-    if(SDL_RenderClear(renderer) != 0)
-        SDL_ExitWithError("Impossible de nettoyer le rendu");
+//    //Nettoyage du rendu
+//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
+//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
+//
+//    if(SDL_RenderClear(renderer) != 0)
+//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
@@ -158,12 +159,12 @@ PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button){
 * et le bouton du joueur 4.
 * Initialise le
 */
-void initPlayerButtons()
+void initPlayerButtons(Partie* the_game)
 {
     SDL_Rect* player_buttons[NPLAYERBUTTONS] = {&player1_area, &player2_area, &player3_area, &player4_area};
     int i;
 
-    for(i = 0; i < /*get_nbjoueurs()*/4; ++i)
+    for(i = 0; i < get_nbjoueurs(the_game); ++i)
     {
         player_buttons[i]->h = PLAYERH;
         player_buttons[i]->w = PLAYERW;

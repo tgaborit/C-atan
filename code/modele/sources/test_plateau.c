@@ -3,8 +3,8 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <cmocka_pbc.h>
-#include "plateau.h"
-#include "test_plateau.h"
+#include "modele/headers/plateau.h"
+#include "modele/headers/test_plateau.h"
 
 
 static int group_setup(void** state){

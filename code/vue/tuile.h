@@ -15,9 +15,9 @@
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "partie.h"
-#include "SDL_erreur.h"
-#include "get_plateau.h"
+#include "modele/headers/partie.h"
+#include "vue/SDL_erreur.h"
+#include "modele/headers/get_plateau.h"
 
 /**
  * \fn AfficheTuile(SDL_Renderer* renderer)

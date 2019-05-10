@@ -4,10 +4,10 @@
 #include <cmocka.h>
 #include <cmocka_pbc.h>
 #include <string.h>
-#include "get_plateau.h"
-#include "partie.h"
-#include "set_partie.h"
-#include "get_partie.h"
+#include "modele/headers/get_plateau.h"
+#include "modele/headers/partie.h"
+#include "modele/headers/set_partie.h"
+#include "modele/headers/get_partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {

@@ -12,6 +12,7 @@
 #define CATANE_CONTROLLER_PLAYER_H
 
 #include <SDL.h>
+#include "modele/headers/partie.h"
 
 /**
 * \enum PlayerButton
@@ -44,7 +45,7 @@ typedef enum {
 */
 #define PLAYERH 35
 
-void controllerPlayer(PlayerButton* player_chosen, SDL_Window* window, SDL_bool* program_launched);
+void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
 
 void drawPlayerButtons(SDL_Window* window);
 
