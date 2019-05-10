@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL.h>
-#include "controleur/controller_turn.h"
+#include "controleur/headers/controller_turn.h"
 #include "modele/headers/set_partie.h"
-#include "vue/fenetre.h"
+#include "vue/headers/fenetre.h"
 
 int main()
 {

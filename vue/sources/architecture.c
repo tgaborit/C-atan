@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des constructions dans le jeu.
  */
 
-#include "architecture.h"
+#include "vue/headers/architecture.h"
 
 /**
  * \fn AfficheBoutonDev(SDL_Renderer *renderer)
@@ -24,7 +24,7 @@ void AfficheBoutonDev(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutondev = NULL;
 
-	image = SDL_LoadBMP("imagecatane/dev.bmp");
+	image = SDL_LoadBMP("images/dev.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -64,7 +64,7 @@ void AfficheBoutonRoute(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonroute = NULL;
 
-	image = SDL_LoadBMP("imagecatane/boutonroute.bmp");
+	image = SDL_LoadBMP("images/boutonroute.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -104,7 +104,7 @@ void AfficheBoutonColonie(SDL_Renderer *renderer)
  SDL_Surface* image = NULL;
 	SDL_Texture* boutoncolonie = NULL;
 
-	image = SDL_LoadBMP("imagecatane/boutoncolonie.bmp");
+	image = SDL_LoadBMP("images/boutoncolonie.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -144,7 +144,7 @@ void AfficheBoutonVille(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonville = NULL;
 
-	image = SDL_LoadBMP("imagecatane/boutonville.bmp");
+	image = SDL_LoadBMP("images/boutonville.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");

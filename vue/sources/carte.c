@@ -8,8 +8,8 @@
  * Implémente les fonctions utiles à l'affichage des cartes dans le jeu.
  */
 
- #include "carte.h"
- #include "SDL_erreur.h"
+ #include "vue/headers/carte.h"
+ #include "vue/headers/SDL_erreur.h"
 
 /**
  * \fn AfficheCarteArgile(SDL_Renderer *renderer)
@@ -23,7 +23,7 @@ void AfficheCarteArgile(SDL_Renderer* renderer){
 	SDL_Surface *image = NULL;
 	SDL_Texture *cargile = NULL;
 
-	image = SDL_LoadBMP("imagecatane/carteargile.bmp");
+	image = SDL_LoadBMP("images/carteargile.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -63,7 +63,7 @@ void AfficheCarteBle(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cble = NULL;
 
-	image = SDL_LoadBMP("imagecatane/carteble.bmp");
+	image = SDL_LoadBMP("images/carteble.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -103,7 +103,7 @@ void AfficheCarteBois(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cbois = NULL;
 
-	image = SDL_LoadBMP("imagecatane/cartebois.bmp");
+	image = SDL_LoadBMP("images/cartebois.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -143,7 +143,7 @@ void AfficheCarteMouton(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cmouton = NULL;
 
-	image = SDL_LoadBMP("imagecatane/cartemouton.bmp");
+	image = SDL_LoadBMP("images/cartemouton.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -184,7 +184,7 @@ void AfficheCarteRoche(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *croche = NULL;
 
-	image = SDL_LoadBMP("imagecatane/carteroche.bmp");
+	image = SDL_LoadBMP("images/carteroche.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");

@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des cartes de développement dans le jeu.
  */
 
-#include "developpement.h"
+#include "vue/headers/developpement.h"
 
 //Carte Developpement
 /*void AfficheCartesDev(SDL_Renderer *renderer)
@@ -16,7 +16,7 @@
 	SDL_Surface *image = NULL;
 	SDL_Texture *texture = NULL;
 
-	image = SDL_LoadBMP("imagecatane/cartedev.bmp");
+	image = SDL_LoadBMP("images/cartedev.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -56,7 +56,7 @@ void AfficheChevalier(SDL_Renderer *renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *chevalier = NULL;
 
-	image = SDL_LoadBMP("imagecatane/chevalier.bmp");
+	image = SDL_LoadBMP("images/chevalier.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -97,7 +97,7 @@ void AfficheMonopole(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* monopole = NULL;
 
-	image = SDL_LoadBMP("imagecatane/monopole.bmp");
+	image = SDL_LoadBMP("images/monopole.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -137,7 +137,7 @@ void AfficheInvention(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* invention = NULL;
 
-	image = SDL_LoadBMP("imagecatane/invention.bmp");
+	image = SDL_LoadBMP("images/invention.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -177,7 +177,7 @@ void AfficheRouteDev(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* route = NULL;
 
-	image = SDL_LoadBMP("imagecatane/routedev.bmp");
+	image = SDL_LoadBMP("images/routedev.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -217,7 +217,7 @@ void AfficheUniversite(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* universite = NULL;
 
-	image = SDL_LoadBMP("imagecatane/universite.bmp");
+	image = SDL_LoadBMP("images/universite.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -257,7 +257,7 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* reussitechevalier = NULL;
 
-	image = SDL_LoadBMP("imagecatane/cartereussitechevalier.bmp");
+	image = SDL_LoadBMP("images/cartereussitechevalier.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -297,7 +297,7 @@ void AfficheGrandeRoute(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* reussiteroute = NULL;
 
-	image = SDL_LoadBMP("imagecatane/cartereussiteroute.bmp");
+	image = SDL_LoadBMP("images/cartereussiteroute.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");

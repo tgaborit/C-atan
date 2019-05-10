@@ -18,7 +18,7 @@
 #include "modele/headers/partie.h"
 #include "modele/headers/get_plateau.h"
 #include "modele/headers/get_partie.h"
-#include "vue/SDL_erreur.h"
+#include "vue/headers/SDL_erreur.h"
 #include "modele/headers/ressource.h"
 
 

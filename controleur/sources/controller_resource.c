@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controller.h"
-#include "controller_resource.h"
-#include "vue/SDL_erreur.h"
+#include "controleur/headers/controller.h"
+#include "controleur/headers/controller_resource.h"
+#include "vue/headers/SDL_erreur.h"
 
 static SDL_Rect wood_card_area;         /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect wheat_card_area;        /*!< Rectangle correspondant à la zone de la carte Blé*/

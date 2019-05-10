@@ -13,7 +13,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "vue/SDL_erreur.h"
+#include "vue/headers/SDL_erreur.h"
 #include "modele/headers/partie.h"
 #include "modele/headers/get_plateau.h"
 

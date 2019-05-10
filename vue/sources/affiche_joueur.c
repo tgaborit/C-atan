@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des informations des joueurs.
  */
 
-#include "affiche_joueur.h"
+#include "vue/headers/affiche_joueur.h"
 
 
 /**
@@ -51,7 +51,7 @@ void AfficheJoueur(SDL_Renderer* renderer)
 void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 {
 
-    TTF_Font* police = TTF_OpenFont("vue/Vogue.ttf", 30);
+    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 30);
     TTF_SetFontStyle(police, TTF_STYLE_BOLD);
     char score[20]="";
     SDL_Color couleur;
@@ -172,7 +172,7 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
  */
 void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer)
 {
-    TTF_Font* police = TTF_OpenFont("vue/Vogue.ttf", 20);
+    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
     SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 
@@ -226,7 +226,7 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
  */
 void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
 {
-    TTF_Font* police = TTF_OpenFont("vue/Vogue.ttf", 20);
+    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 

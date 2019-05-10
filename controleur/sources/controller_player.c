@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controller.h"
-#include "controller_player.h"
+#include "controleur/headers/controller.h"
+#include "controleur/headers/controller_player.h"
 #include "modele/headers/get_partie.h"
-#include "vue/SDL_erreur.h"
+#include "vue/headers/SDL_erreur.h"
 
 static SDL_Rect player1_area;           /*!< Rectangle correspondant à la zone de la carte Bois*/
 static SDL_Rect player2_area;           /*!< Rectangle correspondant à la zone de la carte Blé*/

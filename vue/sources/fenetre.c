@@ -8,23 +8,23 @@
  * Implémente les fonctions utiles à l'affichage du jeu.
  */
 
-#include "fenetre.h"
+#include "vue/headers/fenetre.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "vue/developpement.h"
+#include "vue/headers/developpement.h"
 #include "modele/headers/partie.h"
 #include "modele/headers/get_plateau.h"
-#include "vue/architecture.h"
-#include "vue/tuile.h"
-#include "vue/carte.h"
-#include "vue/developpement.h"
-#include "vue/probabilite.h"
-#include "vue/place_infra.h"
-#include "vue/affiche_joueur.h"
-#include "vue/SDL_erreur.h"
-#include "vue/affiche_texte.h"
+#include "vue/headers/architecture.h"
+#include "vue/headers/tuile.h"
+#include "vue/headers/carte.h"
+#include "vue/headers/developpement.h"
+#include "vue/headers/probabilite.h"
+#include "vue/headers/place_infra.h"
+#include "vue/headers/affiche_joueur.h"
+#include "vue/headers/SDL_erreur.h"
+#include "vue/headers/affiche_texte.h"
 #include "modele/headers/set_partie.h"
 
 #define WINDOWW 1920
@@ -161,7 +161,7 @@ void AfficheSkip(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *skip = NULL;
 
-	image = SDL_LoadBMP("imagecatane/skip.bmp");
+	image = SDL_LoadBMP("images/skip.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -199,7 +199,7 @@ void AfficheSkip(SDL_Renderer* renderer)
 void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
 {
 
-    TTF_Font* police = TTF_OpenFont("vue/Vogue.ttf", 100);
+    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     int lancer = lancer_des();
     char de[20] = "";
@@ -254,7 +254,7 @@ void AfficheHelp(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *help = NULL;
 
-	image = SDL_LoadBMP("imagecatane/help.bmp");
+	image = SDL_LoadBMP("images/help.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image");
@@ -305,7 +305,7 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 		SDL_Surface *image = NULL;
 		SDL_Texture *voleur = NULL;
 
-		image = SDL_LoadBMP("imagecatane/voleur.bmp");
+		image = SDL_LoadBMP("images/voleur.bmp");
 
 		if(image == NULL)
 			SDL_ExitWithError("Impossible de charger l'image");

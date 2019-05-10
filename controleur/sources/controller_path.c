@@ -12,9 +12,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <SDL.h>
-#include "controller.h"
-#include "controller_path.h"
-#include "vue/SDL_erreur.h"
+#include "controleur/headers/controller.h"
+#include "controleur/headers/controller_path.h"
+#include "vue/headers/SDL_erreur.h"
 
 
 static SDL_Rect pathXX0_area;          /*!< Rectangle correspondant à la zone du chemin 0 de la première couronne*/

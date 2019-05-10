@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "modele/headers/partie.h"
-#include "vue/SDL_erreur.h"
+#include "vue/headers/SDL_erreur.h"
 #include "modele/headers/get_plateau.h"
 
 /**

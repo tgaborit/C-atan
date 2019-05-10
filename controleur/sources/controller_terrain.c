@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controller_terrain.h"
-#include "controller.h"
-#include "vue/SDL_erreur.h"
+#include "controleur/headers/controller_terrain.h"
+#include "controleur/headers/controller.h"
+#include "vue/headers/SDL_erreur.h"
 
 static SDL_Rect terrX0_area;          /*!< Rectangle correspondant à la zone du terrain 0 de la première couronne*/
 static SDL_Rect terrX1_area;          /*!< Rectangle correspondant à la zone du terrain 1 de la première couronne*/
