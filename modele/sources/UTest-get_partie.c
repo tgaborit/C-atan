@@ -4,11 +4,11 @@
 #include <cmocka.h>
 #include <cmocka_pbc.h>
 #include <string.h>
-#include "modele/headers/get_plateau.h"
-#include "modele/headers/get_partie.h"
-#include "modele/headers/set_partie.h"
-#include "modele/headers/UTest-get_partie.h"
-#include "modele/headers/partie.h"
+#include "get_plateau.h"
+#include "get_partie.h"
+#include "set_partie.h"
+#include "UTest-get_partie.h"
+#include "partie.h"
 
 
 static int setup_partie (void ** state)
@@ -108,6 +108,28 @@ static void test_get_joueur_actif(void** state){
     assert_int_equal(0,valtest);
 }
 
+static void test_test_pseudo(void** state){
+    Partie* partie= *state;
+    int flag;
+    Node_joueur* current_node=partie->joueurs->current;
+    flag=test_pseudo("joueur_1",partie);
+    assert_int_equal(0,flag);
+    assert_ptr_equal(current_node,partie->joueurs->current);
+    flag=test_pseudo("joueur1",partie);
+    assert_int_equal(-1,flag);
+    assert_ptr_equal(current_node,partie->joueurs->current);
+    flag=test_pseudo("joueur2",partie);
+    assert_int_equal(-1,flag);
+    assert_ptr_equal(current_node,partie->joueurs->current);
+    flag=test_pseudo("joueur3",partie);
+    assert_int_equal(-1,flag);
+    assert_ptr_equal(current_node,partie->joueurs->current);
+    flag=test_pseudo("joueur4",partie);
+    assert_int_equal(-1,flag);
+    assert_ptr_equal(current_node,partie->joueurs->current);
+
+}
+
 static int teardown (void ** state)
 {
     Partie* partie= *state;
@@ -126,6 +148,7 @@ int main_get_partie_test(void)
         cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_test_pseudo,setup_partie,teardown),
 
         };
     return cmocka_run_group_tests(tests_get_partie,NULL,NULL);
