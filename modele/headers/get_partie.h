@@ -88,6 +88,16 @@ int get_score_max(Partie* partie);
 */
 Joueur* get_joueur_score_max(Partie* partie);
 
+/**
+* \fn int test_pseudo(char* pseudo, Partie* partie)
+* \brief retourne un flag qui indique l'unité ou non du pseudo choisi.
+*retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*
+* \param char*:pseudo à vérifier,Partie: partie en cours
+* \return int:retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*/
+int test_pseudo(char* pseudo, Partie* partie);
+
 
 
 
