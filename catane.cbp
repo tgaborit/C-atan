@@ -38,6 +38,9 @@
 		<Linker>
 			<Add option="`sdl2-config --libs` -lSDL2_ttf" />
 		</Linker>
+		<Unit filename="catane.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="controleur/headers/controller.h" />
 		<Unit filename="controleur/headers/controller_crossing.h" />
 		<Unit filename="controleur/headers/controller_path.h" />
@@ -72,9 +75,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="controleur/sources/converters.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="modele/headers/get_partie.h" />
