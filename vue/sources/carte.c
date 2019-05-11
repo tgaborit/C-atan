@@ -8,8 +8,8 @@
  * Implémente les fonctions utiles à l'affichage des cartes dans le jeu.
  */
 
- #include "vue/headers/carte.h"
- #include "vue/headers/SDL_erreur.h"
+ #include "carte.h"
+ #include "SDL_erreur.h"
 
 /**
  * \fn AfficheCarteArgile(SDL_Renderer *renderer)

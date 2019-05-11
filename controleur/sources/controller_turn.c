@@ -10,12 +10,12 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controleur/headers/controller.h"
-#include "controleur/headers/controller_turn.h"
-#include "controleur/headers/controller_turn_events.h"
-#include "modele/headers/partie.h"
-#include "vue/headers/fenetre.h"
-#include "vue/headers/SDL_erreur.h"
+#include "controller.h"
+#include "controller_turn.h"
+#include "controller_turn_events.h"
+#include "partie.h"
+#include "fenetre.h"
+#include "SDL_erreur.h"
 
 
 static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/

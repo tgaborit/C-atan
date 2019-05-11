@@ -10,17 +10,17 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controleur/headers/controller_turn_events.h"
-#include "controleur/headers/controller_path.h"
-#include "controleur/headers/controller_crossing.h"
-#include "controleur/headers/controller_terrain.h"
-#include "controleur/headers/controller_resource.h"
-#include "controleur/headers/controller_player.h"
-#include "controleur/headers/converters.h"
-#include "modele/headers/partie.h"
-#include "modele/headers/set_plateau.h"
-#include "modele/headers/set_partie.h"
-#include "modele/headers/ressource.h"
+#include "controller_turn_events.h"
+#include "controller_path.h"
+#include "controller_crossing.h"
+#include "controller_terrain.h"
+#include "controller_resource.h"
+#include "controller_player.h"
+#include "converters.h"
+#include "partie.h"
+#include "set_plateau.h"
+#include "set_partie.h"
+#include "ressource.h"
 
 /**
 * \fn void craftDevEvent(Partie* the_game)

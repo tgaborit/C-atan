@@ -12,7 +12,7 @@
 #define CATANE_CONTROLLER_TURN_H
 
 #include <SDL.h>
-#include "modele/headers/partie.h"
+#include "partie.h"
 
 /**
 * \enum TurnButton

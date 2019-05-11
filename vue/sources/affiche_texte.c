@@ -8,8 +8,8 @@
  * Implémente les fonctions utiles à l'affichage de texte dans le jeu.
  */
 
-#include "vue/headers/affiche_texte.h"
-#include "vue/headers/SDL_erreur.h"
+#include "affiche_texte.h"
+#include "SDL_erreur.h"
 
 static int fill_text(char* frag, char* buffer){
 

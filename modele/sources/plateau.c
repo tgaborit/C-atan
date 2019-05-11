@@ -8,8 +8,8 @@
  * Implémente les fonctions utiles à la création et la gestion d'un plateau du jeu.
  */
 
-#include "modele/headers/plateau.h"
-#include "modele/headers/joueur.h"
+#include "plateau.h"
+#include "joueur.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

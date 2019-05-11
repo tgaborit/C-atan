@@ -8,7 +8,7 @@
  */
 
 
-#include "modele/headers/set_partie.h"
+#include "set_partie.h"
 
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)

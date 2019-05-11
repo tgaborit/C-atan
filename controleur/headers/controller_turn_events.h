@@ -12,7 +12,7 @@
 #define CATANE_CONTROLLER_TURN_EVENTS_H
 
 #include <SDL.h>
-#include "modele/headers/partie.h"
+#include "partie.h"
 
 void craftDevEvent(Partie* the_game);
 void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);

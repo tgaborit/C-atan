@@ -14,7 +14,7 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "modele/headers/partie.h"
+#include "partie.h"
 
 /**
  * \fn SDL_Window* InitFenetre()

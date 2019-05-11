@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="`sdl2-config --cflags`" />
+			<Add directory="modele/headers" />
+			<Add directory="vue/headers" />
+			<Add directory="controleur/headers" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl2-config --libs` -lSDL2_ttf" />

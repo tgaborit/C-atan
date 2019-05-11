@@ -8,9 +8,9 @@
  * Implémente les fonctions utiles à l'affichage des probabilites dans le jeu.
  */
 
-#include "vue/headers/place_infra.h"
+#include "place_infra.h"
 #include <math.h>
-#include "vue/headers/SDL_erreur.h"
+#include "SDL_erreur.h"
 
 
 static double calcul_offset_x(int position){

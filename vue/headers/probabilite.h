@@ -13,9 +13,9 @@
 
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include "vue/headers/SDL_erreur.h"
-#include "modele/headers/partie.h"
-#include "modele/headers/get_plateau.h"
+#include "SDL_erreur.h"
+#include "partie.h"
+#include "get_plateau.h"
 
 /**
  * \fn Affiche2(SDL_Renderer *renderer,double posx, double posy)

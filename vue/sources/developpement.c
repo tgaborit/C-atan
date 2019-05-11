@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des cartes de développement dans le jeu.
  */
 
-#include "vue/headers/developpement.h"
+#include "developpement.h"
 
 //Carte Developpement
 /*void AfficheCartesDev(SDL_Renderer *renderer)

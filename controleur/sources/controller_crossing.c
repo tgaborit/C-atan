@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controleur/headers/controller.h"
-#include "controleur/headers/controller_crossing.h"
-#include "vue/headers/SDL_erreur.h"
+#include "controller.h"
+#include "controller_crossing.h"
+#include "SDL_erreur.h"
 
 static SDL_Rect crossXX0_area;          /*!< Rectangle correspondant à la zone du croisement 0 de la première couronne*/
 static SDL_Rect crossXX1_area;          /*!< Rectangle correspondant à la zone du croisement 1 de la première couronne*/
