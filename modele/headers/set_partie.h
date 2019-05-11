@@ -64,14 +64,14 @@ void donner_main(Partie* partie, Joueur* joueur);
 void passer_tour(Partie* partie);
 
 /**
- * \fn int lancer_des()
+ * \fn int lancer_des(Partie* partie)
  * \brief Simule un lancé de dès
  *
  *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilité d'un vrai lancé de dès
- * \param aucun
+ * \param partie un pointeur vers la partie.
  * \return int: valeur obtenu
  */
-int lancer_des();
+int lancer_des(Partie* partie);
 
 
 /**

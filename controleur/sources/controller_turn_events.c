@@ -328,7 +328,7 @@ void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
     SDL_Event ev;
 
     printf("Appel de la fonction du modèle lancer_des()\n");
-    int des = lancer_des();
+    int des = lancer_des(the_game);
     if(des == 7)
     {
         printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");

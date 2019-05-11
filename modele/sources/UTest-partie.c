@@ -4,10 +4,10 @@
 #include <cmocka.h>
 #include <cmocka_pbc.h>
 #include <string.h>
-#include "modele/headers/get_plateau.h"
-#include "modele/headers/partie.h"
-#include "modele/headers/set_partie.h"
-#include "modele/headers/get_partie.h"
+#include "get_plateau.h"
+#include "partie.h"
+#include "set_partie.h"
+#include "get_partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -174,11 +174,10 @@ static void test_get_joueur_actif(void** state){
 
 static void test_lancer_des(void** state)
 {
-
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
+    Partie* partie = (Partie*) *(state);
+    int lancer = lancer_des(partie);
+    assert_in_range(lancer,2,12);
+    assert_int_equal(lancer,get_des(partie));
 
 }
 

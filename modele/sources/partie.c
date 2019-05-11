@@ -67,6 +67,7 @@ static void setOnFirst_list_joueur(List_joueur* list)
     partie->plateau= initPlateau();
     partie->cartedev= (CarteDev*) malloc(4* sizeof(CarteDev));
     init_pile_cartedev(partie->cartedev);
+    partie->valeur_de = 12;
     return partie;
  }
 
