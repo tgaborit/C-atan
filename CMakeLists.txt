@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 
-
 # On appelle le projet catane
 project(catane)
 
+# Liste des fichiers source du modèle
 set(SOURCES_MODELE
         modele/sources/get_partie.c
         modele/sources/get_plateau.c
@@ -14,6 +14,7 @@ set(SOURCES_MODELE
         modele/sources/set_plateau.c
         )
 
+# Liste des fichiers d'en-tête du modèle
 set(HEADERS_MODELE
         modele/headers/get_partie.h
         modele/headers/get_plateau.h
@@ -25,6 +26,7 @@ set(HEADERS_MODELE
         modele/headers/set_plateau.h
         )
 
+# Liste des fichiers source de la vue
 set(SOURCES_VUE
         vue/sources/affiche_joueur.c
         vue/sources/affiche_texte.c
@@ -38,6 +40,7 @@ set(SOURCES_VUE
         vue/sources/tuile.c
         )
 
+# Liste des fichiers d'en-tête de la vue
 set(HEADERS_VUE
         vue/headers/affiche_joueur.h
         vue/headers/affiche_texte.h
@@ -51,6 +54,7 @@ set(HEADERS_VUE
         vue/headers/tuile.h
         )
 
+# Liste des fichiers source du contrôleur
 set(SOURCES_CONTROLEUR
         controleur/sources/controller.c
         controleur/sources/controller_crossing.c
@@ -63,6 +67,7 @@ set(SOURCES_CONTROLEUR
         controleur/sources/converters.c
         )
 
+# Liste des fichiers d'en-tête du contrôleur
 set(HEADERS_CONTROLEUR
         controleur/headers/controller.h
         controleur/headers/controller_crossing.h
@@ -75,14 +80,18 @@ set(HEADERS_CONTROLEUR
         controleur/headers/converters.h
         )
 
+# On ajoute les fichiers source et les fichiers d'en-tête du modèle, de la vue, du contrôleur à l'exécutable catane.
+# On ajoute aussi le fichier catane.c qui contient le main du programme.
 add_executable(catane catane.c
         ${SOURCES_MODELE} ${HEADERS_MODELE}
         ${SOURCES_VUE} ${HEADERS_VUE}
         ${SOURCES_CONTROLEUR} ${HEADERS_CONTROLEUR}
         )
 
+# On ajoute les dossiers contenant les fichiers d'en-tête du modèle, de la vue, du contrôleur, à la liste des dossiers où chercher les fichiers d'en-tête
 target_include_directories(catane PUBLIC modele/headers vue/headers controleur/headers)
 
+# On inclut la biliothèque math.h au projet
 target_link_libraries(catane m)
 
 # CMake n'a pas de module FindSDL2_ttf.cmake, on en ajoute donc un dans l'arborescence projet.
