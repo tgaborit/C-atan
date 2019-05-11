@@ -414,12 +414,12 @@ int voleur_perte_ressource(Joueur* joueur){
         for(i=0;i<nbCartePerdues;++i){
 
 
-            rand_val=rand()%100;
-            proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
-            proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
-            proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
-            proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
-            proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
+            rand_val=rand()%1000;
+            proba_ble=(get_nbressource(BLE,joueur)*1000)/get_nbressource_total(joueur);
+            proba_bois=(get_nbressource(BOIS,joueur)*1000)/get_nbressource_total(joueur);
+            proba_pierre=(get_nbressource(PIERRE,joueur)*1000)/get_nbressource_total(joueur);
+            proba_argile=(get_nbressource(ARGILE,joueur)*1000)/get_nbressource_total(joueur);
+            proba_mouton=(get_nbressource(MOUTON,joueur)*1000)/get_nbressource_total(joueur);
 
             if (rand_val<= proba_ble)
                 perte_ressource(BLE,joueur);
@@ -435,9 +435,8 @@ int voleur_perte_ressource(Joueur* joueur){
 
             if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton))
                 perte_ressource(MOUTON,joueur);
-            }
-
-    return 0;
+        }
+        return 0;
     }
     return -1;
 }

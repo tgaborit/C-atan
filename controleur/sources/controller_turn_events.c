@@ -21,6 +21,7 @@
 #include "set_plateau.h"
 #include "set_partie.h"
 #include "ressource.h"
+#include "affiche_texte.h"
 
 /**
 * \fn void craftDevEvent(Partie* the_game)
@@ -30,11 +31,20 @@
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void craftDevEvent(Partie* the_game)
+void craftDevEvent(SDL_Window* window, Partie* the_game)
 {
+    if(get_nbressource_joueuractif(PIERRE,the_game) < 1 || get_nbressource_joueuractif(MOUTON,the_game) < 1 || get_nbressource_joueuractif(BLE,the_game) < 1){
+        AfficheTexte_NoRessource(window);
+        return;
+    }
     SDL_Event ev;
     printf("Appel de la fonction du modèle obtenir_cartedev(the_game)\n");
-    obtenir_cartedev(the_game);
+    if(obtenir_cartedev(the_game) == 0){
+        AfficheTexte_CarteDev_Succes(window);
+    }
+    else{
+        AfficheTexte_CarteDev_Echec(window);
+    }
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -52,21 +62,38 @@ void craftDevEvent(Partie* the_game)
 */
 void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
+    if(get_nbressource_joueuractif(ARGILE,the_game) < 1 || get_nbressource_joueuractif(BOIS,the_game) < 1){
+        AfficheTexte_NoRessource(window);
+        return;
+    }
     SDL_Event ev;
     PathButton path_clicked;
     PathCoordinates path_chosen;
+    int bool_route =0;
 
     do
     {
+        if(bool_route == 0){
+            AfficheTexte_PosRoute(window);
+        }
+        else{
+            AfficheTexte_PosRoute_Echec(window);
+        }
         path_clicked = NO_PATHBUTTON;
         controllerPath(&path_clicked, window, program_launched);
-        if(path_clicked == NO_PATHBUTTON || *program_launched == SDL_FALSE)
+        if(path_clicked == NO_PATHBUTTON || *program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             break;
+        }
 
         path_chosen = pathButtonToPathCoordinates(path_clicked);
         printf("Appel de la fonction du modele setRoute(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
+        bool_route = setRoute(the_game, path_chosen.x, path_chosen.y, path_chosen.position);
+        if(bool_route == 0){
+            AfficheTexte_PosRoute_Succes(window);
+        }
     }
-    while (setRoute(the_game, path_chosen.x, path_chosen.y, path_chosen.position) != 0);
+    while (bool_route != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -85,21 +112,39 @@ void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
 */
 void craftSettleEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
+    if(get_nbressource_joueuractif(ARGILE,the_game) < 1 || get_nbressource_joueuractif(BOIS,the_game) < 1 ||
+        get_nbressource_joueuractif(MOUTON,the_game) < 1 || get_nbressource_joueuractif(BLE,the_game) < 1){
+        AfficheTexte_NoRessource(window);
+        return;
+    }
     SDL_Event ev;
     CrossButton cross_clicked;
     CrossCoordinates cross_chosen;
+    int bool_colonie = 0;
 
     do
     {
+        if(bool_colonie == 0){
+        AfficheTexte_PosColonie(window);
+        }
+        else{
+            AfficheTexte_PosColonie_Echec(window);
+        }
         cross_clicked = NO_CROSSBUTTON;
         controllerCrossing(&cross_clicked, window, program_launched);
-        if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE)
+        if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             break;
+        }
 
         cross_chosen = crossButtonToCrossCoordinates(cross_clicked);
         printf("Appel de la fonction du modele setColonie(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
+        bool_colonie = setColonie(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position);
+        if(bool_colonie == 0){
+            AfficheTexte_PosColonie_Succes(window);
+        }
     }
-    while (setColonie(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position) != 0);
+    while (bool_colonie != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -118,21 +163,38 @@ void craftSettleEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_la
 */
 void craftCityEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
+    if(get_nbressource_joueuractif(PIERRE,the_game) < 3 || get_nbressource_joueuractif(BLE,the_game) < 2){
+        AfficheTexte_NoRessource(window);
+        return;
+    }
     SDL_Event ev;
     CrossButton cross_clicked;
     CrossCoordinates cross_chosen;
+    int bool_ville = 0;
 
     do
     {
+        if(bool_ville == 0){
+            AfficheTexte_PosVille(window);
+        }
+        else{
+            AfficheTexte_PosVille_Echec(window);
+        }
         cross_clicked = NO_CROSSBUTTON;
         controllerCrossing(&cross_clicked, window, program_launched);
-        if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE)
+        if(cross_clicked == NO_CROSSBUTTON || *program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             break;
+        }
 
         cross_chosen = crossButtonToCrossCoordinates(cross_clicked);
         printf("Appel de la fonction du modele setVille(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
+        bool_ville = setVille(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position);
+        if(bool_ville == 0){
+            AfficheTexte_PosVille_Succes(window);
+        }
     }
-    while (setVille(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position) != 0);
+    while (bool_ville != 0);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -151,8 +213,10 @@ void useKnightEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
 {
     SDL_Event ev;
 
-    if(get_nbcartedev_joueuractif(CHEVALIER, the_game) == 0)
+    if(get_nbcartedev_joueuractif(CHEVALIER, the_game) == 0){
+        AfficheTexte_NoCarte(window);
         return;
+    }
 
     printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
     activateRobberEvent(the_game, window, program_launched);
@@ -175,21 +239,33 @@ void useMonopEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
 {
     SDL_Event ev;
 
-    if(get_nbcartedev_joueuractif(MONOPOLE, the_game) == 0)
+    if(get_nbcartedev_joueuractif(MONOPOLE, the_game) == 0){
+        AfficheTexte_NoCarte(window);
         return;
+    }
 
     ResourceButton resource_clicked = NO_RESOURCEBUTTON;
+    AfficheTexte_ChoixRessource(window);
     do
     {
     controllerResource(&resource_clicked, window, program_launched);
-    if(*program_launched == SDL_FALSE)
+    if(*program_launched == SDL_FALSE){
+        AfficheTexte_StopAction(window);
         return;
+    }
     }
     while(resource_clicked == NO_RESOURCEBUTTON);
 
     TypeRessource resource_chosen = resourceButtonToTypeRessource(resource_clicked);
+    int resource_init = get_nbressource_joueuractif(resource_chosen,the_game);
     printf("Appel de la fonction du modele utiliser_monopole(the_game, %d)\n", resource_chosen);
-    utiliser_monopole(the_game, resource_chosen);
+    int vol = utiliser_monopole(the_game, resource_chosen);
+    if(vol-resource_init > 0){
+        AfficheTexte_Monopole_Succes(window, vol-resource_init);
+    }
+    else{
+        AfficheTexte_Monopole_Echec(window);
+    }
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -209,25 +285,34 @@ void useInventEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
 {
     SDL_Event ev;
 
-    if(get_nbcartedev_joueuractif(DECOUVERTE, the_game) == 0)
+    if(get_nbcartedev_joueuractif(DECOUVERTE, the_game) == 0){
+        AfficheTexte_NoCarte(window);
         return;
+    }
 
     ResourceButton resource_clicked1 = NO_RESOURCEBUTTON;
     ResourceButton resource_clicked2 = NO_RESOURCEBUTTON;
+    AfficheTexte_ChoixRessource(window);
 
     do
     {
         controllerResource(&resource_clicked1, window, program_launched);
-        if(*program_launched == SDL_FALSE)
+        if(*program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             return;
+        }
     }
     while(resource_clicked1 == NO_RESOURCEBUTTON);
+
+    AfficheTexte_ChoixRessource(window);
 
     do
     {
         controllerResource(&resource_clicked2, window, program_launched);
-        if(*program_launched == SDL_FALSE)
+        if(*program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             return;
+        }
     }
     while(resource_clicked2 == NO_RESOURCEBUTTON);
 
@@ -235,6 +320,7 @@ void useInventEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
     TypeRessource resource_chosen2 = resourceButtonToTypeRessource(resource_clicked2);
     printf("Appel de la fonction du modele utiliser_decouverte(the_game, %d, %d)\n", resource_chosen1, resource_chosen2);
     utiliser_decouverte(the_game, resource_chosen1, resource_chosen2);
+    AfficheTexte_Decouverte_Succes(window);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -254,31 +340,45 @@ void useInventEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
 void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
     SDL_Event ev;
+    int bool_routes = 0;
 
-    if(get_nbcartedev_joueuractif(ROUTES, the_game) == 0)
+    if(get_nbcartedev_joueuractif(ROUTES, the_game) == 0){
+        AfficheTexte_NoCarte(window);
         return;
+    }
 
     PathCoordinates path_chosen1;
     PathCoordinates path_chosen2;
 
     do
     {
+        if(bool_routes != 0){
+            AfficheTexte_Routes_Echec(window);
+        }
         PathButton path_clicked1 = NO_PATHBUTTON;
         PathButton path_clicked2 = NO_PATHBUTTON;
 
         do
         {
+            AfficheTexte_PosRoute(window);
+
             controllerPath(&path_clicked1, window, program_launched);
-            if(*program_launched == SDL_FALSE)
+            if(*program_launched == SDL_FALSE){
+                AfficheTexte_StopAction(window);
                 return;
+            }
         }
         while(path_clicked1 == NO_PATHBUTTON);
+
+        AfficheTexte_PosRoute(window);
 
         do
         {
             controllerPath(&path_clicked2, window, program_launched);
-            if(*program_launched == SDL_FALSE)
+            if(*program_launched == SDL_FALSE){
+                AfficheTexte_StopAction(window);
                 return;
+            }
         }
         while(path_clicked2 == NO_PATHBUTTON);
 
@@ -287,9 +387,13 @@ void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
 
         printf("Appel de la fonction du modele utiliserRoutes(the_game, %f, %f, %f, %f, %d, %d)\n", path_chosen1.x, path_chosen1.y,
         path_chosen2.x, path_chosen2.y,path_chosen1.position, path_chosen2.position);
+        bool_routes = utiliser_routes(the_game, path_chosen1.x, path_chosen1.y, path_chosen2.x, path_chosen2.y,path_chosen1.position, path_chosen2.position);
     }
-    while (utiliser_routes(the_game, path_chosen1.x, path_chosen1.y, path_chosen2.x, path_chosen2.y,path_chosen1.position, path_chosen2.position) != 0);
+    while (bool_routes != 0);
 
+    if(bool_routes == 0){
+        AfficheTexte_Routes_Succes(window);
+    }
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -302,15 +406,18 @@ void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
 *
 * \param[in,out] the_game Pointeur vers l'état de la partie.
 */
-void useUnivEvent(Partie* the_game)
+void useUnivEvent(Partie* the_game, SDL_Window* window)
 {
     SDL_Event ev;
 
-    if(get_nbcartedev_joueuractif(POINT, the_game) == 0)
+    if(get_nbcartedev_joueuractif(POINT, the_game) == 0){
+        AfficheTexte_NoCarte(window);
         return;
+    }
 
     printf("Appel de la fonction du modèle utiliser_point(the_game)\n");
     utiliser_point(the_game);
+    AfficheTexte_Point_Succes(window);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -333,6 +440,8 @@ void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
     {
         printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
         activateRobberEvent(the_game, window, program_launched);
+        int nb_vol = action_voleur(the_game);
+        AfficheTexte_nbVol(window,nb_vol);
     }
     gagne_ressource(des, the_game);
 
@@ -369,32 +478,51 @@ void endTurnEvent(Partie* the_game)
 */
 void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 {
+
     SDL_Event ev;
     TerrButton terr_clicked = NO_TERRBUTTON;
     PlayerButton player_clicked = NO_PLAYERBUTTON;
+    AfficheTexte_ChoixTuileVoleur(window);
 
     do
     {
         controllerTerrain(&terr_clicked, window, program_launched);
-        if(*program_launched == SDL_FALSE)
+        if(*program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             return;
+        }
     }
     while(terr_clicked == NO_TERRBUTTON);
 
     TerrCoordinates terr_chosen = terrButtonToTerrCoordinates(terr_clicked);
-    printf("Appel de la fonction du modele setVoleur(the_game, %f, %f)\n", terr_chosen.x, terr_chosen.y);
-    setVoleur(the_game, terr_chosen.x, terr_chosen.y);
+    AfficheTexte_ChoixJoueurVoler(window);
 
     do
     {
         controllerPlayer(&player_clicked, the_game, window, program_launched);
-        if(*program_launched == SDL_FALSE)
+        if(*program_launched == SDL_FALSE){
+            AfficheTexte_StopAction(window);
             return;
+        }
     }
     while(player_clicked == NO_PLAYERBUTTON);
 
+    int i;
     int player_chosen = playerButtonToInteger(player_clicked);
-    printf("Appel de la fonction du modele volVoleur(the_game, %d)\n", player_chosen);
+    Node_joueur* cur = the_game->joueurs->current;
+    the_game->joueurs->current = the_game->joueurs->first;
+    for(i=1;i<player_chosen;++i){
+        the_game->joueurs->current = the_game->joueurs->current->next;
+    }
+    Joueur* victime = the_game->joueurs->current->joueur;
+    the_game->joueurs->current = cur;
+    printf("Appel de la fonction du modele utiliser_chevalier(the_game, %f, %f,%s\n", terr_chosen.x, terr_chosen.y, victime->pseudo);
+    if(utiliser_chevalier(the_game,terr_chosen.x, terr_chosen.y, victime) == 0){
+        AfficheTexte_Chevalier_Succes(window);
+    }
+    else{
+        AfficheTexte_Chevalier_Echec(window);
+    }
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
