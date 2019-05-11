@@ -58,14 +58,14 @@ void destroyFenetre(SDL_Window* window);
 void AfficheHelp(SDL_Renderer *renderer);
 
 /**
- * \fn void AfficheDe(SDL_Renderer* renderer)
+ * \fn void AfficheDe(SDL_Window* window, Partie* partie)
  * \brief Fonction affichant le dé
  *
  *
- * \param renderer, le rendu actuel
+ * \param window la fenetre du jeu et partie la partie actuelle.
  * \return aucun
  */
-void AfficheDe(SDL_Window* window, SDL_Renderer *renderer);
+void AfficheDe(SDL_Window* window, Partie* partie);
 
 /**
  * \fn void AfficheSkip(SDL_Renderer* renderer)

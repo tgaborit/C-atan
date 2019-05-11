@@ -92,7 +92,7 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	if(renderer == NULL)
 		SDL_ExitWithError("Creation rendu echouée");
 
-    	AfficheDe(window, renderer);
+    	AfficheDe(window, p);
 	AfficheChevalier(renderer);
 	AfficheMonopole(renderer);
 	AfficheInvention(renderer);
@@ -196,12 +196,12 @@ void AfficheSkip(SDL_Renderer* renderer)
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
+void AfficheDe(SDL_Window* window, Partie* partie)
 {
-
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
-    int lancer = lancer_des();
+    int lancer = get_des(partie);
     char de[20] = "";
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
@@ -225,7 +225,7 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
     if((lancer == 10) | (lancer == 11) | (lancer == 12)){
         rect.x = 1572;
     }
-    sprintf(de, "%d", lancer_des());
+    sprintf(de, "%d", lancer);
 
 
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);

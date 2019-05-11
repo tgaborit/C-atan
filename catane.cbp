@@ -34,6 +34,7 @@
 			<Add directory="modele/headers" />
 			<Add directory="vue/headers" />
 			<Add directory="controleur/headers" />
+			<Add directory="/usr/includes" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl2-config --libs` -lSDL2_ttf" />

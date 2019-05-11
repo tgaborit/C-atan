@@ -264,14 +264,14 @@ void nb_routes_max(Partie* partie){
 }
 
 /**
- * \fn int lancer_des()
+ * \fn int lancer_des(Partie* partie)
  * \brief Simule un lancé de dès
  *
  *  retourne une valeur aléatoire entre 2 et 12 en respectant les probabilité d'un vrai lancé de dès
- * \param aucun
+ * \param partie un pointeur vers la partie.
  * \return int: valeur obtenu
  */
-int lancer_des()
+int lancer_des(Partie* partie)
 {
     int i=0;
     int res=0;
@@ -280,9 +280,9 @@ int lancer_des()
     {
         res+= rand()%(7-1) + 1 ;
     }
-   return res;
+    partie->valeur_de = res;
+    return res;
 }
-
 
 static int get_nbcartedev_pile(CarteDev cartedev[4],TypeCarteDev type)
 {
