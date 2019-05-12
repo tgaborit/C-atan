@@ -116,6 +116,12 @@ static void test_findjoueur(void** state)
     assert_ptr_equal(joueur_1,partie->joueurs->current->joueur);
 }
 
+static void test_get_nb_joueur(void **state)
+{
+    Partie* partie= *state;
+    int c= get_nbjoueurs(partie);
+    assert_int_equal(4, c);
+}
 
 static void test_donner_main(void **state)
 {
@@ -139,6 +145,32 @@ static void test_passer_tour(void** state)
     passer_tour(partie);
     assert_int_equal(0, partie->joueurs->last->joueur->status);
 
+}
+
+static void test_get_joueur_score_max(void** state)
+{
+    Partie* partie= *state;
+    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_score_max(partie));
+    partie->joueurs->first->joueur->score=0;
+    partie->joueurs->first->next->joueur->score=0;
+    partie->joueurs->first->next->next->joueur->score=0;
+    partie->joueurs->last->joueur->score=0;
+
+    assert_ptr_equal(partie->joueurs->current->joueur,get_joueur_score_max(partie));
+}
+
+static void test_get_score_max(void** state)
+{
+    Partie* partie= *state;
+    Node_joueur* savecurrentnode=partie->joueurs->current;
+    assert_int_equal(7,get_score_max(partie));
+    assert_ptr_equal(partie->joueurs->current,savecurrentnode);
+}
+
+static void test_get_joueur_actif(void** state){
+    Partie* partie = *state;
+    int valtest = strcmp(partie->joueurs->current->joueur->pseudo,get_joueur_actif(partie)->pseudo);
+    assert_int_equal(0,valtest);
 }
 
 static void test_lancer_des(void** state)
@@ -285,26 +317,30 @@ static void test_utiliser_monopole(void** state){
 
 }
 
-//static void test_utiliser_decouverte(void** state){
-//    Partie* partie= *state;
-//    int flag;
-//    int nb;
-//    get_joueur_actif(partie)->carte_dev[DECOUVERTE].nb_carte=2;
-//    flag=utiliser_decouverte(partie,BLE,BLE);
-//    nb=get_nbressource(BLE,get_joueur_actif(partie));
-//    assert_int_equal(0,flag);
-//    assert_int_equal(2,nb);
-//
-//    flag=utiliser_decouverte(partie,BOIS);
-//    nb=get_nbressource(BOIS,get_joueur_actif(partie));
-//    assert_int_equal(0,flag);
-//    assert_int_equal(3,nb);
-//
-//    flag=utiliser_decouverte(partie,PIERRE);
-//    nb=get_nbressource(PIERRE,get_joueur_actif(partie));
-//    assert_int_equal(-1,flag);
-//    assert_int_equal(2,nb);
-//}
+static void test_utiliser_decouverte(void** state){
+    Partie* partie= *state;
+    int flag;
+    int nb1,nb2;
+    get_joueur_actif(partie)->carte_dev[DECOUVERTE].nb_carte=2;
+    flag=utiliser_decouverte(partie,BLE,BLE);
+    nb1=get_nbressource(BLE,get_joueur_actif(partie));
+    assert_int_equal(0,flag);
+    assert_int_equal(2,nb1);
+
+    flag=utiliser_decouverte(partie,BOIS,BLE);
+    nb1=get_nbressource(BOIS,get_joueur_actif(partie));
+    nb2=get_nbressource(BLE,get_joueur_actif(partie));
+    assert_int_equal(0,flag);
+    assert_int_equal(2,nb1);
+    assert_int_equal(3,nb2);
+
+    flag=utiliser_decouverte(partie,PIERRE,BOIS);
+    nb1=get_nbressource(PIERRE,get_joueur_actif(partie));
+    nb2=get_nbressource(BOIS,get_joueur_actif(partie));
+    assert_int_equal(-1,flag);
+    assert_int_equal(2,nb1);
+    assert_int_equal(2,nb2);
+}
 
 static void test_utiliser_point(void** state){
     Partie* partie= *state;
@@ -329,6 +365,142 @@ static void test_utiliser_point(void** state){
 
 }
 
+static void test_utiliser_routes_sanscarte(void** state)
+{
+    Partie* partie= *state;
+    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    assert_int_equal(flag,-1);
+}
+static void test_utiliser_routes_mauvaises_coordonnees(void** state)
+{
+    Partie* partie= *state;
+    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    assert_int_equal(flag,-1);
+}
+
+static void test_utiliser_routes_1bonne_coordonnee(void** state)
+{
+    Partie* partie= *state;
+    Plateau* plateau= partie->plateau;
+    partie->joueurs->current->joueur->carte_dev[ROUTES].nb_carte=1;
+
+    Noeud* cur = deplacementPlateau(plateau,1,0);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0.5,1);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0,0);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+
+    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    assert_int_equal(flag,-1);
+    assert_ptr_equal(getJoueurArrete(partie,1,0,1),NULL);
+    assert_int_equal(1,get_nbcartedev_joueuractif(ROUTES,partie));
+}
+
+static void test_utiliser_routes_bonnes_coordonnees(void** state)
+{
+    Partie* partie= *state;
+    Plateau* plateau= partie->plateau;
+    partie->joueurs->current->joueur->carte_dev[ROUTES].nb_carte=1;
+
+    Noeud* cur = deplacementPlateau(plateau,1,0);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0.5,1);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0,0);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+
+    cur=deplacementPlateau(plateau,2,0);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,1.5,1);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,1,0);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+
+    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    assert_int_equal(flag,0);
+    assert_ptr_equal(getJoueurArrete(partie,1,0,1),get_joueur_actif(partie));
+    assert_ptr_equal(getJoueurArrete(partie,2,0,1),get_joueur_actif(partie));
+    assert_int_equal(0,get_nbcartedev_joueuractif(ROUTES,partie));
+}
+static void test_utiliser_chevalier(void** state)
+{
+    Partie* partie= *state;
+    Plateau* plateau= partie->plateau;
+    Joueur* joueur_vole= get_joueur_actif(partie);
+    Noeud* cur = deplacementPlateau(plateau,1,0);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0.5,1);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0,0);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+
+    setOnNext_list_joueur(partie->joueurs);
+    partie->joueurs->current->joueur->carte_dev[CHEVALIER].nb_carte=1;
+    int flag= utiliser_chevalier(partie,1,0,joueur_vole);
+    assert_int_equal(0,flag);
+    assert_int_equal(get_nbressource_total(joueur_vole),9);
+    assert_int_equal(get_nbressource_total(get_joueur_actif(partie)),11);
+
+}
+
+static void test_utiliser_chevalier_sansjoueur(void** state){
+    Partie* partie= *state;
+    Joueur* joueur_vole= get_joueur_actif(partie);
+    setOnNext_list_joueur(partie->joueurs);
+    partie->joueurs->current->joueur->carte_dev[CHEVALIER].nb_carte=1;
+    int flag= utiliser_chevalier(partie,1,0,joueur_vole);
+    assert_int_equal(-1,flag);
+    assert_int_equal(get_nbressource_total(joueur_vole),10);
+    assert_int_equal(get_nbressource_total(get_joueur_actif(partie)),10);
+}
+
+static void test_utiliser_chevalier_sanscarte(void** state){
+    Partie* partie= *state;
+    Plateau* plateau= partie->plateau;
+    Joueur* joueur_vole= get_joueur_actif(partie);
+    Noeud* cur = deplacementPlateau(plateau,1,0);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0.5,1);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0,0);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+
+    setOnNext_list_joueur(partie->joueurs);
+    partie->joueurs->current->joueur->carte_dev[CHEVALIER].nb_carte=0;
+    int flag= utiliser_chevalier(partie,1,0,joueur_vole);
+    assert_int_equal(-1,flag);
+    assert_int_equal(get_nbressource_total(joueur_vole),10);
+    assert_int_equal(get_nbressource_total(get_joueur_actif(partie)),10);
+
+}
+
+static void test_action_voleur(void** state){
+    Partie* partie= *state;
+    int i;
+    action_voleur(partie);
+    for(i=1;i<=4;++i){
+    assert_int_equal(5, get_nbressource_total(get_joueur_actif(partie)));
+    setOnNext_list_joueur(partie->joueurs);
+    }
+}
+
+
 static int teardown (void ** state)
 {
     Partie* partie= *state;
@@ -340,18 +512,31 @@ static int teardown (void ** state)
 int main_partie_test(void)
 {
     const struct CMUnitTest tests_partie[]={
+        cmocka_unit_test_setup_teardown(test_get_nb_joueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_findjoueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_donner_main,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_passer_tour,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_score_max,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_nb_routes_max,setup_partie,teardown),
         cmocka_unit_test(test_nb_routes_max_partieNULL),
         cmocka_unit_test_setup_teardown(test_lancer_des,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_gagne_ressource,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_distribution_ressource,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_obtenir_cartedev,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_monopole,setup_partie_ressource,teardown),
-//        cmocka_unit_test_setup_teardown(test_utiliser_decouverte,setup_partie_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_decouverte,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_point,setup_partie_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_routes_sanscarte,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_routes_bonnes_coordonnees,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_routes_mauvaises_coordonnees,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_routes_1bonne_coordonnee,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_chevalier,setup_partie_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sansjoueur,setup_partie_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sanscarte,setup_partie_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_action_voleur,setup_partie_ressource,teardown),
         };
     return cmocka_run_group_tests(tests_partie,NULL,NULL);
 }

@@ -135,12 +135,12 @@ int get_score(Joueur* joueur)
     return joueur->score;
 }
 
-/**
+ /**
  * \fn char* get_pseudo(Joueur* joueur)
  * \brief Fonction qui retourne le pseudo du joueur
  *
  * fonction renvoillant le pseudo du joueur passé en paramètre
- * \param Joueur : joueur dont on veut connètre le pseudo
+ * \param Joueur : joueur dont on veut connaitre le pseudo
  * \return char* :le pseudo du joueur
  */
 char* get_pseudo(Joueur* joueur)

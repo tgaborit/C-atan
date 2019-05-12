@@ -55,6 +55,7 @@ struct Node_joueur* next;
 */
 Partie* init_partie();
 
+void setOnNext_list_joueur(List_joueur* list);
  	  /**
 
 * \fn void free_partie (Partie* partie)

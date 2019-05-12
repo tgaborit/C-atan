@@ -36,7 +36,7 @@ static void init_pile_cartedev(CarteDev carte_dev[4])
     carte_dev[4]=decouverte;
 }
 
-static void setOnNext_list_joueur(List_joueur* list)
+void setOnNext_list_joueur(List_joueur* list)
 {
     if(list->current != NULL){
         list->current=list->current->next;

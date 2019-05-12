@@ -164,6 +164,16 @@ static void test_get_pseudo(void **state)
     char* pseudo= get_pseudo(joueur_1);
     assert_string_equal("Joueur1", pseudo);
 }
+static void test_get_nbressource_ptr_NULL(void** state)
+{
+    Joueur* joueur= NULL;
+    assert_int_equal(get_nbressource(PIERRE,joueur),-1);
+}
+static void test_get_nbressource(void ** state)
+{
+    Joueur* joueur_1= *state;
+    assert_int_equal(get_nbressource(BLE,joueur_1),0);
+}
 
 static void test_gain_ressource(void **state)
 {
@@ -225,7 +235,16 @@ static void test_set_status(void **state)
     Status status =get_status(joueur_1);
     assert_int_equal(0,(int*)status);
 }
-
+static void test_get_nbcartedev_ptr_NULL(void** state)
+{
+    Joueur* joueur= NULL;
+    assert_int_equal(get_cartedev(MONOPOLE,joueur),-1);
+}
+static void test_get_nbcartedev(void ** state)
+{
+    Joueur* joueur_1= *state;
+    assert_int_equal(get_cartedev(MONOPOLE,joueur_1),0);
+}
 static void test_gain_cartedev(void **state)
 {
     int nb;
@@ -329,6 +348,16 @@ static void test_voleur_perte_ressource(void** state)
     assert_int_equal(-1,flag);
     assert_int_equal(5,nbcartes);
 }
+static void test_get_nbChevalier_ptr_NULL(void** state)
+{
+    Joueur* joueur1=NULL;
+    assert_int_equal(get_nbChevalier(joueur1),-1);
+}
+static void test_get_nbChevalier(void** state)
+{
+    Joueur* joueur1=*state;
+    assert_int_equal(get_nbChevalier(joueur1),0);
+}
 static int teardown (void ** state)
 {
     free_joueur(*state);
@@ -342,10 +371,14 @@ int main_joueur_test(void)
         cmocka_unit_test_setup_teardown(test_inc_score,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_dec_score,setup_joueur,teardown),
         cmocka_unit_test_setup_teardown(test_get_pseudo,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbressource,setup_joueur_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbressource_ptr_NULL,setup_joueur_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_gain_ressource,setup_joueur_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_perte_ressource,setup_joueur_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_get_nb_total_ressource,setup_joueur_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_set_status,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbcartedev_ptr_NULL,setup_joueur_cartedev,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbcartedev,setup_joueur_cartedev,teardown),
         cmocka_unit_test_setup_teardown(test_gain_cartedev,setup_joueur_cartedev,teardown),
         cmocka_unit_test_setup_teardown(test_perte_cartedev,setup_joueur_cartedev,teardown),
         cmocka_unit_test_setup_teardown(test_achat_route,setup_joueur_achat_route,teardown),
@@ -353,6 +386,8 @@ int main_joueur_test(void)
         cmocka_unit_test_setup_teardown(test_achat_ville,setup_joueur_achat_ville,teardown),
         cmocka_unit_test_setup_teardown(test_achat_cartedev,setup_joueur_achat_cartedev,teardown),
         cmocka_unit_test_setup_teardown(test_voleur_perte_ressource,setup_joueur_ressource,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbChevalier_ptr_NULL,setup_joueur,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbChevalier,setup_joueur,teardown),
         };
     return cmocka_run_group_tests(tests_joueur,NULL,NULL);
 }

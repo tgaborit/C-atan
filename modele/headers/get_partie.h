@@ -67,6 +67,26 @@ int  get_nbressource_joueuractif(TypeRessource type, Partie* partie);
 
 int get_score_joueuractif(Partie* partie);
 
+/**
+ * \fn char* get_pseudo_joueuractif(Partie* partie)
+ * \brief Fonction qui retourne le pseudo du joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return char*:le pseudo du joueur actif
+ */
+
+ char* get_pseudo_joueuractif(Partie* partie);
+
+ /**
+ * \fn int get_nbChevalier_joueuractif(Partie* partie)
+ * \brief Fonction qui retourne le nombre de chevaliers activés par le joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return int:le nombre de chevaliers activés par le joueur actif
+ */
+
+int get_nbChevalier_joueuractif(Partie* partie);
+
   /**
 * \fn int get_nbjoueurs(Partie* partie)
 * \brief renvoie le nombre de joueurs dans la partie
@@ -98,6 +118,16 @@ int get_score_max(Partie* partie);
 * \return Joueur*: joueur ayant le plus haut score
 */
 Joueur* get_joueur_score_max(Partie* partie);
+
+/**
+* \fn int test_pseudo(char* pseudo, Partie* partie)
+* \brief retourne un flag qui indique l'unité ou non du pseudo choisi.
+*retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*
+* \param char*:pseudo à vérifier,Partie: partie en cours
+* \return int:retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*/
+int test_pseudo(char* pseudo, Partie* partie);
 
 
 

@@ -7,15 +7,9 @@
  *
  */
 
-#include "get_partie.h"
+# include "get_partie.h"
 
 
-static void setOnNext_list_joueur(List_joueur* list)
-{
-    if(list->current != NULL){
-        list->current=list->current->next;
-    }
-}
 
 
 static void setOnFirst_list_joueur(List_joueur* list)
@@ -99,7 +93,7 @@ int get_score_joueuractif(Partie* partie)
  * \return int:le nombre de chevaliers activés par le joueur actif
  */
 
-int get_score_nbChevalier(Partie* partie)
+int get_nbChevalier_joueuractif(Partie* partie)
 {
     Joueur* joueur= get_joueur_actif(partie);
     return get_nbChevalier(joueur);
@@ -128,7 +122,7 @@ int get_score_nbChevalier(Partie* partie)
 */
 int get_nbjoueurs(Partie* partie)
 {
-    if (partie->joueurs==NULL)
+    if (partie==NULL)
         return -1;
     Node_joueur* save_current= partie->joueurs->current;
 
@@ -191,3 +185,27 @@ Joueur* get_joueur_score_max(Partie* partie)
     return joueurmaxscore;
 
 }
+
+/**
+* \fn int test_pseudo(char* pseudo, Partie* partie)
+* \brief retourne un flag qui indique l'unité ou non du pseudo choisi.
+*retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*
+* \param char*:pseudo à vérifier,Partie: partie en cours
+* \return int:retourne 0 si le pseudo n'est pas encore utiliser dans la partie, -1 sinon
+*/
+int test_pseudo(char* pseudo, Partie* partie){
+    int i;
+    Node_joueur* current_node= partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    for(i=0;i<get_nbjoueurs(partie);++i){
+        if(strcmp(pseudo,partie->joueurs->current->joueur->pseudo)==0){
+            partie->joueurs->current= current_node;
+            return -1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+
+    }
+    partie->joueurs->current= current_node;
+    return 0;
+    }

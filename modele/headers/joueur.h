@@ -1,11 +1,11 @@
 /**
  * \file joueur.h
- * \brief deffinition de la strucuture joueur et prototype des fonctions associées
+ * \brief deffinition de la strucuture joueur et les prototypes des fonctions associées
  * \author Rémi.F
  * \version 0
  * \date 05 mars 2019
  *
- * Header, deffinition structure joueur et prototype fonctions associées à joueur
+ * Header,deffinition structure joueur et prototype fonctions associées à joueur
  *
  */
 
@@ -42,7 +42,7 @@ typedef enum {
  */
 typedef enum {
     JOUE, /*!<c'est le tour du joueur>*/
-    ATTEND /*<le joueur attend son tour>*/
+    ATTEND /*!<le joueur attend son tour>*/
 }Status;
 
 
@@ -70,8 +70,7 @@ int nbChevalier; /*!<nombre de chevalier activés par le joueur>*/
  * \fn void set_pseudo(Joueur joueur);
  * \brief Initialisaton pseudo joueur
  *
- *
- * \param Char* pseudo choisie par le joueur Joueur*: joueur dont on initialise le pseudo
+ * \param Char*: pseudo choisie par le joueur, Joueur*: joueur dont on initialise le pseudo
  * \return aucun
  */
 void set_pseudo(Joueur* joueur, char* pseudo);
@@ -83,7 +82,7 @@ void set_pseudo(Joueur* joueur, char* pseudo);
  * \brief Fonction qui retourne le pseudo du joueur
  *
  * fonction renvoillant le pseudo du joueur passé en paramètre
- * \param Joueur : joueur dont on veut connètre le pseudo
+ * \param Joueur : joueur dont on veut connaitre le pseudo
  * \return char* :le pseudo du joueur
  */
 char* get_pseudo(Joueur* joueur);
@@ -113,7 +112,7 @@ Status get_status(Joueur* joueur);
  * \brief Initialisation des cartes en main du joueur
  *
  *
- * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \param initialise les cartes en main du joueur en trillant le tableau par type dans un ordre précis
  * \return: aucun
  */
 void init_main_ressource(Joueur* joueur);
@@ -122,8 +121,7 @@ void init_main_ressource(Joueur* joueur);
  * \fn void init_main_cartdev(Joueur joueur);
  * \brief Initialisation des cartes en main du joueur
  *
- *
- * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \param initialise les cartes en main du joueur en trillant le tableau par type dans un ordre précis
  * \return: aucun
  */
 void init_main_cartedev(Joueur* joueur);
@@ -155,7 +153,7 @@ void free_joueur(Joueur* joueur);
  * \brief Fonction qui retourne le score du joueur
  *
  * fonction renvoillant le score du joueur passé en paramètre
- * \param Joueur : joueur dont on veut connètrele score
+ * \param Joueur : joueur dont on veut connaitre le score
  * \return int:la valeur score cotenue dans la structure joueur passé en paramètre
  */
 int get_score(Joueur* joueur);
