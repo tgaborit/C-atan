@@ -24,7 +24,7 @@ int main()
     partie->plateau->adjacence[1]->t->a[1].owner=k;
 
     gain_ressource(BOIS, j);
-    for(int i=0; i<100; ++i){
+    for(int i=0; i<1; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);
         gain_ressource(BLE,k);

@@ -113,9 +113,3 @@ void initPosRectHexLying(SDL_Rect** hex_buttons, float center_x, float center_y,
     hex_buttons[5]->y = round(center_y - hexagon_h - hex_buttons[0]->h/2);
 }
 
-//void SDL_ExitWithError(const char *message)
-//{
-//    SDL_Log("ERREUR : %s > %s\n", message, SDL_GetError());
-//    SDL_Quit();
-//    exit(EXIT_FAILURE);
-//}

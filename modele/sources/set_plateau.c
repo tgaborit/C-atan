@@ -274,7 +274,6 @@ int setRouteFree(Partie* partie, double x, double y, int position){
 }
 
 
-
 /**
  * \fn int setColonie(Partie* partie, double x, double y, int position)
  * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile et de payer.
@@ -296,6 +295,7 @@ int setColonie(Partie* partie, double x, double y, int position){
     }
     return -1;
 }
+
 
 /**
  * \fn int setColonieFree(Partie* partie, double x, double y, int position)

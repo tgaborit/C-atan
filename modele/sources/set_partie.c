@@ -311,7 +311,7 @@ int obtenir_cartedev (Partie* partie)
 {
     Joueur* joueur = get_joueur_actif(partie);
     CarteDev* cartedev= partie->cartedev;
-    if (achat_cartedev(joueur)==0)
+    if (get_nbcartedev_total_pile(partie->cartedev) > 0 && achat_cartedev(joueur)==0)
     {
     int proba_chevalier=(get_nbcartedev_pile(cartedev,CHEVALIER)*100)/get_nbcartedev_total_pile(cartedev);
     int proba_point=(get_nbcartedev_pile(cartedev,POINT)*100)/get_nbcartedev_total_pile(cartedev);
@@ -551,7 +551,6 @@ int action_voleur(Partie* partie){
     Joueur* current_joueur;
     for(i=0;i<get_nbjoueurs(partie);++i){
         current_joueur=partie->joueurs->current->joueur;
-        printf("%s\n",current_joueur->pseudo);
         if(voleur_perte_ressource(current_joueur) != -1){
             ++nb_vol;
         }
