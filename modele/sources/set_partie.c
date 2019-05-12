@@ -81,6 +81,31 @@ static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
     return 1;
 }
 
+static Joueur* joueur_nbChevalier_max(Partie* partie){
+    int i, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus d'activations de chevaliers.
+        if(j_max->nbChevalier < partie->joueurs->current->joueur->nbChevalier){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbChevalier == partie->joueurs->current->joueur->nbChevalier){           // Si deux joueurs ont le même nombre de chevaliers, alors NULL est renvoyé
+            partie->joueurs->current = tmp;
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
 static Joueur* joueur_nbRoute_max(Partie* partie){
     int i, boolean_equal = 0;
     Node_joueur* tmp = partie->joueurs->current;
@@ -250,12 +275,37 @@ void nb_routes_max(Partie* partie){
         if(j_old != NULL){
             dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
         }
-     if(j_new != NULL){
+        if(j_new != NULL && j_new->nbRoute > 4){
             inc_score(j_new,1);
         }
         j_old = j_new;
     }
 
+}
+
+
+/**
+ * \fn void nb_chevaliers_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de chevaliers activés.
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+void nb_chevaliers_max(Partie* partie){
+    if(partie != NULL){
+        static Joueur* j_old = NULL;
+        Joueur* j_new = joueur_nbChevalier_max(partie);
+        if(j_old != NULL){
+            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
+        }
+        if(j_new != NULL && j_new->nbChevalier > 2){
+            inc_score(j_new,1);
+        }
+        if(j_new == NULL || j_new->nbChevalier > 2){
+            j_old = j_new;
+        }
+    }
 }
 
 /**

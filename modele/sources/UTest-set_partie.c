@@ -257,6 +257,31 @@ static void test_nb_routes_max_partieNULL(void** state){
     nb_routes_max(NULL);
 }
 
+static void test_nb_chevaliers_max(void** state){
+    Partie* partie = (Partie*) *(state);
+    nb_chevaliers_max(NULL);
+    partie->joueurs->first->joueur->nbChevalier = 2;
+    partie->joueurs->first->next->joueur->nbChevalier = 1;
+    nb_chevaliers_max(partie);
+    assert_int_equal(partie->joueurs->first->joueur->score,6);
+    assert_int_equal(partie->joueurs->first->next->joueur->score,7);
+
+    partie->joueurs->first->joueur->nbChevalier = 3;
+    nb_chevaliers_max(partie);
+    assert_int_equal(partie->joueurs->first->joueur->score,7);
+
+    partie->joueurs->first->next->joueur->nbChevalier = 5;
+    nb_chevaliers_max(partie);
+    assert_int_equal(partie->joueurs->first->joueur->score,6);
+    assert_int_equal(partie->joueurs->first->next->joueur->score,8);
+
+    partie->joueurs->first->joueur->nbChevalier = 5;
+    nb_chevaliers_max(partie);
+    assert_int_equal(partie->joueurs->first->joueur->score,6);
+    assert_int_equal(partie->joueurs->first->next->joueur->score,7);
+
+}
+
 static void test_obtenir_cartedev(void** state)
 {
     Partie* partie= *state;
@@ -520,6 +545,7 @@ int main_partie_test(void)
         cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_nb_routes_max,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_nb_chevaliers_max,setup_partie, teardown),
         cmocka_unit_test(test_nb_routes_max_partieNULL),
         cmocka_unit_test_setup_teardown(test_lancer_des,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_gagne_ressource,setup_partie,teardown),
