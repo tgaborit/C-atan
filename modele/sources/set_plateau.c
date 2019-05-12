@@ -275,6 +275,67 @@ int setRouteFree(Partie* partie, double x, double y, int position){
 
 
 /**
+ * \fn int setColonieInit(Partie* partie, double x, double y, int position)
+ * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile, en début de partie (conditions différentes).
+ *
+ *
+ * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
+ * \return 0 si la colonie a été posée, -1 si ce n'est pas possible.
+ */
+
+int setColonieInit(Partie* partie, double x, double y, int position){
+    if(partie == NULL){
+        return -1;
+    }
+    Plateau* p = partie->plateau;
+    Noeud* Cur = deplacementPlateau(p,x,y);
+    if(p == NULL || Cur == NULL || partie->joueurs->current == NULL){
+        return -1;
+    }
+    Joueur* owner = partie->joueurs->current->joueur;
+
+    if(position < 0 || position >= 6){
+        return -1;
+    }
+
+    //verification que l'emplacement est vide.
+    if(Cur->t->s[position].i != VIDE){
+        return -1;
+    }
+    //verification que il n'y a pas de colonie adjacente.
+    if(constructionVoisineSommet(partie,x,y,position) !=1 ){
+        return -1;
+    }
+
+    int pattern[6] = {0,2,4,5,3,1};
+    int low = position-2;
+    int high = position+2;
+    int position2 = position+1;
+    if(position2 > 5){
+        position2 = 0;
+    }
+    if(low < 0){
+        low = low+6;
+    }
+    if(high > 5){
+        high = high-6;
+    }
+
+    Cur->t->s[position].i = COLONIE;
+    Cur->t->s[position].owner = owner;
+    if(Cur->adjacence[pattern[position]] != NULL){
+        Cur->adjacence[pattern[position]]->t->s[high].i = COLONIE;
+        Cur->adjacence[pattern[position]]->t->s[high].owner = owner;
+    }
+    if(Cur->adjacence[pattern[position2]] != NULL){
+        Cur->adjacence[pattern[position2]]->t->s[low].i = COLONIE;
+        Cur->adjacence[pattern[position2]]->t->s[low].owner = owner;
+    }
+    return 0;
+}
+
+
+/**
  * \fn int setColonie(Partie* partie, double x, double y, int position)
  * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile et de payer.
  *

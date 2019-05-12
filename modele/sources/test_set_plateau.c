@@ -114,6 +114,21 @@ static void test_setColonie_CoordFausses(void** state){
     assert_int_equal(setColonieFree(p,0,0,-4),-1);
 }
 
+static void test_setColonieInit(void** state){
+
+    Partie* p = (Partie*) *(state);
+    assert_int_equal(setColonieInit(NULL,0,0,0),-1);
+    assert_int_equal(setColonieInit(p,5,0,0),-1);
+    assert_int_equal(setColonieInit(p,2,0,6),-1);
+    assert_int_equal(setColonieInit(p,2,0,3),0);
+    assert_int_equal(setColonieInit(p,2,0,3),-1);
+    assert_int_equal(setColonieInit(p,2,0,4),-1);
+    assert_int_equal(setColonieInit(p,0.5,1,0),0);
+    assert_int_equal(setColonieInit(p,-1.5,1,5),0);
+
+
+}
+
 static void test_setColonie_CoordBonnes(void** state){
     Partie* p = (Partie*) (*state);
     Joueur* j = p->joueurs->current->joueur;
@@ -206,6 +221,7 @@ int main_set_plateau_test(void){
         cmocka_unit_test(test_setColonie_CoordFausses),
         cmocka_unit_test(test_setColonie_CoordBonnes),
         cmocka_unit_test(test_setColonie_JoueurDiff),
+        cmocka_unit_test(test_setColonieInit),
         cmocka_unit_test(test_setVille_partieNULL),
         cmocka_unit_test(test_setVille_CoorFausses),
         cmocka_unit_test(test_setVille_CoordBonnes)

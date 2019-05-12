@@ -18,12 +18,6 @@ int main()
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
 
-    partie->plateau->adjacence[0]->t->a[4].i=ROUTE;
-    partie->plateau->adjacence[1]->t->a[1].i=ROUTE;
-    partie->plateau->adjacence[0]->t->a[4].owner=k;
-    partie->plateau->adjacence[1]->t->a[1].owner=k;
-
-    gain_ressource(BOIS, j);
     for(int i=0; i<1; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);

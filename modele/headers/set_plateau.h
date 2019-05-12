@@ -35,6 +35,18 @@ int setRouteFree(Partie* partie, double x, double y, int position);
 
 
 /**
+ * \fn int setColonieInit(Partie* partie, double x, double y, int position)
+ * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile, en début de partie (conditions différentes).
+ *
+ *
+ * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la tuile et position est le sommet.
+ * \return 0 si la colonie a été posée, -1 si ce n'est pas possible.
+ */
+
+int setColonieInit(Partie* partie, double x, double y, int position);
+
+
+/**
  * \fn int setColonie(Partie* partie, double x, double y, int position)
  * \brief fonction permettant de placer une colonie appartenant à un joueur sur le sommet d'une tuile et de payer.
  *
