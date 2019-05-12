@@ -471,9 +471,13 @@ int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int p
  * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructure sur un sommet de la tuile de coordonnées (x,y)
  */
 int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
-        setVoleur(partie,x,y);
-        perte_cartedev(CHEVALIER,get_joueur_actif(partie));
-        return vole_carte(partie,x,y,joueur);
+        Joueur* joueur_actif = get_joueur_actif(partie);
+        if (get_cartedev(CHEVALIER,joueur_actif)>=1){
+            setVoleur(partie,x,y);
+            perte_cartedev(CHEVALIER,get_joueur_actif(partie));
+            return vole_carte(partie,x,y,joueur);
+        }
+        return -1;
 
     }
 
@@ -491,7 +495,6 @@ int vole_carte(Partie* partie,double x, double y, Joueur* victime){
     int i,rand_val;
     Noeud* current = deplacementPlateau(partie->plateau,x,y);
     Joueur* joueur_actif=get_joueur_actif(partie);
-    if (get_cartedev(CHEVALIER,joueur_actif)>=1){
    for(i=0;i<6;++i){
         if(current->t->s[i].owner != NULL && strcmp(victime->pseudo,current->t->s[i].owner->pseudo) == 0) {
             if (get_nbressource_total(victime) != 0){
@@ -533,10 +536,7 @@ int vole_carte(Partie* partie,double x, double y, Joueur* victime){
      return 0;
             }
         }
-    }
     return -1;
-
-
 }
 
     /**
