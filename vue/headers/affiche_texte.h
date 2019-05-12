@@ -17,6 +17,36 @@
 #define TAILLE_FRAG 59
 
 /**
+ * \fn AfficheTexte_NoRessource(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de ressources pour l'action demandée.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_NoRessource(SDL_Window* window);
+
+/**
+ * \fn AfficheTexte_NoCarte(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de cartes pour l'action demandée.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_NoCarte(SDL_Window* window);
+
+/**
+ * \fn AfficheTexte_StopAction(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur a annulé une action.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_StopAction(SDL_Window* window);
+
+/**
  * \fn AfficheTexte_Joueur(SDL_Window* window)
  * \brief affiche un message sur le joueur dont c'est le tour de jeu
  *
@@ -182,7 +212,7 @@ void AfficheTexte_ChoixRessource(SDL_Window* window);
  * \param window la fenetre de jeu
  * \return aucun
  */
-void AfficheTexte_Monopole_Succes(SDL_Window* window);
+void AfficheTexte_Monopole_Succes(SDL_Window* window, int vol);
 
 
 /**
@@ -207,16 +237,6 @@ void AfficheTexte_Monopole_Echec(SDL_Window* window);
 void AfficheTexte_Decouverte_Succes(SDL_Window* window);
 
 
-/**
- * \fn AfficheTexte_Decouverte_Echec(SDL_Window* window)
- * \brief affiche un message d'indication, le joueur n'a pas de carte decouverte à jouer.
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
-void AfficheTexte_Decouverte_Echec(SDL_Window* window);
-
 
 /**
  * \fn AfficheTexte_Point_Succes(SDL_Window* window)
@@ -227,17 +247,6 @@ void AfficheTexte_Decouverte_Echec(SDL_Window* window);
  * \return aucun
  */
 void AfficheTexte_Point_Succes(SDL_Window* window);
-
-
-/**
- * \fn AfficheTexte_Point_Echec(SDL_Window* window)
- * \brief affiche un message d'indication, le joueur n'a pas de carte point à jouer.
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
-void AfficheTexte_Point_Echec(SDL_Window* window);
 
 
 /**
@@ -260,17 +269,6 @@ void AfficheTexte_Routes_Succes(SDL_Window* window);
  * \return aucun
  */
 void AfficheTexte_Routes_Echec(SDL_Window* window);
-
-
-/**
- * \fn AfficheTexte_ChoixRoutes(SDL_Renderer* renderer)
- * \brief affiche un message d'indication, demande au joueur de choisir deux emplacements pour les routes à poser.
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
-void AfficheTexte_ChoixRoutes(SDL_Window* window);
 
 
 /**
@@ -326,5 +324,15 @@ void AfficheTexte_ChoixJoueurVoler(SDL_Window* window);
  * \return aucun
  */
 void AfficheTexte_LancerDe(SDL_Window* window);
+
+/**
+ * \fn AfficheTexte_nbVol(SDL_Window* window, int nb_vol)
+ * \brief affiche un message d'indication sur des eventuels joueurs volés.
+ *
+ *
+ * \param window la fenetre de jeu, nb_vol le nombre de joueurs volés.
+ * \return aucun
+ */
+void AfficheTexte_nbVol(SDL_Window* window,int nb_vol);
 
 #endif

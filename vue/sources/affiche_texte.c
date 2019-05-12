@@ -8,8 +8,8 @@
  * Implémente les fonctions utiles à l'affichage de texte dans le jeu.
  */
 
-#include "vue/headers/affiche_texte.h"
-#include "vue/headers/SDL_erreur.h"
+#include "affiche_texte.h"
+#include "SDL_erreur.h"
 
 static int fill_text(char* frag, char* buffer){
 
@@ -104,6 +104,46 @@ void AfficheTexte_Joueur(SDL_Window* window){
 }
 
 /**
+ * \fn AfficheTexte_NoRessource(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de ressources pour l'action demandée.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_NoRessource(SDL_Window* window){
+    char txt[80] = "Echec, vous manquez de ressources cette action";
+    AfficheTexte(window,txt,0);
+}
+
+/**
+ * \fn AfficheTexte_NoCarte(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur n'a pas assez de cartes pour l'action demandée.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_NoCarte(SDL_Window* window){
+    char txt[80] = "Echec, vous manquez de cartes pour realiser cette l'action";
+    AfficheTexte(window,txt,0);
+}
+
+/**
+ * \fn AfficheTexte_StopAction(SDL_Window* window)
+ * \brief affiche un message d'indication, le joueur a annulé une action.
+ *
+ *
+ * \param window la fenetre de jeu
+ * \return aucun
+ */
+void AfficheTexte_StopAction(SDL_Window* window){
+    char txt[80] = "Action annulée.";
+    AfficheTexte(window,txt,0);
+}
+
+
+/**
  * \fn AfficheTexte_Init(SDL_Window* window)
  * \brief affiche un message d'accueil en début de partie
  *
@@ -150,7 +190,7 @@ void AfficheTexte_PosRoute(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_PosRoute_Echec(SDL_Window* window){
-    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette route ou bien l'emplacement est invalide.";
+    char txt[110] = "L'emplacement est invalide ! choisissez en un autre.";
     AfficheTexte(window,txt,0);
 }
 
@@ -191,7 +231,7 @@ void AfficheTexte_PosColonie(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_PosColonie_Echec(SDL_Window* window){
-    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette colonie ou bien l'emplacement est invalide.";
+    char txt[110] = "L'emplacement est invalide ! choisissez en un autre.";
     AfficheTexte(window,txt,0);
 }
 
@@ -232,7 +272,7 @@ void AfficheTexte_PosVille(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_PosVille_Echec(SDL_Window* window){
-    char txt[110] = "Echec, vous n'avez pas assez de ressources pour poser cette ville ou bien l'emplacement est invalide.";
+    char txt[110] = "L'emplacement est invalide ! choisissez en un autre.";
     AfficheTexte(window,txt,0);
 }
 
@@ -274,7 +314,7 @@ void AfficheTexte_CarteDev_Succes(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_CarteDev_Echec(SDL_Window* window){
-    char txt[110] = "Echec, vous n'avez pas assez de ressources pour acheter une carte developpement.";
+    char txt[110] = "Echec, vous n'avez pas assez de ressources pour acheter une carte developpement ou il n'y en a plus.";
     AfficheTexte(window,txt,0);
 }
 
@@ -300,8 +340,13 @@ void AfficheTexte_ChoixRessource(SDL_Window* window){
  * \param window la fenetre de jeu
  * \return aucun
  */
-void AfficheTexte_Monopole_Succes(SDL_Window* window){
-    char txt[110] = "Utilisation d'une carte Monopole avec succes !";
+void AfficheTexte_Monopole_Succes(SDL_Window* window, int vol){
+    char number[10] = "";
+    char txt[110] = "Utilisation d'une carte Monopole avec succes, ";
+    sprintf(number, "%d", vol);
+    char txt2[20] = " ressources volees !";
+    strcat(txt,number);
+    strcat(txt,txt2);
     AfficheTexte(window,txt,0);
 }
 
@@ -315,7 +360,7 @@ void AfficheTexte_Monopole_Succes(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Monopole_Echec(SDL_Window* window){
-    char txt[110] = "Vous n'avez pas de carte Monopole a jouer.";
+    char txt[110] = "Aucune ressource n'a ete volee.";
     AfficheTexte(window,txt,0);
 }
 
@@ -329,21 +374,7 @@ void AfficheTexte_Monopole_Echec(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Decouverte_Succes(SDL_Window* window){
-    char txt[110] = "Utilisation d'une carte Decouverte avec succes !";
-    AfficheTexte(window,txt,0);
-}
-
-
-/**
- * \fn AfficheTexte_Decouverte_Echec(SDL_Window* window)
- * \brief affiche un message d'indication, le joueur n'a pas de carte decouverte à jouer.
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
-void AfficheTexte_Decouverte_Echec(SDL_Window* window){
-    char txt[110] = "Vous n'avez pas de carte Decouverte a jouer.";
+    char txt[110] = "Utilisation d'une carte Invention avec succes !";
     AfficheTexte(window,txt,0);
 }
 
@@ -363,18 +394,28 @@ void AfficheTexte_Point_Succes(SDL_Window* window){
 
 
 /**
- * \fn AfficheTexte_Point_Echec(SDL_Window* window)
- * \brief affiche un message d'indication, le joueur n'a pas de carte point à jouer.
+ * \fn AfficheTexte_nbVol(SDL_Window* window, int nb_vol)
+ * \brief affiche un message d'indication sur des eventuels joueurs volés.
  *
  *
- * \param window la fenetre de jeu
+ * \param window la fenetre de jeu, nb_vol le nombre de joueurs volés.
  * \return aucun
  */
-void AfficheTexte_Point_Echec(SDL_Window* window){
-    char txt[110] = "Vous n'avez pas de carte Point a jouer.";
+void AfficheTexte_nbVol(SDL_Window* window,int nb_vol){
+    char txt[110] = "";
+    if(nb_vol <= 0){
+        return;
+    }
+    sprintf(txt, "%d", nb_vol);
+    if(nb_vol == 1){
+        strcat(txt," personne avait plus de 7 cartes !");
+    }
+    else{
+        strcat(txt," personnes avaient plus de 7 cartes !");
+    }
     AfficheTexte(window,txt,0);
-}
 
+}
 
 /**
  * \fn AfficheTexte_Routes_Succes(SDL_Window* window)
@@ -399,23 +440,10 @@ void AfficheTexte_Routes_Succes(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Routes_Echec(SDL_Window* window){
-    char txt[110] = "Vous n'avez pas de carte Routes a jouer, ou bien les lieux choisis pour vos routes sont invalides.";
+    char txt[110] = "Les lieux choisis pour vos routes sont invalides, veuillez recommencer.";
     AfficheTexte(window,txt,0);
 }
 
-
-/**
- * \fn AfficheTexte_ChoixRoutes(SDL_Renderer* renderer)
- * \brief affiche un message d'indication, demande au joueur de choisir deux emplacements pour les routes à poser.
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
-void AfficheTexte_ChoixRoutes(SDL_Window* window){
-    char txt[110] = "Veuillez choisir deux emplacements ou poser vos routes.";
-    AfficheTexte(window,txt,0);
-}
 
 
 /**
@@ -427,7 +455,7 @@ void AfficheTexte_ChoixRoutes(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Chevalier_Succes(SDL_Window* window){
-    char txt[110] = "Utilisation d'une carte Chevalier avec succes !";
+    char txt[110] = "Une carte a ete volee !";
     AfficheTexte(window,txt,0);
 }
 
@@ -441,7 +469,7 @@ void AfficheTexte_Chevalier_Succes(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Chevalier_Echec(SDL_Window* window){
-    char txt[130] = "Vous n'avez pas de carte Chevalier a jouer, ou les lieux et le joueur choisis pour voler sont invalides.";
+    char txt[130] = "Aucune carte n'a ete volee ...";
     AfficheTexte(window,txt,0);
 }
 

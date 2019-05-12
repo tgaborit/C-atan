@@ -20,6 +20,19 @@ static void setOnFirst_list_joueur(List_joueur* list)
 }
 
 
+/**
+ * \fn int get_des(Partie* partie)
+ * \brief Simule un lancé de dès
+ *
+ *  retourne la valeur du lancé de des le plus récent de la partie.
+ * \param partie un pointeur vers la partie.
+ * \return int: valeur obtenu
+ */
+int get_des(Partie* partie){
+    return partie->valeur_de;
+}
+
+
  /**
 * \fn Joueur get_joueur_actif(Partie partie);
 * \brief renvoie le Joueur qui a la main

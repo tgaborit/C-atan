@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des probabilites dans le jeu.
  */
 
-#include "vue/headers/probabilite.h"
+#include "probabilite.h"
 
 
 /**

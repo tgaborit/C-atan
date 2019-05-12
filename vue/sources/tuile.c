@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des tuiles dans le jeu.
  */
 
-#include "vue/headers/tuile.h"
+#include "tuile.h"
 
 
 /**

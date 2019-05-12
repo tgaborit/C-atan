@@ -5,9 +5,10 @@
 #include <cmocka_pbc.h>
 #include <string.h>
 #include "get_plateau.h"
+#include "UTest-set_partie.h"
 #include "partie.h"
-#include "set_partie.h"
 #include "get_partie.h"
+#include "set_partie.h"
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -175,10 +176,10 @@ static void test_get_joueur_actif(void** state){
 static void test_lancer_des(void** state)
 {
 
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
-    assert_in_range(lancer_des(),2,12);
+    Partie* partie = (Partie*) *(state);
+    int lancer = lancer_des(partie);
+    assert_in_range(lancer,2,12);
+    assert_int_equal(lancer,get_des(partie));
 
 }
 
@@ -295,18 +296,18 @@ static void test_utiliser_monopole(void** state){
 
     flag=utiliser_monopole(partie,BOIS);
     nb=get_nbressource(BOIS,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(4,flag);
     assert_int_equal(4,nb);
 
     flag=utiliser_monopole(partie,PIERRE);
     nb=get_nbressource(PIERRE,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(8,flag);
     assert_int_equal(8,nb);
 
 
     flag=utiliser_monopole(partie,ARGILE);
     nb=get_nbressource(ARGILE,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(12,flag);
     assert_int_equal(12,nb);
 
     flag=utiliser_monopole(partie,MOUTON);

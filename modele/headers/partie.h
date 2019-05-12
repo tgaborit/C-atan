@@ -41,6 +41,7 @@ struct Node_joueur* next;
      List_joueur* joueurs; /*!<liste contenant tout les joueurs inscrit dans la partie>*/
      Plateau* plateau; /*!<structure représentant l'état du plateau de jeu>*/
      CarteDev* cartedev; /*!<tableau de la pile des carte developpement>*/
+     int valeur_de; /*!<valeur actuelle du dé de la partie>*/
  }Partie;
 
   /**

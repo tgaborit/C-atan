@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des constructions dans le jeu.
  */
 
-#include "vue/headers/architecture.h"
+#include "architecture.h"
 
 /**
  * \fn AfficheBoutonDev(SDL_Renderer *renderer)

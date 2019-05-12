@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles à l'affichage des informations des joueurs.
  */
 
-#include "vue/headers/affiche_joueur.h"
+#include "affiche_joueur.h"
 
 
 /**

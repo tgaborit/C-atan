@@ -1,4 +1,4 @@
-#include "modele/headers/test_set_plateau.h"
+#include "test_set_plateau.h"
 
 static int group_setup(void** state){
     Partie* partie = init_partie();

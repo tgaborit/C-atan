@@ -8,7 +8,7 @@
  * Implémente les fonctions utiles aux erreurs liées à l'utilisation de SDL2
  */
 
- #include "vue/headers/SDL_erreur.h"
+ #include "SDL_erreur.h"
 
 
 /**

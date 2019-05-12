@@ -8,24 +8,24 @@
  * Implémente les fonctions utiles à l'affichage du jeu.
  */
 
-#include "vue/headers/fenetre.h"
+#include "fenetre.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "vue/headers/developpement.h"
-#include "modele/headers/partie.h"
-#include "modele/headers/get_plateau.h"
-#include "vue/headers/architecture.h"
-#include "vue/headers/tuile.h"
-#include "vue/headers/carte.h"
-#include "vue/headers/developpement.h"
-#include "vue/headers/probabilite.h"
-#include "vue/headers/place_infra.h"
-#include "vue/headers/affiche_joueur.h"
-#include "vue/headers/SDL_erreur.h"
-#include "vue/headers/affiche_texte.h"
-#include "modele/headers/set_partie.h"
+#include "developpement.h"
+#include "partie.h"
+#include "get_plateau.h"
+#include "architecture.h"
+#include "tuile.h"
+#include "carte.h"
+#include "developpement.h"
+#include "probabilite.h"
+#include "place_infra.h"
+#include "affiche_joueur.h"
+#include "SDL_erreur.h"
+#include "affiche_texte.h"
+#include "set_partie.h"
 
 #define WINDOWW 1920
 #define WINDOWH 950
@@ -92,7 +92,7 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	if(renderer == NULL)
 		SDL_ExitWithError("Creation rendu echouée");
 
-    	AfficheDe(window, renderer);
+    	AfficheDe(window, p);
 	AfficheChevalier(renderer);
 	AfficheMonopole(renderer);
 	AfficheInvention(renderer);
@@ -196,12 +196,12 @@ void AfficheSkip(SDL_Renderer* renderer)
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
+void AfficheDe(SDL_Window* window, Partie* partie)
 {
-
+    SDL_Renderer* renderer = SDL_GetRenderer(window);
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
-    int lancer = lancer_des();
+    int lancer = get_des(partie);
     char de[20] = "";
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
 		SDL_ExitWithError("Impossible de changer la couleur du rendu");
@@ -225,7 +225,7 @@ void AfficheDe(SDL_Window* window, SDL_Renderer* renderer)
     if((lancer == 10) | (lancer == 11) | (lancer == 12)){
         rect.x = 1572;
     }
-    sprintf(de, "%d", lancer_des());
+    sprintf(de, "%d", lancer);
 
 
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);

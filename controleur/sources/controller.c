@@ -10,8 +10,8 @@
 
 #include <math.h>
 #include <SDL.h>
-#include "controleur/headers/controller.h"
-#include "vue/headers/SDL_erreur.h"
+#include "controller.h"
+#include "SDL_erreur.h"
 
 /**
 * \fn SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area)

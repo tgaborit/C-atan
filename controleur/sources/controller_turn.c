@@ -10,12 +10,12 @@
 
 #include <stdio.h>
 #include <SDL.h>
-#include "controleur/headers/controller.h"
-#include "controleur/headers/controller_turn.h"
-#include "controleur/headers/controller_turn_events.h"
-#include "modele/headers/partie.h"
-#include "vue/headers/fenetre.h"
-#include "vue/headers/SDL_erreur.h"
+#include "controller.h"
+#include "controller_turn.h"
+#include "controller_turn_events.h"
+#include "partie.h"
+#include "fenetre.h"
+#include "SDL_erreur.h"
 
 
 static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
@@ -70,7 +70,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 case DEVCRAFT_BUTTON :
                     printf("Clic sur bouton Craft developpement\n");
                     printf("Appel de la fonction craftDevEvent(the_game)\n");
-                    craftDevEvent(the_game);
+                    craftDevEvent(window, the_game);
                     break;
 
                 case ROADCRAFT_BUTTON :
@@ -119,7 +119,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 case UNIVDEV_BUTTON :
                     printf("Clic sur bouton de carte développement Universite\n");
                     printf("Appel de la fonction useUnivEvent(the_game)\n");
-                    useUnivEvent(the_game);
+                    useUnivEvent(the_game, window);
                     break;
 
 

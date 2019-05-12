@@ -16,7 +16,7 @@
 #include "controller_terrain.h"
 #include "controller_resource.h"
 #include "controller_player.h"
-#include "modele/headers/ressource.h"
+#include "ressource.h"
 
 //typedef enum {
 //        BLE,

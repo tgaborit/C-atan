@@ -8,10 +8,10 @@
 *
 */
 
-#include "controleur/headers/converters.h"
-#include "controleur/headers/controller_resource.h"
-#include "controleur/headers/controller_path.h"
-#include "modele/headers/ressource.h"
+#include "converters.h"
+#include "controller_resource.h"
+#include "controller_path.h"
+#include "ressource.h"
 
 /**
 * \fn PathCoordinates pathButtonToPathCoordinates(PathButton path_clicked)
