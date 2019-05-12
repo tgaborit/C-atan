@@ -455,7 +455,7 @@ void AfficheTexte_Routes_Echec(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Chevalier_Succes(SDL_Window* window){
-    char txt[110] = "Utilisation d'une carte Chevalier avec succes, une carte a ete volee !";
+    char txt[110] = "Une carte a ete volee !";
     AfficheTexte(window,txt,0);
 }
 

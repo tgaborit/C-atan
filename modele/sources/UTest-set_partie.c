@@ -264,18 +264,18 @@ static void test_utiliser_monopole(void** state){
 
     flag=utiliser_monopole(partie,BOIS);
     nb=get_nbressource(BOIS,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(4,flag);
     assert_int_equal(4,nb);
 
     flag=utiliser_monopole(partie,PIERRE);
     nb=get_nbressource(PIERRE,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(8,flag);
     assert_int_equal(8,nb);
 
 
     flag=utiliser_monopole(partie,ARGILE);
     nb=get_nbressource(ARGILE,partie->joueurs->current->joueur);
-    assert_int_equal(0,flag);
+    assert_int_equal(12,flag);
     assert_int_equal(12,nb);
 
     flag=utiliser_monopole(partie,MOUTON);

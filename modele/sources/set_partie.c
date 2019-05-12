@@ -476,7 +476,7 @@ int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int p
  * \brief utilise une carte développemnt chevalier, bouge le voleur sur une nouvelle tuile de coordonée passé en paramètre,
  *vole une carte aléatoirement dans la main du joueur passé en paramètre et la donne au joueur qui appelle la carte chevalier.
  * \param Partie: etat de la partie
- * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructuresur un sommet de la tuile de coordonnées (x,y)
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructure sur un sommet de la tuile de coordonnées (x,y)
  */
 int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
         setVoleur(partie,x,y);
