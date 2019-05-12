@@ -8,7 +8,7 @@
  */
 
 
-#include "modele/headers/set_partie.h"
+#include "set_partie.h"
 
 
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
@@ -50,12 +50,7 @@ static int isempty_list_joueur (List_joueur* list)
 }
 
 
-static void setOnNext_list_joueur(List_joueur* list)
-{
-    if(list->current != NULL){
-        list->current=list->current->next;
-    }
-}
+
 
 
 static void setOnFirst_list_joueur(List_joueur* list)
@@ -316,36 +311,33 @@ int obtenir_cartedev (Partie* partie)
 {
     Joueur* joueur = get_joueur_actif(partie);
     CarteDev* cartedev= partie->cartedev;
-    if(get_nbcartedev_total_pile(cartedev) !=0 )
+    if (achat_cartedev(joueur)==0)
     {
-        if (achat_cartedev(joueur)==0)
-        {
-        int proba_chevalier=(get_nbcartedev_pile(cartedev,CHEVALIER)*100)/get_nbcartedev_total_pile(cartedev);
-        int proba_point=(get_nbcartedev_pile(cartedev,POINT)*100)/get_nbcartedev_total_pile(cartedev);
-        int proba_route=(get_nbcartedev_pile(cartedev,ROUTES)*100)/get_nbcartedev_total_pile(cartedev);
-        int proba_monopole=(get_nbcartedev_pile(cartedev,MONOPOLE)*100)/get_nbcartedev_total_pile(cartedev);
-        int proba_decouverte=(get_nbcartedev_pile(cartedev,DECOUVERTE)*100)/get_nbcartedev_total_pile(cartedev);
-        srand(time(NULL));
-        int rand_val=rand()%100;
+    int proba_chevalier=(get_nbcartedev_pile(cartedev,CHEVALIER)*100)/get_nbcartedev_total_pile(cartedev);
+    int proba_point=(get_nbcartedev_pile(cartedev,POINT)*100)/get_nbcartedev_total_pile(cartedev);
+    int proba_route=(get_nbcartedev_pile(cartedev,ROUTES)*100)/get_nbcartedev_total_pile(cartedev);
+    int proba_monopole=(get_nbcartedev_pile(cartedev,MONOPOLE)*100)/get_nbcartedev_total_pile(cartedev);
+    int proba_decouverte=(get_nbcartedev_pile(cartedev,DECOUVERTE)*100)/get_nbcartedev_total_pile(cartedev);
+    srand(time(NULL));
+    int rand_val=rand()%100;
 
 
-        if (rand_val<= proba_chevalier)
-            retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
+    if (rand_val<= proba_chevalier)
+        retirer_cartedev_pile(cartedev,joueur,CHEVALIER);
 
-        if(proba_chevalier<rand_val && rand_val<=(proba_chevalier+proba_point))
-            retirer_cartedev_pile(cartedev,joueur,POINT);
+    if(proba_chevalier<rand_val && rand_val<=(proba_chevalier+proba_point))
+        retirer_cartedev_pile(cartedev,joueur,POINT);
 
-        if((proba_chevalier+proba_point)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte))
-            retirer_cartedev_pile(cartedev,joueur,DECOUVERTE);
+    if((proba_chevalier+proba_point)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte))
+        retirer_cartedev_pile(cartedev,joueur,DECOUVERTE);
 
-        if((proba_chevalier+proba_point+proba_decouverte)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole))
-            retirer_cartedev_pile(cartedev,joueur,MONOPOLE);
+    if((proba_chevalier+proba_point+proba_decouverte)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole))
+        retirer_cartedev_pile(cartedev,joueur,MONOPOLE);
 
-        if ((proba_chevalier+proba_point+proba_decouverte+proba_monopole)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole+proba_route))
-            retirer_cartedev_pile(cartedev,joueur,ROUTES);
+    if ((proba_chevalier+proba_point+proba_decouverte+proba_monopole)<rand_val && rand_val<=(proba_chevalier+proba_point+proba_decouverte+proba_monopole+proba_route))
+        retirer_cartedev_pile(cartedev,joueur,ROUTES);
 
-        return 0;
-        }
+    return 0;
     }
     return -1;
 }
@@ -482,10 +474,11 @@ int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
     int i,rand_val;
     Noeud* current = deplacementPlateau(partie->plateau,x,y);
     Joueur* joueur_actif=get_joueur_actif(partie);
+    if(get_cartedev(CHEVALIER,joueur_actif)>=1){
     for(i=0;i<=6;++i){
-        if(strcmp(joueur->pseudo,current->t->s[i].owner->pseudo) ==0 && current->t->brigand!=0) {
+        if(current->t->s[i].owner==joueur && current->t->brigand!=1) {
             setVoleur(partie,x,y);
-            if (get_nbressource_total(joueur)==0){
+            if (get_nbressource_total(joueur)!=0){
                 int proba_ble,proba_bois,proba_pierre,proba_mouton,proba_argile;
                 rand_val=rand()%100;
                 proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
@@ -523,30 +516,28 @@ int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
                 gain_ressource(MOUTON,joueur_actif);
                 }
             }
+     perte_cartedev(CHEVALIER,joueur);
      joueur_actif->nbChevalier+=1;
      return 0;
             }
         }
-    return -1;
     }
+    return -1;
+}
 
     /**
- * \fn int action_voleur(Partie* partie,int des);
+ * \fn void action_voleur(Partie* partie);
  * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
  *
  * \param Partie*: la partie en cours, int: résultat aux des
- * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
+ * \return aucun
  */
-int action_voleur(Partie* partie,int des){
+void action_voleur(Partie* partie){
     int i;
     Joueur* current_joueur;
-    if (des==7){
-        for(i=0;i<=get_nbjoueurs(partie);++i){
-            current_joueur=partie->joueurs->current->joueur;
-            voleur_perte_ressource(current_joueur);
-            setOnNext_list_joueur(partie->joueurs);
-            }
-        return 0;
+    for(i=0;i<get_nbjoueurs(partie);++i){
+        current_joueur=partie->joueurs->current->joueur;
+        voleur_perte_ressource(current_joueur);
+        setOnNext_list_joueur(partie->joueurs);
     }
-    return -1;
 }

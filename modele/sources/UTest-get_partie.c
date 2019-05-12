@@ -58,6 +58,12 @@ static int setup_partie (void ** state)
     *state = partie;
     return 0;
 }
+static void test_get_nb_joueur_ptr_NULL(void **state)
+{
+    Partie* partie=NULL;
+    int c= get_nbjoueurs(partie);
+    assert_int_equal(-1, c);
+}
 
 static void test_get_nb_joueur(void **state)
 {
@@ -102,10 +108,33 @@ static void test_get_score_max(void** state)
     assert_ptr_equal(partie->joueurs->current,savecurrentnode);
 }
 
+static void test_get_score_joueuractif(void** state)
+{
+    Partie* partie= *state;
+    assert_int_equal(get_score_joueuractif(partie),3);
+}
+
+static void test_get_pseudo_joueuractif(void** state)
+{
+    Partie* partie= *state;
+    assert_int_equal(strcmp("joueur4",(char*)get_pseudo_joueuractif(partie)),0);
+    setOnNext_list_joueur(partie->joueurs);
+    assert_int_equal(strcmp("joueur1",get_pseudo_joueuractif(partie)),0);
+    setOnNext_list_joueur(partie->joueurs);
+    assert_int_equal(strcmp("joueur2",get_pseudo_joueuractif(partie)),0);
+    setOnNext_list_joueur(partie->joueurs);
+    assert_int_equal(strcmp("joueur3",get_pseudo_joueuractif(partie)),0);
+    setOnNext_list_joueur(partie->joueurs);
+}
+
 static void test_get_joueur_actif(void** state){
     Partie* partie = *state;
     int valtest = strcmp(partie->joueurs->current->joueur->pseudo,get_joueur_actif(partie)->pseudo);
     assert_int_equal(0,valtest);
+}
+static void test_get_nbChevalier_joueuractif(void** state){
+    Partie* partie = *state;
+    assert_int_equal(0,get_nbChevalier_joueuractif(partie));
 }
 
 static void test_test_pseudo(void** state){
@@ -127,14 +156,12 @@ static void test_test_pseudo(void** state){
     flag=test_pseudo("joueur4",partie);
     assert_int_equal(-1,flag);
     assert_ptr_equal(current_node,partie->joueurs->current);
-
 }
 
 static int teardown (void ** state)
 {
     Partie* partie= *state;
-    free (partie->joueurs);
-    free(partie);
+    free_partie(partie);
     return 0 ;
 }
 
@@ -143,12 +170,16 @@ int main_get_partie_test(void)
     const struct CMUnitTest tests_get_partie[]={
         cmocka_unit_test_setup_teardown(test_get_nbcartedev_joueuractif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_nbressource_joueuractif,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nb_joueur_ptr_NULL,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_nb_joueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_score_max,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_score_joueuractif,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_pseudo_joueuractif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
-        cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_nbChevalier_joueuractif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_test_pseudo,setup_partie,teardown),
+
 
         };
     return cmocka_run_group_tests(tests_get_partie,NULL,NULL);

@@ -160,12 +160,11 @@ int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int p
 int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur);
 
     /**
- * \fn int action_voleur(Partie* partie,int des);
+ * \fn void action_voleur(Partie* partie);
  * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
  *
  * \param Partie*: la partie en cours, int: résultat aux des
- * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
+ * \return aucun
  */
-int action_voleur(Partie* partie,int des);
-
+void action_voleur(Partie* partie);
 #endif //MODELE_REMI_CATANE_PARTIE_H

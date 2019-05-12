@@ -10,12 +10,6 @@
 # include "get_partie.h"
 
 
-static void setOnNext_list_joueur(List_joueur* list)
-{
-    if(list->current != NULL){
-        list->current=list->current->next;
-    }
-}
 
 
 static void setOnFirst_list_joueur(List_joueur* list)
@@ -86,7 +80,7 @@ int get_score_joueuractif(Partie* partie)
  * \return int:le nombre de chevaliers activés par le joueur actif
  */
 
-int get_score_nbChevalier(Partie* partie)
+int get_nbChevalier_joueuractif(Partie* partie)
 {
     Joueur* joueur= get_joueur_actif(partie);
     return get_nbChevalier(joueur);
@@ -115,7 +109,7 @@ int get_score_nbChevalier(Partie* partie)
 */
 int get_nbjoueurs(Partie* partie)
 {
-    if (partie->joueurs==NULL)
+    if (partie==NULL)
         return -1;
     Node_joueur* save_current= partie->joueurs->current;
 

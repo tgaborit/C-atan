@@ -56,6 +56,26 @@ int  get_nbressource_joueuractif(TypeRessource type, Partie* partie);
 
 int get_score_joueuractif(Partie* partie);
 
+/**
+ * \fn char* get_pseudo_joueuractif(Partie* partie)
+ * \brief Fonction qui retourne le pseudo du joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return char*:le pseudo du joueur actif
+ */
+
+ char* get_pseudo_joueuractif(Partie* partie);
+
+ /**
+ * \fn int get_nbChevalier_joueuractif(Partie* partie)
+ * \brief Fonction qui retourne le nombre de chevaliers activés par le joueur actif
+ *
+ * \param Partie* partie en cours
+ * \return int:le nombre de chevaliers activés par le joueur actif
+ */
+
+int get_nbChevalier_joueuractif(Partie* partie);
+
   /**
 * \fn int get_nbjoueurs(Partie* partie)
 * \brief renvoie le nombre de joueurs dans la partie
