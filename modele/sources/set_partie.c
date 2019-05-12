@@ -299,10 +299,12 @@ void nb_chevaliers_max(Partie* partie){
         if(j_old != NULL){
             dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
         }
-        if(j_new != NULL && j_new->nbChevalier > 4){
+        if(j_new != NULL && j_new->nbChevalier > 2){
             inc_score(j_new,1);
         }
-        j_old = j_new;
+        if(j_new == NULL || j_new->nbChevalier > 2){
+            j_old = j_new;
+        }
     }
 }
 

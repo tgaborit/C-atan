@@ -102,6 +102,18 @@ void gagne_ressource(int lance_des, Partie* partie);
 */
 void nb_routes_max(Partie* partie);
 
+
+/**
+ * \fn void nb_chevaliers_max(Partie* partie)
+ * \brief met à jour le point déscerné au détenteur du plus de chevaliers activés.
+ *
+ *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
+ * \param Partie: etat de la partie
+ * \return aucun retour
+ */
+void nb_chevaliers_max(Partie* partie);
+
+
 /**
  * \fn int obtenir_cartedev (Partie* partie)
  * \brief donne une carte developpement au joueur qui en fait la demande
