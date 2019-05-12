@@ -491,7 +491,7 @@ int vole_carte(Partie* partie,double x, double y, Joueur* victime){
     int i,rand_val;
     Noeud* current = deplacementPlateau(partie->plateau,x,y);
     Joueur* joueur_actif=get_joueur_actif(partie);
-
+    if (get_cartedev(CHEVALIER,joueur_actif)>=1){
    for(i=0;i<6;++i){
         if(current->t->s[i].owner != NULL && strcmp(victime->pseudo,current->t->s[i].owner->pseudo) == 0) {
             if (get_nbressource_total(victime) != 0){
@@ -528,13 +528,15 @@ int vole_carte(Partie* partie,double x, double y, Joueur* victime){
                     gain_ressource(MOUTON,joueur_actif);
                 }
             }
-     perte_cartedev(CHEVALIER,joueur);
+     perte_cartedev(CHEVALIER,joueur_actif);
      joueur_actif->nbChevalier+=1;
      return 0;
             }
         }
     }
     return -1;
+
+
 }
 
     /**
