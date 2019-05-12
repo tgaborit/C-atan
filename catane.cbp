@@ -1,156 +1,251 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="6" />
+	<FileVersion major="1" minor="6"/>
 	<Project>
-		<Option title="catane" />
-		<Option pch_mode="2" />
-		<Option compiler="gcc" />
+		<Option title="catane"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\;CMake Files\cmake\;"/>
 		<Build>
-			<Target title="Debug">
-				<Option output="bin/Debug/catane" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-				</Compiler>
+			<Target title="all">
+				<Option working_dir="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
 			</Target>
-			<Target title="Release">
-				<Option output="bin/Release/catane" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option type="1" />
-				<Option compiler="gcc" />
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="catane">
+				<Option output="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/catane" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
 				<Compiler>
-					<Add option="-O2" />
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers"/>
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers"/>
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers"/>
+					<Add directory="/usr/include/SDL2"/>
 				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 catane"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="catane/fast">
+				<Option output="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/catane" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers"/>
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers"/>
+					<Add directory="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers"/>
+					<Add directory="/usr/include/SDL2"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 catane/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/tgaborit/Documents/INSA/INSA\ Rennes/3A/S6/Projet\ Langage\ C/catane/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
 			</Target>
 		</Build>
-		<Compiler>
-			<Add option="-Wall" />
-			<Add option="`sdl2-config --cflags`" />
-			<Add directory="modele/headers" />
-			<Add directory="vue/headers" />
-			<Add directory="controleur/headers" />
-			<Add directory="/usr/includes" />
-		</Compiler>
-		<Linker>
-			<Add option="`sdl2-config --libs` -lSDL2_ttf" />
-			<Add directory="/usr/lib/x86_64-linux-gnu" />
-		</Linker>
-		<Unit filename="catane.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/catane.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/headers/controller.h" />
-		<Unit filename="controleur/headers/controller_crossing.h" />
-		<Unit filename="controleur/headers/controller_path.h" />
-		<Unit filename="controleur/headers/controller_player.h" />
-		<Unit filename="controleur/headers/controller_resource.h" />
-		<Unit filename="controleur/headers/controller_terrain.h" />
-		<Unit filename="controleur/headers/controller_turn.h" />
-		<Unit filename="controleur/headers/controller_turn_events.h" />
-		<Unit filename="controleur/headers/converters.h" />
-		<Unit filename="controleur/sources/controller.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_crossing.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_crossing.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_path.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_path.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_player.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_player.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_resource.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_resource.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_terrain.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_terrain.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_turn.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_turn.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/controller_turn_events.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/controller_turn_events.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="controleur/sources/converters.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/headers/converters.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/headers/get_partie.h" />
-		<Unit filename="modele/headers/get_plateau.h" />
-		<Unit filename="modele/headers/joueur.h" />
-		<Unit filename="modele/headers/partie.h" />
-		<Unit filename="modele/headers/plateau.h" />
-		<Unit filename="modele/headers/ressource.h" />
-		<Unit filename="modele/headers/set_partie.h" />
-		<Unit filename="modele/headers/set_plateau.h" />
-		<Unit filename="modele/sources/get_partie.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/get_plateau.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_crossing.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/joueur.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_path.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/partie.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_player.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/plateau.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_resource.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/set_partie.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_terrain.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="modele/sources/set_plateau.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_turn.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/headers/SDL_erreur.h" />
-		<Unit filename="vue/headers/affiche_joueur.h" />
-		<Unit filename="vue/headers/affiche_texte.h" />
-		<Unit filename="vue/headers/architecture.h" />
-		<Unit filename="vue/headers/carte.h" />
-		<Unit filename="vue/headers/developpement.h" />
-		<Unit filename="vue/headers/fenetre.h" />
-		<Unit filename="vue/headers/place_infra.h" />
-		<Unit filename="vue/headers/probabilite.h" />
-		<Unit filename="vue/headers/tuile.h" />
-		<Unit filename="vue/sources/SDL_erreur.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/controller_turn_events.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/affiche_joueur.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/controleur/sources/converters.c">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/affiche_texte.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/get_partie.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/architecture.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/get_plateau.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/carte.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/joueur.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/developpement.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/partie.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/fenetre.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/plateau.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/place_infra.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/ressource.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/probabilite.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/set_partie.h">
+			<Option target="catane"/>
 		</Unit>
-		<Unit filename="vue/sources/tuile.c">
-			<Option compilerVar="CC" />
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/headers/set_plateau.h">
+			<Option target="catane"/>
 		</Unit>
-		<Extensions>
-			<code_completion />
-			<debugger />
-		</Extensions>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/get_partie.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/get_plateau.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/joueur.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/partie.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/plateau.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/set_partie.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/modele/sources/set_plateau.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/SDL_erreur.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/affiche_joueur.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/affiche_texte.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/architecture.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/carte.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/developpement.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/fenetre.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/place_infra.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/probabilite.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/headers/tuile.h">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/SDL_erreur.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/affiche_joueur.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/affiche_texte.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/architecture.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/carte.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/developpement.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/fenetre.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/place_infra.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/probabilite.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/vue/sources/tuile.c">
+			<Option target="catane"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/../../../../../../../../../usr/lib/x86_64-linux-gnu/cmake/SDL2/sdl2-config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SDL2\"/>
+		</Unit>
+		<Unit filename="/home/tgaborit/Documents/INSA/INSA Rennes/3A/S6/Projet Langage C/catane/cmake/FindSDL2_ttf.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>
