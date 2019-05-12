@@ -356,7 +356,7 @@ int obtenir_cartedev (Partie* partie)
  *de tout les autre joueurs.
  *
  * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
- * \return int: 0 si tout c'est bien passé -1 si le joueur n'as pas de carte monopole
+ * \return le nombre de ressources volées ou -1 si le joueur n'as pas de carte monopole
  */
 int utiliser_monopole (Partie* partie, TypeRessource type){
     int i,nb=0,tot=0;
@@ -373,7 +373,7 @@ int utiliser_monopole (Partie* partie, TypeRessource type){
     }
     //setOnNext_list_joueur(partie->joueurs);
     partie->joueurs->current->joueur->ressource[type].nb_ressource=tot;
-    return 0;
+    return tot;
 }
 
 /**
@@ -476,77 +476,90 @@ int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int p
  * \brief utilise une carte développemnt chevalier, bouge le voleur sur une nouvelle tuile de coordonée passé en paramètre,
  *vole une carte aléatoirement dans la main du joueur passé en paramètre et la donne au joueur qui appelle la carte chevalier.
  * \param Partie: etat de la partie
- * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructuresur un sommet de la tuile de coordonnées (x,y)
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructure sur un sommet de la tuile de coordonnées (x,y)
  */
 int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur){
+        setVoleur(partie,x,y);
+        perte_cartedev(CHEVALIER,get_joueur_actif(partie));
+        return vole_carte(partie,x,y,joueur);
+
+    }
+
+
+
+/**
+ * \fn int vole_carte(Partie* partie,double x, double y, Joueur* victime)
+ * \brief tente de voler une carte au hasard dans la main du joueur passé en parametre et de la donner ua joueur courant.
+ *
+ * \param Partie: etat de la partie, x et y les coordonnées de la tuile ou voler, victime le joueur à voler.
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructure sur un sommet de la tuile de coordonnées (x,y) ou s'il n'a pas de cartes.
+ */
+int vole_carte(Partie* partie,double x, double y, Joueur* victime){
+
     int i,rand_val;
     Noeud* current = deplacementPlateau(partie->plateau,x,y);
     Joueur* joueur_actif=get_joueur_actif(partie);
-    for(i=0;i<=6;++i){
-        if(strcmp(joueur->pseudo,current->t->s[i].owner->pseudo) ==0 && current->t->brigand!=0) {
-            setVoleur(partie,x,y);
-            if (get_nbressource_total(joueur)==0){
+
+   for(i=0;i<6;++i){
+        if(current->t->s[i].owner != NULL && strcmp(victime->pseudo,current->t->s[i].owner->pseudo) == 0) {
+            if (get_nbressource_total(victime) != 0){
                 int proba_ble,proba_bois,proba_pierre,proba_mouton,proba_argile;
                 rand_val=rand()%100;
-                proba_ble=(get_nbressource(BLE,joueur)*100)/get_nbressource_total(joueur);
-                proba_bois=(get_nbressource(BOIS,joueur)*100)/get_nbressource_total(joueur);
-                proba_pierre=(get_nbressource(PIERRE,joueur)*100)/get_nbressource_total(joueur);
-                proba_argile=(get_nbressource(ARGILE,joueur)*100)/get_nbressource_total(joueur);
-                proba_mouton=(get_nbressource(MOUTON,joueur)*100)/get_nbressource_total(joueur);
+                proba_ble=(get_nbressource(BLE,victime)*100)/get_nbressource_total(victime);
+                proba_bois=(get_nbressource(BOIS,victime)*100)/get_nbressource_total(victime);
+                proba_pierre=(get_nbressource(PIERRE,victime)*100)/get_nbressource_total(victime);
+                proba_argile=(get_nbressource(ARGILE,victime)*100)/get_nbressource_total(victime);
+                proba_mouton=(get_nbressource(MOUTON,victime)*100)/get_nbressource_total(victime);
 
-            if (rand_val<= proba_ble){
-                perte_ressource(BLE,joueur);
-                gain_ressource(BLE,joueur_actif);
+                if (rand_val<= proba_ble){
+                    perte_ressource(BLE,victime);
+                    gain_ressource(BLE,joueur_actif);
                 }
 
-            if(proba_ble<rand_val && rand_val<=(proba_ble+proba_bois))
-                {
-                perte_ressource(BOIS,joueur);
-                gain_ressource(BOIS,joueur_actif);
+                if(proba_ble<rand_val && rand_val<=(proba_ble+proba_bois)){
+                    perte_ressource(BOIS,victime);
+                    gain_ressource(BOIS,joueur_actif);
                 }
 
-            if((proba_ble+proba_bois)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre))
-                {
-                perte_ressource(PIERRE,joueur);
-                gain_ressource(PIERRE,joueur_actif);
+                if((proba_ble+proba_bois)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre)){
+                    perte_ressource(PIERRE,victime);
+                    gain_ressource(PIERRE,joueur_actif);
                 }
 
-            if((proba_ble+proba_bois+proba_pierre)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile))
-                {
-                perte_ressource(ARGILE,joueur);
-                gain_ressource(ARGILE,joueur_actif);
+                if((proba_ble+proba_bois+proba_pierre)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile)){
+                    perte_ressource(ARGILE,victime);
+                    gain_ressource(ARGILE,joueur_actif);
                 }
 
-            if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton))
-                {
-                perte_ressource(MOUTON,joueur);
-                gain_ressource(MOUTON,joueur_actif);
+                if ((proba_ble+proba_bois+proba_pierre+proba_argile)<rand_val && rand_val<=(proba_ble+proba_bois+proba_pierre+proba_argile+proba_mouton)){
+                    perte_ressource(MOUTON,victime);
+                    gain_ressource(MOUTON,joueur_actif);
                 }
-            }
-     joueur_actif->nbChevalier+=1;
-     return 0;
+                return 0;
             }
         }
-    return -1;
-    }
-
-    /**
- * \fn int action_voleur(Partie* partie,int des);
- * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
- *
- * \param Partie*: la partie en cours, int: résultat aux des
- * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
- */
-int action_voleur(Partie* partie,int des){
-    int i;
-    Joueur* current_joueur;
-    if (des==7){
-        for(i=0;i<=get_nbjoueurs(partie);++i){
-            current_joueur=partie->joueurs->current->joueur;
-            voleur_perte_ressource(current_joueur);
-            setOnNext_list_joueur(partie->joueurs);
-            }
-        return 0;
     }
     return -1;
 }
+
+    /**
+ * \fn int action_voleur(Partie* partie);
+ * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
+ *
+ * \param Partie*: la partie en cours
+ * \return le nombre de gens volés
+ */
+int action_voleur(Partie* partie){
+    int i,nb_vol=0;
+    Joueur* current_joueur;
+    for(i=0;i<get_nbjoueurs(partie);++i){
+        current_joueur=partie->joueurs->current->joueur;
+        printf("%s\n",current_joueur->pseudo);
+        if(voleur_perte_ressource(current_joueur) != -1){
+            ++nb_vol;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    return nb_vol;
+}
+

@@ -31,12 +31,15 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="`sdl2-config --cflags`" />
+			<Add option="-fprofile-arcs -ftest-coverage" />
 			<Add directory="modele/headers" />
 			<Add directory="vue/headers" />
 			<Add directory="controleur/headers" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl2-config --libs` -lSDL2_ttf" />
+			<Add option="-fprofile-arcs -ftest-coverage" />
+			<Add option="-lcmocka" />
 			<Add directory="/usr/lib/x86_64-linux-gnu" />
 		</Linker>
 		<Unit filename="controleur/headers/controller.h" />
@@ -96,9 +99,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="modele/sources/UTest-joueur.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="modele/sources/UTest-partie.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="modele/sources/UTest-set_partie.c">
@@ -163,9 +163,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="vue/sources/fenetre.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="vue/sources/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="vue/sources/place_infra.c">

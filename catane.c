@@ -23,14 +23,13 @@ int main()
     partie->plateau->adjacence[0]->t->a[4].owner=k;
     partie->plateau->adjacence[1]->t->a[1].owner=k;
 
-
+    gain_ressource(BOIS, j);
     for(int i=0; i<100; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);
         gain_ressource(BLE,k);
         gain_ressource(BOIS,k);
         gain_ressource(PIERRE,k);
-        gain_ressource(PIERRE,j);
     }
 
     controllerTurn(&program_launched, window, partie);

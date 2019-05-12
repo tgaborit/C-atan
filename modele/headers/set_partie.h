@@ -159,13 +159,23 @@ int utiliser_routes(Partie* partie,double x1,double y1,double x2,double y2,int p
  */
 int utiliser_chevalier(Partie* partie, double x, double y,Joueur* joueur);
 
+
+/**
+ * \fn int vole_carte(Partie* partie,double x, double y, Joueur* victime)
+ * \brief tente de voler une carte au hasard dans la main du joueur passé en parametre et de la donner ua joueur courant.
+ *
+ * \param Partie: etat de la partie, x et y les coordonnées de la tuile ou voler, victime le joueur à voler.
+ * \return 0 si tout c'est bien passé -1 si le joueur passé en paramètre n'a pas d'infrastructure sur un sommet de la tuile de coordonnées (x,y) ou s'il n'a pas de cartes.
+ */
+int vole_carte(Partie* partie,double x, double y, Joueur* victime);
+
     /**
- * \fn int action_voleur(Partie* partie,int des);
+ * \fn int action_voleur(Partie* partie);
  * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
  *
- * \param Partie*: la partie en cours, int: résultat aux des
- * \return int: 0 si tout c'est bien passé -1 si le résultats des des n'est pas 7
+ * \param Partie*: la partie en cours
+ * \return le nombre de gens volés
  */
-int action_voleur(Partie* partie,int des);
+int action_voleur(Partie* partie);
 
 #endif //MODELE_REMI_CATANE_PARTIE_H
