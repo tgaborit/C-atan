@@ -260,15 +260,15 @@ void distribution_ressource(Partie* partie){
 }
 
 /**
- * \fn void nb_routes_max(Partie* partie)
+ * \fn Joueur* nb_routes_max(Partie* partie)
  * \brief met à jour le point déscerné au détenteur du plus de routes
  *
  *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
  * \param Partie: etat de la partie
- * \return aucun retour
+ * \return retourne le joueur ayant le plus de routes posées ou NULL.
  */
 
-void nb_routes_max(Partie* partie){
+Joueur* nb_routes_max(Partie* partie){
     if(partie != NULL && partie->plateau != NULL){
         static Joueur* j_old = NULL;
         Joueur* j_new = joueur_nbRoute_max(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité).
@@ -278,21 +278,24 @@ void nb_routes_max(Partie* partie){
         if(j_new != NULL && j_new->nbRoute > 4){
             inc_score(j_new,1);
         }
-        j_old = j_new;
+        if(j_new == NULL || j_new->nbRoute > 4){
+            j_old = j_new;
+        }
+        return j_old;
     }
-
+    return NULL;
 }
 
 
 /**
- * \fn void nb_chevaliers_max(Partie* partie)
+ * \fn Joueur* nb_chevaliers_max(Partie* partie)
  * \brief met à jour le point déscerné au détenteur du plus de chevaliers activés.
  *
  *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
  * \param Partie: etat de la partie
- * \return aucun retour
+ * \return retourne le joueur ayant le plus de chevaliers activés ou NULL.
  */
-void nb_chevaliers_max(Partie* partie){
+Joueur* nb_chevaliers_max(Partie* partie){
     if(partie != NULL){
         static Joueur* j_old = NULL;
         Joueur* j_new = joueur_nbChevalier_max(partie);
@@ -305,7 +308,9 @@ void nb_chevaliers_max(Partie* partie){
         if(j_new == NULL || j_new->nbChevalier > 2){
             j_old = j_new;
         }
+        return j_old;
     }
+    return NULL;
 }
 
 /**
