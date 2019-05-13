@@ -7,7 +7,7 @@
  *
  */
 
-#include "get_partie.h"
+# include "get_partie.h"
 
 
 
@@ -98,75 +98,6 @@ int get_nbChevalier_joueuractif(Partie* partie)
     Joueur* joueur= get_joueur_actif(partie);
     return get_nbChevalier(joueur);
 }
-
-
-/**
- * \fn Joueur* get_joueur_chevaliers(Partie* partie)
- * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
- *
- * \param Partie* partie en cours
- * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a activé plus de trois chevaliers.
- */
-
-Joueur* get_joueur_chevaliers(Partie* partie){
-    int i, boolean_equal = 0;
-    Node_joueur* tmp = partie->joueurs->current;
-    setOnFirst_list_joueur(partie->joueurs);
-    Joueur* j_max = partie->joueurs->current->joueur;
-    setOnNext_list_joueur(partie->joueurs);
-
-    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus d'activations de chevaliers.
-        if(j_max->nbChevalier < partie->joueurs->current->joueur->nbChevalier){
-            j_max = partie->joueurs->current->joueur;
-            boolean_equal = 0;
-        }
-        else if(j_max->nbChevalier == partie->joueurs->current->joueur->nbChevalier){           // Si deux joueurs ont le même nombre de chevaliers, alors NULL est renvoyé
-            partie->joueurs->current = tmp;
-            boolean_equal = 1;
-        }
-        setOnNext_list_joueur(partie->joueurs);
-    }
-    partie->joueurs->current = tmp;
-    if(boolean_equal == 0){
-        return j_max;
-    }
-    return NULL;
-}
-
-
-/**
- * \fn Joueur* get_joueur_routes(Partie* partie)
- * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
- *
- * \param Partie* partie en cours
- * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a posé plus de cinq routes.
- */
-
-Joueur* get_joueur_routes(Partie* partie){
-    int i, boolean_equal = 0;
-    Node_joueur* tmp = partie->joueurs->current;
-    setOnFirst_list_joueur(partie->joueurs);
-    Joueur* j_max = partie->joueurs->current->joueur;
-    setOnNext_list_joueur(partie->joueurs);
-
-    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
-        if(j_max->nbRoute < partie->joueurs->current->joueur->nbRoute){
-            j_max = partie->joueurs->current->joueur;
-            boolean_equal = 0;
-        }
-        else if(j_max->nbRoute == partie->joueurs->current->joueur->nbRoute){           // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
-            partie->joueurs->current = tmp;
-            boolean_equal = 1;
-        }
-        setOnNext_list_joueur(partie->joueurs);
-    }
-    partie->joueurs->current = tmp;
-    if(boolean_equal == 0){
-        return j_max;
-    }
-    return NULL;
-}
-
 
 /**
  * \fn char* get_pseudo_joueuractif(Partie* partie)
