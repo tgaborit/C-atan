@@ -52,6 +52,9 @@ void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 {
 
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 30);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     TTF_SetFontStyle(police, TTF_STYLE_BOLD);
     char score[20]="";
     SDL_Color couleur;
@@ -173,6 +176,9 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
 void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer)
 {
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 
@@ -227,6 +233,9 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
 void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
 {
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 

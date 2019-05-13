@@ -80,6 +80,7 @@ set(HEADERS_CONTROLEUR
         controleur/headers/converters.h
         )
 
+# On génère les fichiers binaires dans un répertoire bin
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # On ajoute les fichiers source et les fichiers d'en-tête du modèle, de la vue, du contrôleur à l'exécutable catane.

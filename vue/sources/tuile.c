@@ -27,7 +27,7 @@ void AfficheTuile(SDL_Renderer* renderer)
 	image = SDL_LoadBMP("images/plateau.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image plateau.bmp");
 
 	texture = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -68,7 +68,7 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 	image = SDL_LoadBMP("images/tuileargile.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image tuileargile.bmp");
 
 	argile = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -109,7 +109,7 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 	image = SDL_LoadBMP("images/tuileble.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image tuileble.bmp");
 
 	ble = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -150,7 +150,7 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 	image = SDL_LoadBMP("images/tuilebois.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image tuilebois.bmp");
 
 	bois = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -191,7 +191,7 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 	image = SDL_LoadBMP("images/tuilemouton.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image tuilemouton.bmp");
 
 	mouton = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -232,7 +232,7 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 	image = SDL_LoadBMP("images/tuileroche.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image tuileroche.bmp");
 
 	roche = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);

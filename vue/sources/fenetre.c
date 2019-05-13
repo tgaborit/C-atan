@@ -45,7 +45,7 @@ SDL_Window* InitFenetre(){
     SDL_Window *window = NULL;
 
     if(TTF_Init()!=0){
-        fprintf(stderr, "Erreur d'initialisation TTf : %s\n", TTF_GetError());
+        fprintf(stderr, "Erreur d'initialisation TTF : %s\n", TTF_GetError());
     }
 
 	if(SDL_Init(SDL_INIT_VIDEO)!=0)
@@ -92,7 +92,7 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	if(renderer == NULL)
 		SDL_ExitWithError("Creation rendu echouée");
 
-    	AfficheDe(window, p);
+    AfficheDe(window, p);
 	AfficheChevalier(renderer);
 	AfficheMonopole(renderer);
 	AfficheInvention(renderer);
@@ -164,9 +164,10 @@ void AfficheSkip(SDL_Renderer* renderer)
 	image = SDL_LoadBMP("images/skip.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image skip.bmp");
 
 	skip = SDL_CreateTextureFromSurface(renderer, image);
+
 	SDL_FreeSurface(image);
 
 
@@ -200,6 +201,10 @@ void AfficheDe(SDL_Window* window, Partie* partie)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
     TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
+
+    if(police == NULL)
+		SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     int lancer = get_des(partie);
     char de[20] = "";
@@ -229,7 +234,12 @@ void AfficheDe(SDL_Window* window, Partie* partie)
 
 
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
+    if(surfde == NULL)
+        SDL_ExitWithError("Echec de la creation de la surface du de");
+
     SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
+    if(textde == NULL)
+        SDL_ExitWithError("Echec de la creation de la texture du de");
 
     SDL_QueryTexture(textde, NULL, NULL, &rect.w, &rect.h);
 
@@ -257,7 +267,7 @@ void AfficheHelp(SDL_Renderer* renderer)
 	image = SDL_LoadBMP("images/help.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image help.bmp");
 
 	help = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -308,7 +318,7 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 		image = SDL_LoadBMP("images/voleur.bmp");
 
 		if(image == NULL)
-			SDL_ExitWithError("Impossible de charger l'image");
+			SDL_ExitWithError("Impossible de charger l'image voleur.bmp");
 
 		voleur = SDL_CreateTextureFromSurface(renderer, image);
 		SDL_FreeSurface(image);
