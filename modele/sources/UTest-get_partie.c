@@ -137,6 +137,25 @@ static void test_get_nbChevalier_joueuractif(void** state){
     assert_int_equal(0,get_nbChevalier_joueuractif(partie));
 }
 
+static void test_get_joueur_chevaliers(void** state){
+    Partie* partie = (Partie*) *(state);
+    partie->joueurs->first->joueur->nbChevalier=5;
+    partie->joueurs->first->next->joueur->nbChevalier = 7;
+    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_chevaliers(partie));
+    partie->joueurs->first->next->next->joueur->nbChevalier = 7;
+    assert_ptr_equal(NULL,get_joueur_chevaliers(partie));
+}
+
+static void test_get_joueur_routes(void** state){
+    Partie* partie = (Partie*) *(state);
+    partie->joueurs->first->joueur->nbRoute=5;
+    partie->joueurs->first->next->joueur->nbRoute = 7;
+    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_routes(partie));
+    partie->joueurs->first->next->next->joueur->nbRoute = 7;
+    assert_ptr_equal(NULL,get_joueur_routes(partie));
+
+}
+
 static void test_test_pseudo(void** state){
     Partie* partie= *state;
     int flag;
@@ -177,6 +196,8 @@ int main_get_partie_test(void)
         cmocka_unit_test_setup_teardown(test_get_pseudo_joueuractif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_score_max,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_nbChevalier_joueuractif,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_chevaliers,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_routes,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_get_joueur_actif,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_test_pseudo,setup_partie,teardown),
 

@@ -94,26 +94,26 @@ void distribution_ressource(Partie* partie);
 void gagne_ressource(int lance_des, Partie* partie);
 
 /**
- * \fn Joueur* nb_routes_max(Partie* partie)
+ * \fn void nb_routes_max(Partie* partie)
  * \brief met à jour le point déscerné au détenteur du plus de routes
  *
  *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
  * \param Partie: etat de la partie
- * \return retourne le joueur ayant le plus de routes posées ou NULL.
+ * \return aucun retour
  */
 
-Joueur* nb_routes_max(Partie* partie);
+void nb_routes_max(Partie* partie);
 
 
 /**
- * \fn Joueur* nb_chevaliers_max(Partie* partie)
+ * \fn void nb_chevaliers_max(Partie* partie)
  * \brief met à jour le point déscerné au détenteur du plus de chevaliers activés.
  *
  *  Enleve un point à l'ancien détenteur et en rajoute un au nouveau (sauf en cas d'égalité)
  * \param Partie: etat de la partie
- * \return retourne le joueur ayant le plus de chevaliers activés ou NULL.
+ * \return auncun retour
  */
-Joueur* nb_chevaliers_max(Partie* partie);
+void nb_chevaliers_max(Partie* partie);
 
 
 /**
