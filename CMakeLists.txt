@@ -91,7 +91,7 @@ add_executable(catane catane.c
 # On ajoute les dossiers contenant les fichiers d'en-tête du modèle, de la vue, du contrôleur, à la liste des dossiers où chercher les fichiers d'en-tête
 target_include_directories(catane PUBLIC ${CMAKE_SOURCE_DIR}/modele/headers ${CMAKE_SOURCE_DIR}/vue/headers ${CMAKE_SOURCE_DIR}/controleur/headers)
 
-target_link_directories(catane PUBLIC /usr/lib/x86_64-linux-gnu)
+target_include_directories(catane PUBLIC /usr/lib/x86_64-linux-gnu)
 
 # On inclut la biliothèque math.h au projet
 target_link_libraries(catane m)
