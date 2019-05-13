@@ -80,3 +80,20 @@ bin/
 obj/
 
 # found on https://www.gitignore.io/api/codeblocks
+
+
+### CMake ###
+
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# found on https://github.com/github/gitignore/blob/master/CMake.gitignore

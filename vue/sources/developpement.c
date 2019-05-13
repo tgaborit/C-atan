@@ -59,7 +59,7 @@ void AfficheChevalier(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/chevalier.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image chevalier.bmp");
 
 	chevalier = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -100,7 +100,7 @@ void AfficheMonopole(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/monopole.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image monopole.bmp");
 
 	monopole = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -140,7 +140,7 @@ void AfficheInvention(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/invention.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image invention.bmp");
 
 	invention = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -180,7 +180,7 @@ void AfficheRouteDev(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/routedev.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image routedev.bmp");
 
 	route = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -220,7 +220,7 @@ void AfficheUniversite(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/universite.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image universite.bmp");
 
 	universite = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -260,7 +260,7 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/cartereussitechevalier.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image cartereussitechevalier.bmp");
 
 	reussitechevalier = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -300,7 +300,7 @@ void AfficheGrandeRoute(SDL_Renderer *renderer)
 	image = SDL_LoadBMP("images/cartereussiteroute.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image cartereussiteroute.bmp");
 
 	reussiteroute = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
