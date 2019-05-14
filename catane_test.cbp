@@ -35,6 +35,9 @@
 			<Add directory="modele/headers" />
 			<Add directory="vue/headers" />
 			<Add directory="controleur/headers" />
+			<Add directory="tests" />
+			<Add directory="tests/modele/sources" />
+			<Add directory="tests/modele/headers" />
 		</Compiler>
 		<Linker>
 			<Add option="`sdl2-config --libs` -lSDL2_ttf" />
@@ -78,12 +81,6 @@
 		<Unit filename="controleur/sources/converters.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="main_test.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="modele/headers/UTest-get_partie.h" />
-		<Unit filename="modele/headers/UTest-joueur.h" />
-		<Unit filename="modele/headers/UTest-set_partie.h" />
 		<Unit filename="modele/headers/get_partie.h" />
 		<Unit filename="modele/headers/get_plateau.h" />
 		<Unit filename="modele/headers/joueur.h" />
@@ -92,18 +89,6 @@
 		<Unit filename="modele/headers/ressource.h" />
 		<Unit filename="modele/headers/set_partie.h" />
 		<Unit filename="modele/headers/set_plateau.h" />
-		<Unit filename="modele/headers/test_get_plateau.h" />
-		<Unit filename="modele/headers/test_plateau.h" />
-		<Unit filename="modele/headers/test_set_plateau.h" />
-		<Unit filename="modele/sources/UTest-get_partie.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="modele/sources/UTest-joueur.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="modele/sources/UTest-set_partie.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="modele/sources/get_partie.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -125,13 +110,31 @@
 		<Unit filename="modele/sources/set_plateau.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="modele/sources/test_get_plateau.c">
+		<Unit filename="tests/catane_tests.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="modele/sources/test_plateau.c">
+		<Unit filename="tests/modele/headers/UTest-get_partie.h" />
+		<Unit filename="tests/modele/headers/UTest-joueur.h" />
+		<Unit filename="tests/modele/headers/UTest-set_partie.h" />
+		<Unit filename="tests/modele/headers/test_get_plateau.h" />
+		<Unit filename="tests/modele/headers/test_plateau.h" />
+		<Unit filename="tests/modele/headers/test_set_plateau.h" />
+		<Unit filename="tests/modele/sources/UTest-get_partie.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="modele/sources/test_set_plateau.c">
+		<Unit filename="tests/modele/sources/UTest-joueur.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tests/modele/sources/UTest-set_partie.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tests/modele/sources/test_get_plateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tests/modele/sources/test_plateau.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tests/modele/sources/test_set_plateau.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="vue/headers/SDL_erreur.h" />

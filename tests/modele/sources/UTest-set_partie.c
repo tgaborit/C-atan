@@ -291,7 +291,7 @@ static void test_obtenir_cartedev(void** state)
     joueur->ressource[MOUTON].nb_ressource=30;
     joueur->ressource[BLE].nb_ressource=30;
 
-    while(flag=obtenir_cartedev(partie)==0){
+    while((flag = obtenir_cartedev(partie)) == 0){
     n=0;
     for(i=0;i<=4;++i){
         n+=joueur->carte_dev[i].nb_carte;
