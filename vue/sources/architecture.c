@@ -24,7 +24,7 @@ void AfficheBoutonDev(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutondev = NULL;
 
-	image = SDL_LoadBMP("images/dev.bmp");
+	image = SDL_LoadBMP("../images/dev.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image dev.bmp");
@@ -64,7 +64,7 @@ void AfficheBoutonRoute(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonroute = NULL;
 
-	image = SDL_LoadBMP("images/boutonroute.bmp");
+	image = SDL_LoadBMP("../images/boutonroute.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image boutonroute.bmp");
@@ -104,7 +104,7 @@ void AfficheBoutonColonie(SDL_Renderer *renderer)
  SDL_Surface* image = NULL;
 	SDL_Texture* boutoncolonie = NULL;
 
-	image = SDL_LoadBMP("images/boutoncolonie.bmp");
+	image = SDL_LoadBMP("../images/boutoncolonie.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image bouton colonie.bmp");
@@ -144,7 +144,7 @@ void AfficheBoutonVille(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonville = NULL;
 
-	image = SDL_LoadBMP("images/boutonville.bmp");
+	image = SDL_LoadBMP("../images/boutonville.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image boutonville.bmp");

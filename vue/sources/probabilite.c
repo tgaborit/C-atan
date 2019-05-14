@@ -25,7 +25,7 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p2 = NULL;
 
-	image = SDL_LoadBMP("images/2.bmp");
+	image = SDL_LoadBMP("../images/2.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 2.bmp");
@@ -65,7 +65,7 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p3 = NULL;
 
-	image = SDL_LoadBMP("images/3.bmp");
+	image = SDL_LoadBMP("../images/3.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 3.bmp");
@@ -105,7 +105,7 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p4 = NULL;
 
-	image = SDL_LoadBMP("images/4.bmp");
+	image = SDL_LoadBMP("../images/4.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 4.bmp");
@@ -145,7 +145,7 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p5 = NULL;
 
-	image = SDL_LoadBMP("images/5.bmp");
+	image = SDL_LoadBMP("../images/5.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 5.bmp");
@@ -186,7 +186,7 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p6 = NULL;
 
-	image = SDL_LoadBMP("images/6.bmp");
+	image = SDL_LoadBMP("../images/6.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 6.bmp");
@@ -229,7 +229,7 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p7 = NULL;
 
-	image = SDL_LoadBMP("images/7.bmp");
+	image = SDL_LoadBMP("../images/7.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 7.bmp");
@@ -271,7 +271,7 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p8 = NULL;
 
-	image = SDL_LoadBMP("images/8.bmp");
+	image = SDL_LoadBMP("../images/8.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 8.bmp");
@@ -311,7 +311,7 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p9 = NULL;
 
-	image = SDL_LoadBMP("images/9.bmp");
+	image = SDL_LoadBMP("../images/9.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 9.bmp");
@@ -351,7 +351,7 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p10 = NULL;
 
-	image = SDL_LoadBMP("images/10.bmp");
+	image = SDL_LoadBMP("../images/10.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 10.bmp");
@@ -391,7 +391,7 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p11 = NULL;
 
-	image = SDL_LoadBMP("images/11.bmp");
+	image = SDL_LoadBMP("../images/11.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 11.bmp");
@@ -431,7 +431,7 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p12 = NULL;
 
-	image = SDL_LoadBMP("images/12.bmp");
+	image = SDL_LoadBMP("../images/12.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image 12.bmp");

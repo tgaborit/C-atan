@@ -23,7 +23,7 @@ void AfficheCarteArgile(SDL_Renderer* renderer){
 	SDL_Surface *image = NULL;
 	SDL_Texture *cargile = NULL;
 
-	image = SDL_LoadBMP("images/carteargile.bmp");
+	image = SDL_LoadBMP("../images/carteargile.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image carteargile.bmp");
@@ -63,7 +63,7 @@ void AfficheCarteBle(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cble = NULL;
 
-	image = SDL_LoadBMP("images/carteble.bmp");
+	image = SDL_LoadBMP("../images/carteble.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image carteble.bmp");
@@ -103,7 +103,7 @@ void AfficheCarteBois(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cbois = NULL;
 
-	image = SDL_LoadBMP("images/cartebois.bmp");
+	image = SDL_LoadBMP("../images/cartebois.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image cartebois.bmp");
@@ -143,7 +143,7 @@ void AfficheCarteMouton(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *cmouton = NULL;
 
-	image = SDL_LoadBMP("images/cartemouton.bmp");
+	image = SDL_LoadBMP("../images/cartemouton.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image cartemouton.bmp");
@@ -184,7 +184,7 @@ void AfficheCarteRoche(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *croche = NULL;
 
-	image = SDL_LoadBMP("images/carteroche.bmp");
+	image = SDL_LoadBMP("../images/carteroche.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image carteroche.bmp");

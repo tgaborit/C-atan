@@ -27,7 +27,7 @@ static int fill_text(char* frag, char* buffer){
 
 static void PrintText(SDL_Window* window, char* frag, int ligne){
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-    TTF_Font* police = TTF_OpenFont("fonts/DejaVuSansMono.ttf", 14);
+    TTF_Font* police = TTF_OpenFont("../fonts/DejaVuSansMono.ttf", 14);
         if (police == NULL)
         SDL_ExitWithError("Echec du chargement de la police DejaVuSansMono.ttf");
 
