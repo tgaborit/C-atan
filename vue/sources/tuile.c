@@ -24,7 +24,7 @@ void AfficheTuile(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *texture = NULL;
 
-	image = SDL_LoadBMP("images/plateau.bmp");
+	image = SDL_LoadBMP("../images/plateau.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image plateau.bmp");
@@ -65,7 +65,7 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *argile = NULL;
 
-	image = SDL_LoadBMP("images/tuileargile.bmp");
+	image = SDL_LoadBMP("../images/tuileargile.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image tuileargile.bmp");
@@ -106,7 +106,7 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *ble = NULL;
 
-	image = SDL_LoadBMP("images/tuileble.bmp");
+	image = SDL_LoadBMP("../images/tuileble.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image tuileble.bmp");
@@ -147,7 +147,7 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *bois = NULL;
 
-	image = SDL_LoadBMP("images/tuilebois.bmp");
+	image = SDL_LoadBMP("../images/tuilebois.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image tuilebois.bmp");
@@ -188,7 +188,7 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *mouton = NULL;
 
-	image = SDL_LoadBMP("images/tuilemouton.bmp");
+	image = SDL_LoadBMP("../images/tuilemouton.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image tuilemouton.bmp");
@@ -229,7 +229,7 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 	SDL_Surface *image = NULL;
 	SDL_Texture *roche = NULL;
 
-	image = SDL_LoadBMP("images/tuileroche.bmp");
+	image = SDL_LoadBMP("../images/tuileroche.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image tuileroche.bmp");

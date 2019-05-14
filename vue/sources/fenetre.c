@@ -161,7 +161,7 @@ void AfficheSkip(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *skip = NULL;
 
-	image = SDL_LoadBMP("images/skip.bmp");
+	image = SDL_LoadBMP("../images/skip.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image skip.bmp");
@@ -200,7 +200,7 @@ void AfficheSkip(SDL_Renderer* renderer)
 void AfficheDe(SDL_Window* window, Partie* partie)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 100);
 
     if(police == NULL)
 		SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
@@ -264,7 +264,7 @@ void AfficheHelp(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *help = NULL;
 
-	image = SDL_LoadBMP("images/help.bmp");
+	image = SDL_LoadBMP("../images/help.bmp");
 
 	if(image == NULL)
 		SDL_ExitWithError("Impossible de charger l'image help.bmp");
@@ -315,7 +315,7 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 		SDL_Surface *image = NULL;
 		SDL_Texture *voleur = NULL;
 
-		image = SDL_LoadBMP("images/voleur.bmp");
+		image = SDL_LoadBMP("../images/voleur.bmp");
 
 		if(image == NULL)
 			SDL_ExitWithError("Impossible de charger l'image voleur.bmp");
