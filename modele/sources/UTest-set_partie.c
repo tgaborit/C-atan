@@ -285,18 +285,20 @@ static void test_nb_chevaliers_max(void** state){
 static void test_obtenir_cartedev(void** state)
 {
     Partie* partie= *state;
-    int flag,n=0,i;
+    int flag,n=0,i,c=1;
     Joueur* joueur= partie->joueurs->current->joueur;
-    gain_ressource(MOUTON,joueur);
-    gain_ressource(BLE,joueur);
-    gain_ressource(PIERRE,joueur);
-    flag=obtenir_cartedev(partie);
+    joueur->ressource[PIERRE].nb_ressource=30;
+    joueur->ressource[MOUTON].nb_ressource=30;
+    joueur->ressource[BLE].nb_ressource=30;
 
+    while(flag=obtenir_cartedev(partie)==0){
+    n=0;
     for(i=0;i<=4;++i){
         n+=joueur->carte_dev[i].nb_carte;
     }
-    assert_int_equal(0,flag);
-    assert_int_equal(1,n);
+    assert_int_equal(c,n);
+    ++c;
+    }
 
     flag=obtenir_cartedev(partie);
     n=0;
@@ -304,7 +306,7 @@ static void test_obtenir_cartedev(void** state)
         n+=joueur->carte_dev[i].nb_carte;
     }
     assert_int_equal(-1,flag);
-    assert_int_equal(1,n);
+    assert_int_equal(25,n);
 }
 
 static void test_utiliser_monopole(void** state){
@@ -399,6 +401,7 @@ static void test_utiliser_routes_sanscarte(void** state)
 static void test_utiliser_routes_mauvaises_coordonnees(void** state)
 {
     Partie* partie= *state;
+    get_joueur_actif(partie)->carte_dev[ROUTES].nb_carte=1;
     int flag= utiliser_routes(partie,1,0,2,0,1,1);
     assert_int_equal(flag,-1);
 }
@@ -410,16 +413,39 @@ static void test_utiliser_routes_1bonne_coordonnee(void** state)
     partie->joueurs->current->joueur->carte_dev[ROUTES].nb_carte=1;
 
     Noeud* cur = deplacementPlateau(plateau,1,0);
-    cur->t->s[0].i=COLONIE;
-    cur->t->s[0].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,0.5,1);
     cur->t->s[4].i=COLONIE;
     cur->t->s[4].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,0,0);
+    cur=deplacementPlateau(plateau,0.5,-1);
     cur->t->s[2].i=COLONIE;
     cur->t->s[2].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,1.5,-1);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
 
-    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    int flag= utiliser_routes(partie,1,0,2,0,4,1);
+    assert_int_equal(flag,-1);
+    assert_ptr_equal(getJoueurArrete(partie,1,0,1),NULL);
+    assert_int_equal(1,get_nbcartedev_joueuractif(ROUTES,partie));
+}
+
+
+static void test_utiliser_routes_2bonne_coordonnee(void** state)
+{
+    Partie* partie= *state;
+    Plateau* plateau= partie->plateau;
+    partie->joueurs->current->joueur->carte_dev[ROUTES].nb_carte=1;
+
+    Noeud* cur = deplacementPlateau(plateau,1,0);
+    cur->t->s[4].i=COLONIE;
+    cur->t->s[4].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,0.5,-1);
+    cur->t->s[2].i=COLONIE;
+    cur->t->s[2].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,1.5,-1);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
+
+    int flag= utiliser_routes(partie,0,0,1,0,0,4);
     assert_int_equal(flag,-1);
     assert_ptr_equal(getJoueurArrete(partie,1,0,1),NULL);
     assert_int_equal(1,get_nbcartedev_joueuractif(ROUTES,partie));
@@ -432,29 +458,26 @@ static void test_utiliser_routes_bonnes_coordonnees(void** state)
     partie->joueurs->current->joueur->carte_dev[ROUTES].nb_carte=1;
 
     Noeud* cur = deplacementPlateau(plateau,1,0);
-    cur->t->s[0].i=COLONIE;
-    cur->t->s[0].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,0.5,1);
     cur->t->s[4].i=COLONIE;
     cur->t->s[4].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,0,0);
+    cur=deplacementPlateau(plateau,0.5,-1);
     cur->t->s[2].i=COLONIE;
     cur->t->s[2].owner=get_joueur_actif(partie);
+    cur=deplacementPlateau(plateau,1.5,-1);
+    cur->t->s[0].i=COLONIE;
+    cur->t->s[0].owner=get_joueur_actif(partie);
 
     cur=deplacementPlateau(plateau,2,0);
-    cur->t->s[0].i=COLONIE;
-    cur->t->s[0].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,1.5,1);
     cur->t->s[4].i=COLONIE;
     cur->t->s[4].owner=get_joueur_actif(partie);
-    cur=deplacementPlateau(plateau,1,0);
+    cur=deplacementPlateau(plateau,1.5,-1);
     cur->t->s[2].i=COLONIE;
     cur->t->s[2].owner=get_joueur_actif(partie);
 
-    int flag= utiliser_routes(partie,1,0,2,0,1,1);
+    int flag= utiliser_routes(partie,1,0,2,0,4,4);
     assert_int_equal(flag,0);
-    assert_ptr_equal(getJoueurArrete(partie,1,0,1),get_joueur_actif(partie));
-    assert_ptr_equal(getJoueurArrete(partie,2,0,1),get_joueur_actif(partie));
+    assert_ptr_equal(getJoueurArrete(partie,1,0,4),get_joueur_actif(partie));
+    assert_ptr_equal(getJoueurArrete(partie,2,0,4),get_joueur_actif(partie));
     assert_int_equal(0,get_nbcartedev_joueuractif(ROUTES,partie));
 }
 static void test_utiliser_chevalier(void** state)
@@ -517,10 +540,16 @@ static void test_utiliser_chevalier_sanscarte(void** state){
 
 static void test_action_voleur(void** state){
     Partie* partie= *state;
-    int i;
+    int i,j;
+    for(i=0;i<get_nbjoueurs(partie);++i){
+        for(j=0;j<=4;++j){
+            get_joueur_actif(partie)->ressource[j].nb_ressource=10;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
     action_voleur(partie);
     for(i=1;i<=4;++i){
-    assert_int_equal(5, get_nbressource_total(get_joueur_actif(partie)));
+    assert_int_equal(25, get_nbressource_total(get_joueur_actif(partie)));
     setOnNext_list_joueur(partie->joueurs);
     }
 }
@@ -559,6 +588,7 @@ int main_partie_test(void)
         cmocka_unit_test_setup_teardown(test_utiliser_routes_bonnes_coordonnees,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_routes_mauvaises_coordonnees,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_routes_1bonne_coordonnee,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_utiliser_routes_2bonne_coordonnee,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sansjoueur,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sanscarte,setup_partie_ressource,teardown),
