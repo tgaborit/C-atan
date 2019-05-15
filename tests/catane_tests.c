@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL.h>
 #include "test_get_plateau.h"
 #include "test_set_plateau.h"
 #include "test_plateau.h"

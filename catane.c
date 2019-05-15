@@ -18,7 +18,7 @@ int main()
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
 
-    for(int i=0; i<1; ++i){
+    for(int i=0; i<100; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);
         gain_ressource(BLE,k);
