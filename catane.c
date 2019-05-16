@@ -4,6 +4,7 @@
 #include "controller_turn.h"
 #include "set_partie.h"
 #include "fenetre.h"
+#include "controller_preparation.h"
 
 int main()
 {
@@ -26,7 +27,9 @@ int main()
         gain_ressource(PIERRE,k);
     }
 
-    controllerTurn(&program_launched, window, partie);
+    //controllerTurn(&program_launched, window, partie);
+
+    controllerPreparation(&program_launched, window, partie);
 
     destroyFenetre(window);
 

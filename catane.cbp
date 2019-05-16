@@ -49,6 +49,7 @@
 		<Unit filename="controleur/headers/controller_crossing.h" />
 		<Unit filename="controleur/headers/controller_path.h" />
 		<Unit filename="controleur/headers/controller_player.h" />
+		<Unit filename="controleur/headers/controller_preparation.h" />
 		<Unit filename="controleur/headers/controller_resource.h" />
 		<Unit filename="controleur/headers/controller_terrain.h" />
 		<Unit filename="controleur/headers/controller_turn.h" />
