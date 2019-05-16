@@ -21,7 +21,14 @@
 #include <math.h>
 
 
-
+  /**
+* \fn void setOnFirst_joueur(Partie* partie)
+* \brief remet la liste de joueurs sur le premier.
+*
+* \param Partie*:partie
+* \return aucun retour.
+*/
+void setOnFirst_joueur(Partie* partie);
 
   /**
 * \fn int find_joueur(Partie* partie, Joueur* joueur)
