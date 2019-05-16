@@ -52,7 +52,7 @@ SDL_Window* InitFenetre(){
 		SDL_ExitWithError("Initialisation SDL impossible");
 
 	//Creation de la fenetre en fullscreen et rendu
-	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, 0)) == NULL)
+	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, SDL_WINDOW_FULLSCREEN_DESKTOP)) == NULL)
 		SDL_ExitWithError("Impossible de creer la fenetre");
 
     return window;
