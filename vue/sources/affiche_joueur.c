@@ -300,3 +300,91 @@ void AfficheNbCarte(Partie* p, SDL_Renderer* renderer)
 	AfficheNombreDev(POINT, p, renderer);
 	SDL_RenderPresent(renderer);
 }
+
+
+/**
+ * \fn void AfficheNbReussiteChevalier(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 15);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+
+	SDL_Rect rect;
+	rect.x = 155;
+	rect.y = 235;
+	rect.w = 100;
+	rect.h = 100;
+
+    SDL_Surface* surfnb = NULL;
+    p->joueurs->current->joueur = get_joueur_chevaliers(p);
+    if(p->joueurs->current->joueur == get_joueur_chevaliers(p)){
+         surfnb = TTF_RenderText_Blended(police, "1", couleur);
+
+    }else{
+        surfnb = TTF_RenderText_Blended(police, "0", couleur);
+    }
+
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    TTF_CloseFont(police);
+}
+
+
+/**
+ * \fn void AfficheNbReussiteChevalier(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteRoute(Partie*p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 15);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+
+	SDL_Rect rect;
+	rect.x = 330;
+	rect.y = 235;
+	rect.w = 100;
+	rect.h = 100;
+
+	 SDL_Surface* surfnb = NULL;
+
+    if(p->joueurs->current->joueur == get_joueur_routes(p)){
+        surfnb = TTF_RenderText_Blended(police, "1", couleur);
+
+    }else{
+        surfnb = TTF_RenderText_Blended(police, "0", couleur);
+    }
+
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    SDL_RenderPresent(renderer);
+
+    TTF_CloseFont(police);
+}

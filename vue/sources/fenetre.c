@@ -122,6 +122,8 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	AfficheTexte_MAJ(window);
 	AfficheListeJoueurs(p, renderer);
 	AfficheNbCarte(p, renderer);
+	AfficheNbReussiteChevalier(p, renderer);
+	AfficheNbReussiteRoute(p, renderer);
     SDL_RenderPresent(renderer);
 
 	AfficheTexte_MAJ(window);
