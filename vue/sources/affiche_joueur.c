@@ -326,7 +326,6 @@ void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
 	rect.h = 100;
 
     SDL_Surface* surfnb = NULL;
-    p->joueurs->current->joueur = get_joueur_chevaliers(p);
     if(p->joueurs->current->joueur == get_joueur_chevaliers(p)){
          surfnb = TTF_RenderText_Blended(police, "1", couleur);
 
