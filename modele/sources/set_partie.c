@@ -14,8 +14,6 @@
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
     Node_joueur* new= (Node_joueur*) malloc(sizeof(Node_joueur));
-    new->joueur = (Joueur*) malloc(sizeof(Joueur));
-    new->next= (Node_joueur*) malloc(sizeof(Node_joueur));
     new->joueur=joueur;
     new->next=next;
     return new;
