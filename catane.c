@@ -6,6 +6,7 @@
 #include "fenetre.h"
 #include "controller_preparation.h"
 #include "controller_dice.h"
+#include "controller.h"
 
 int main()
 {
@@ -41,6 +42,9 @@ int main()
             break;
 
         controllerTurn(&program_launched, window, partie);
+
+        if(get_score_max(partie) >= 10)
+            quit(&program_launched);
 
         passer_tour(partie);
     }
