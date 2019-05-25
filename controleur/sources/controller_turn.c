@@ -52,7 +52,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
     SDL_bool turn_launched = SDL_TRUE;
     while(turn_launched == SDL_TRUE)
     {
-//        drawTurnButtons(window);
+        drawTurnButtons(window);
 
         SDL_Event event;
         while(SDL_PollEvent(&event))
@@ -386,7 +386,7 @@ void initKnightDevArea()
     knight_dev_area.h = DEVH;
 
     knight_dev_area.x = 100;
-    knight_dev_area.y = 240;
+    knight_dev_area.y = 275;
 }
 
 /**

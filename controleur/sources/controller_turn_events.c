@@ -22,6 +22,7 @@
 #include "set_partie.h"
 #include "ressource.h"
 #include "affiche_texte.h"
+#include "fenetre.h"
 
 
 /**
@@ -392,9 +393,8 @@ void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
     }
     while (bool_routes != 0);
 
-    if(bool_routes == 0){
-        AfficheTexte_Routes_Succes(window);
-    }
+    AfficheTexte_Routes_Succes(window);
+
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -485,6 +485,8 @@ void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program
     TerrButton terr_clicked = NO_TERRBUTTON;
     PlayerButton player_clicked = NO_PLAYERBUTTON;
     AfficheTexte_ChoixTuileVoleur(window);
+
+    updateFenetre(the_game, window);
 
     do
     {
