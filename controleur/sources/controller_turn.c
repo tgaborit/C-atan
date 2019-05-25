@@ -29,7 +29,6 @@ static SDL_Rect invent_dev_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect roads_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Routes*/
 static SDL_Rect univ_dev_area;          /*!< Rectangle correspondant à la zone du bouton de la carte développement Université*/
 
-static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone du bouton Aide*/
@@ -122,17 +121,10 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                     useUnivEvent(the_game, window);
                     break;
 
-
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
                     printf("Appel de la fonction endTurnEvent(the_game)\n");
                     endTurnEvent(the_game);
-                    break;
-
-                case DICE_BUTTON :
-                    printf("Clic sur bouton Lancer les des\n");
-                    printf("Appel de la fonction rollDiceEvent(the_game)\n");
-                    rollDiceEvent(the_game, window, program_launched);
                     break;
 
                 case HELP_BUTTON :
@@ -188,7 +180,7 @@ void drawTurnButtons(SDL_Window* window)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
     SDL_Rect turn_buttons[NTURNBUTTONS] = {dev_craft_area, road_craft_area, settle_craft_area, city_craft_area,
-    knight_dev_area, monop_dev_area, invent_dev_area, roads_dev_area, univ_dev_area, dice_area, end_turn_area, help_area};
+    knight_dev_area, monop_dev_area, invent_dev_area, roads_dev_area, univ_dev_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -214,8 +206,6 @@ TurnButton whichTurnButton(SDL_MouseButtonEvent mouse_button){
         return button_clicked;
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
-    if(isInArea(mouse_button, dice_area) == SDL_TRUE)
-        return DICE_BUTTON;
     if(isInArea(mouse_button, help_area) == SDL_TRUE)
         return HELP_BUTTON;
     return NO_TURNBUTTON;
@@ -278,7 +268,6 @@ void initTurnButtons()
 {
     initCraftAreas();
     initDevCardsAreas();
-    initDiceArea();
     initEndTurnArea();
     initHelpArea();
 }
@@ -456,22 +445,6 @@ void initUnivDevArea()
 
     univ_dev_area.x = knight_dev_area.x;
     univ_dev_area.y = roads_dev_area.y + 25 + univ_dev_area.h;
-}
-
-/**
-* \fn void initDiesArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés.
-*
-* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
-* Assigne les valeurs de position selon le placement souhaité.
-*/
-void initDiceArea()
-{
-    dice_area.w = 100;
-    dice_area.h = 100;
-
-    dice_area.x = dev_craft_area.x + dev_craft_area.w/2 - dice_area.w/2;
-    dice_area.y = 75;
 }
 
 /**

@@ -31,8 +31,10 @@ int main()
         gain_ressource(PIERRE,k);
     }
 
-    controllerPreparation(&program_launched, window, partie);
-    controllerTurn(&program_launched, window, partie);
+//    controllerPreparation(&program_launched, window, partie);
+//    controllerTurn(&program_launched, window, partie);
+
+    controllerDice(&program_launched, window, partie);
 
     destroyFenetre(window);
 
