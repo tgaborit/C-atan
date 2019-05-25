@@ -5,6 +5,7 @@
 #include "set_partie.h"
 #include "fenetre.h"
 #include "controller_preparation.h"
+#include "controller_dice.h"
 
 int main()
 {
@@ -31,10 +32,14 @@ int main()
         gain_ressource(PIERRE,k);
     }
 
-//    controllerPreparation(&program_launched, window, partie);
-//    controllerTurn(&program_launched, window, partie);
+    controllerPreparation(&program_launched, window, partie);
 
-    controllerDice(&program_launched, window, partie);
+    while (program_launched == SDL_TRUE)
+    {
+        controllerDice(&program_launched, window, partie);
+        controllerTurn(&program_launched, window, partie);
+        passer_tour(partie);
+    }
 
     destroyFenetre(window);
 

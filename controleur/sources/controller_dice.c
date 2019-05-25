@@ -23,7 +23,7 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
     updateFenetre(the_game, window);
     initDiceButton();
     SDL_bool throw_launched = SDL_TRUE;
-    while(throw_launched)
+    while(throw_launched == SDL_TRUE)
     {
         SDL_Event event;
         while(SDL_PollEvent(&event))

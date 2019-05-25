@@ -49,7 +49,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
 {
     updateFenetre(the_game, window);
     initTurnButtons();
-    while(*program_launched)
+    SDL_bool turn_launched = SDL_TRUE;
+    while(turn_launched == SDL_TRUE)
     {
 //        drawTurnButtons(window);
 
@@ -124,7 +125,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 case ENDTURN_BUTTON :
                     printf("Clic sur bouton Fin de tour\n");
                     printf("Appel de la fonction endTurnEvent(the_game)\n");
-                    endTurnEvent(the_game);
+                    quit(&turn_launched);
+//                    endTurnEvent(the_game);
                     break;
 
                 case HELP_BUTTON :
@@ -142,6 +144,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 {
                 case SDLK_q :
                     printf("Appui sur touche Q\n");
+                    printf("Appel de la fonction quit(&turn_launched)\n");
+                    quit(&turn_launched);
                     printf("Appel de la fonction quit(program_launched)\n");
                     quit(program_launched);
                     break;
@@ -153,6 +157,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
 
             case SDL_QUIT :
                 printf("Evenement SDL_QUIT\n");
+                printf("Appel de la fonction quit(&turn_launched)\n");
+                quit(&turn_launched);
                 printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
