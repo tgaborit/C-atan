@@ -19,10 +19,10 @@ int main()
 	add_joueur(j,partie);
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
-	Joueur* f = init_joueur(BLANC,"pauline");
-	add_joueur(f,partie);
-	Joueur* g = init_joueur(ORANGE,"titou");
-	add_joueur(g,partie);
+//	Joueur* f = init_joueur(BLANC,"pauline");
+//	add_joueur(f,partie);
+//	Joueur* g = init_joueur(ORANGE,"titou");
+//	add_joueur(g,partie);
 
     for(int i=0; i<100; ++i){
         gain_ressource(ARGILE,k);
@@ -37,7 +37,11 @@ int main()
     while (program_launched == SDL_TRUE)
     {
         controllerDice(&program_launched, window, partie);
+        if(program_launched == SDL_FALSE)
+            break;
+
         controllerTurn(&program_launched, window, partie);
+
         passer_tour(partie);
     }
 

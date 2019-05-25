@@ -25,6 +25,7 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
     SDL_bool throw_launched = SDL_TRUE;
     while(throw_launched == SDL_TRUE)
     {
+        drawDiceButton(window);
         SDL_Event event;
         while(SDL_PollEvent(&event))
         {
@@ -129,5 +130,5 @@ void initDiceButton()
     dice_area.h = 100;
 
     dice_area.x = WINDOWW - 250 - dice_area.w;
-    dice_area.y = 75;
+    dice_area.y = BANNERH + 75;
 }
