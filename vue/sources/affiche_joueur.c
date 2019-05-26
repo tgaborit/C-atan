@@ -326,7 +326,7 @@ void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
 	rect.h = 100;
 
     SDL_Surface* surfnb = NULL;
-    if(p->joueurs->current->joueur == get_joueur_chevaliers(p)){
+    if(p->joueurs->current->joueur == get_joueur_chevaliers(p) && p->joueurs->current->joueur->nbChevalier > 2){
          surfnb = TTF_RenderText_Blended(police, "1", couleur);
 
     }else{
@@ -370,7 +370,7 @@ void AfficheNbReussiteRoute(Partie*p, SDL_Renderer* renderer)
 
 	 SDL_Surface* surfnb = NULL;
 
-    if(p->joueurs->current->joueur == get_joueur_routes(p)){
+    if(p->joueurs->current->joueur == get_joueur_routes(p) && p->joueurs->current->joueur->nbRoute > 4){
         surfnb = TTF_RenderText_Blended(police, "1", couleur);
 
     }else{

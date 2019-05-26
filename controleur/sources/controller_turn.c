@@ -17,6 +17,7 @@
 #include "partie.h"
 #include "fenetre.h"
 #include "SDL_erreur.h"
+#include "set_partie.h"
 
 
 static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
@@ -62,6 +63,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
             {
             case SDL_USEREVENT:
                 printf("Appel de la fonction de la vue updateFenetre(the_game, window)\n");
+                nb_chevaliers_max(the_game);
+                nb_routes_max(the_game);
                 updateFenetre(the_game, window);
                 break;
 

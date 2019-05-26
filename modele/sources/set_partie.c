@@ -215,7 +215,7 @@ void nb_routes_max(Partie* partie){
         static Joueur* j_old = NULL;
         Joueur* j_new = get_joueur_routes(partie);                                     // Recherche du nouveau possesseur du plus grand nombre de route et gain d'un point (sauf en cas d'égalité).
         if(j_old != NULL){
-            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
+            dec_score(j_old,1);                                                         // Perte d'un point à l'ancien possesseur du plus grand nombre de route (sauf en cas d'ancienne égalité).
         }
         if(j_new != NULL && j_new->nbRoute > 4){
             inc_score(j_new,1);
@@ -240,7 +240,7 @@ void nb_chevaliers_max(Partie* partie){
         static Joueur* j_old = NULL;
         Joueur* j_new = get_joueur_chevaliers(partie);
         if(j_old != NULL){
-            dec_score(j_old,1);                                               // Perte d'un point à l'ancien possesseur du plus grand nombre de route (suaf en cas d'ancienne égalité).
+            dec_score(j_old,1);                                               // Perte d'un point à l'ancien possesseur du plus grand nombre de chevaliers (sauf en cas d'ancienne égalité).
         }
         if(j_new != NULL && j_new->nbChevalier > 2){
             inc_score(j_new,1);

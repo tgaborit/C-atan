@@ -7,6 +7,7 @@
 #include "controller_preparation.h"
 #include "controller_dice.h"
 #include "controller.h"
+#include "affiche_texte.h"
 
 int main()
 {
@@ -37,6 +38,7 @@ int main()
 
     while (program_launched == SDL_TRUE)
     {
+        AfficheTexte_Joueur(window, partie);
         controllerDice(&program_launched, window, partie);
         if(program_launched == SDL_FALSE)
             break;

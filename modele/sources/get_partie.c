@@ -121,7 +121,6 @@ Joueur* get_joueur_chevaliers(Partie* partie){
             boolean_equal = 0;
         }
         else if(j_max->nbChevalier == partie->joueurs->current->joueur->nbChevalier){           // Si deux joueurs ont le même nombre de chevaliers, alors NULL est renvoyé
-            partie->joueurs->current = tmp;
             boolean_equal = 1;
         }
         setOnNext_list_joueur(partie->joueurs);
@@ -143,19 +142,19 @@ Joueur* get_joueur_chevaliers(Partie* partie){
  */
 
 Joueur* get_joueur_routes(Partie* partie){
-    int i, boolean_equal = 0;
+    int i,nbRoutes, boolean_equal = 0;
     Node_joueur* tmp = partie->joueurs->current;
     setOnFirst_list_joueur(partie->joueurs);
     Joueur* j_max = partie->joueurs->current->joueur;
     setOnNext_list_joueur(partie->joueurs);
 
     for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
-        if(j_max->nbRoute < partie->joueurs->current->joueur->nbRoute){
+        nbRoutes = partie->joueurs->current->joueur->nbRoute;
+        if(j_max->nbRoute < nbRoutes){
             j_max = partie->joueurs->current->joueur;
             boolean_equal = 0;
         }
-        else if(j_max->nbRoute == partie->joueurs->current->joueur->nbRoute){           // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
-            partie->joueurs->current = tmp;
+        else if(j_max->nbRoute == nbRoutes){                                            // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
             boolean_equal = 1;
         }
         setOnNext_list_joueur(partie->joueurs);

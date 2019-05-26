@@ -331,6 +331,7 @@ int setColonieInit(Partie* partie, double x, double y, int position){
         Cur->adjacence[pattern[position2]]->t->s[low].i = COLONIE;
         Cur->adjacence[pattern[position2]]->t->s[low].owner = owner;
     }
+    inc_score(get_joueur_actif(partie),1);
     return 0;
 }
 

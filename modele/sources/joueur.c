@@ -355,6 +355,7 @@ int achat_colonie(Joueur* joueur)
             perte_ressource(BOIS, joueur);
             perte_ressource(MOUTON, joueur);
             perte_ressource(BLE, joueur);
+            inc_score(joueur,1);
             return 0;
         }
     return -1;
@@ -376,6 +377,7 @@ int achat_ville(Joueur* joueur)
             perte_ressource(PIERRE,joueur);
             perte_ressource(BLE, joueur);
             perte_ressource(BLE, joueur);
+            inc_score(joueur,1);
             return 0;
         }
     return -1;

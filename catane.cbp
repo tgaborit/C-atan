@@ -48,6 +48,7 @@
 		<Unit filename="controleur/headers/controller.h" />
 		<Unit filename="controleur/headers/controller_crossing.h" />
 		<Unit filename="controleur/headers/controller_dice.h" />
+		<Unit filename="controleur/headers/controller_help.h" />
 		<Unit filename="controleur/headers/controller_path.h" />
 		<Unit filename="controleur/headers/controller_player.h" />
 		<Unit filename="controleur/headers/controller_preparation.h" />
@@ -63,6 +64,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="controleur/sources/controller_dice.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/sources/controller_help.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="controleur/sources/controller_path.c">
