@@ -90,4 +90,26 @@ void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer);
  * \return aucun
  */
 void AfficheNbCarte(Partie* p, SDL_Renderer* renderer);
+
+/**
+ * \fn void AfficheNbReussiteChevalier(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer);
+
+/**
+ * \fn void AfficheNbReussiteRoute(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteRoute(Partie*p, SDL_Renderer* renderer);
 #endif

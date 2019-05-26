@@ -13,6 +13,7 @@
 #include "controller.h"
 #include "controller_turn.h"
 #include "controller_turn_events.h"
+#include "controller_help.h"
 #include "partie.h"
 #include "fenetre.h"
 #include "SDL_erreur.h"
@@ -137,6 +138,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
 
                 case HELP_BUTTON :
                     printf("Clic sur bouton Aide\n");
+                    controllerHelp(window);
+                    updateFenetre(the_game, window);
                     break;
 
 

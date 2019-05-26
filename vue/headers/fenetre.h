@@ -57,6 +57,17 @@ void destroyFenetre(SDL_Window* window);
  */
 void AfficheHelp(SDL_Renderer *renderer);
 
+
+/**
+ * \fn void Help(SDL_Renderer* renderer)
+ * \brief Fonction affichant l'aide du jeu
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void Help(SDL_Window* w);
+
 /**
  * \fn void AfficheDe(SDL_Window* window, Partie* partie)
  * \brief Fonction affichant le dé

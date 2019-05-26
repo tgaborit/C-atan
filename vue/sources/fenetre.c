@@ -122,6 +122,8 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	AfficheTexte_MAJ(window);
 	AfficheListeJoueurs(p, renderer);
 	AfficheNbCarte(p, renderer);
+	AfficheNbReussiteChevalier(p, renderer);
+	AfficheNbReussiteRoute(p, renderer);
     SDL_RenderPresent(renderer);
 
 	AfficheTexte_MAJ(window);
@@ -282,6 +284,48 @@ void AfficheHelp(SDL_Renderer* renderer)
 		SDL_ExitWithError("Impossible de charger la texture");
 
 	recthelp.x = 1875;
+	recthelp.y = 0;
+
+
+	if(SDL_RenderCopy(renderer, help, NULL, &recthelp) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
+
+	SDL_RenderPresent(renderer);
+
+}
+
+/**
+ * \fn void Help(SDL_Renderer* renderer)
+ * \brief Fonction affichant l'aide du jeu
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void Help(SDL_Window* w)
+{
+    SDL_Renderer* renderer = SDL_GetRenderer(w);
+	SDL_Surface *image = NULL;
+	SDL_Texture *help = NULL;
+
+	image = SDL_LoadBMP("../images/aide.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image aide.bmp");
+
+	help = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(help == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect recthelp;
+
+	if(SDL_QueryTexture(help, NULL, NULL, &recthelp.w, &recthelp.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	recthelp.x = 0;
 	recthelp.y = 0;
 
 
