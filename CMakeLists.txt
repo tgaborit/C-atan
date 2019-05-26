@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.10)
 # On appelle le projet catane
 project(catane)
 
-# CMake n'a pas de module FindSDL2_ttf.cmake, on en ajoute donc un dans l'arborescence projet.
+# CMake n'a pas de module FindSDL2_ttf.cmake, on en ajoute donc un dans l'arborescence du projet.
 # Il faut donc ajouter son chemin dans les chemins des modules CMake.
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 

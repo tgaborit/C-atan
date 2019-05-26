@@ -140,7 +140,7 @@ static void Affiche_Route(double x, double y, int position, Couleur couleur, SDL
     }
 
     if(couleur == BLANC){
-        print_infra(posx,posy,angle,"../images/routeblanc.bmp",renderer);
+        print_infra(posx,posy,angle,"../images/routeblanche.bmp",renderer);
     }
     if(couleur == BLEU){
         print_infra(posx,posy,angle,"../images/routebleu.bmp",renderer);

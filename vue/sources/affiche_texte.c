@@ -10,6 +10,7 @@
 
 #include "affiche_texte.h"
 #include "SDL_erreur.h"
+#include "get_partie.h"
 
 static int fill_text(char* frag, char* buffer){
 
@@ -99,9 +100,11 @@ static void AfficheTexte(SDL_Window* window, char* buffer, int action){
  * \param window la fenetre de jeu
  * \return aucun
  */
-void AfficheTexte_Joueur(SDL_Window* window){
+void AfficheTexte_Joueur(SDL_Window* window,Partie* partie){
     AfficheTexte(window,"----------------------------------------------------------",0);
-    char txt[40] = "Tour du joueur ...";
+    char txt[100] = "C'est au tour de ";
+    strcat(txt,get_pseudo_joueuractif(partie));
+    strcat(txt," de jouer !");
     AfficheTexte(window,txt,0);
     AfficheTexte(window,"----------------------------------------------------------",0);
 }
@@ -141,7 +144,7 @@ void AfficheTexte_NoCarte(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_StopAction(SDL_Window* window){
-    char txt[80] = "Action annulée.";
+    char txt[80] = "Action annulee.";
     AfficheTexte(window,txt,0);
 }
 

@@ -4,6 +4,9 @@
 #include "controller_turn.h"
 #include "set_partie.h"
 #include "fenetre.h"
+#include "controller_preparation.h"
+#include "controller_dice.h"
+#include "controller.h"
 
 int main()
 {
@@ -17,6 +20,10 @@ int main()
 	add_joueur(j,partie);
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
+//	Joueur* f = init_joueur(BLANC,"pauline");
+//	add_joueur(f,partie);
+//	Joueur* g = init_joueur(ORANGE,"titou");
+//	add_joueur(g,partie);
 
     for(int i=0; i<100; ++i){
         gain_ressource(ARGILE,k);
@@ -26,7 +33,21 @@ int main()
         gain_ressource(PIERRE,k);
     }
 
-    controllerTurn(&program_launched, window, partie);
+    controllerPreparation(&program_launched, window, partie);
+
+    while (program_launched == SDL_TRUE)
+    {
+        controllerDice(&program_launched, window, partie);
+        if(program_launched == SDL_FALSE)
+            break;
+
+        controllerTurn(&program_launched, window, partie);
+
+        if(get_score_max(partie) >= 10)
+            quit(&program_launched);
+
+        passer_tour(partie);
+    }
 
     destroyFenetre(window);
 

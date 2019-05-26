@@ -166,7 +166,7 @@ void initPlayerButtons(Partie* the_game)
 
     for(i = 0; i < get_nbjoueurs(the_game); ++i)
     {
-        player_buttons[i]->h = PLAYERH;
+        player_buttons[i]->h = BANNERH;
         player_buttons[i]->w = PLAYERW;
     }
 

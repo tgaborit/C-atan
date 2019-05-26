@@ -39,12 +39,6 @@ typedef enum {
 */
 #define PLAYERW 460
 
-/**
-* \def PLAYERH
-* Définit la hauteur d'un bouton de joueur.
-*/
-#define PLAYERH 35
-
 void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
 
 void drawPlayerButtons(SDL_Window* window);

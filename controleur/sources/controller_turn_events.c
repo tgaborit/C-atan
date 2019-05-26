@@ -22,6 +22,8 @@
 #include "set_partie.h"
 #include "ressource.h"
 #include "affiche_texte.h"
+#include "fenetre.h"
+
 
 /**
 * \fn void craftDevEvent(Partie* the_game)
@@ -219,7 +221,7 @@ void useKnightEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
     }
 
     printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
-    activateRobberEvent(the_game, window, program_launched);
+    activateRobberEvent(the_game, window, program_launched, 1);
 
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
@@ -391,9 +393,8 @@ void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
     }
     while (bool_routes != 0);
 
-    if(bool_routes == 0){
-        AfficheTexte_Routes_Succes(window);
-    }
+    AfficheTexte_Routes_Succes(window);
+
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -439,7 +440,7 @@ void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
     if(des == 7)
     {
         printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
-        activateRobberEvent(the_game, window, program_launched);
+        activateRobberEvent(the_game, window, program_launched, 0);
         int nb_vol = action_voleur(the_game);
         AfficheTexte_nbVol(window,nb_vol);
     }
@@ -467,22 +468,25 @@ void endTurnEvent(Partie* the_game)
 }
 
 /**
-* \fn void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
+* \fn void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched, int bool_knight)
 * \brief Evénement d'activation du brigand.
 *
 * Demande au joueur de sélectionner un terrain où déplacer le brigand, convertit cet emplacement en données du modèle,
 * puis fait appel à la fonction du modèle setVoleur pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
 *
+* \param[in,out] bool_knight un entier, 1 si l'action est déclenchée par le chevalier, 0 sinon.
 * \param[in,out] the_game Pointeur vers l'état de la partie.
-* \param[in,out] program_launched Ponteur vers l'état du pplacement.
+* \param[in,out] program_launched Ponteur vers l'état du placement.
 */
-void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
+void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched, int bool_knight)
 {
 
     SDL_Event ev;
     TerrButton terr_clicked = NO_TERRBUTTON;
     PlayerButton player_clicked = NO_PLAYERBUTTON;
     AfficheTexte_ChoixTuileVoleur(window);
+
+    updateFenetre(the_game, window);
 
     do
     {
@@ -509,19 +513,32 @@ void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program
 
     int i;
     int player_chosen = playerButtonToInteger(player_clicked);
-    Node_joueur* cur = the_game->joueurs->current;
-    the_game->joueurs->current = the_game->joueurs->first;
+    Joueur* cur = get_joueur_actif(the_game);
+    setOnFirst_joueur(the_game);
     for(i=1;i<player_chosen;++i){
-        the_game->joueurs->current = the_game->joueurs->current->next;
+        passer_tour(the_game);
     }
-    Joueur* victime = the_game->joueurs->current->joueur;
-    the_game->joueurs->current = cur;
-    printf("Appel de la fonction du modele utiliser_chevalier(the_game, %f, %f,%s\n", terr_chosen.x, terr_chosen.y, victime->pseudo);
-    if(utiliser_chevalier(the_game,terr_chosen.x, terr_chosen.y, victime) == 0){
-        AfficheTexte_Chevalier_Succes(window);
+    Joueur* victime = get_joueur_actif(the_game);
+    while(get_joueur_actif(the_game) != cur){
+        passer_tour(the_game);
+    }
+    if(bool_knight == 1){
+        printf("Appel de la fonction du modele utiliser_chevalier(the_game, %f, %f,%s\n", terr_chosen.x, terr_chosen.y, victime->pseudo);
+        if(utiliser_chevalier(the_game,terr_chosen.x, terr_chosen.y, victime) == 0){
+            AfficheTexte_Chevalier_Succes(window);
+        }
+        else{
+            AfficheTexte_Chevalier_Echec(window);
+        }
     }
     else{
-        AfficheTexte_Chevalier_Echec(window);
+        setVoleur(the_game, terr_chosen.x, terr_chosen.y);
+        if(vole_carte(the_game,terr_chosen.x,terr_chosen.y,victime) == 0){
+            AfficheTexte_Chevalier_Succes(window);
+        }
+        else{
+            AfficheTexte_Chevalier_Echec(window);
+        }
     }
 
     ev.type = SDL_USEREVENT;

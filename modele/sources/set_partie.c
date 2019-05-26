@@ -48,12 +48,12 @@ static int isempty_list_joueur (List_joueur* list)
 }
 
 
-//static void setOnFirst_list_joueur(List_joueur* list)
-//{
-//    if(list->current != NULL){
-//        list->current=list->first;
-//    }
-//}
+void setOnFirst_joueur(Partie* partie)
+{
+    if(partie->joueurs->current != NULL){
+        partie->joueurs->current=partie->joueurs->first;
+    }
+}
 
 static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
 {

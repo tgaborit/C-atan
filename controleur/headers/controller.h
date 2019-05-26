@@ -41,6 +41,12 @@
 */
 #define HEXAGONS 78
 
+/**
+* \def BANNERH
+* Définit la hauteur d'un bouton de joueur.
+*/
+#define BANNERH 35
+
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
 void quit(SDL_bool * paction_launched);
