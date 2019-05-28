@@ -104,6 +104,13 @@ static int setup_partie_ressource (void ** state)
     return 0;
 }
 
+static void test_setOnFirst_joueur(void** state){
+    Partie* partie = (Partie*) (*state);
+    partie->joueurs->current = partie->joueurs->current->next;
+    setOnFirst_joueur(partie);
+    assert_ptr_equal(partie->joueurs->current,partie->joueurs->first);
+}
+
 static void test_findjoueur(void** state)
 {
     Partie* partie= *state;
@@ -567,6 +574,7 @@ int main_partie_test(void)
 {
     const struct CMUnitTest tests_partie[]={
         cmocka_unit_test_setup_teardown(test_get_nb_joueur,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_setOnFirst_joueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_findjoueur,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_donner_main,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_passer_tour,setup_partie,teardown),

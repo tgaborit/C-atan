@@ -26,12 +26,18 @@ int main()
 //	Joueur* g = init_joueur(ORANGE,"titou");
 //	add_joueur(g,partie);
 
-    for(int i=0; i<100; ++i){
+    for(int i=0; i<10; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);
         gain_ressource(BLE,k);
         gain_ressource(BOIS,k);
         gain_ressource(PIERRE,k);
+
+        gain_ressource(ARGILE,j);
+        gain_ressource(MOUTON,j);
+        gain_ressource(BLE,j);
+        gain_ressource(BOIS,j);
+        gain_ressource(PIERRE,j);
     }
 
     controllerPreparation(&program_launched, window, partie);
