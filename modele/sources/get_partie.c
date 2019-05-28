@@ -11,6 +11,13 @@
 
 
 
+/**
+ * static void setOnFirst_list_joueur(List_joueur* list)
+ * \brief deffinie le joueur courant comme le premier de la liste
+ *
+ * \param List_joueur* liste des joueurs de la partie
+ * \return aucun
+ */
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -24,9 +31,9 @@ static void setOnFirst_list_joueur(List_joueur* list)
  * \fn int get_des(Partie* partie)
  * \brief Simule un lancé de dès
  *
- *  retourne la valeur du lancé de des le plus récent de la partie.
+ *  change la valeur du paramètre valeur_de de la structure partie
  * \param partie un pointeur vers la partie.
- * \return int: valeur obtenu
+ * \return aucun
  */
 int get_des(Partie* partie){
     return partie->valeur_de;
@@ -37,8 +44,8 @@ int get_des(Partie* partie){
 * \fn Joueur get_joueur_actif(Partie partie);
 * \brief renvoie le Joueur qui a la main
 *
-* \param Partie: partie en cour
-* \return Joueur: joueur qui a la main
+* \param Partie*: partie en cour
+* \return Joueur*: joueur qui a la main
 */
 Joueur* get_joueur_actif(Partie* partie)
 {
@@ -47,7 +54,7 @@ Joueur* get_joueur_actif(Partie* partie)
 
 /**
  * \fn int  get_nbcartedev_joueuractif(TypeCarteDev type,Partie* partie)
- * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur
+ * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur actif
  *
  * fonction renvoillant le nombre de carte developpement d'un certain type possédé par le joueur actif
  * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Partie* partie en cours
@@ -211,7 +218,7 @@ int get_nbjoueurs(Partie* partie)
 * \brief retourne le score du joueur le plus fort
 *
 * renvoie le score du joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie
- * le score le plus fort
+* le score le plus fort
 * \param Partie: partie en cours
 * \return int: score max dans la partie
 */
@@ -224,7 +231,7 @@ int get_score_max(Partie* partie)
 * \fn Joueur* get_score_max
 * \brief retourne un pointeur sur le joueur qui a le score le plus fort
 *
-* renvoie le joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie le joeur qui a joué le plus tot au premier tour
+* renvoie le joueur ayant le plus de point si plusieurs joueurs sont a égalité renvoie le joeur qui a joué le plus tot au premier tour
 * exemple: si tout les score sont à 2 renvoie le joueur qui a jouer en premier
 *
 * \param Partie: partie en cours

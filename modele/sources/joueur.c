@@ -15,8 +15,7 @@
  * \fn void set_pseudo(Joueur joueur);
  * \brief Initialisaton pseudo joueur
  *
- *
- * \param Char* pseudo choisie par le joueur Joueur: joueurdont on initialise le pseudo
+ * \param Char* pseudo choisie par le joueur Joueur*: joueur dont on initialise le pseudo
  * \return: aucun
  */
 void set_pseudo(Joueur* joueur, char* pseudo)
@@ -25,11 +24,11 @@ void set_pseudo(Joueur* joueur, char* pseudo)
 }
 
 /**
- * \fn void set_couleur(Joueur joueur, Couleur couleur);
+ * \fn void set_couleur(Joueur* joueur, Couleur couleur);
  * \brief Initialisaton couleur joueur
  *
  *
- * \param Couleur: couleur choisie par le joueur Joueur: joueur dont on initialise la couleur
+ * \param Couleur: couleur choisie par le joueur Joueur*: joueur dont on initialise la couleur
  * \return: aucun
  */
 void set_couleur(Joueur* joueur, Couleur couleur)
@@ -39,10 +38,11 @@ void set_couleur(Joueur* joueur, Couleur couleur)
 
 /**
  * \fn void init_main_ressource(Joueur joueur);
- * \brief Initialisation des cartes en main du joueur
+ * \brief Initialisation les cartes en main du joueur
+ *initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * après l'initialisation le joueur ne possède aucune carte ressource
  *
- *
- * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \param Joueur* : joueur dont on initialise les cartes ressources
  * \return: aucun
  */
 void init_main_ressource(Joueur* joueur)
@@ -62,9 +62,10 @@ void init_main_ressource(Joueur* joueur)
 /**
  * \fn void init_main_cartdev(Joueur joueur);
  * \brief Initialisation des cartes en main du joueur
+ *initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * après l'initialisation le joueur ne possède aucune carte developpement
  *
- *
- * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \param Joueur* : joueur dont on initialise les cartes developpement
  * \return: aucun
  */
 void init_main_cartedev(Joueur* joueur)
@@ -83,10 +84,11 @@ void init_main_cartedev(Joueur* joueur)
 
 /**
  * \fn void init_joueur(Couleur couleur,char* pseudo)
- * \brief Fonction d'initialisationde la structure joueur
+ * \brief Fonction d'initialisation de la structure joueur
  *
- * fonction qui alloue la mémoire necessaire à la création d'un joueur, lui donne son pseudo et sa couleur et initialise son score à 0 ainsi que le nombre de ses cartes en main
- * \param Couleur: la couleur choisi par le joueur char* le pseudo choisi par le joueur.
+ * fonction qui alloue la mémoire necessaire à la création d'un joueur, lui donne son pseudo et sa couleur et initialise e le nombre de ses cartes en main
+ *initialise le score, ne nombre de chevalier activé et le nombre de routes à 0.
+ * \param Couleur: la couleur choisi par le joueur char*: le pseudo choisi par le joueur.
  * \return: aucun
  */
 Joueur* init_joueur(Couleur couleur,char* pseudo)
@@ -111,7 +113,7 @@ Joueur* init_joueur(Couleur couleur,char* pseudo)
  * \brief Fonction qui libère la mémoire allouer à un joueur
  *
  *
- * \param Joueur : joueur
+ * \param Joueur* : joueur
  * \return aucun
  */
 void free_joueur(Joueur* joueur)
@@ -123,7 +125,7 @@ void free_joueur(Joueur* joueur)
 }
 
 /**
- * \fn int get_score(Joueur joueur)
+ * \fn int get_score(Joueur* joueur)
  * \brief Fonction qui retourne le score du joueur
  *
  * fonction renvoillant le score du joueur passé en paramètre
@@ -140,7 +142,7 @@ int get_score(Joueur* joueur)
  * \brief Fonction qui retourne le pseudo du joueur
  *
  * fonction renvoillant le pseudo du joueur passé en paramètre
- * \param Joueur : joueur dont on veut connaitre le pseudo
+ * \param Joueur* : joueur dont on veut connaitre le pseudo
  * \return char* :le pseudo du joueur
  */
 char* get_pseudo(Joueur* joueur)
@@ -153,7 +155,7 @@ char* get_pseudo(Joueur* joueur)
  * \brief Fonction qui incrémente le score d'un joueur
  *
  * fonction qui incrémente le score d'un joueur de l'entier passé en paramètre
- * \param Joueur : joueur dont on veut augmenter le score, int: points nombres de points gagné par le joueur
+ * \param Joueur* : joueur dont on veut augmenter le score, int: points nombres de points gagné par le joueur
  * \return aucun
  */
 void inc_score(Joueur* joueur, int points)
@@ -166,7 +168,7 @@ void inc_score(Joueur* joueur, int points)
 	 * \brief Fonction qui décrémente le score d'un joueur
 	 *
 	 * fonction qui décrémente le score d'un joueur de l'entier passé en paramètre
-	 * \param Joueur : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
+	 * \param Joueur* : joueur dont on veut diminuer le score, int: points nombres de points perdus par le joueur
 	 * \return aucun
 	 */
 	void dec_score(Joueur* joueur, int points){
@@ -204,7 +206,7 @@ Status get_status(Joueur* joueur)
  * \brief Fonction qui ajoute une carte ressource dans la main du joueur
  *
  * fait gagner au joueur une ressource spécifique
- * \param  Type_ressource: le type de la ressource gagné, Joueur: la structure joueur qui gagne cette ressource
+ * \param  Type_ressource: le type de la ressource gagné, Joueur*: la structure joueur qui gagne cette ressource
  * \return aucun
  */
 void gain_ressource(TypeRessource type, Joueur* joueur)
@@ -217,7 +219,7 @@ void gain_ressource(TypeRessource type, Joueur* joueur)
  * \brief Fonction qui fait perdre une carte ressource dans la main du joueur
  *
  * fait perdre au joueur une ressource spécifique
- * \param  Type_ressource: le type de la ressource gagné, Joueur: la structure joueur qui perd cette ressource
+ * \param  Type_ressource: le type de la ressource gagné, Joueur*: la structure joueur qui perd cette ressource
  * \return aucun
  */
 void perte_ressource(TypeRessource type, Joueur* joueur)
@@ -231,7 +233,7 @@ void perte_ressource(TypeRessource type, Joueur* joueur)
  * \brief Fonction qui retourne les ressources possédées par le joueur
  *
  * fonction renvoillant le nombre de ressource d'un certain type possédé par un joueur
- * \param Type_ressource: le type de la ressource dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de ressource
+ * \param Type_ressource: le type de la ressource dont on veut connaitre le nombre, Joueur*: le joeur dont on veut connaitre le nombre de ressource
  * \return int:le nombre de la ressource du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
 int  get_nbressource(TypeRessource type, Joueur* joueur)
@@ -243,7 +245,7 @@ int  get_nbressource(TypeRessource type, Joueur* joueur)
 
 /**
  * \fn int get_nbressource_total(Joueur* joueur)
- * \brief retourne le nombre totale de carte ressource dans la main du jouuer tout type confondu
+ * \brief retourne le nombre totale de cartes ressource dans la main du joueur tout type confondu
  * \param Joueur* joueur
  * \return: int: le nombre de carte ressource
  */
@@ -292,7 +294,7 @@ void perte_cartedev(TypeCarteDev type, Joueur* joueur)
  * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur
  *
  * fonction renvoillant le nombre de carte developpement d'un certain type possédé par un joueur
- * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Joueur: le joeur dont on veut connaitre le nombre de carte developpment
+ * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Joueur*: le joeur dont on veut connaitre le nombre de carte developpment
  * \return int:le nombre de la carte developpement du type passé en paramètre possédé par le joueur ou -1 si le joueur passé en paramètre n'est pas définie
  */
 
@@ -306,10 +308,10 @@ int  get_cartedev(TypeCarteDev type, Joueur* joueur)
 
 /**
  * \fn int  get_nbChevalier(Joueur* joueur)
- * \brief Fonction qui retourne le nombre de chevalier activés par un joueur
+ * \brief Fonction qui retourne le nombre de chevaliers activés par un joueur
  *
  * \param Joueur: le joeur dont on veut connaitre le nombre de chevalier activés
- * \return int:le nombre de chevalier activés ou -1 si le joueur passé en paramètre n'est pas définie
+ * \return int:le nombre de chevaliers activés ou -1 si le joueur passé en paramètre n'est pas définie
  */
 
 int  get_nbChevalier (Joueur* joueur)
@@ -324,7 +326,7 @@ int  get_nbChevalier (Joueur* joueur)
 /**
  * \fn int achat_route(Joueur* joueur);
  * \brief teste si le joueur à sufisament de ressource pour construire une route
- *consome les ressource si c'est le cas.
+ *consomme les ressource si c'est le cas.
  * \param Joueur* joueur
  * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
@@ -343,7 +345,7 @@ int achat_route(Joueur* joueur)
 /**
  * \fn int achat_colonie(Joueur* joueur);
  * \brief teste si le joueur à sufisament de ressource pour construire une colonie
- *consome les ressource si c'est le cas.
+ *consomme les ressource si c'est le cas.
  * \param Joueur* joueur
  * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
@@ -364,7 +366,7 @@ int achat_colonie(Joueur* joueur)
 /**
  * \fn int achat_ville(Joueur* joueur);
  * \brief teste si le joueur à sufisament de ressource pour construire une ville
- *consome les ressource si c'est le cas.
+ *consomme les ressource si c'est le cas.
  * \param Joueur* joueur
  * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
@@ -385,7 +387,7 @@ int achat_ville(Joueur* joueur)
 /**
  * \fn int achat_cartedev(Joueur* joueur);
  * \brief teste si le joueur à sufisament de ressource pour acheter une cartedev
- *consome les ressource si c'est le cas.
+ *consomme les ressource si c'est le cas.
  * \param Joueur* joueur
  * \return: int: -1 le joueur n'as pas suffisement de ressource, 0 tout c'est bien passé
  */
@@ -401,6 +403,13 @@ int achat_cartedev(Joueur* joueur)
     return -1;
 }
 
+/**
+ * \fn voleur_perte_ressource(Joueur* joueur);
+ * \brief fonction qui test si le joueur passé en paramètre possède plus de 7 cartes ressources si c'est le cas il pert la moitier arondit à l'infèrieur de ses cartes
+ *les cartes perdues sont choisient aléatoirement.
+ * \param Joueur* joueur
+ * \return: 0 si tout c'est bien passé, -1 si le joueur n'a pas à perdre de ressource
+ */
 int voleur_perte_ressource(Joueur* joueur){
 
     int i,nbCartePerdues;

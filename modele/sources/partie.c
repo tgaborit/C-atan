@@ -3,6 +3,14 @@
 
 
 
+/**
+ * \fn static List_joueur* init_list_joueur ()
+ * \brief initialisation de la liste des joueurs dans la partie
+ *alloue l'espace necessaire et initialise les pointeurs
+ *
+ * \param aucun
+ * \return: aucun
+ */
 static List_joueur* init_list_joueur ()
 {
     List_joueur* list= (List_joueur*) malloc(3*sizeof(Node_joueur));
@@ -16,10 +24,10 @@ static List_joueur* init_list_joueur ()
 
 /**
  * \fn void init_pile_cartdev(Joueur joueur);
- * \brief Initialisation des cartes en main du joueur
+ * \brief Initialisation de la pile de cartes développment de la partie celon les règles du jeu
  *
  *
- * \param initialise les carte en main du joueur en trillant le tableau par type dans un ordre précis
+ * \param : CarteDev carte_dev[4] tableau representant la pile de carte developpement
  * \return: aucun
  */
 static void init_pile_cartedev(CarteDev carte_dev[4])
@@ -35,6 +43,14 @@ static void init_pile_cartedev(CarteDev carte_dev[4])
     carte_dev[3]=point;
     carte_dev[4]=decouverte;
 }
+/**
+ * \fn void setOnNext_list_joueur(List_joueur* list)
+ * \brief passe le joueur courant de la liste sur le joueur suivant
+ *
+ *
+ * \param :List_joueur* liste des joueurs
+ * \return: aucun
+ */
 
 void setOnNext_list_joueur(List_joueur* list)
 {
@@ -71,7 +87,13 @@ static void setOnFirst_list_joueur(List_joueur* list)
     return partie;
  }
 
-
+/**
+* \fn static void free_node_joueur(Node_joueur* n)
+* \brief libère la mémoire allouée pour une structure Node_joueur
+*
+* \param Node_joueur* le noeud a liberer
+* \return aucun
+*/
 static void free_node_joueur(Node_joueur* n){
     free_joueur(n->joueur);
     free(n);
@@ -95,6 +117,13 @@ static int get_nbjoueurs(Partie* partie)
     return c;
 }
 
+/**
+* \fn static void free_list_joueur(Partie* partie)
+* \brief libère la mémoire allouée pour une structure List_joueur
+*
+* \param Partie* la partie contenant la liste à liberer
+* \return aucun
+*/
 static void free_list_joueur(Partie* partie){
     int i;
     setOnFirst_list_joueur(partie->joueurs);
