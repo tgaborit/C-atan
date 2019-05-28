@@ -1,6 +1,6 @@
 
 #include "partie.h"
-
+#include "get_partie.h"
 
 
 /**
@@ -60,13 +60,6 @@ void setOnNext_list_joueur(List_joueur* list)
 }
 
 
-static void setOnFirst_list_joueur(List_joueur* list)
-{
-    if(list->current != NULL){
-        list->current=list->first;
-    }
-}
-
  /**
 * \fn void init_partie (Partie partie)
 * \brief initialise la strucure partie qui contient toute les information relatives à la partie
@@ -95,26 +88,10 @@ static void setOnFirst_list_joueur(List_joueur* list)
 * \return aucun
 */
 static void free_node_joueur(Node_joueur* n){
-    free_joueur(n->joueur);
-    free(n);
-}
-
-static int get_nbjoueurs(Partie* partie)
-{
-    if (partie->joueurs==NULL)
-        return -1;
-    Node_joueur* save_current= partie->joueurs->current;
-
-    setOnFirst_list_joueur(partie->joueurs);
-    int c=1;
-
-    while(partie->joueurs->current != partie->joueurs->last)
-    {
-        setOnNext_list_joueur(partie->joueurs);
-        c+=1;
+    if(n != NULL){
+        free_joueur(n->joueur);
+        free(n);
     }
-    partie->joueurs->current=save_current;
-    return c;
 }
 
 /**

@@ -20,14 +20,14 @@
 
 
 /**
- * void setOnFirst_list_joueur(List_joueur* list)
+ * void setOnFirst_list_joueur(List_joueur* l)
  * \brief deffinie le joueur courant comme le premier de la liste
  *
- * \param List_joueur* liste des joueurs de la partie
+ * \param List_joueur* l liste des joueurs de la partie
  * \return aucun
  */
 
-void setOnFirst_list_joueur(List_joueur* list);
+void setOnFirst_list_joueur(List_joueur* l);
 
 /**
  * \fn int get_des(Partie* partie)
