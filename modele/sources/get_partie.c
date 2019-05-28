@@ -7,7 +7,7 @@
  *
  */
 
-#include "get_partie.h"
+# include "get_partie.h"
 
 
 
