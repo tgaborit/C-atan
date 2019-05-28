@@ -20,6 +20,16 @@
 
 
 /**
+ * void setOnFirst_list_joueur(List_joueur* list)
+ * \brief deffinie le joueur courant comme le premier de la liste
+ *
+ * \param List_joueur* liste des joueurs de la partie
+ * \return aucun
+ */
+
+void setOnFirst_list_joueur(List_joueur* list);
+
+/**
  * \fn int get_des(Partie* partie)
  * \brief Simule un lancé de dès
  *
@@ -86,6 +96,28 @@ int get_score_joueuractif(Partie* partie);
  */
 
 int get_nbChevalier_joueuractif(Partie* partie);
+
+
+/**
+ * \fn Joueur* get_joueur_chevaliers(Partie* partie)
+ * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
+ *
+ * \param Partie* partie en cours
+ * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a activé plus de trois chevaliers.
+ */
+
+Joueur* get_joueur_chevaliers(Partie* partie);
+
+
+/**
+ * \fn Joueur* get_joueur_routes(Partie* partie)
+ * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
+ *
+ * \param Partie* partie en cours
+ * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a posé plus de cinq routes.
+ */
+Joueur* get_joueur_routes(Partie* partie);
+
 
   /**
 * \fn int get_nbjoueurs(Partie* partie)
