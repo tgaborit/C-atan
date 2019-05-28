@@ -37,7 +37,7 @@ static int rechercheNoeud(Noeud** tabNoeud, double x, double y){
 }
 
 /**
- * \fn static void fillAdjacence(Noeud* tabNoeud)
+ * \fn static void fillAdjacence(Noeud** tabNoeud)
  * \brief Fonction remplissant les tableaux de pointeurs noeuds adjacents de chaque noeud du plateau (interne à l'initialisation du plateau).
  *
  *
@@ -68,11 +68,11 @@ static void fillAdjacence(Noeud** tabNoeud){
 
 
 /**
- * \fn static void generationProba(Noeud* tabNoeud)
+ * \fn static void generationProba(Noeud** tabNoeud)
  * \brief Génération des probabilités (nombres) associées à chaque tuile du plateau (fonction interne à l'initialisation d'un plateau).
  *
  *
- * \param tabNoeud, un pointeur vers le premier élément du tableau contenant les noeuds des tuiles du plateau
+ * \param tabNoeud, un pointeur vers un tableau de pointeurs de noeuds des tuiles du plateau
  * \return Aucun retour
  */
 
@@ -106,11 +106,11 @@ static void generationProba(Noeud** tabNoeud){
 
 
 /**
- * \fn static int generationType(Noeud* tabNoeud)
+ * \fn static void generationType(Noeud** tabNoeud)
  * \brief Génération des types de ressources pour les tuiles (fonction interne à l'initialisation d'un plateau)
  *
  *
- * \param tabNoeud, un pointeur vers le premier élément du tableau contenant les noeuds des tuiles du plateau
+ * \param tabNoeud, un pointeur vers un tableau de pointeurs de noeuds des tuiles du plateau
  * \return Aucun retour
  */
 

@@ -1,3 +1,13 @@
+/**
+ * \file get_plateau.c
+ * \brief Implémente les fonctions de get_plateau.h
+ * \author Emmanuel.D
+ * \version 1.0
+ * \date 5 mars 2019
+ *
+ * Implémente les fonctions utiles à l'obtention de données touchant au plateau de jeu.
+ */
+
 #include "get_plateau.h"
 
 

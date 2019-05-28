@@ -43,11 +43,11 @@ typedef enum
 typedef enum
 {
     G,      /*!< déplacement à gauche */
-    BG,     /*!< déplacement en haut à gauche */
-    HG,     /*!< déplacement en haut à droite */
-    BD,      /*!< déplacement à droite */
-    HD,      /*!< déplacement en bas à droite */
-    D,     /*!< déplacement en bas à gauche */
+    BG,     /*!< déplacement en bas à droite */
+    HG,     /*!< déplacement en haut à gauche */
+    BD,      /*!< déplacement en bas à droite */
+    HD,      /*!< déplacement en haut à droite */
+    D,     /*!< déplacement en bas à droite */
 }Mouvement;
 
 
@@ -77,7 +77,7 @@ typedef struct
 typedef struct
 {
     Infrastructure i;           /*!< type d'Infrastructure présente sur le Sommet */
-    Joueur* owner;       /*!< Joueur possédanr l'Infrastructure sur le Sommet */
+    Joueur* owner;       /*!< Joueur possédant l'Infrastructure sur le Sommet */
 }Sommet;
 
 
@@ -110,11 +110,12 @@ typedef struct
 
 typedef struct Noeud{
     Tuile* t;                          /*!< Tuile associée au Noeud */
-    struct Noeud** adjacence;           /*!< pointeur vers un tableau de pointeurs de Noeuds des Tuiles adjacentes à la Tuile du Noeud (tableau) */
+    struct Noeud** adjacence;          /*!< pointeur vers un tableau de pointeurs de Noeuds des Tuiles adjacentes à la Tuile du Noeud (tableau) */
     double x;                          /*!< Position abscisse dans le repère de la Tuile du Noeud */
     double y;                          /*!< Position ordonnée dans le repère de la Tuile du Noeud */
 }Noeud;
 
+//definition d'un plateau comme etant un noeud (le noeud central du plateau)
 
 typedef Noeud Plateau;
 
@@ -132,27 +133,15 @@ Plateau* initPlateau();
 
 
 /**
- * \fn void freePlateau(Plateau* p)
+ * \fn int freePlateau(Plateau* p)
  * \brief Libération de la mémoire allouée à un plateau et son contenu.
  *
  *
  * \param p un pointeur vers le Plateau à libérer.
- * \return -1 si p est un pointeur nul, 0 sinon.
+ * \return 0 si tout c'est bien passé, -1 sinon.
  */
 
  int freePlateau(Plateau* p);
-
-
-/**
- * \fn int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int pos)
- * \brief Fonction permettant de poser une infrastructure à un endroit du plateau si l'endroit en question est vide.
- *
- *
- * \param p est un pointeur vers le plateau, i est le type d'infrastructure à poser, x et y sont les coordonnées de la tuile en question et pos est la position sur la tuile en question.
- * \return 1 si l'action est validée, 0 sinon (cas ou il y a deja une infrastructure de présente).
- */
-
-int poserInfrastructure(Plateau* p, Infrastructure i, double x, double y, int pos);
 
 
 /**
