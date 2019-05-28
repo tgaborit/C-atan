@@ -67,8 +67,6 @@ static void print_infra(double x, double y,double angle, char* pathname, SDL_Ren
     if(SDL_RenderCopyEx(renderer,infra, NULL, &rectangle, angle, &point, 0) != 0){
 		SDL_ExitWithError("Impossible d'afficher la texture");
     }
-
-	SDL_RenderPresent(renderer);
 }
 
 

@@ -33,8 +33,6 @@ void AfficheJoueur(SDL_Renderer* renderer)
 
 	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)
 		SDL_ExitWithError("Impossible de remplir un rectangle");
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -120,8 +118,6 @@ void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 
     SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -156,8 +152,6 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
     AfficheInfoJoueurs(p->joueurs->first->next->joueur,renderer, 468.5);
 
     }
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -215,8 +209,6 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -272,8 +264,6 @@ void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -298,7 +288,6 @@ void AfficheNbCarte(Partie* p, SDL_Renderer* renderer)
 	AfficheNombreDev(DECOUVERTE, p, renderer);
 	AfficheNombreDev(ROUTES, p, renderer);
 	AfficheNombreDev(POINT, p, renderer);
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -339,14 +328,12 @@ void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
 
 /**
- * \fn void AfficheNbReussiteChevalier(Partie* p, SDL_Renderer* renderer);
+ * \fn void AfficheNbReussiteRoute(Partie* p, SDL_Renderer* renderer);
  * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
  *
  *
@@ -354,7 +341,7 @@ void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
  * \param renderer, le rendu actuel
  * \return aucun
  */
-void AfficheNbReussiteRoute(Partie*p, SDL_Renderer* renderer)
+void AfficheNbReussiteRoute(Partie* p, SDL_Renderer* renderer)
 {
     TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 15);
     if (police == NULL)
@@ -382,8 +369,6 @@ void AfficheNbReussiteRoute(Partie*p, SDL_Renderer* renderer)
     SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
-
-    SDL_RenderPresent(renderer);
 
     TTF_CloseFont(police);
 }

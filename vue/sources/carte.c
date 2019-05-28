@@ -46,8 +46,6 @@ void AfficheCarteArgile(SDL_Renderer* renderer){
 
 	if(SDL_RenderCopy(renderer, cargile, NULL, &rectargile) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -86,8 +84,6 @@ void AfficheCarteBle(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, cble, NULL, &rectble) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -126,8 +122,6 @@ void AfficheCarteBois(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, cbois, NULL, &rectbois) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -166,8 +160,6 @@ void AfficheCarteMouton(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, cmouton, NULL, &rectmouton) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -207,6 +199,4 @@ void AfficheCarteRoche(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, croche, NULL, &rectroche) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }

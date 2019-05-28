@@ -119,15 +119,12 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	AfficheBoutonColonie(renderer);
 	AfficheBoutonVille(renderer);
 	Affiche_Infrastructures(p,renderer);
-	AfficheTexte_MAJ(window);
-	AfficheListeJoueurs(p, renderer);
 	AfficheNbCarte(p, renderer);
 	AfficheNbReussiteChevalier(p, renderer);
 	AfficheNbReussiteRoute(p, renderer);
     SDL_RenderPresent(renderer);
 
 	AfficheTexte_MAJ(window);
-    SDL_RenderPresent(renderer);
 }
 
 /**
@@ -247,10 +244,7 @@ void AfficheDe(SDL_Window* window, Partie* partie)
 
     SDL_RenderCopy(renderer, textde, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
-
 }
 
 /**
@@ -289,9 +283,6 @@ void AfficheHelp(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, help, NULL, &recthelp) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
-
 }
 
 /**
@@ -381,8 +372,6 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 
 		if(SDL_RenderCopy(renderer, voleur, NULL, &rectvoleur) !=0)
 			SDL_ExitWithError("Impossible d'afficher la texture");
-
-		SDL_RenderPresent(renderer);
 	}
 }
 

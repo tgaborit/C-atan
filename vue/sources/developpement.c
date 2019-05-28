@@ -47,8 +47,6 @@ void AfficheChevalier(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, chevalier, NULL, &rectchevalier) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -88,8 +86,6 @@ void AfficheMonopole(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, monopole, NULL, &rectmonopole) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -128,8 +124,6 @@ void AfficheInvention(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, invention, NULL, &rectinvention) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -168,8 +162,6 @@ void AfficheRouteDev(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, route, NULL, &rectroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -208,8 +200,6 @@ void AfficheUniversite(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, universite, NULL, &rectuniversite) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -248,8 +238,6 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, reussitechevalier, NULL, &rectreussitechevalier) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -288,6 +276,4 @@ void AfficheGrandeRoute(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, reussiteroute, NULL, &rectreussiteroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }

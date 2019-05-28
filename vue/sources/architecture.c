@@ -47,8 +47,6 @@ void AfficheBoutonDev(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutondev, NULL, &rectboutondev) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -87,8 +85,6 @@ void AfficheBoutonRoute(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutonroute, NULL, &rectboutonroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -127,8 +123,6 @@ void AfficheBoutonColonie(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutoncolonie, NULL, &rectboutoncolonie) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -167,7 +161,5 @@ void AfficheBoutonVille(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutonville, NULL, &rectboutonville) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 

@@ -47,8 +47,6 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p2, NULL, &rectp2) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -87,8 +85,6 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p3, NULL, &rectp3) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -127,8 +123,6 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p4, NULL, &rectp4) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -167,8 +161,6 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p5, NULL, &rectp5) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -208,8 +200,6 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p6, NULL, &rectp6) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -251,8 +241,6 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p7, NULL, &rectp7) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -293,8 +281,6 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p8, NULL, &rectp8) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -333,8 +319,6 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p9, NULL, &rectp9) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -373,8 +357,6 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p10, NULL, &rectp10) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -413,8 +395,6 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p11, NULL, &rectp11) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -453,8 +433,6 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p12, NULL, &rectp12) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -489,8 +467,6 @@ void AfficheProbaNormal(SDL_Renderer* renderer)
 	Affiche8(renderer, 814, 605);
 	Affiche4(renderer, 949, 605);
 	Affiche11(renderer, 1084, 605);
-
-	SDL_RenderPresent(renderer);
 }
 
 /**

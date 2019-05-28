@@ -46,8 +46,6 @@ void AfficheTuile(SDL_Renderer* renderer)
 
 	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -88,8 +86,6 @@ void AfficheTuileArgile(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_RenderCopy(renderer, argile, NULL, &rectargile) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -129,8 +125,6 @@ void AfficheTuileBle(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_RenderCopy(renderer, ble, NULL, &rectble) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -170,8 +164,6 @@ void AfficheTuileBois(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_RenderCopy(renderer, bois, NULL, &rectbois) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -211,8 +203,6 @@ void AfficheTuileMouton(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_RenderCopy(renderer, mouton, NULL, &rectmouton) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -252,8 +242,6 @@ void AfficheTuileRoche(SDL_Renderer* renderer, double x, double y)
 
 	if(SDL_RenderCopy(renderer, roche, NULL, &rectroche) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
