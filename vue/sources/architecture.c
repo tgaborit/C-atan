@@ -1,4 +1,4 @@
-/*
+/**
  * \file architecture.c
  * \brief Implémente les fonctions de architecture.h
  * \author Pauline.M
