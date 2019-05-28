@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 6 mai 2019
 *
-*
+* Fonctions de conversion du système de coordonnées du contrôleur vers le système de coordonnées du modèle.
 *
 */
 

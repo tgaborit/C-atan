@@ -1,3 +1,14 @@
+/**
+* \file controller_preparation.c
+* \brief Fonction du contrôleur de la préparation du jeu
+* \author Titouan Gaborit
+* \date 16 mai 2019
+*
+* Programme gérant la préparation du jeu : le placement de deux colonies et de deux routes par chaque joueur, selon l'ordre
+* stipulé par les règles du jeu.
+*
+*/
+
 #include "controller_preparation.h"
 #include "get_partie.h"
 #include "fenetre.h"
@@ -7,7 +18,18 @@
 #include "set_partie.h"
 #include "affiche_texte.h"
 
-
+/**
+* \fn void controllerPreparation(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
+* \brief Fonction principale du contrôleur de la préparation du jeu
+*
+* Cette fonction corrrespond à la préparation de la partie : les joueurs placent chacun deux colonies et deux routes.
+* Elle appelle donc des fonctions de contrôleur pour détecter le choix du placement des joueurs, des fonctions du modèle pour modifier
+* l'état de la partie, et des fonctions de la vue pour mettre à jour ce que voit le joueur.
+*
+* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+*/
 void controllerPreparation(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
 {
     int i, j, k, bool_colonie = 0, bool_route = 0;
@@ -42,7 +64,6 @@ void controllerPreparation(SDL_bool* program_launched, SDL_Window* window, Parti
                 }
 
                 cross_chosen = crossButtonToCrossCoordinates(cross_clicked);
-                printf("Appel de la fonction du modele setColonieInit(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
                 bool_colonie = setColonieInit(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position);
                 if(bool_colonie == 0){
                     AfficheTexte_PosColonie_Succes(window);
@@ -72,7 +93,6 @@ void controllerPreparation(SDL_bool* program_launched, SDL_Window* window, Parti
                 }
 
                 path_chosen = pathButtonToPathCoordinates(path_clicked);
-                printf("Appel de la fonction du modele setRouteFree(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
                 bool_route = setRouteFree(the_game, path_chosen.x, path_chosen.y, path_chosen.position);
                 if(bool_route == 0){
                     AfficheTexte_PosRoute_Succes(window);

@@ -60,23 +60,23 @@ void initPosRectHex(SDL_Rect** hex_rect, float center_x, float center_y, float h
 {
     float hexagon_h = (sqrt(3)/2)*hexagon_s;
 
-    hex_rect[0]->x = round(center_x - hex_rect[0]->w/2);
-    hex_rect[0]->y = round(center_y - hexagon_s - hex_rect[0]->h/2);
+    hex_rect[0]->x = (int)round((double)(center_x - (float)hex_rect[0]->w/2));
+    hex_rect[0]->y = (int)round((double)(center_y - hexagon_s - (float)hex_rect[0]->h/2));
 
-    hex_rect[1]->x = round(center_x + hexagon_h - hex_rect[0]->w/2);
-    hex_rect[1]->y = round(center_y - hexagon_s/2 - hex_rect[0]->h/2);
+    hex_rect[1]->x = (int)round((double)(center_x + hexagon_h - (float)hex_rect[0]->w/2));
+    hex_rect[1]->y = (int)round((double)(center_y - hexagon_s/2 - (float)hex_rect[0]->h/2));
 
-    hex_rect[2]->x = round(center_x + hexagon_h - hex_rect[0]->w/2);
-    hex_rect[2]->y = round(center_y + hexagon_s/2 - hex_rect[0]->h/2);
+    hex_rect[2]->x = (int)round((double)(center_x + hexagon_h - (float)hex_rect[0]->w/2));
+    hex_rect[2]->y = (int)round((double)(center_y + hexagon_s/2 - (float)hex_rect[0]->h/2));
 
-    hex_rect[3]->x = round(center_x - hex_rect[0]->w/2);
-    hex_rect[3]->y = round(center_y + hexagon_s - hex_rect[0]->h/2);
+    hex_rect[3]->x = (int)round((double)(center_x - (float)hex_rect[0]->w/2));
+    hex_rect[3]->y = (int)round((double)(center_y + hexagon_s - (float)hex_rect[0]->h/2));
 
-    hex_rect[4]->x = round(center_x - hexagon_h - hex_rect[0]->w/2);
-    hex_rect[4]->y = round(center_y + hexagon_s/2 - hex_rect[0]->h/2);
+    hex_rect[4]->x = (int)round((double)(center_x - hexagon_h - (float)hex_rect[0]->w/2));
+    hex_rect[4]->y = (int)round((double)(center_y + hexagon_s/2 - (float)hex_rect[0]->h/2));
 
-    hex_rect[5]->x = round(center_x - hexagon_h - hex_rect[0]->w/2);
-    hex_rect[5]->y = round(center_y - hexagon_s/2 - hex_rect[0]->h/2);
+    hex_rect[5]->x = (int)round((double)(center_x - hexagon_h - (float)hex_rect[0]->w/2));
+    hex_rect[5]->y = (int)round((double)(center_y - hexagon_s/2 - (float)hex_rect[0]->h/2));
 }
 
 /**
@@ -94,22 +94,22 @@ void initPosRectHexLying(SDL_Rect** hex_buttons, float center_x, float center_y,
 {
     float hexagon_h = (sqrt(3)/2)*hexagon_s;
 
-    hex_buttons[0]->x = round(center_x + hexagon_s/2 - hex_buttons[0]->w/2);
-    hex_buttons[0]->y = round(center_y - hexagon_h - hex_buttons[0]->h/2);
+    hex_buttons[0]->x = (int)round((double)(center_x + hexagon_s/2 - (float)hex_buttons[0]->w/2));
+    hex_buttons[0]->y = (int)round((double)(center_y - hexagon_h - (float)hex_buttons[0]->h/2));
 
-    hex_buttons[1]->x = round(center_x + hexagon_s - hex_buttons[0]->w/2);
-    hex_buttons[1]->y = round(center_y - hex_buttons[0]->h/2);
+    hex_buttons[1]->x = (int)round((double)(center_x + hexagon_s - (float)hex_buttons[0]->w/2));
+    hex_buttons[1]->y = (int)round((double)(center_y - (float)hex_buttons[0]->h/2));
 
-    hex_buttons[2]->x = round(center_x + hexagon_s/2 - hex_buttons[0]->w/2);
-    hex_buttons[2]->y = round(center_y + hexagon_h - hex_buttons[0]->h/2);
+    hex_buttons[2]->x = (int)round((double)(center_x + hexagon_s/2 - (float)hex_buttons[0]->w/2));
+    hex_buttons[2]->y = (int)round((double)(center_y + hexagon_h - (float)hex_buttons[0]->h/2));
 
-    hex_buttons[3]->x = round(center_x - hexagon_s/2 - hex_buttons[0]->w/2);
-    hex_buttons[3]->y = round(center_y + hexagon_h - hex_buttons[0]->h/2);
+    hex_buttons[3]->x = (int)round((double)(center_x - hexagon_s/2 - (float)hex_buttons[0]->w/2));
+    hex_buttons[3]->y = (int)round((double)(center_y + hexagon_h - (float)hex_buttons[0]->h/2));
 
-    hex_buttons[4]->x = round(center_x - hexagon_s - hex_buttons[0]->w/2);
-    hex_buttons[4]->y = round(center_y - hex_buttons[0]->h/2);
+    hex_buttons[4]->x = (int)round((double)(center_x - hexagon_s - (float)hex_buttons[0]->w/2));
+    hex_buttons[4]->y = (int)round((double)(center_y - (float)hex_buttons[0]->h/2));
 
-    hex_buttons[5]->x = round(center_x - hexagon_s/2 - hex_buttons[0]->w/2);
-    hex_buttons[5]->y = round(center_y - hexagon_h - hex_buttons[0]->h/2);
+    hex_buttons[5]->x = (int)round((double)(center_x - hexagon_s/2 - (float)hex_buttons[0]->w/2));
+    hex_buttons[5]->y = (int)round((double)(center_y - hexagon_h - (float)hex_buttons[0]->h/2));
 }
 

@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 6 mai 2019
 *
-*
+* En-tête des fonctions de conversion du système de coordonnées du contrôleur vers le système de coordonnées du modèle.
 *
 */
 
@@ -17,14 +17,6 @@
 #include "controller_resource.h"
 #include "controller_player.h"
 #include "ressource.h"
-
-//typedef enum {
-//        BLE,
-//        BOIS,
-//        PIERRE,
-//        ARGILE,
-//        MOUTON
-//} TypeRessource;/* pour tester */
 
 /**
 * \struct PathCoordinates
