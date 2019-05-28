@@ -61,8 +61,8 @@ void setOnNext_list_joueur(List_joueur* list);
 * \fn void free_partie (Partie* partie)
 * \brief initialise la strucure partie qui contient toute les informations relatives à la partie
 * supprime la mémoire allouée à la structure partie,
-*initialise le pateau aléatoirement et initialise le tableau de joueur à null
-* \param parte un pointeur vers la partie
+*
+* \param partie* un pointeur vers la partie
 * \return aucun
 */
 void free_partie(Partie* partie);

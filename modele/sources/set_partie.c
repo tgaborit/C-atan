@@ -10,7 +10,13 @@
 
 #include "set_partie.h"
 
-
+/**
+* \fn static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
+* \brief initialise un noeud joueur
+*
+* \param Joueur* joueur courant, Joueur* joueur suivant
+* \return aucun
+*/
 static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
 {
     Node_joueur* new= (Node_joueur*) malloc(sizeof(Node_joueur));
@@ -19,6 +25,13 @@ static Node_joueur* initNode_joueur(Joueur* joueur, Node_joueur* next)
     return new;
 }
 
+/**
+* \fn static void cherche_infrastructure(Noeud* n)
+* \brief cherche les infrastructure des joueurs qui gagnent des ressources
+*
+* \param Noeud* noeud du plateau où l'on cherche
+* \return aucun
+*/
 static void cherche_infrastructure(Noeud* n){
 
 	    Infrastructure infra;
@@ -39,6 +52,13 @@ static void cherche_infrastructure(Noeud* n){
 
 	}
 
+	/**
+* \fn static int isempty_list_joueur (List_joueur* list)
+* \brief indique si la liste est vide
+*
+* \param List_joueur*
+* \return int :1 si la liste est vide 0 sinon
+*/
 static int isempty_list_joueur (List_joueur* list)
 {
     if(list->first==NULL)
@@ -54,7 +74,13 @@ void setOnFirst_joueur(Partie* partie)
         partie->joueurs->current=partie->joueurs->first;
     }
 }
-
+	/**
+* \fn static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
+* \brief ajoute un joueur dans la liste en première position
+*
+* \param List_joueur* ,Joueur*
+* \return int :1 si tout c'est bien passé -1 sinon
+*/
 static int addfirst_list_joueur (Joueur* joueur, List_joueur* list)
 {
 
@@ -338,7 +364,7 @@ int obtenir_cartedev (Partie* partie)
 /**
  * \fn int utiliser_monopole (Partie* partie, TypeRessource type)
  * \brief si le joueur courant possède une carte monopole il la défausse et prend les cartes ressources du type passé en paramètre
- *de tout les autre joueurs.
+ *de tout les autres joueurs.
  *
  * \param Partie*: la partie en cours, TypeRessource: type de ressource demandé.
  * \return le nombre de ressources volées ou -1 si le joueur n'as pas de carte monopole
@@ -534,7 +560,7 @@ int vole_carte(Partie* partie,double x, double y, Joueur* victime){
 
     /**
  * \fn int action_voleur(Partie* partie);
- * \brief si le des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
+ * \brief si les des affiche 7, passe en revu les cartes ressource de tout les joueur et enlève la moitier des ressource des joueur qui ont plus de 7 cartes ressources.
  *
  * \param Partie*: la partie en cours
  * \return le nombre de gens volés
