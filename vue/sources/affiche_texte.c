@@ -12,6 +12,8 @@
 #include "SDL_erreur.h"
 #include "get_partie.h"
 
+
+//fonction remplissant le texte à afficher dans des buffers
 static int fill_text(char* frag, char* buffer){
 
     int i =0;
@@ -26,6 +28,7 @@ static int fill_text(char* frag, char* buffer){
     return 0;
 }
 
+//fonction affichant le texte sur le rendu de la fenetre d'affichage
 static void PrintText(SDL_Window* window, char* frag, int ligne){
     SDL_Renderer* renderer = SDL_GetRenderer(window);
     TTF_Font* police = TTF_OpenFont("../fonts/DejaVuSansMono.ttf", 14);

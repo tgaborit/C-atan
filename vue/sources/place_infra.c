@@ -37,6 +37,7 @@ static double calcul_offset_y(int position){
     }
 }
 
+//fonction affichant l'infrastructure à poser sur le rendu
 static void print_infra(double x, double y,double angle, char* pathname, SDL_Renderer* renderer){
     SDL_Surface *image = NULL;
 	SDL_Texture *infra = NULL;
