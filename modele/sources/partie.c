@@ -73,6 +73,7 @@ static void setOnFirst_list_joueur(List_joueur* list)
 
 
 static void free_node_joueur(Node_joueur* n){
+    free_joueur(n->joueur);
     free(n);
 }
 
@@ -119,7 +120,8 @@ static void free_list_joueur(Partie* partie){
 */
 void free_partie(Partie* partie){
 	freePlateau(partie->plateau);
-    free_list_joueur(partie);
+   	free_list_joueur(partie);
+	free (partie->cartedev);
 	free(partie);
 
 }
