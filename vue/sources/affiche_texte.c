@@ -10,7 +10,10 @@
 
 #include "affiche_texte.h"
 #include "SDL_erreur.h"
+#include "get_partie.h"
 
+
+//fonction remplissant le texte à afficher dans des buffers
 static int fill_text(char* frag, char* buffer){
 
     int i =0;
@@ -25,9 +28,13 @@ static int fill_text(char* frag, char* buffer){
     return 0;
 }
 
+//fonction affichant le texte sur le rendu de la fenetre d'affichage
 static void PrintText(SDL_Window* window, char* frag, int ligne){
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-    TTF_Font* police = TTF_OpenFont("fonts/DejaVuSansMono.ttf", 14);
+    TTF_Font* police = TTF_OpenFont("../fonts/DejaVuSansMono.ttf", 14);
+        if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police DejaVuSansMono.ttf");
+
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
 
 	if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
@@ -96,9 +103,11 @@ static void AfficheTexte(SDL_Window* window, char* buffer, int action){
  * \param window la fenetre de jeu
  * \return aucun
  */
-void AfficheTexte_Joueur(SDL_Window* window){
+void AfficheTexte_Joueur(SDL_Window* window,Partie* partie){
     AfficheTexte(window,"----------------------------------------------------------",0);
-    char txt[40] = "Tour du joueur ...";
+    char txt[100] = "C'est au tour de ";
+    strcat(txt,get_pseudo_joueuractif(partie));
+    strcat(txt," de jouer !");
     AfficheTexte(window,txt,0);
     AfficheTexte(window,"----------------------------------------------------------",0);
 }
@@ -138,7 +147,7 @@ void AfficheTexte_NoCarte(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_StopAction(SDL_Window* window){
-    char txt[80] = "Action annulée.";
+    char txt[80] = "Action annulee.";
     AfficheTexte(window,txt,0);
 }
 

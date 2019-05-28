@@ -7,7 +7,8 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/catane" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/catane" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -16,7 +17,8 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/catane" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/catane" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -45,8 +47,11 @@
 		</Unit>
 		<Unit filename="controleur/headers/controller.h" />
 		<Unit filename="controleur/headers/controller_crossing.h" />
+		<Unit filename="controleur/headers/controller_dice.h" />
+		<Unit filename="controleur/headers/controller_help.h" />
 		<Unit filename="controleur/headers/controller_path.h" />
 		<Unit filename="controleur/headers/controller_player.h" />
+		<Unit filename="controleur/headers/controller_preparation.h" />
 		<Unit filename="controleur/headers/controller_resource.h" />
 		<Unit filename="controleur/headers/controller_terrain.h" />
 		<Unit filename="controleur/headers/controller_turn.h" />
@@ -58,10 +63,19 @@
 		<Unit filename="controleur/sources/controller_crossing.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="controleur/sources/controller_dice.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/sources/controller_help.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="controleur/sources/controller_path.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="controleur/sources/controller_player.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="controleur/sources/controller_preparation.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="controleur/sources/controller_resource.c">

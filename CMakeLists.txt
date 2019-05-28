@@ -3,100 +3,36 @@ cmake_minimum_required(VERSION 3.10)
 # On appelle le projet catane
 project(catane)
 
-# Liste des fichiers source du modèle
-set(SOURCES_MODELE
-        modele/sources/get_partie.c
-        modele/sources/get_plateau.c
-        modele/sources/joueur.c
-        modele/sources/partie.c
-        modele/sources/plateau.c
-        modele/sources/set_partie.c
-        modele/sources/set_plateau.c
+# CMake n'a pas de module FindSDL2_ttf.cmake, on en ajoute donc un dans l'arborescence du projet.
+# Il faut donc ajouter son chemin dans les chemins des modules CMake.
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
+
+# On génère les fichiers binaires dans un répertoire bin
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+# Liste des fichiers sources du modèle, de la vue et du contrôleur
+file(GLOB_RECURSE CATANE_SOURCES
+        ${CMAKE_SOURCE_DIR}/modele/*.c
+        ${CMAKE_SOURCE_DIR}/vue/*.c
+        ${CMAKE_SOURCE_DIR}/controleur/*.c
         )
 
-# Liste des fichiers d'en-tête du modèle
-set(HEADERS_MODELE
-        modele/headers/get_partie.h
-        modele/headers/get_plateau.h
-        modele/headers/joueur.h
-        modele/headers/partie.h
-        modele/headers/plateau.h
-        modele/headers/ressource.h
-        modele/headers/set_partie.h
-        modele/headers/set_plateau.h
+# Liste des fichiers d'en-tête du modèle, de la vue et du contrôleur
+file(GLOB_RECURSE CATANE_HEADERS
+        ${CMAKE_SOURCE_DIR}/modele/*.h
+        ${CMAKE_SOURCE_DIR}/vue/*.h
+        ${CMAKE_SOURCE_DIR}/controleur/*.h
         )
 
-# Liste des fichiers source de la vue
-set(SOURCES_VUE
-        vue/sources/affiche_joueur.c
-        vue/sources/affiche_texte.c
-        vue/sources/architecture.c
-        vue/sources/carte.c
-        vue/sources/developpement.c
-        vue/sources/fenetre.c
-        vue/sources/place_infra.c
-        vue/sources/probabilite.c
-        vue/sources/SDL_erreur.c
-        vue/sources/tuile.c
-        )
-
-# Liste des fichiers d'en-tête de la vue
-set(HEADERS_VUE
-        vue/headers/affiche_joueur.h
-        vue/headers/affiche_texte.h
-        vue/headers/architecture.h
-        vue/headers/carte.h
-        vue/headers/developpement.h
-        vue/headers/fenetre.h
-        vue/headers/place_infra.h
-        vue/headers/probabilite.h
-        vue/headers/SDL_erreur.h
-        vue/headers/tuile.h
-        )
-
-# Liste des fichiers source du contrôleur
-set(SOURCES_CONTROLEUR
-        controleur/sources/controller.c
-        controleur/sources/controller_crossing.c
-        controleur/sources/controller_path.c
-        controleur/sources/controller_player.c
-        controleur/sources/controller_resource.c
-        controleur/sources/controller_terrain.c
-        controleur/sources/controller_turn.c
-        controleur/sources/controller_turn_events.c
-        controleur/sources/converters.c
-        )
-
-# Liste des fichiers d'en-tête du contrôleur
-set(HEADERS_CONTROLEUR
-        controleur/headers/controller.h
-        controleur/headers/controller_crossing.h
-        controleur/headers/controller_path.h
-        controleur/headers/controller_player.h
-        controleur/headers/controller_resource.h
-        controleur/headers/controller_terrain.h
-        controleur/headers/controller_turn.h
-        controleur/headers/controller_turn_events.h
-        controleur/headers/converters.h
-        )
-
-# On ajoute les fichiers source et les fichiers d'en-tête du modèle, de la vue, du contrôleur à l'exécutable catane.
+# On ajoute les fichiers sources et les fichiers d'en-tête du modèle, de la vue, du contrôleur à l'exécutable catane.
 # On ajoute aussi le fichier catane.c qui contient le main du programme.
-add_executable(catane catane.c
-        ${SOURCES_MODELE} ${HEADERS_MODELE}
-        ${SOURCES_VUE} ${HEADERS_VUE}
-        ${SOURCES_CONTROLEUR} ${HEADERS_CONTROLEUR}
-        )
+add_executable(catane catane.c ${CATANE_SOURCES} ${CATANE_HEADERS})
 
 # On ajoute les dossiers contenant les fichiers d'en-tête du modèle, de la vue, du contrôleur, à la liste des dossiers où chercher les fichiers d'en-tête
-target_include_directories(catane PUBLIC modele/headers vue/headers controleur/headers)
+target_include_directories(catane PUBLIC ${CMAKE_SOURCE_DIR}/modele/headers ${CMAKE_SOURCE_DIR}/vue/headers ${CMAKE_SOURCE_DIR}/controleur/headers)
 
 # On inclut la biliothèque math.h au projet
 target_link_libraries(catane m)
-
-# CMake n'a pas de module FindSDL2_ttf.cmake, on en ajoute donc un dans l'arborescence projet.
-# Il faut donc ajouter son chemin dans les chemins des modules CMake.
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 # Recherche des bibliothèques externes SDL2 et SDL2_ttf
 find_package(SDL2 REQUIRED)
@@ -118,4 +54,43 @@ if (SDL2_TTF_FOUND)
 else ()
     # Sinon, on affiche un message et on arrête le script
     message(FATAL_ERROR "libsdl2-ttf-dev not found")
+endif ()
+
+
+# Liste des fichiers sources des tests
+file(GLOB_RECURSE TESTS_SOURCES
+        ${CMAKE_SOURCE_DIR}/tests/*.c
+        )
+
+# Liste des fichiers d'en-tête des tests
+file(GLOB_RECURSE TESTS_HEADERS
+        ${CMAKE_SOURCE_DIR}/tests/*.h
+        )
+
+# Liste des fichiers sources du modèle
+file(GLOB_RECURSE MODELE_SOURCES
+        ${CMAKE_SOURCE_DIR}/modele/*.c
+        )
+
+# Liste des fichiers d'en-tête du modèle
+file(GLOB_RECURSE MODELE_HEADERS
+        ${CMAKE_SOURCE_DIR}/modele/*.c
+        )
+
+# On ajoute les fichiers sources et les fichiers d'en-tête du modèle et des tests à l'exécutable catane_tests
+add_executable(catane_tests ${MODELE_SOURCES} ${MODELE_HEADERS} ${TESTS_SOURCES} ${TESTS_HEADERS})
+
+# On ajoute les dossiers contenant les fichiers d'en-tête du modèle, de la vue, du contrôleur, à la liste des dossiers où chercher les fichiers d'en-tête
+target_include_directories(catane_tests PUBLIC ${CMAKE_SOURCE_DIR}/modele/headers ${CMAKE_SOURCE_DIR}/tests/modele/headers)
+
+# Recherche de la bibliothèque externe cmocka
+find_package(CMOCKA REQUIRED)
+
+if (CMOCKA_FOUND)
+    # Une fois la bibliothèque cmocka trouvée, elle est incluse au projet
+    target_include_directories(catane_tests PUBLIC ${CMOCKA_INCLUDE_DIRS})
+    target_link_libraries(catane_tests ${CMOCKA_LIBRARIES})
+else()
+    # Sinon, on affiche un message et on arrête le script
+    message(FATAL_ERROR "libcmocka not found")
 endif ()

@@ -13,9 +13,11 @@
 #include "controller.h"
 #include "controller_turn.h"
 #include "controller_turn_events.h"
+#include "controller_help.h"
 #include "partie.h"
 #include "fenetre.h"
 #include "SDL_erreur.h"
+#include "set_partie.h"
 
 
 static SDL_Rect dev_craft_area;         /*!< Rectangle correspondant à la zone du bouton Craft d'une Carte développement*/
@@ -29,30 +31,31 @@ static SDL_Rect invent_dev_area;        /*!< Rectangle correspondant à la zone 
 static SDL_Rect roads_dev_area;         /*!< Rectangle correspondant à la zone du bouton de la carte développement Routes*/
 static SDL_Rect univ_dev_area;          /*!< Rectangle correspondant à la zone du bouton de la carte développement Université*/
 
-static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 static SDL_Rect end_turn_area;          /*!< Rectangle correspondant à la zone du bouton Fin de tour*/
 
 static SDL_Rect help_area;              /*!< Rectangle correspondant à la zone du bouton Aide*/
 
 
 /**
-* \fn void controllerTurn(SDL_bool* program_launched, Partie* the_game)
+* \fn void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
 * \brief Fonction principale du contrôleur du tour du joueur.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement de son tour de jeu.
-* Elle détecte les actions du joueur et fait appel aux fonctions de callback de craft, de carte développement, de lancer de dé, de fin de tour,
+* Elle détecte les actions du joueur et fait appel aux fonctions de callback de craft, de carte développement, de fin de tour,
 * d'aide ou de fin du programme en fonction de ces actions.
 *
 * \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
 * \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
 */
 void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
 {
     updateFenetre(the_game, window);
     initTurnButtons();
-    while(*program_launched)
+    SDL_bool turn_launched = SDL_TRUE;
+    while(turn_launched == SDL_TRUE)
     {
-//        drawTurnButtons(window);
+        drawTurnButtons(window);
 
         SDL_Event event;
         while(SDL_PollEvent(&event))
@@ -60,7 +63,8 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
             switch(event.type)
             {
             case SDL_USEREVENT:
-                printf("Appel de la fonction de la vue updateFenetre(the_game, window)\n");
+                nb_chevaliers_max(the_game);
+                nb_routes_max(the_game);
                 updateFenetre(the_game, window);
                 break;
 
@@ -68,75 +72,49 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 switch(whichTurnButton(event.button))
                 {
                 case DEVCRAFT_BUTTON :
-                    printf("Clic sur bouton Craft developpement\n");
-                    printf("Appel de la fonction craftDevEvent(the_game)\n");
                     craftDevEvent(window, the_game);
                     break;
 
                 case ROADCRAFT_BUTTON :
-                    printf("Clic sur bouton Craft route\n");
-                    printf("Appel de la fonction craftRoadEvent(the_game, window, program_launched)\n");
                     craftRoadEvent(the_game, window, program_launched);
                     break;
 
                 case SETTLECRAFT_BUTTON :
-                    printf("Clic sur bouton Craft colonie\n");
-                    printf("Appel de la fonction craftSettleEvent(the_game, window, program_launched)\n");
                     craftSettleEvent(the_game, window, program_launched);
                     break;
 
                 case CITYCRAFT_BUTTON :
-                    printf("Clic sur bouton Craft ville\n");
-                    printf("Appel de la fonction craftCityEvent(the_game, window, program_launched)\n");
                     craftCityEvent(the_game, window, program_launched);
                     break;
 
 
                 case KNIGHTDEV_BUTTON :
-                    printf("Clic sur bouton de carte développement Chevalier\n");
-                    printf("Appel de la fonction useKnightEvent(the_game, window, program_launched)\n");
                     useKnightEvent(the_game, window, program_launched);
                     break;
 
                 case MONOPDEV_BUTTON :
-                    printf("Clic sur bouton de carte développement Monopole\n");
-                    printf("Appel de la fonction useMonopEvent(the_game, window, program_launched)\n");
                     useMonopEvent(the_game, window, program_launched);
                     break;
 
                 case INVENTDEV_BUTTON :
-                    printf("Clic sur bouton de carte développement Invention\n");
-                    printf("Appel de la fonction useInventEvent(the_game, window, program_launched)\n");
                     useInventEvent(the_game, window, program_launched);
                     break;
 
                 case ROADSDEV_BUTTON :
-                    printf("Clic sur bouton de carte développement Routes\n");
-                    printf("Appel de la fonction useRoadsEvent(the_game, window, program_launched)\n");
                     useRoadsEvent(the_game, window, program_launched);
                     break;
 
                 case UNIVDEV_BUTTON :
-                    printf("Clic sur bouton de carte développement Universite\n");
-                    printf("Appel de la fonction useUnivEvent(the_game)\n");
                     useUnivEvent(the_game, window);
                     break;
 
-
                 case ENDTURN_BUTTON :
-                    printf("Clic sur bouton Fin de tour\n");
-                    printf("Appel de la fonction endTurnEvent(the_game)\n");
-                    endTurnEvent(the_game);
-                    break;
-
-                case DICE_BUTTON :
-                    printf("Clic sur bouton Lancer les des\n");
-                    printf("Appel de la fonction rollDiceEvent(the_game)\n");
-                    rollDiceEvent(the_game, window, program_launched);
+                    quit(&turn_launched);
                     break;
 
                 case HELP_BUTTON :
-                    printf("Clic sur bouton Aide\n");
+                    controllerHelp(window);
+                    updateFenetre(the_game, window);
                     break;
 
 
@@ -149,8 +127,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_q :
-                    printf("Appui sur touche Q\n");
-                    printf("Appel de la fonction quit(program_launched)\n");
+                    quit(&turn_launched);
                     quit(program_launched);
                     break;
 
@@ -160,8 +137,7 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 break;
 
             case SDL_QUIT :
-                printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(program_launched)\n");
+                quit(&turn_launched);
                 quit(program_launched);
                 break;
 
@@ -172,23 +148,24 @@ void controllerTurn(SDL_bool* program_launched, SDL_Window* window, Partie* the_
     }
 }
 
+/**
+* \fn void drawTurnButtons(SDL_Window* window)
+* \brief Fonction d'affichage des boutons de l'environnement du tour de jeu
+*
+* Regroupe tous les boutons de l'envrionnement du tour de jeu dans un tableau, puis les affiche de couleur blanche, par-dessus
+* sur le rendu de la fenêtre.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
 void drawTurnButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-
-//    //Nettoyage du rendu
-//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-//
-//    if(SDL_RenderClear(renderer) != 0)
-//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
         SDL_ExitWithError("Impossible de changer la couleur du rendu");
 
     SDL_Rect turn_buttons[NTURNBUTTONS] = {dev_craft_area, road_craft_area, settle_craft_area, city_craft_area,
-    knight_dev_area, monop_dev_area, invent_dev_area, roads_dev_area, univ_dev_area, dice_area, end_turn_area, help_area};
+    knight_dev_area, monop_dev_area, invent_dev_area, roads_dev_area, univ_dev_area, end_turn_area, help_area};
     if(SDL_RenderDrawRects(renderer, turn_buttons, NTURNBUTTONS) != 0)
         SDL_ExitWithError("Impossible de dessiner les boutons");
 
@@ -214,8 +191,6 @@ TurnButton whichTurnButton(SDL_MouseButtonEvent mouse_button){
         return button_clicked;
     if(isInArea(mouse_button, end_turn_area) == SDL_TRUE)
         return ENDTURN_BUTTON;
-    if(isInArea(mouse_button, dice_area) == SDL_TRUE)
-        return DICE_BUTTON;
     if(isInArea(mouse_button, help_area) == SDL_TRUE)
         return HELP_BUTTON;
     return NO_TURNBUTTON;
@@ -278,7 +253,6 @@ void initTurnButtons()
 {
     initCraftAreas();
     initDevCardsAreas();
-    initDiceArea();
     initEndTurnArea();
     initHelpArea();
 }
@@ -391,7 +365,7 @@ void initKnightDevArea()
     knight_dev_area.h = DEVH;
 
     knight_dev_area.x = 100;
-    knight_dev_area.y = 240;
+    knight_dev_area.y = 275;
 }
 
 /**
@@ -456,22 +430,6 @@ void initUnivDevArea()
 
     univ_dev_area.x = knight_dev_area.x;
     univ_dev_area.y = roads_dev_area.y + 25 + univ_dev_area.h;
-}
-
-/**
-* \fn void initDiesArea()
-* \brief Fonction d'initialisation des champs du rectangle de la zone du bouton Lancer les dés.
-*
-* Assigne les valeurs de largeur et hauteur d'après la taille souhaitée.
-* Assigne les valeurs de position selon le placement souhaité.
-*/
-void initDiceArea()
-{
-    dice_area.w = 100;
-    dice_area.h = 100;
-
-    dice_area.x = dev_craft_area.x + dev_craft_area.w/2 - dice_area.w/2;
-    dice_area.y = 75;
 }
 
 /**

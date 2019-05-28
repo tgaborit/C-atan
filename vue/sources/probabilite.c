@@ -25,10 +25,10 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p2 = NULL;
 
-	image = SDL_LoadBMP("images/2.bmp");
+	image = SDL_LoadBMP("../images/2.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 2.bmp");
 
 	p2 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -47,8 +47,6 @@ void Affiche2(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p2, NULL, &rectp2) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -65,10 +63,10 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p3 = NULL;
 
-	image = SDL_LoadBMP("images/3.bmp");
+	image = SDL_LoadBMP("../images/3.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 3.bmp");
 
 	p3 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -87,8 +85,6 @@ void Affiche3(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p3, NULL, &rectp3) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -105,10 +101,10 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p4 = NULL;
 
-	image = SDL_LoadBMP("images/4.bmp");
+	image = SDL_LoadBMP("../images/4.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 4.bmp");
 
 	p4 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -127,8 +123,6 @@ void Affiche4(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p4, NULL, &rectp4) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -145,10 +139,10 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p5 = NULL;
 
-	image = SDL_LoadBMP("images/5.bmp");
+	image = SDL_LoadBMP("../images/5.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 5.bmp");
 
 	p5 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -167,8 +161,6 @@ void Affiche5(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p5, NULL, &rectp5) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -186,10 +178,10 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p6 = NULL;
 
-	image = SDL_LoadBMP("images/6.bmp");
+	image = SDL_LoadBMP("../images/6.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 6.bmp");
 
 	p6 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -208,8 +200,6 @@ void Affiche6(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p6, NULL, &rectp6) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -229,10 +219,10 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p7 = NULL;
 
-	image = SDL_LoadBMP("images/7.bmp");
+	image = SDL_LoadBMP("../images/7.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 7.bmp");
 
 	p7 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -251,8 +241,6 @@ void Affiche7(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p7, NULL, &rectp7) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -271,10 +259,10 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p8 = NULL;
 
-	image = SDL_LoadBMP("images/8.bmp");
+	image = SDL_LoadBMP("../images/8.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 8.bmp");
 
 	p8 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -293,8 +281,6 @@ void Affiche8(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p8, NULL, &rectp8) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -311,10 +297,10 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p9 = NULL;
 
-	image = SDL_LoadBMP("images/9.bmp");
+	image = SDL_LoadBMP("../images/9.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 9.bmp");
 
 	p9 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -333,8 +319,6 @@ void Affiche9(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p9, NULL, &rectp9) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -351,10 +335,10 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p10 = NULL;
 
-	image = SDL_LoadBMP("images/10.bmp");
+	image = SDL_LoadBMP("../images/10.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 10.bmp");
 
 	p10 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -373,8 +357,6 @@ void Affiche10(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p10, NULL, &rectp10) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -391,10 +373,10 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p11 = NULL;
 
-	image = SDL_LoadBMP("images/11.bmp");
+	image = SDL_LoadBMP("../images/11.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 11.bmp");
 
 	p11 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -413,8 +395,6 @@ void Affiche11(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p11, NULL, &rectp11) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -431,10 +411,10 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 	SDL_Surface *image = NULL;
 	SDL_Texture *p12 = NULL;
 
-	image = SDL_LoadBMP("images/12.bmp");
+	image = SDL_LoadBMP("../images/12.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image 12.bmp");
 
 	p12 = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -453,8 +433,6 @@ void Affiche12(SDL_Renderer* renderer, double posx, double posy)
 
 	if(SDL_RenderCopy(renderer, p12, NULL, &rectp12) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -489,8 +467,6 @@ void AfficheProbaNormal(SDL_Renderer* renderer)
 	Affiche8(renderer, 814, 605);
 	Affiche4(renderer, 949, 605);
 	Affiche11(renderer, 1084, 605);
-
-	SDL_RenderPresent(renderer);
 }
 
 /**

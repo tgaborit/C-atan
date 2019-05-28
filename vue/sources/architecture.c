@@ -1,4 +1,4 @@
-/*
+/**
  * \file architecture.c
  * \brief Implémente les fonctions de architecture.h
  * \author Pauline.M
@@ -24,10 +24,10 @@ void AfficheBoutonDev(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutondev = NULL;
 
-	image = SDL_LoadBMP("images/dev.bmp");
+	image = SDL_LoadBMP("../images/dev.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image dev.bmp");
 
 	boutondev = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -47,8 +47,6 @@ void AfficheBoutonDev(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutondev, NULL, &rectboutondev) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -64,10 +62,10 @@ void AfficheBoutonRoute(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonroute = NULL;
 
-	image = SDL_LoadBMP("images/boutonroute.bmp");
+	image = SDL_LoadBMP("../images/boutonroute.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image boutonroute.bmp");
 
 	boutonroute = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -87,8 +85,6 @@ void AfficheBoutonRoute(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutonroute, NULL, &rectboutonroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -104,10 +100,10 @@ void AfficheBoutonColonie(SDL_Renderer *renderer)
  SDL_Surface* image = NULL;
 	SDL_Texture* boutoncolonie = NULL;
 
-	image = SDL_LoadBMP("images/boutoncolonie.bmp");
+	image = SDL_LoadBMP("../images/boutoncolonie.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image bouton colonie.bmp");
 
 	boutoncolonie = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -127,8 +123,6 @@ void AfficheBoutonColonie(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutoncolonie, NULL, &rectboutoncolonie) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -144,10 +138,10 @@ void AfficheBoutonVille(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* boutonville = NULL;
 
-	image = SDL_LoadBMP("images/boutonville.bmp");
+	image = SDL_LoadBMP("../images/boutonville.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image boutonville.bmp");
 
 	boutonville = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -167,7 +161,5 @@ void AfficheBoutonVille(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, boutonville, NULL, &rectboutonville) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 

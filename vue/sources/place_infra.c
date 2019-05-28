@@ -37,6 +37,7 @@ static double calcul_offset_y(int position){
     }
 }
 
+//fonction affichant l'infrastructure à poser sur le rendu
 static void print_infra(double x, double y,double angle, char* pathname, SDL_Renderer* renderer){
     SDL_Surface *image = NULL;
 	SDL_Texture *infra = NULL;
@@ -66,8 +67,6 @@ static void print_infra(double x, double y,double angle, char* pathname, SDL_Ren
     if(SDL_RenderCopyEx(renderer,infra, NULL, &rectangle, angle, &point, 0) != 0){
 		SDL_ExitWithError("Impossible d'afficher la texture");
     }
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -82,16 +81,16 @@ static void Affiche_Colonie(double x, double y, int position, Couleur couleur, S
     posy += -34;
 
     if(couleur == BLANC){
-        print_infra(posx,posy,0,"images/colonieblanche.bmp",renderer);
+        print_infra(posx,posy,0,"../images/colonieblanche.bmp",renderer);
     }
     if(couleur == BLEU){
-        print_infra(posx,posy,0,"images/coloniebleu.bmp",renderer);
+        print_infra(posx,posy,0,"../images/coloniebleu.bmp",renderer);
     }
     if(couleur == ROUGE){
-        print_infra(posx,posy,0,"images/colonierouge.bmp",renderer);
+        print_infra(posx,posy,0,"../images/colonierouge.bmp",renderer);
     }
     if(couleur == ORANGE){
-        print_infra(posx,posy,0,"images/colonieorange.bmp",renderer);
+        print_infra(posx,posy,0,"../images/colonieorange.bmp",renderer);
     }
 }
 
@@ -106,16 +105,16 @@ static void Affiche_Ville(double x, double y, int position, Couleur couleur, SDL
     posy += -22;
 
     if(couleur == BLANC){
-        print_infra(posx,posy,0,"images/villeblanc.bmp",renderer);
+        print_infra(posx,posy,0,"../images/villeblanc.bmp",renderer);
     }
     if(couleur == BLEU){
-        print_infra(posx,posy,0,"images/villebleu.bmp",renderer);
+        print_infra(posx,posy,0,"../images/villebleu.bmp",renderer);
     }
     if(couleur == ROUGE){
-        print_infra(posx,posy,0,"images/villerouge.bmp",renderer);
+        print_infra(posx,posy,0,"../images/villerouge.bmp",renderer);
     }
     if(couleur == ORANGE){
-        print_infra(posx,posy,0,"images/villeorange.bmp",renderer);
+        print_infra(posx,posy,0,"../images/villeorange.bmp",renderer);
     }
 }
 
@@ -140,16 +139,16 @@ static void Affiche_Route(double x, double y, int position, Couleur couleur, SDL
     }
 
     if(couleur == BLANC){
-        print_infra(posx,posy,angle,"images/routeblanc.bmp",renderer);
+        print_infra(posx,posy,angle,"../images/routeblanche.bmp",renderer);
     }
     if(couleur == BLEU){
-        print_infra(posx,posy,angle,"images/routebleu.bmp",renderer);
+        print_infra(posx,posy,angle,"../images/routebleu.bmp",renderer);
     }
     if(couleur == ROUGE){
-        print_infra(posx,posy,angle,"images/routerouge.bmp",renderer);
+        print_infra(posx,posy,angle,"../images/routerouge.bmp",renderer);
     }
     if(couleur == ORANGE){
-        print_infra(posx,posy,angle,"images/routeorange.bmp",renderer);
+        print_infra(posx,posy,angle,"../images/routeorange.bmp",renderer);
     }
 }
 

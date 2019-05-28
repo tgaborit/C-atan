@@ -10,38 +10,6 @@
 
 #include "developpement.h"
 
-//Carte Developpement
-/*void AfficheCartesDev(SDL_Renderer *renderer)
-{
-	SDL_Surface *image = NULL;
-	SDL_Texture *texture = NULL;
-
-	image = SDL_LoadBMP("images/cartedev.bmp");
-
-	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
-
-	texture = SDL_CreateTextureFromSurface(renderer, image);
-	SDL_FreeSurface(image);
-
-
-	if(texture == NULL)
-		SDL_ExitWithError("impossible de creer la texture");
-
-	SDL_Rect rectangle;
-
-	if(SDL_QueryTexture(texture, NULL, NULL, &rectangle.w, &rectangle.h) != 0)
-		SDL_ExitWithError("Impossible de charger la texture");
-
-	rectangle.x = 1251.5;
-	rectangle.y = 780;
-
-
-	if(SDL_RenderCopy(renderer, texture, NULL, &rectangle) !=0)
-		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
-}*/
 
 /**
  * \fn AfficheChevalier(SDL_Renderer *renderer)
@@ -56,10 +24,10 @@ void AfficheChevalier(SDL_Renderer *renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *chevalier = NULL;
 
-	image = SDL_LoadBMP("images/chevalier.bmp");
+	image = SDL_LoadBMP("../images/chevalier.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image chevalier.bmp");
 
 	chevalier = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -79,8 +47,6 @@ void AfficheChevalier(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, chevalier, NULL, &rectchevalier) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 
@@ -97,10 +63,10 @@ void AfficheMonopole(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* monopole = NULL;
 
-	image = SDL_LoadBMP("images/monopole.bmp");
+	image = SDL_LoadBMP("../images/monopole.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image monopole.bmp");
 
 	monopole = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -120,8 +86,6 @@ void AfficheMonopole(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, monopole, NULL, &rectmonopole) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -137,10 +101,10 @@ void AfficheInvention(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* invention = NULL;
 
-	image = SDL_LoadBMP("images/invention.bmp");
+	image = SDL_LoadBMP("../images/invention.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image invention.bmp");
 
 	invention = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -160,8 +124,6 @@ void AfficheInvention(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, invention, NULL, &rectinvention) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -177,10 +139,10 @@ void AfficheRouteDev(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* route = NULL;
 
-	image = SDL_LoadBMP("images/routedev.bmp");
+	image = SDL_LoadBMP("../images/routedev.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image routedev.bmp");
 
 	route = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -200,8 +162,6 @@ void AfficheRouteDev(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, route, NULL, &rectroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -217,10 +177,10 @@ void AfficheUniversite(SDL_Renderer *renderer)
 	SDL_Surface* image = NULL;
 	SDL_Texture* universite = NULL;
 
-	image = SDL_LoadBMP("images/universite.bmp");
+	image = SDL_LoadBMP("../images/universite.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image universite.bmp");
 
 	universite = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -240,8 +200,6 @@ void AfficheUniversite(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, universite, NULL, &rectuniversite) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -257,10 +215,10 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* reussitechevalier = NULL;
 
-	image = SDL_LoadBMP("images/cartereussitechevalier.bmp");
+	image = SDL_LoadBMP("../images/cartereussitechevalier.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image cartereussitechevalier.bmp");
 
 	reussitechevalier = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -280,8 +238,6 @@ void AfficheGrandeArmee(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, reussitechevalier, NULL, &rectreussitechevalier) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }
 
 /**
@@ -297,10 +253,10 @@ void AfficheGrandeRoute(SDL_Renderer *renderer)
     SDL_Surface* image = NULL;
 	SDL_Texture* reussiteroute = NULL;
 
-	image = SDL_LoadBMP("images/cartereussiteroute.bmp");
+	image = SDL_LoadBMP("../images/cartereussiteroute.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image cartereussiteroute.bmp");
 
 	reussiteroute = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -320,6 +276,4 @@ void AfficheGrandeRoute(SDL_Renderer *renderer)
 
 	if(SDL_RenderCopy(renderer, reussiteroute, NULL, &rectreussiteroute) !=0)
 		SDL_ExitWithError("Impossible d'afficher la texture");
-
-	SDL_RenderPresent(renderer);
 }

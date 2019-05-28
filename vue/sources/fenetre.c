@@ -45,14 +45,14 @@ SDL_Window* InitFenetre(){
     SDL_Window *window = NULL;
 
     if(TTF_Init()!=0){
-        fprintf(stderr, "Erreur d'initialisation TTf : %s\n", TTF_GetError());
+        fprintf(stderr, "Erreur d'initialisation TTF : %s\n", TTF_GetError());
     }
 
 	if(SDL_Init(SDL_INIT_VIDEO)!=0)
 		SDL_ExitWithError("Initialisation SDL impossible");
 
 	//Creation de la fenetre en fullscreen et rendu
-	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, 0)) == NULL)
+	if((window = SDL_CreateWindow("Catane",SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOWW, WINDOWH, SDL_WINDOW_FULLSCREEN_DESKTOP)) == NULL)
 		SDL_ExitWithError("Impossible de creer la fenetre");
 
     return window;
@@ -92,7 +92,7 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	if(renderer == NULL)
 		SDL_ExitWithError("Creation rendu echouée");
 
-    	AfficheDe(window, p);
+    AfficheDe(window, p);
 	AfficheChevalier(renderer);
 	AfficheMonopole(renderer);
 	AfficheInvention(renderer);
@@ -119,13 +119,12 @@ void updateFenetre(Partie* p, SDL_Window* window){
 	AfficheBoutonColonie(renderer);
 	AfficheBoutonVille(renderer);
 	Affiche_Infrastructures(p,renderer);
-	AfficheTexte_MAJ(window);
-	AfficheListeJoueurs(p, renderer);
 	AfficheNbCarte(p, renderer);
+	AfficheNbReussiteChevalier(p, renderer);
+	AfficheNbReussiteRoute(p, renderer);
     SDL_RenderPresent(renderer);
 
 	AfficheTexte_MAJ(window);
-    SDL_RenderPresent(renderer);
 }
 
 /**
@@ -161,12 +160,13 @@ void AfficheSkip(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *skip = NULL;
 
-	image = SDL_LoadBMP("images/skip.bmp");
+	image = SDL_LoadBMP("../images/skip.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image skip.bmp");
 
 	skip = SDL_CreateTextureFromSurface(renderer, image);
+
 	SDL_FreeSurface(image);
 
 
@@ -199,7 +199,11 @@ void AfficheSkip(SDL_Renderer* renderer)
 void AfficheDe(SDL_Window* window, Partie* partie)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 100);
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 100);
+
+    if(police == NULL)
+		SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     int lancer = get_des(partie);
     char de[20] = "";
@@ -229,16 +233,18 @@ void AfficheDe(SDL_Window* window, Partie* partie)
 
 
     SDL_Surface* surfde = TTF_RenderText_Blended(police, de, couleur);
+    if(surfde == NULL)
+        SDL_ExitWithError("Echec de la creation de la surface du de");
+
     SDL_Texture* textde = SDL_CreateTextureFromSurface(renderer, surfde);
+    if(textde == NULL)
+        SDL_ExitWithError("Echec de la creation de la texture du de");
 
     SDL_QueryTexture(textde, NULL, NULL, &rect.w, &rect.h);
 
     SDL_RenderCopy(renderer, textde, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
-
 }
 
 /**
@@ -254,10 +260,10 @@ void AfficheHelp(SDL_Renderer* renderer)
 	SDL_Surface *image = NULL;
 	SDL_Texture *help = NULL;
 
-	image = SDL_LoadBMP("images/help.bmp");
+	image = SDL_LoadBMP("../images/help.bmp");
 
 	if(image == NULL)
-		SDL_ExitWithError("Impossible de charger l'image");
+		SDL_ExitWithError("Impossible de charger l'image help.bmp");
 
 	help = SDL_CreateTextureFromSurface(renderer, image);
 	SDL_FreeSurface(image);
@@ -272,6 +278,45 @@ void AfficheHelp(SDL_Renderer* renderer)
 		SDL_ExitWithError("Impossible de charger la texture");
 
 	recthelp.x = 1875;
+	recthelp.y = 0;
+
+
+	if(SDL_RenderCopy(renderer, help, NULL, &recthelp) !=0)
+		SDL_ExitWithError("Impossible d'afficher la texture");
+}
+
+/**
+ * \fn void Help(SDL_Renderer* renderer)
+ * \brief Fonction affichant l'aide du jeu
+ *
+ *
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void Help(SDL_Window* w)
+{
+    SDL_Renderer* renderer = SDL_GetRenderer(w);
+	SDL_Surface *image = NULL;
+	SDL_Texture *help = NULL;
+
+	image = SDL_LoadBMP("../images/aide.bmp");
+
+	if(image == NULL)
+		SDL_ExitWithError("Impossible de charger l'image aide.bmp");
+
+	help = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+
+
+	if(help == NULL)
+		SDL_ExitWithError("impossible de creer la texture");
+
+	SDL_Rect recthelp;
+
+	if(SDL_QueryTexture(help, NULL, NULL, &recthelp.w, &recthelp.h) != 0)
+		SDL_ExitWithError("Impossible de charger la texture");
+
+	recthelp.x = 0;
 	recthelp.y = 0;
 
 
@@ -305,10 +350,10 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 		SDL_Surface *image = NULL;
 		SDL_Texture *voleur = NULL;
 
-		image = SDL_LoadBMP("images/voleur.bmp");
+		image = SDL_LoadBMP("../images/voleur.bmp");
 
 		if(image == NULL)
-			SDL_ExitWithError("Impossible de charger l'image");
+			SDL_ExitWithError("Impossible de charger l'image voleur.bmp");
 
 		voleur = SDL_CreateTextureFromSurface(renderer, image);
 		SDL_FreeSurface(image);
@@ -327,8 +372,6 @@ void AfficheJetonVoleur(Partie* p, double x, double y, SDL_Renderer* renderer, d
 
 		if(SDL_RenderCopy(renderer, voleur, NULL, &rectvoleur) !=0)
 			SDL_ExitWithError("Impossible d'afficher la texture");
-
-		SDL_RenderPresent(renderer);
 	}
 }
 

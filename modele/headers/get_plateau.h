@@ -1,3 +1,13 @@
+/**
+ * \file get_plateau.h
+ * \brief Définit les fonctions de get_plateau.c
+ * \author Emmanuel.D
+ * \version 1.0
+ * \date 5 mars 2019
+ *
+ * Définit les fonctions utiles à l'obtention de données touchant au plateau de jeu.
+ */
+
 #include "plateau.h"
 #include "ressource.h"
 #include "joueur.h"
@@ -76,7 +86,6 @@ Joueur* getJoueurArrete(Partie* partie, double x, double y, int position);
  * \param position est le sommet (suivant l'enum Deplacement, sachant que le sommet correspondant à l'arrete de même numéro est le sommet de droite).
  * \return l'infrastructure (son entier) ou -1 si la tuile n'existe pas, si la postition est incorrecte ou si partie est un pointeur nul.
  */
-
 int getInfrastructureSommet(Partie* partie, double x, double y, int position);
 
 

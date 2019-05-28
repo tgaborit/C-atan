@@ -33,8 +33,6 @@ void AfficheJoueur(SDL_Renderer* renderer)
 
 	if(SDL_RenderFillRect(renderer, &barrejoueurs) != 0)
 		SDL_ExitWithError("Impossible de remplir un rectangle");
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -51,7 +49,10 @@ void AfficheJoueur(SDL_Renderer* renderer)
 void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 {
 
-    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 30);
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 30);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     TTF_SetFontStyle(police, TTF_STYLE_BOLD);
     char score[20]="";
     SDL_Color couleur;
@@ -117,8 +118,6 @@ void AfficheInfoJoueurs(Joueur* j, SDL_Renderer* renderer, int x)
 
     SDL_RenderCopy(renderer, textscore, NULL, &rectscore);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -153,8 +152,6 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
     AfficheInfoJoueurs(p->joueurs->first->next->joueur,renderer, 468.5);
 
     }
-
-    SDL_RenderPresent(renderer);
 }
 
 
@@ -172,7 +169,10 @@ void AfficheListeJoueurs(Partie* p, SDL_Renderer* renderer)
  */
 void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* renderer)
 {
-    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 20);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {0, 0, 0, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 
@@ -209,8 +209,6 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -226,7 +224,10 @@ void AfficheNombreRessources(TypeRessource type, Partie* p, SDL_Renderer* render
  */
 void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
 {
-    TTF_Font* police = TTF_OpenFont("fonts/Vogue.ttf", 20);
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 20);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
     SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
     char nb[20] = "";
 
@@ -263,8 +264,6 @@ void AfficheNombreDev(TypeCarteDev type, Partie* p, SDL_Renderer* renderer)
 
     SDL_RenderCopy(renderer, textnb, NULL, &rect);
 
-    SDL_RenderPresent(renderer);
-
     TTF_CloseFont(police);
 }
 
@@ -289,5 +288,87 @@ void AfficheNbCarte(Partie* p, SDL_Renderer* renderer)
 	AfficheNombreDev(DECOUVERTE, p, renderer);
 	AfficheNombreDev(ROUTES, p, renderer);
 	AfficheNombreDev(POINT, p, renderer);
-	SDL_RenderPresent(renderer);
+}
+
+
+/**
+ * \fn void AfficheNbReussiteChevalier(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteChevalier(Partie*p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 15);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+
+	SDL_Rect rect;
+	rect.x = 155;
+	rect.y = 235;
+	rect.w = 100;
+	rect.h = 100;
+
+    SDL_Surface* surfnb = NULL;
+    if(p->joueurs->current->joueur == get_joueur_chevaliers(p) && p->joueurs->current->joueur->nbChevalier > 2){
+         surfnb = TTF_RenderText_Blended(police, "1", couleur);
+
+    }else{
+        surfnb = TTF_RenderText_Blended(police, "0", couleur);
+    }
+
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    TTF_CloseFont(police);
+}
+
+
+/**
+ * \fn void AfficheNbReussiteRoute(Partie* p, SDL_Renderer* renderer);
+ * \brief Fonction affichant 1 si la carte réussite est en possession du joueur, sinon 0
+ *
+ *
+ * \param p, la partie actuelle
+ * \param renderer, le rendu actuel
+ * \return aucun
+ */
+void AfficheNbReussiteRoute(Partie* p, SDL_Renderer* renderer)
+{
+    TTF_Font* police = TTF_OpenFont("../fonts/Vogue.ttf", 15);
+    if (police == NULL)
+        SDL_ExitWithError("Echec du chargement de la police Vogue.ttf");
+
+    SDL_Color couleur = {255, 255, 255, SDL_ALPHA_OPAQUE};
+
+	SDL_Rect rect;
+	rect.x = 330;
+	rect.y = 235;
+	rect.w = 100;
+	rect.h = 100;
+
+	 SDL_Surface* surfnb = NULL;
+
+    if(p->joueurs->current->joueur == get_joueur_routes(p) && p->joueurs->current->joueur->nbRoute > 4){
+        surfnb = TTF_RenderText_Blended(police, "1", couleur);
+
+    }else{
+        surfnb = TTF_RenderText_Blended(police, "0", couleur);
+    }
+
+    SDL_Texture* textnb = SDL_CreateTextureFromSurface(renderer, surfnb);
+
+    SDL_QueryTexture(textnb, NULL, NULL, &rect.w, &rect.h);
+
+    SDL_RenderCopy(renderer, textnb, NULL, &rect);
+
+    TTF_CloseFont(police);
 }

@@ -4,6 +4,10 @@
 #include "controller_turn.h"
 #include "set_partie.h"
 #include "fenetre.h"
+#include "controller_preparation.h"
+#include "controller_dice.h"
+#include "controller.h"
+#include "affiche_texte.h"
 
 int main()
 {
@@ -17,16 +21,41 @@ int main()
 	add_joueur(j,partie);
 	Joueur* k = init_joueur(BLEU,"remi");
 	add_joueur(k,partie);
+//	Joueur* f = init_joueur(BLANC,"pauline");
+//	add_joueur(f,partie);
+//	Joueur* g = init_joueur(ORANGE,"titou");
+//	add_joueur(g,partie);
 
-    for(int i=0; i<1; ++i){
+    for(int i=0; i<10; ++i){
         gain_ressource(ARGILE,k);
         gain_ressource(MOUTON,k);
         gain_ressource(BLE,k);
         gain_ressource(BOIS,k);
         gain_ressource(PIERRE,k);
+
+        gain_ressource(ARGILE,j);
+        gain_ressource(MOUTON,j);
+        gain_ressource(BLE,j);
+        gain_ressource(BOIS,j);
+        gain_ressource(PIERRE,j);
     }
 
-    controllerTurn(&program_launched, window, partie);
+    controllerPreparation(&program_launched, window, partie);
+
+    while (program_launched == SDL_TRUE)
+    {
+        AfficheTexte_Joueur(window, partie);
+        controllerDice(&program_launched, window, partie);
+        if(program_launched == SDL_FALSE)
+            break;
+
+        controllerTurn(&program_launched, window, partie);
+
+        if(get_score_max(partie) >= 10)
+            quit(&program_launched);
+
+        passer_tour(partie);
+    }
 
     destroyFenetre(window);
 

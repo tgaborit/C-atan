@@ -1,3 +1,13 @@
+/**
+ * \file set_plateau.h
+ * \brief Définit les fonctions de set_plateau.c
+ * \author Emmanuel.D
+ * \version 1.0
+ * \date 5 mars 2019
+ *
+ * Définit les fonctions utiles à la modification des données touchant au plateau de jeu.
+ */
+
 #include "plateau.h"
 #include "get_plateau.h"
 #include "get_partie.h"
@@ -11,7 +21,7 @@
 
 
 /**
- * \fn int setRoute(Partie* partie,double x, double y, int position, Infrastructure i)
+ * \fn int setRoute(Partie* partie,double x, double y, int position)
  * \brief fonction permettant de placer une route appartenant à un joueur sur l'arrete d'une tuile et payer.
  *
  *
@@ -23,7 +33,7 @@ int setRoute(Partie* partie, double x, double y, int position);
 
 
 /**
- * \fn int setRouteFree(Partie* partie,double x, double y, int position, Infrastructure i)
+ * \fn int setRouteFree(Partie* partie,double x, double y, int position)
  * \brief fonction permettant de placer une route appartenant à un joueur sur l'arrete d'une tuile.
  *
  *
@@ -99,7 +109,7 @@ int setVilleFree(Partie* partie, double x, double y, int position);
  *
  *
  * \param partie est un pointeur vers la partie, x et y sont les coordonnées de la nouvelle tuile où poser le voleur.
- * \return 0 si tout c est bien passé, -1 sinon.
+ * \return retourne 0 si tout c est bien passé, -1 sinon.
  */
 
 int setVoleur(Partie* partie, double x, double y);

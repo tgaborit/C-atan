@@ -41,13 +41,17 @@
 */
 #define HEXAGONS 78
 
+/**
+* \def BANNERH
+* Définit la hauteur d'un bouton de joueur.
+*/
+#define BANNERH 35
+
 SDL_bool isInArea(SDL_MouseButtonEvent mouse_button, SDL_Rect area);
 
 void quit(SDL_bool * paction_launched);
 
 void initPosRectHex(SDL_Rect** hex_rect, float center_x, float center_y, float hexagon_s);
 void initPosRectHexLying(SDL_Rect** hex_rect, float center_x, float center_y, float hexagon_s);
-
-//void SDL_ExitWithError(const char *message);
 
 #endif //CATANE_CONTROLLER_H

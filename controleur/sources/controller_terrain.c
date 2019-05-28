@@ -37,13 +37,14 @@ static SDL_Rect terrSW_area;          /*!< Rectangle correspondant à la zone du
 static SDL_Rect terrNW_area;          /*!< Rectangle correspondant à la zone du terrain 5 de l'hexagone debout*/
 
 /**
-* \fn void controllerTerrain(PathButton* path_chosen, SDL_bool* program_launched)
+* \fn void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* program_launched)
 * \brief Fonction principale du contrôleur du choix d'un terrain.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un terrain.
 * Elle détecte les actions du joueur et enregistre le terrain cliqué le cas échéant, quitte le programme ou l'environnement.
 *
 * \param[in,out] terrain_chosen Pointeur vers la ressource choisie dans laquelle sera enregistrée le terrain cliqué.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* program_launched)
@@ -62,7 +63,6 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* pr
             case SDL_MOUSEBUTTONDOWN :
                 if((terr_clicked = whichTerrButton(event.button)) != NO_TERRBUTTON)
                 {
-                    printf("Clic sur terrain %d\n", terr_clicked);
                     *terr_chosen = terr_clicked;
                     quit(&choice_launched);
                 }
@@ -72,8 +72,6 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* pr
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_BACKSPACE :
-                    printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 
@@ -83,10 +81,7 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* pr
                 break;
 
             case SDL_QUIT :
-                printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
-                printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
 
@@ -97,16 +92,17 @@ void controllerTerrain(TerrButton* terr_chosen, SDL_Window* window, SDL_bool* pr
     }
 }
 
+/**
+* \fn void drawTerrButtons(SDL_Window* window)
+* \brief Fonction d'affichage des boutons de l'environnement du choix d'un terrain
+*
+* Regroupe tous les boutons de l'envrionnement du choix d'un terrain dans un tableau, puis les affiche de couleur blanche, par-dessus
+* sur le rendu de la fenêtre.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
 void drawTerrButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-
-//    //Nettoyage du rendu
-//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-//
-//    if(SDL_RenderClear(renderer) != 0)
-//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

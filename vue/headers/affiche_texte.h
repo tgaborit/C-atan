@@ -54,7 +54,7 @@ void AfficheTexte_StopAction(SDL_Window* window);
  * \param window la fenetre de jeu
  * \return aucun
  */
-void AfficheTexte_Joueur(SDL_Window* window);
+void AfficheTexte_Joueur(SDL_Window* window, Partie* partie);
 
 /**
  * \fn AfficheTexte_Init(SDL_Window* window)

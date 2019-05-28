@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-*
+* En-tête des fonctions de callback appelées lors d'un évènement particulier.
 *
 */
 
@@ -28,6 +28,6 @@ void useUnivEvent(Partie* the_game, SDL_Window* window);
 void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
 void endTurnEvent(Partie* the_game);
 
-void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched);
+void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launched, int bool_knight);
 
 #endif //CATANE_CONTROLLER_TURN_EVENTS_H

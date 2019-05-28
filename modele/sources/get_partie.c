@@ -11,6 +11,13 @@
 
 
 
+/**
+ * static void setOnFirst_list_joueur(List_joueur* list)
+ * \brief deffinie le joueur courant comme le premier de la liste
+ *
+ * \param List_joueur* liste des joueurs de la partie
+ * \return aucun
+ */
 
 static void setOnFirst_list_joueur(List_joueur* list)
 {
@@ -24,9 +31,9 @@ static void setOnFirst_list_joueur(List_joueur* list)
  * \fn int get_des(Partie* partie)
  * \brief Simule un lancé de dès
  *
- *  retourne la valeur du lancé de des le plus récent de la partie.
+ *  change la valeur du paramètre valeur_de de la structure partie
  * \param partie un pointeur vers la partie.
- * \return int: valeur obtenu
+ * \return aucun
  */
 int get_des(Partie* partie){
     return partie->valeur_de;
@@ -37,8 +44,8 @@ int get_des(Partie* partie){
 * \fn Joueur get_joueur_actif(Partie partie);
 * \brief renvoie le Joueur qui a la main
 *
-* \param Partie: partie en cour
-* \return Joueur: joueur qui a la main
+* \param Partie*: partie en cour
+* \return Joueur*: joueur qui a la main
 */
 Joueur* get_joueur_actif(Partie* partie)
 {
@@ -47,7 +54,7 @@ Joueur* get_joueur_actif(Partie* partie)
 
 /**
  * \fn int  get_nbcartedev_joueuractif(TypeCarteDev type,Partie* partie)
- * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur
+ * \brief Fonction qui retourne les cartes developpemnts possédées par le joueur actif
  *
  * fonction renvoillant le nombre de carte developpement d'un certain type possédé par le joueur actif
  * \param TypeCarteDev: le type de la carte developpemnt dont on veut connaitre le nombre, Partie* partie en cours
@@ -99,6 +106,74 @@ int get_nbChevalier_joueuractif(Partie* partie)
     return get_nbChevalier(joueur);
 }
 
+
+/**
+ * \fn Joueur* get_joueur_chevaliers(Partie* partie)
+ * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
+ *
+ * \param Partie* partie en cours
+ * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a activé plus de trois chevaliers.
+ */
+
+Joueur* get_joueur_chevaliers(Partie* partie){
+    int i, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus d'activations de chevaliers.
+        if(j_max->nbChevalier < partie->joueurs->current->joueur->nbChevalier){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbChevalier == partie->joueurs->current->joueur->nbChevalier){           // Si deux joueurs ont le même nombre de chevaliers, alors NULL est renvoyé
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
+
+/**
+ * \fn Joueur* get_joueur_routes(Partie* partie)
+ * \brief Fonction qui retourne le joueur possédant le plus d'activations de chevaliers.
+ *
+ * \param Partie* partie en cours
+ * \return retourne le joueur en question, ou NULL en cas d'égalité ou si personne n'a posé plus de cinq routes.
+ */
+
+Joueur* get_joueur_routes(Partie* partie){
+    int i,nbRoutes, boolean_equal = 0;
+    Node_joueur* tmp = partie->joueurs->current;
+    setOnFirst_list_joueur(partie->joueurs);
+    Joueur* j_max = partie->joueurs->current->joueur;
+    setOnNext_list_joueur(partie->joueurs);
+
+    for(i=0;i<get_nbjoueurs(partie)-1;++i){                                             // On parcourt les joueurs et on renvoie celui qui possede le plus de routes.
+        nbRoutes = partie->joueurs->current->joueur->nbRoute;
+        if(j_max->nbRoute < nbRoutes){
+            j_max = partie->joueurs->current->joueur;
+            boolean_equal = 0;
+        }
+        else if(j_max->nbRoute == nbRoutes){                                            // Si deux joueurs ont le même nombre de routes, alors NULL est renvoyé
+            boolean_equal = 1;
+        }
+        setOnNext_list_joueur(partie->joueurs);
+    }
+    partie->joueurs->current = tmp;
+    if(boolean_equal == 0){
+        return j_max;
+    }
+    return NULL;
+}
+
+
 /**
  * \fn char* get_pseudo_joueuractif(Partie* partie)
  * \brief Fonction qui retourne le pseudo du joueur actif
@@ -143,7 +218,7 @@ int get_nbjoueurs(Partie* partie)
 * \brief retourne le score du joueur le plus fort
 *
 * renvoie le score du joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie
- * le score le plus fort
+* le score le plus fort
 * \param Partie: partie en cours
 * \return int: score max dans la partie
 */
@@ -156,7 +231,7 @@ int get_score_max(Partie* partie)
 * \fn Joueur* get_score_max
 * \brief retourne un pointeur sur le joueur qui a le score le plus fort
 *
-* renvoie le joueur ayant le plus de point si plusieurs joueur sont a égalité renvoie le joeur qui a joué le plus tot au premier tour
+* renvoie le joueur ayant le plus de point si plusieurs joueurs sont a égalité renvoie le joeur qui a joué le plus tot au premier tour
 * exemple: si tout les score sont à 2 renvoie le joueur qui a jouer en premier
 *
 * \param Partie: partie en cours
