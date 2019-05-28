@@ -12,14 +12,14 @@
 
 
 /**
- * static void setOnFirst_list_joueur(List_joueur* list)
+ * void setOnFirst_list_joueur(List_joueur* list)
  * \brief deffinie le joueur courant comme le premier de la liste
  *
  * \param List_joueur* liste des joueurs de la partie
  * \return aucun
  */
 
-static void setOnFirst_list_joueur(List_joueur* list)
+void setOnFirst_list_joueur(List_joueur* list)
 {
     if(list->current != NULL){
         list->current=list->first;

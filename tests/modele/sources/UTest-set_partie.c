@@ -10,10 +10,6 @@
 #include "get_partie.h"
 #include "set_partie.h"
 
-static void setOnFirst_list_joueur(List_joueur* list)
-{
-    list->current=list->first;
-}
 
 
 static int setup_partie (void ** state)
@@ -122,6 +118,26 @@ static void test_findjoueur(void** state)
     assert_int_equal(-1,find_joueur(partie,joueur_test));
     assert_ptr_equal(joueur_1,partie->joueurs->current->joueur);
 }
+
+static void test_get_joueur_chevaliers(void** state){
+    Partie* partie = (Partie*) *(state);
+    partie->joueurs->first->joueur->nbChevalier=5;
+    partie->joueurs->first->next->joueur->nbChevalier = 7;
+    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_chevaliers(partie));
+    partie->joueurs->first->next->next->joueur->nbChevalier = 7;
+    assert_ptr_equal(NULL,get_joueur_chevaliers(partie));
+}
+
+static void test_get_joueur_routes(void** state){
+    Partie* partie = (Partie*) *(state);
+    partie->joueurs->first->joueur->nbRoute=5;
+    partie->joueurs->first->next->joueur->nbRoute = 7;
+    assert_ptr_equal(partie->joueurs->first->next->joueur,get_joueur_routes(partie));
+    partie->joueurs->first->next->next->joueur->nbRoute = 7;
+    assert_ptr_equal(NULL,get_joueur_routes(partie));
+
+}
+
 
 static void test_get_nb_joueur(void **state)
 {
@@ -597,6 +613,8 @@ int main_partie_test(void)
         cmocka_unit_test_setup_teardown(test_utiliser_routes_mauvaises_coordonnees,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_routes_1bonne_coordonnee,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_routes_2bonne_coordonnee,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_chevaliers,setup_partie,teardown),
+        cmocka_unit_test_setup_teardown(test_get_joueur_routes,setup_partie,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sansjoueur,setup_partie_ressource,teardown),
         cmocka_unit_test_setup_teardown(test_utiliser_chevalier_sanscarte,setup_partie_ressource,teardown),

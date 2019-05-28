@@ -9,6 +9,7 @@
  */
 
 #include "affiche_joueur.h"
+#include "get_partie.h"
 
 
 /**
