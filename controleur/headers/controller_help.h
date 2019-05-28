@@ -11,16 +11,8 @@
 #ifndef CONTROLLER_HELP_H
 #define CONTROLLER_HELP_H
 
-#include "fenetre.h"
+#include <SDL.h>
 
-/**
- * \fn controllerHelp(SDL_Window* window)
- * \brief Fonction controlleur pour ouvrir l'aide du jeu
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
 void controllerHelp(SDL_Window* window);
 
-#endif
+#endif //CONTROLLER_HELP_H

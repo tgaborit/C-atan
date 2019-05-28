@@ -9,15 +9,17 @@
  */
 
 #include "controller_help.h"
+#include "fenetre.h"
 
 /**
- * \fn controllerHelp(SDL_Window* window)
- * \brief Fonction controlleur pour ouvrir l'aide du jeu
- *
- *
- * \param window la fenetre de jeu
- * \return aucun
- */
+* \fn void controllerHelp(SDL_Window* window)
+* \brief Fonction principale du contrôleur de l'aide.
+*
+* Cette fonction se répète tant que le joueur reste dans l'environnement de l'aide
+* Elle détecte les actions du joueur et quitte l'environnement le cas échéant.
+*
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
 void controllerHelp(SDL_Window* window)
 {
     Help(window);

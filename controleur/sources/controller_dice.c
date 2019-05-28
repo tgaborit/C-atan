@@ -18,6 +18,18 @@
 
 static SDL_Rect dice_area;              /*!< Rectangle correspondant à la zone du bouton Lancer les dés*/
 
+/**
+* \fn void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
+* \brief Fonction principale du contrôleur du lancer de dés.
+*
+* Cette fonction se répète tant que le joueur reste dans l'environnement du lancer de dés.
+* Elle détecte les actions du joueur et fait appel aux fonctions de lancer de dés,
+* d'aide ou de fin du programme en fonction de ces actions.
+*
+* \param[in,out] program_launched Pointeur vers l'état du programme : si devient SDL_False, on sort de la fonction et on quitte le programme.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+* \param[in,out] the_partie Etat de la partie en cours qui sera modifié en fonction des actions du joueur.
+*/
 void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_game)
 {
     updateFenetre(the_game, window);
@@ -35,10 +47,7 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 switch(whichDiceButton(event.button))
                 {
                 case DICE_BUTTON :
-                    printf("Clic sur bouton Lancer les des\n");
-                    printf("Appel de la fonction rollDiceEvent(the_game)\n");
                     rollDiceEvent(the_game, window, program_launched);
-                    printf("Appel de la fonction quit(&throw_launched)\n");
                     quit(&throw_launched);
                     break;
 
@@ -51,10 +60,7 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_q :
-                    printf("Appui sur touche Q\n");
-                    printf("Appel de la fonction quit(&throw_launched)\n");
                     quit(&throw_launched);
-                    printf("Appel de la fonction quit(program_launched)\n");
                     quit(program_launched);
                     break;
 
@@ -64,10 +70,7 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
                 break;
 
             case SDL_QUIT :
-                printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&throw_launched)\n");
                 quit(&throw_launched);
-                printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
 
@@ -78,16 +81,18 @@ void controllerDice(SDL_bool* program_launched, SDL_Window* window, Partie* the_
     }
 }
 
+/**
+* \fn void drawDiceButtons(SDL_Window* window)
+* \brief Fonction d'affichage des boutons de l'environnement du lancer de dés
+*
+* Regroupe tous les boutons de l'envrionnement du lancer de dés dans un tableau, puis les affiche de couleur blanche, par-dessus
+* sur le rendu de la fenêtre.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
+
 void drawDiceButton(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-
-//    //Nettoyage du rendu
-//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-//
-//    if(SDL_RenderClear(renderer) != 0)
-//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)

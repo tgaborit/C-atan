@@ -54,6 +54,4 @@ void quit(SDL_bool * paction_launched);
 void initPosRectHex(SDL_Rect** hex_rect, float center_x, float center_y, float hexagon_s);
 void initPosRectHexLying(SDL_Rect** hex_rect, float center_x, float center_y, float hexagon_s);
 
-//void SDL_ExitWithError(const char *message);
-
 #endif //CATANE_CONTROLLER_H

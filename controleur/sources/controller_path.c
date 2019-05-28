@@ -108,6 +108,7 @@ static SDL_Rect pathO51_area;          /*!< Rectangle correspondant à la zone d
 * Elle détecte les actions du joueur et enregistre le chemin cliqué le cas échéant, quitte le programme ou l'environnement.
 *
 * \param[in,out] path_chosen Pointeur vers le chemin choisi dans lequel sera enregistré le chemin cliqué.
+* \param[in] window Pointeur vers la fenêtre du jeu.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* program_launched)
@@ -126,7 +127,6 @@ void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* progr
             case SDL_MOUSEBUTTONDOWN :
                 if((path_clicked = whichPathButton(event.button)) != NO_PATHBUTTON)
                 {
-                    printf("Clic sur chemin %d\n", path_clicked);
                     *path_chosen = path_clicked;
                     quit(&choice_launched);
                 }
@@ -136,8 +136,6 @@ void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* progr
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_BACKSPACE :
-                    printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 
@@ -147,10 +145,7 @@ void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* progr
                 break;
 
             case SDL_QUIT :
-                printf("Evenement SDL_QUIT\n");
-                printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
-                printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
 
@@ -161,16 +156,17 @@ void controllerPath(PathButton* path_chosen, SDL_Window* window, SDL_bool* progr
     }
 }
 
+/**
+* \fn void drawPathButtons(SDL_Window* window)
+* \brief Fonction d'affichage des boutons de l'environnement du choix d'un chemin
+*
+* Regroupe tous les boutons de l'envrionnement du choix d'un chemin dans un tableau, puis les affiche de couleur blanche, par-dessus
+* sur le rendu de la fenêtre.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
 void drawPathButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
-
-//    //Nettoyage du rendu
-//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-//
-//    if(SDL_RenderClear(renderer) != 0)
-//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
@@ -276,12 +272,12 @@ void initPathButtons()
     initPosRectHexLying(path_buttons[1], BOARDCENTERX, BOARDCENTERY, 3*hexagonl_s);                                         // Boutons de la deuxième couronne
     initPosRectHexLying(path_buttons[2], BOARDCENTERX, BOARDCENTERY, 5*hexagonl_s);                                         // Boutons de la troisième couronne
     initPosRectHexLying(path_buttons[3], BOARDCENTERX, BOARDCENTERY - 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Nord
-    initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Est
-    initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Est
+    initPosRectHexLying(path_buttons[4], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY - HEXAGONS - (float)HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Est
+    initPosRectHexLying(path_buttons[5], BOARDCENTERX + 3*hexagonl_s, BOARDCENTERY + HEXAGONS + (float)HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Est
     initPosRectHexLying(path_buttons[6], BOARDCENTERX, BOARDCENTERY + 3*HEXAGONS, hexagonl_s);                              // Boutons de l'hexagone Sud
-    initPosRectHexLying(path_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Ouest
-    initPosRectHexLying(path_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Nord - Ouest
-    initPosRectHex(path_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + HEXAGONS/2);                                     // Boutons de l'hexagone debout
+    initPosRectHexLying(path_buttons[7], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY + HEXAGONS + (float)HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Sud - Ouest
+    initPosRectHexLying(path_buttons[8], BOARDCENTERX - 3*hexagonl_s, BOARDCENTERY - HEXAGONS - (float)HEXAGONS/2, hexagonl_s);    // Boutons de l'hexagone Nord - Ouest
+    initPosRectHex(path_buttons[9], BOARDCENTERX, BOARDCENTERY, HEXAGONS + (float)HEXAGONS/2);                                     // Boutons de l'hexagone debout
     initPosRectOthers();                                                                                                    // Boutons des 12 chemins orphelins
 }
 
@@ -298,18 +294,18 @@ void initPosRectOthers(){
     hexagonl_s = (sqrt(3)/2)*HEXAGONS;
     hexagonl_h = (sqrt(3)/2)*hexagonl_s;
 
-    pathO00_area.x = pathO31_area.x = round(BOARDCENTERX - hexagonl_s - hexagonl_s/2 - pathO00_area.w/2);
-    pathO00_area.y = pathO01_area.y = round(BOARDCENTERY - 3*HEXAGONS - hexagonl_h - pathO00_area.h/2);
-    pathO01_area.x = pathO30_area.x = round(BOARDCENTERX + hexagonl_s + hexagonl_s/2 - pathO01_area.w/2);
-    pathO30_area.y = pathO31_area.y = round(BOARDCENTERY + 3*HEXAGONS + hexagonl_h - pathO20_area.h/2);
+    pathO00_area.x = pathO31_area.x = (int)round((double)(BOARDCENTERX - hexagonl_s - hexagonl_s/2 - (float)pathO00_area.w/2));
+    pathO00_area.y = pathO01_area.y = (int)round((double)(BOARDCENTERY - 3*HEXAGONS - hexagonl_h - (float)pathO00_area.h/2));
+    pathO01_area.x = pathO30_area.x = (int)round((double)(BOARDCENTERX + hexagonl_s + hexagonl_s/2 - (float)pathO01_area.w/2));
+    pathO30_area.y = pathO31_area.y = (int)round((double)(BOARDCENTERY + 3*HEXAGONS + hexagonl_h - (float)pathO20_area.h/2));
 
-    pathO11_area.x = pathO20_area.x = round(BOARDCENTERX + 4*hexagonl_s + hexagonl_s/2 - pathO10_area.w/2);
-    pathO11_area.y = pathO50_area.y = round(BOARDCENTERY - hexagonl_h - pathO11_area.h/2);
-    pathO41_area.x = pathO50_area.x = round(BOARDCENTERX - 4*hexagonl_s - hexagonl_s/2 - pathO41_area.w/2);
-    pathO20_area.y = pathO41_area.y = round(BOARDCENTERY + hexagonl_h - pathO11_area.h/2);
+    pathO11_area.x = pathO20_area.x = (int)round((double)(BOARDCENTERX + 4*hexagonl_s + hexagonl_s/2 - (float)pathO10_area.w/2));
+    pathO11_area.y = pathO50_area.y = (int)round((double)(BOARDCENTERY - hexagonl_h - (float)pathO11_area.h/2));
+    pathO41_area.x = pathO50_area.x = (int)round((double)(BOARDCENTERX - 4*hexagonl_s - hexagonl_s/2 - (float)pathO41_area.w/2));
+    pathO20_area.y = pathO41_area.y = (int)round((double)(BOARDCENTERY + hexagonl_h - (float)pathO11_area.h/2));
 
-    pathO10_area.x = pathO21_area.x = round(BOARDCENTERX + 3*hexagonl_s - pathO10_area.w/2);
-    pathO10_area.y = pathO51_area.y = round(BOARDCENTERY - 3*HEXAGONS - pathO10_area.h/2);
-    pathO21_area.y = pathO40_area.y = round(BOARDCENTERY + 3*HEXAGONS - pathO21_area.h/2);
-    pathO40_area.x = pathO51_area.x = round(BOARDCENTERX - 3*hexagonl_s - pathO40_area.w/2);
+    pathO10_area.x = pathO21_area.x = (int)round((double)(BOARDCENTERX + 3*hexagonl_s - (float)pathO10_area.w/2));
+    pathO10_area.y = pathO51_area.y = (int)round((double)(BOARDCENTERY - 3*HEXAGONS - (float)pathO10_area.h/2));
+    pathO21_area.y = pathO40_area.y = (int)round((double)(BOARDCENTERY + 3*HEXAGONS - (float)pathO21_area.h/2));
+    pathO40_area.x = pathO51_area.x = (int)round((double)(BOARDCENTERX - 3*hexagonl_s - (float)pathO40_area.w/2));
 }

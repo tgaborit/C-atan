@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-*
+* Programme gérant les fonctions de callback appelées lors d'un évènement particulier. Ces fonctions agissent sur le modèle.
 *
 */
 
@@ -40,7 +40,6 @@ void craftDevEvent(SDL_Window* window, Partie* the_game)
         return;
     }
     SDL_Event ev;
-    printf("Appel de la fonction du modèle obtenir_cartedev(the_game)\n");
     if(obtenir_cartedev(the_game) == 0){
         AfficheTexte_CarteDev_Succes(window);
     }
@@ -89,7 +88,6 @@ void craftRoadEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
         }
 
         path_chosen = pathButtonToPathCoordinates(path_clicked);
-        printf("Appel de la fonction du modele setRoute(the_game, %f, %f, %d)\n", path_chosen.x, path_chosen.y, path_chosen.position);
         bool_route = setRoute(the_game, path_chosen.x, path_chosen.y, path_chosen.position);
         if(bool_route == 0){
             AfficheTexte_PosRoute_Succes(window);
@@ -140,7 +138,6 @@ void craftSettleEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_la
         }
 
         cross_chosen = crossButtonToCrossCoordinates(cross_clicked);
-        printf("Appel de la fonction du modele setColonie(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
         bool_colonie = setColonie(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position);
         if(bool_colonie == 0){
             AfficheTexte_PosColonie_Succes(window);
@@ -190,7 +187,6 @@ void craftCityEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
         }
 
         cross_chosen = crossButtonToCrossCoordinates(cross_clicked);
-        printf("Appel de la fonction du modele setVille(the_game, %f, %f, %d)\n", cross_chosen.x, cross_chosen.y, cross_chosen.position);
         bool_ville = setVille(the_game, cross_chosen.x, cross_chosen.y, cross_chosen.position);
         if(bool_ville == 0){
             AfficheTexte_PosVille_Succes(window);
@@ -220,7 +216,6 @@ void useKnightEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
         return;
     }
 
-    printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
     activateRobberEvent(the_game, window, program_launched, 1);
 
     ev.type = SDL_USEREVENT;
@@ -260,7 +255,6 @@ void useMonopEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
 
     TypeRessource resource_chosen = resourceButtonToTypeRessource(resource_clicked);
     int resource_init = get_nbressource_joueuractif(resource_chosen,the_game);
-    printf("Appel de la fonction du modele utiliser_monopole(the_game, %d)\n", resource_chosen);
     int vol = utiliser_monopole(the_game, resource_chosen);
     if(vol-resource_init > 0){
         AfficheTexte_Monopole_Succes(window, vol-resource_init);
@@ -320,7 +314,6 @@ void useInventEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_laun
 
     TypeRessource resource_chosen1 = resourceButtonToTypeRessource(resource_clicked1);
     TypeRessource resource_chosen2 = resourceButtonToTypeRessource(resource_clicked2);
-    printf("Appel de la fonction du modele utiliser_decouverte(the_game, %d, %d)\n", resource_chosen1, resource_chosen2);
     utiliser_decouverte(the_game, resource_chosen1, resource_chosen2);
     AfficheTexte_Decouverte_Succes(window);
 
@@ -387,8 +380,6 @@ void useRoadsEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
         path_chosen1 = pathButtonToPathCoordinates(path_clicked1);
         path_chosen2 = pathButtonToPathCoordinates(path_clicked2);
 
-        printf("Appel de la fonction du modele utiliserRoutes(the_game, %f, %f, %f, %f, %d, %d)\n", path_chosen1.x, path_chosen1.y,
-        path_chosen2.x, path_chosen2.y,path_chosen1.position, path_chosen2.position);
         bool_routes = utiliser_routes(the_game, path_chosen1.x, path_chosen1.y, path_chosen2.x, path_chosen2.y,path_chosen1.position, path_chosen2.position);
     }
     while (bool_routes != 0);
@@ -416,7 +407,6 @@ void useUnivEvent(Partie* the_game, SDL_Window* window)
         return;
     }
 
-    printf("Appel de la fonction du modèle utiliser_point(the_game)\n");
     utiliser_point(the_game);
     AfficheTexte_Point_Succes(window);
     ev.type = SDL_USEREVENT;
@@ -435,34 +425,15 @@ void rollDiceEvent(Partie* the_game, SDL_Window* window, SDL_bool* program_launc
 {
     SDL_Event ev;
 
-    printf("Appel de la fonction du modèle lancer_des()\n");
     int des = lancer_des(the_game);
     if(des == 7)
     {
-        printf("Appel de la fonction activateRobberEvent(the_game, renderer, program_launched)\n");
         activateRobberEvent(the_game, window, program_launched, 0);
         int nb_vol = action_voleur(the_game);
         AfficheTexte_nbVol(window,nb_vol);
     }
     gagne_ressource(des, the_game);
 
-    ev.type = SDL_USEREVENT;
-    SDL_PushEvent(&ev);
-}
-
-/**
-* \fn void endTurnEvent(Partie* the_game)
-* \brief Evénement de fin de tour du joueur.
-*
-* Fait appel à la fonction du modèle passer_tour pour modifier l'état du jeu et crée un événement pour mettre à jour la vue.
-*
-* \param[in,out] the_game Pointeur vers l'état de la partie.
-*/
-void endTurnEvent(Partie* the_game)
-{
-    SDL_Event ev;
-    printf("Appel de la fonction du modèle passer_tour(the_game)\n");
-    //passer_tour(the_game);
     ev.type = SDL_USEREVENT;
     SDL_PushEvent(&ev);
 }
@@ -523,7 +494,6 @@ void activateRobberEvent(Partie* the_game, SDL_Window* window, SDL_bool* program
         passer_tour(the_game);
     }
     if(bool_knight == 1){
-        printf("Appel de la fonction du modele utiliser_chevalier(the_game, %f, %f,%s\n", terr_chosen.x, terr_chosen.y, victime->pseudo);
         if(utiliser_chevalier(the_game,terr_chosen.x, terr_chosen.y, victime) == 0){
             AfficheTexte_Chevalier_Succes(window);
         }

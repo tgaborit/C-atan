@@ -22,13 +22,15 @@ static SDL_Rect player3_area;           /*!< Rectangle correspondant à la zone 
 static SDL_Rect player4_area;           /*!< Rectangle correspondant à la zone de la carte Moutons*/
 
 /**
-* \fn void controllerPlayer(PathButton* path_chosen, SDL_bool* program_launched)
+* \fn void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
 * \brief Fonction principale du contrôleur du choix d'un joueur.
 *
 * Cette fonction se répète tant que le joueur reste dans l'environnement du choix d'un joueur.
 * Elle détecte les actions du joueur et enregistre le joueur cliqué le cas échéant, quitte le programme ou l'environnement.
 *
 * \param[in,out] player_chosen Pointeur vers le joueur choisi dans lequel sera enregistré le joueur cliqué.
+* \param[in] the_partie Etat de la partie en cours qui contient le nombre de joueurs.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
 * \param[in,out] program_launched Etat du programme : si devient SDL_False, on quitte le programme.
 */
 void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window* window, SDL_bool* program_launched)
@@ -47,25 +49,21 @@ void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window*
                 switch(whichPlayerButton(event.button))
                 {
                 case PLAYER1_BUTTON :
-                    printf("Clic sur joueur 1\n");
                     *player_chosen = PLAYER1_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case PLAYER2_BUTTON :
-                    printf("Clic sur joueur 2\n");
                     *player_chosen = PLAYER2_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case PLAYER3_BUTTON :
-                    printf("Clic sur joueur 3\n");
                     *player_chosen = PLAYER3_BUTTON;
                     quit(&choice_launched);
                     break;
 
                 case PLAYER4_BUTTON :
-                    printf("Clic sur joueur 4\n");
                     *player_chosen = PLAYER4_BUTTON;
                     quit(&choice_launched);
                     break;
@@ -79,8 +77,6 @@ void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window*
                 switch(event.key.keysym.sym)
                 {
                 case SDLK_BACKSPACE :
-                    printf("Appui sur touche Retour arriere\n");
-                    printf("Appel de la fonction quit(&choice_launched)\n");
                     quit(&choice_launched);
                     break;
 
@@ -90,11 +86,8 @@ void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window*
                 break;
 
             case SDL_QUIT :
-                printf("Evenement SDL_QUIT\n");
                 *player_chosen = NO_PLAYERBUTTON;
-                printf("Appel de la fonction quit(&choice_launched)\n");
                 quit(&choice_launched);
-                printf("Appel de la fonction quit(program_launched)\n");
                 quit(program_launched);
                 break;
 
@@ -105,16 +98,18 @@ void controllerPlayer(PlayerButton* player_chosen, Partie* the_game, SDL_Window*
     }
 }
 
+/**
+* \fn void drawPlayerButtons(SDL_Window* window)
+* \brief Fonction d'affichage des boutons de l'environnement du choix d'un joueur
+*
+* Regroupe tous les boutons de l'envrionnement du choix d'un joueur dans un tableau, puis les affiche de couleur blanche, par-dessus
+* sur le rendu de la fenêtre.
+* \param[in,out] window Pointeur vers la fenêtre du jeu.
+*/
 void drawPlayerButtons(SDL_Window* window)
 {
     SDL_Renderer* renderer = SDL_GetRenderer(window);
 
-//    //Nettoyage du rendu
-//    if(SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE) != 0)
-//        SDL_ExitWithError("Impossible de changer la couleur du rendu");
-//
-//    if(SDL_RenderClear(renderer) != 0)
-//        SDL_ExitWithError("Impossible de nettoyer le rendu");
 
     //Couleur boutons
     if(SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE) != 0)
@@ -151,13 +146,13 @@ PlayerButton whichPlayerButton(SDL_MouseButtonEvent mouse_button){
 }
 
 /**
-* \fn void initPlayerButtons()
+* \fn void initPlayerButtons(Partie* the_game)
 * \brief Fonction d'initialisation des zones des boutons de l'environnement "Choix d'un joueur".
 *
 * Initialise les champs des rectangles des zones correspondant aux boutons des joueurs.
 * Fait appel aux fonctions d'initialisation de placement pour le bouton du joueur 1, le bouton du joueur 2, le bouton du joueur 3,
 * et le bouton du joueur 4.
-* Initialise le
+* Assigne les valeurs de largeur et hauteur d'après les macros correspondant à la largeur et à la hauteur des boutons de joueur.
 */
 void initPlayerButtons(Partie* the_game)
 {
@@ -176,21 +171,45 @@ void initPlayerButtons(Partie* the_game)
     initPlayer4Placement();
 }
 
+/**
+* \fn void initPlayer1Placement()
+* \brief Fonction d'initialisation de la position de la zone du bouton du joueur 1.
+*
+* Initialise l'abscisse de la zone du bouton du joueur 1 selon son emplacement dans le bandeau.
+*/
 void initPlayer1Placement()
 {
     player1_area.x = 10;
 }
 
+/**
+* \fn void initPlayer2Placement()
+* \brief Fonction d'initialisation de la position de la zone du bouton du joueur 2.
+*
+* Initialise l'abscisse de la zone du bouton du joueur 1 selon son emplacement dans le bandeau.
+*/
 void initPlayer2Placement()
 {
     player2_area.x = player1_area.x + player1_area.w + 5;
 }
 
+/**
+* \fn void initPlayer3Placement()
+* \brief Fonction d'initialisation de la position de la zone du bouton du joueur 3.
+*
+* Initialise l'abscisse de la zone du bouton du joueur 1 selon son emplacement dans le bandeau.
+*/
 void initPlayer3Placement()
 {
     player3_area.x = player2_area.x + player2_area.w + 5;
 }
 
+/**
+* \fn void initPlayer4Placement()
+* \brief Fonction d'initialisation de la position de la zone du bouton du joueur 4.
+*
+* Initialise l'abscisse de la zone du bouton du joueur 1 selon son emplacement dans le bandeau.
+*/
 void initPlayer4Placement()
 {
     player4_area.x = player3_area.x + player3_area.w + 5;

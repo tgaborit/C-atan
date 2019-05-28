@@ -4,7 +4,7 @@
 * \author Titouan Gaborit
 * \date 4 mai 2019
 *
-*
+* En-tête des fonctions de callback appelées lors d'un évènement particulier.
 *
 */
 
