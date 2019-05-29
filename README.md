@@ -70,6 +70,17 @@ Now you have two binaries in the *bin* directory : *catane_tests* for testing pu
 
 To run the model tests, in the *bin* directory, run the *catane_tests* executable.
 
+## Tree view
+
+* `/modele` : contains the headers and sources files relating to the model part of the project
+* `/vue` : contains the headers and sources files relating to the view part of the project
+* `/controleur` : contains the headers and sources files relating to the controller part of the project
+* `/images` : contains all the images necesary for the project
+* `/fonts` : contains all the fonts necesary for the project
+* `/test` : contains the headers and sources files relating to the tests of the model part of the project
+* `/cmake` : contains the CMake script to find the SDL2-ttf library
+* `/documents` : contains all the documents used for the project management
+
 ## Built With
 
 * [Code::Blocks](http://www.codeblocks.org/) - The IDE used
