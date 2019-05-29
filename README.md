@@ -72,20 +72,22 @@ To run the model tests, in the `/bin` directory, run the *catane_tests* executab
 
 ## Tree view
 
-* `/modele` : contains the headers and sources files relating to the model part of the project
-* `/vue` : contains the headers and sources files relating to the view part of the project
-* `/controleur` : contains the headers and sources files relating to the controller part of the project
-* `/images` : contains all the images necesary for the project
-* `/fonts` : contains all the fonts necesary for the project
-* `/tests` : contains the headers and sources files relating to the tests of the model part of the project
-* `/cmake` : contains the CMake script to find the SDL2-ttf library
-* `/documents` : contains all the documents used for the project management
+* `/modele` : the headers and sources files relating to the model part of the project
+* `/vue` : the headers and sources files relating to the view part of the project
+* `/controleur` : the headers and sources files relating to the controller part of the project
+* `/images` : the images necesary for the project
+* `/fonts` : the fonts necesary for the project
+* `/tests` : the headers and sources files relating to the tests of the model part of the project
+* `/cmake` : the CMake script to find the SDL2-ttf library
+* `/documents` : the documents used for the project management
 
 ## Built With
 
 * [Code::Blocks](http://www.codeblocks.org/) - The IDE used
 * [CMake](https://cmake.org/) - Build system
 * [SDL](https://www.libsdl.org/index.php) - Graphical library used
+* [CMocka](https://cmocka.org/) - Test library used
+* [Valgrind](http://www.valgrind.org/) - For detecting memory leaks
 
 ## Authors
 
