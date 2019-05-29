@@ -1,12 +1,12 @@
 # Catane
 
-This project consists in the videogame adaptation of the board game Les Colons de Catane. Each player takes turns on the same computer.
+This project consists in the videogame adaptation of the board game **Les Colons de Catane**. Each player takes turns on the same computer.
 
 ![screenshot](documents/screenshot.png)
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will get you a copy of the project up and running on your local machine for running and testing purposes.
 
 ### Prerequisites
 
@@ -19,7 +19,7 @@ What things you need to install the software and how to install them
 sudo apt-get install libcmocka-dev
 ```
 
-* Windows - Download the adequate zip archive cmocka-1.1.0-mingw.zip, at the address https://cmocka.org/files/1.1/, then follow the installation instructions.
+* Windows - Download the adequate zip archive *cmocka-1.1.0-mingw.zip*, at the address https://cmocka.org/files/1.1/, then follow the installation instructions.
 
 ##### SDL2 library
 
@@ -48,25 +48,27 @@ sudo apt-get install cmake
 
 * Windows - Download the adequate zip archive, à l'adresse https://cmake.org/download/, then follow the installation instructions.
 
-### Installing
+### Building
 
-A step by step series of examples that tell you how to get a development env running
+A step by step series of examples that tell you how to get the executable files
 
-In the catane directory, generate the Makefile 
+In the catane directory, generate the *Makefile* 
 
 ```
 cmake .
 ```
 
-Then build the binaries in the bin directory
+Then build the binaries in the *bin* directory
 
 ```
 make all
 ```
 
+Now you have two binaries in the *bin* directory : *catane_tests* for testing purposes, and *catane* for running purposes.
+
 ## Running the tests
 
-Pour lancer les tests du modèle, se rendre dans le dossier bin, puis lancer l'exécutable catane_tests.
+To run the model tests, in the *bin* directory, run the *catane_tests* executable.
 
 ## Built With
 
