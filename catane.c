@@ -1,3 +1,14 @@
+/**
+* \file catane.c
+* \brief Programme du jeu Catane
+* \author Titouan Gaborit
+* \date 25 avril 2019
+*
+* Fichier contenant la fonction main du jeu Catane
+*
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL.h>
@@ -9,6 +20,12 @@
 #include "controller.h"
 #include "affiche_texte.h"
 
+/**
+* \fn int main()
+* \brief Entree du programme
+*
+* \return 0 si arret normal
+*/
 int main()
 {
     SDL_Window* window = InitFenetre();
