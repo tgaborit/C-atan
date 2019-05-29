@@ -161,7 +161,7 @@ void AfficheTexte_StopAction(SDL_Window* window){
  * \return aucun
  */
 void AfficheTexte_Init(SDL_Window* window){
-    char txt[40] = "Bienvenu dans le jeu Catane !";
+    char txt[40] = "Bienvenue dans le jeu Catane !";
     AfficheTexte(window,txt,0);
 }
 
