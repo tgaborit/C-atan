@@ -2,6 +2,8 @@
 
 Ce projet consiste en l'adaptation vidéoludique du jeu de plateau Les Colons de Catane. Chaque joueur joue à tour de rôle sur une même machine.
 
+![screenshot](documents/screenshot.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
