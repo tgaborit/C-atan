@@ -1,6 +1,6 @@
 # Catane
 
-Ce projet consiste en l'adaptation vidéoludique du jeu de plateau Les Colons de Catane. Chaque joueur joue à tour de rôle sur une même machine.
+This project consists in the videogame adaptation of the board game Les Colons de Catane. Each player takes turns on the same computer.
 
 ![screenshot](documents/screenshot.png)
 
@@ -12,53 +12,53 @@ These instructions will get you a copy of the project up and running on your loc
 
 What things you need to install the software and how to install them
 
-##### Bibliothèque CMocka
+##### CMocka library
 
-* Linux - Entrer dans un terminal la commande : 
+* Linux - Type this command in a terminal: 
 ```
 sudo apt-get install libcmocka-dev
 ```
 
-* Windows - Télécharger l'archive zip cmocka-1.1.0-mingw.zip, à l'adresse https://cmocka.org/files/1.1/, puis suivre les instructions d'installation.
+* Windows - Download the adequate zip archive cmocka-1.1.0-mingw.zip, at the address https://cmocka.org/files/1.1/, then follow the installation instructions.
 
-##### Bibliothèque SDL2
+##### SDL2 library
 
-* Linux - Entrer dans un terminal la commande : 
+* Linux - Type this command in a terminal: 
 ```
 sudo apt-get install libsdl2-dev
 ```
 
-* Windows - Télécharger l'archive zip adéquate, catégorie Development Libraries, à l'adresse https://www.libsdl.org/download-2.0.php, puis suivre les instructions d'installation.
+* Windows - Download the adequate zip archive, Development Libraries category, at the address https://www.libsdl.org/download-2.0.php, then follow the installation instructions.
 
-##### Bibliothèque SDL2-ttf
+##### SDL2-ttf library
 
-* Linux - Entrer dans un terminal la commande : 
+* Linux - Type this command in a terminal: 
 ```
 sudo apt-get install libsdl2-ttf-dev
 ```
 
-* Windows - Télécharger l'archive zip adéquate, catégorie Development Libraries, à l'adresse https://www.libsdl.org/projects/SDL_ttf/, puis suivre les instructions d'installation.
+* Windows - Download the adequate zip archive, Development Libraries category, at the address https://www.libsdl.org/projects/SDL_ttf/, then follow the installation instructions.
 
-##### Système de compilation CMake
+##### CMake build system
 
-* Linux - Entrer dans un terminal la commande : 
+* Linux - Type this command in a terminal: 
 ```
 sudo apt-get install cmake
 ```
 
-* Windows - Télécharger l'archive zip adéquate, à l'adresse https://cmake.org/download/, puis suivre les instructions d'installation.
+* Windows - Download the adequate zip archive, à l'adresse https://cmake.org/download/, then follow the installation instructions.
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
 
-Dans le dossier catane, générer le fichier Makefile 
+In the catane directory, generate the Makefile 
 
 ```
 cmake .
 ```
 
-Puis construire les binaires
+Then build the binaries in the bin directory
 
 ```
 make all
@@ -71,7 +71,8 @@ Pour lancer les tests du modèle, se rendre dans le dossier bin, puis lancer l'e
 ## Built With
 
 * [Code::Blocks](http://www.codeblocks.org/) - The IDE used
-* [CMake](https://cmake.org/) - Compilation system
+* [CMake](https://cmake.org/) - Build system
+* [SDL](https://www.libsdl.org/index.php) - Graphical library used
 
 ## Authors
 
@@ -79,9 +80,3 @@ Pour lancer les tests du modèle, se rendre dans le dossier bin, puis lancer l'e
 * **Rémi Fargeon**
 * **Titouan Gaborit**
 * **Pauline Manauthon**
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
