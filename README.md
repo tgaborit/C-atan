@@ -1,7 +1,7 @@
 # The Settlers of Catan
 
-This project consists in a videoludic adaptation of the board game **The Settlers of Catan**, as part of our studies in the Electronics and Computer Engineering department, at the INSA Rennes engineering school, France. It has been written in C.  
-This game, in french language, follows the rules of the original board game. Each player takes turns on the same computer.
+This project consists in a videoludic adaptation of the board game **The Settlers of Catan**. It has been developed in C, as part of our studies in the Electronics and Computer Engineering department, at the INSA Rennes engineering school, situated in France.  
+This video game, in french language, follows the rules of the original board game. Each player takes turns on the same computer.
 
 ![screenshot](documents/screenshot.png)
 
