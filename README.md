@@ -1,6 +1,6 @@
-# Catane
+# The Settlers of Catan
 
-  This project consists in the videoludic adaptation of the board game **Les Colons de Catane**, as part of our studies in the Electronics and Computer Engineering department,
+This project consists in the videoludic adaptation of the board game **The Settlers of Catan**, as part of our studies in the Electronics and Computer Engineering department,
 at the INSA Rennes engineering school.
 It follows the rules of the original board game, and each player takes turns on the same computer.
 
