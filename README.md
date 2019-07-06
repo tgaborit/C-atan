@@ -89,6 +89,7 @@ To run the model tests, in the `/bin` directory, run the *catane_tests* executab
 * [SDL](https://www.libsdl.org/index.php) - Graphical library used
 * [CMocka](https://cmocka.org/) - Test library used
 * [Valgrind](http://www.valgrind.org/) - For detecting memory leaks
+* [GitLab](https://gitlab.insa-rennes.fr/edurel/catane) - Our original repository
 
 ## Authors
 
