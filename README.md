@@ -1,8 +1,7 @@
 # The Settlers of Catan
 
-This project consists in the videoludic adaptation of the board game **The Settlers of Catan**, as part of our studies in the Electronics and Computer Engineering department,
-at the INSA Rennes engineering school.
-It follows the rules of the original board game, and each player takes turns on the same computer.
+This project consists in a videoludic adaptation of the board game **The Settlers of Catan**, as part of our studies in the Electronics and Computer Engineering department, at the INSA Rennes engineering school, France. It has been written in C.  
+This game, in french language, follows the rules of the original board game. Each player takes turns on the same computer.
 
 ![screenshot](documents/screenshot.png)
 
@@ -44,8 +43,7 @@ sudo apt-get install libsdl2-ttf-dev
 ##### CMake build system
 
 * Linux - Type this command in a terminal: 
-```
-sudo apt-get install cmake
+```sudo apt-get install cmake
 ```
 
 * Windows - Download the adequate zip archive, à l'adresse https://cmake.org/download/. Then follow the installation instructions.
