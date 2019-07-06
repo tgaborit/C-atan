@@ -44,7 +44,8 @@ sudo apt-get install libsdl2-ttf-dev
 ##### CMake build system
 
 * Linux - Type this command in a terminal: 
-```sudo apt-get install cmake
+```
+sudo apt-get install cmake
 ```
 
 * Windows - Download the adequate zip archive, à l'adresse https://cmake.org/download/. Then follow the installation instructions.
