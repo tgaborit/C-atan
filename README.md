@@ -97,3 +97,7 @@ To run the model tests, in the `/bin` directory, run the *catane_tests* executab
 * **Rémi Fargeon**
 * **Titouan Gaborit**
 * **Pauline Manauthon**
+
+## License
+
+This project is licensed under the BSD 2-Clause License, available in the [LICENSE](https://github.com/tgaborit/catane/blob/master/LICENSE) file.
